@@ -1,0 +1,66 @@
+server:
+  port: 9527
+
+spring:
+  #服务名
+  application:
+    name: aurora-admin
+
+  main:
+    allow-bean-definition-overriding: true
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/dbblog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+# JWT配置
+jwt:
+  # 密匙Key
+  secret: JWTSecret,C3Stones
+  # HeaderKey
+  tokenHeader: Authorization
+  # Token前缀
+  tokenPrefix: Bearer
+  # 过期时间，单位秒
+  expiration: 86400
+  # 配置白名单（不需要认证）
+  antMatchers: /login/**,/register/**,/static/**
+
+# Mybatis-plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  global-config:
+    db-config:
+      id-type: AUTO
+  configuration:
+    # 打印sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# Dubbo Config properties
+dubbo:
+  ## Base packages to scan Dubbo Component：@com.alibaba.dubbo.config.annotation.Service
+  scan:
+    base-packages: com.aurora.system.controller
+  #  ## ApplicationConfig Bean
+  application:
+    id: service-consumer
+    name: service-consumer
+    qos-port: 22224
+    qos-enable: true
+  #  ## ProtocolConfig Bean
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 20888
+    status: server
+  ## RegistryConfig Bean
+  registry:
+    address: nacos://127.0.0.1:8848
+
+nacos:
+  service-address: 127.0.0.1
+  port: 8848
+

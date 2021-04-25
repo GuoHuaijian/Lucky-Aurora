@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aurora.admin.mapper.BookMapper">
+    <resultMap id="BaseResultMap" type="com.aurora.admin.domain.Book">
+        <!--@mbg.generated-->
+        <!--@Table dbblog.book-->
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="cover" jdbcType="VARCHAR" property="cover"/>
+        <result column="author" jdbcType="VARCHAR" property="author"/>
+        <result column="category_id" jdbcType="VARCHAR" property="categoryId"/>
+        <result column="recommend" jdbcType="BOOLEAN" property="recommend"/>
+        <result column="publisher" jdbcType="VARCHAR" property="publisher"/>
+        <result column="publish_date" jdbcType="DATE" property="publishDate"/>
+        <result column="page_num" jdbcType="INTEGER" property="pageNum"/>
+        <result column="grade" jdbcType="DOUBLE" property="grade"/>
+        <result column="description" jdbcType="LONGVARCHAR" property="description"/>
+        <result column="catalogue" jdbcType="LONGVARCHAR" property="catalogue"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="read_num" jdbcType="INTEGER" property="readNum"/>
+        <result column="comment_num" jdbcType="INTEGER" property="commentNum"/>
+        <result column="like_num" jdbcType="INTEGER" property="likeNum"/>
+        <result column="publish" jdbcType="BOOLEAN" property="publish"/>
+        <result column="progress" jdbcType="INTEGER" property="progress"/>
+        <result column="reading" jdbcType="BOOLEAN" property="reading"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        id, title, cover, author, category_id, recommend, publisher, publish_date, page_num,
+        grade, description, catalogue, create_time, update_time, read_num, comment_num, like_num,
+        publish, progress, reading
+    </sql>
+</mapper>
