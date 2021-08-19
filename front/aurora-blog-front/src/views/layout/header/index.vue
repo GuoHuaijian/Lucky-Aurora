@@ -37,14 +37,11 @@
         </header>
       </div>
     </el-collapse-transition>
-    <div class="hello"></div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "sidebarHead",
-
   data: () => ({
     show: true,
     searchValue: "",
@@ -143,8 +140,5 @@ li {
 }
 .input-with-select {
   width: 200px;
-}
-.hello {
-  height: 1000px;
 }
 </style>

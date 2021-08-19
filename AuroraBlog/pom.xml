@@ -11,6 +11,7 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>aurora-admin</module>
         <module>aurora-auth</module>
         <module>aurora-common</module>
         <module>aurora-system</module>
@@ -266,14 +267,14 @@
                             <skip>true</skip>
                         </configuration>
                     </plugin>
-                    <plugin>
-                        <groupId>org.apache.maven.plugins</groupId>
-                        <artifactId>maven-javadoc-plugin</artifactId>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
-                        <inherited>true</inherited>
-                    </plugin>
+<!--                    <plugin>-->
+<!--                        <groupId>org.apache.maven.plugins</groupId>-->
+<!--                        <artifactId>maven-javadoc-plugin</artifactId>-->
+<!--                        <configuration>-->
+<!--                            <skip>true</skip>-->
+<!--                        </configuration>-->
+<!--                        <inherited>true</inherited>-->
+<!--                    </plugin>-->
                 </plugins>
             </build>
         </profile>
