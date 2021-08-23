@@ -3,6 +3,7 @@ package com.aurora.common.core.web.domain;
 import com.alibaba.fastjson.JSON;
 import com.aurora.common.core.enums.HttpStatusEnum;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.servlet.ServletResponse;
@@ -20,6 +21,7 @@ import java.util.HashMap;
  */
 @Data
 @Slf4j
+@EqualsAndHashCode(callSuper = false)
 public class Result<T> extends HashMap<String, Object> implements Serializable {
 
     private static final long serialVersionUID = 1L;

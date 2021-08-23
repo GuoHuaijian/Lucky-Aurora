@@ -14,7 +14,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://127.0.0.1:3306/aurora_blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
     username: root
-    password: 123456
+    password: 564559079
 
 # JWT配置
 jwt:
@@ -39,28 +39,17 @@ mybatis-plus:
     # 打印sql
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-# Dubbo Config properties
+# Dubbo
 dubbo:
-  ## Base packages to scan Dubbo Component：@com.alibaba.dubbo.config.annotation.Service
-  scan:
-    base-packages: com.aurora.system.controller
-  #  ## ApplicationConfig Bean
-  application:
-    id: service-consumer
-    name: service-consumer
-    qos-port: 22225
-    qos-enable: true
-  #  ## ProtocolConfig Bean
+  #通信规则（通信协议和端口）
   protocol:
-    id: dubbo
-    name: dubbo
-    port: 20887
-    status: server
-  ## RegistryConfig Bean
+    name: Triple
+    #(默认20880,-1为随机端口)
+    port: -1
+  #注册中心的地址和协议
   registry:
-    address: nacos://127.0.0.1:8848
-
-nacos:
-  service-address: 127.0.0.1
-  port: 8848
-
+    address: zookeeper://127.0.0.1:2181
+    protocol: zookeeper
+  #连接监控中心
+  monitor:
+    protocol: registry

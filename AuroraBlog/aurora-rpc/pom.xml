@@ -8,9 +8,9 @@
         <version>1.0.0</version>
     </parent>
     <groupId>com.aurora</groupId>
-    <artifactId>aurora-api</artifactId>
+    <artifactId>aurora-rpc</artifactId>
     <version>1.0.0</version>
-    <name>aurora-api</name>
+    <name>aurora-rpc</name>
     <description>rpc接口</description>
     <packaging>jar</packaging>
 

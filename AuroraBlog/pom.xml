@@ -21,7 +21,7 @@
     <properties>
         <java.version>1.8</java.version>
         <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
-        <dubbo.version>2.7.8</dubbo.version>
+        <dubbo.version>3.0.0</dubbo.version>
         <jjwt.version>0.9.1</jjwt.version>
         <jwt.version>1.1.1.RELEASE</jwt.version>
         <fastjson.version>1.2.75</fastjson.version>
@@ -77,11 +77,12 @@
                 <version>${dubbo.version}</version>
             </dependency>
 
-            <!-- Dubbo-Registry-Nacos -->
+            <!-- Dubbo-Registry-Zookeeper -->
             <dependency>
                 <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-registry-nacos</artifactId>
+                <artifactId>dubbo-dependencies-zookeeper</artifactId>
                 <version>${dubbo.version}</version>
+                <type>pom</type>
             </dependency>
 
             <!-- Guava -->
