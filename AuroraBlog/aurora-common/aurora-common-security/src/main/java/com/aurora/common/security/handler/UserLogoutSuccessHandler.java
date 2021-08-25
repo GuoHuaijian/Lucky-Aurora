@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Component
@@ -24,6 +24,6 @@ public class UserLogoutSuccessHandler implements LogoutSuccessHandler {
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response,
                                 Authentication authentication) {
         SecurityContextHolder.clearContext();
-        Result.responseJson(response, Result.OK());
+        Result.responseJson(response, Result.success());
     }
 }

@@ -17,7 +17,7 @@ import java.util.Date;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Data
@@ -25,7 +25,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "sys_user")
-public class SysUser implements Serializable {
+public class AuthUser implements Serializable {
     /**
      * 用户id
      */

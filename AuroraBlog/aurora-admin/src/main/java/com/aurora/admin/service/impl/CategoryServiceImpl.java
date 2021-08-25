@@ -1,11 +1,11 @@
 package com.aurora.admin.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.aurora.admin.domain.Category;
 import com.aurora.admin.mapper.CategoryMapper;
 import com.aurora.admin.service.CategoryService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.List;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/3
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Service
@@ -30,7 +30,7 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryMapper, Category> i
      */
     @Override
     public String renderCategoryArr(String categoryIds, List<Category> categoryList) {
-        if (StringUtils.isEmpty(categoryIds)) {
+        if (StrUtil.isEmpty(categoryIds)) {
             return "";
         }
         List<String> categoryStrList = new ArrayList<>();

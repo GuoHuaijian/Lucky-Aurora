@@ -1,7 +1,7 @@
 package com.aurora.auth.common.config;
 
-import com.aurora.auth.service.impl.SysUserDetailsService;
-import com.aurora.common.security.config.SysSecurityConfig;
+import com.aurora.auth.service.impl.UserDetailsServiceImpl;
+import com.aurora.common.security.config.SecurityConfig;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
 import javax.annotation.Resource;
@@ -11,16 +11,16 @@ import javax.annotation.Resource;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
-public class AuthSecurityConfig extends SysSecurityConfig {
+public class AuthSecurityConfig extends SecurityConfig {
 
     /**
      * 用户登录验证
      */
     @Resource
-    private SysUserDetailsService userDetailsService;
+    private UserDetailsServiceImpl userDetailsService;
 
     /**
      * 用户登录验证

@@ -3,6 +3,7 @@ package com.aurora.admin.domain.vo;
 import com.aurora.admin.domain.Article;
 import com.aurora.admin.domain.Tag;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 import java.util.List;
 
@@ -11,10 +12,11 @@ import java.util.List;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/3
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class ArticleVO extends Article {
 
     /**

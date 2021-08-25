@@ -17,17 +17,17 @@ spring:
     password: 564559079
 
 # JWT配置
-jwt:
-  # 密匙Key
-  secret: JWTSecret,C3Stones
-  # HeaderKey
-  tokenHeader: Authorization
-  # Token前缀
-  tokenPrefix: Bearer
-  # 过期时间，单位秒
-  expiration: 86400
-  # 配置白名单（不需要认证）
-  antMatchers: /login/**,/register/**,/static/**
+#jwt:
+#  # 密匙Key
+#  secret: JWTSecret,C3Stones
+#  # HeaderKey
+#  tokenHeader: Authorization
+#  # Token前缀
+#  tokenPrefix: Bearer
+#  # 过期时间，单位秒
+#  expiration: 86400
+#  # 配置白名单（不需要认证）
+#  antMatchers: /login/**,/register/**,/static/**
 
 # Mybatis-plus配置
 mybatis-plus:
@@ -43,7 +43,7 @@ mybatis-plus:
 dubbo:
   #通信规则（通信协议和端口）
   protocol:
-    name: Triple
+    name: dubbo
     #(默认20880,-1为随机端口)
     port: -1
   #注册中心的地址和协议
@@ -53,4 +53,13 @@ dubbo:
   #连接监控中心
   monitor:
     protocol: registry
+  consumer:
+    check: false
+
+
+# 日志配置
+logging:
+  level:
+    com.aurora: debug
+    org.springframework: warn
 

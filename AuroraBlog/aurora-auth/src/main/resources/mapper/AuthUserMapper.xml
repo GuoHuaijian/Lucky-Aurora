@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.aurora.system.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.aurora.system.domain.User">
+<mapper namespace="com.aurora.auth.mapper.AuthUserMapper">
+    <resultMap id="BaseResultMap" type="com.aurora.auth.domain.AuthUser">
         <!--@mbg.generated-->
         <!--@Table aurora_blog.sys_user-->
         <id column="user_id" jdbcType="BIGINT" property="userId"/>
@@ -21,4 +21,13 @@
         user_id, user_name, nick_name, email, phone_number, avatar, `password`, `status`,
         create_time, update_time, remark
     </sql>
+
+    <select id="getRolesByUserId" resultType="string">
+        select role_code from sys_role where role_id in (select role_id from sys_user_role where user_id = #{userId});
+    </select>
+    <select id="getAuthsByUserId" resultType="string">
+        select perms from sys_menu where menu_id in (select menu_id from sys_role_menu where role_id in
+        (select role_id from sys_user_role where user_id = #{userId}) );
+
+    </select>
 </mapper>

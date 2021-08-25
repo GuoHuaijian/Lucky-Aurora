@@ -1,7 +1,8 @@
 package com.aurora.auth.service.impl;
 
-import com.aurora.auth.domain.SysUser;
-import com.aurora.auth.service.SysUserService;
+import com.aurora.auth.domain.AuthUser;
+import com.aurora.auth.service.AuthUserService;
+import com.aurora.common.core.utils.AssertUtil;
 import com.aurora.common.security.domain.SecurityUserDetails;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -23,15 +24,15 @@ import java.util.Set;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Service
 @Slf4j
-public class SysUserDetailsService implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
-    private SysUserService sysUserService;
+    private AuthUserService authUserService;
 
     /**
      * 根据用户名查用户信息
@@ -40,31 +41,22 @@ public class SysUserDetailsService implements UserDetailsService {
      * @return 用户详细信息
      */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        SysUser sysUser = sysUserService.getUserByName(username);
-        if (sysUser == null) {
-            log.debug("用户名不存在{}");
-            throw new UsernameNotFoundException("用户名不存在");
-        }
-        if ("2".equals(sysUser.getStatus())) {
-            throw new LockedException("用户已禁用");
-        }
-        if (sysUser != null) {
+    public UserDetails loadUserByUsername(String username) {
+        AuthUser authUser = authUserService.getUserByName(username);
+        AssertUtil.notNull(authUser, new UsernameNotFoundException("用户名不存在"));
+        AssertUtil.isTrue("2".equals(authUser.getStatus()), new LockedException("用户已禁用"));
+        if (authUser != null) {
             SecurityUserDetails userDetails = new SecurityUserDetails();
-            BeanUtils.copyProperties(sysUser, userDetails);
-            userDetails.setUsername(sysUser.getUsername());
+            BeanUtils.copyProperties(authUser, userDetails);
+            userDetails.setUsername(authUser.getUsername());
             // 角色和权限集合
             Set<GrantedAuthority> authorities = new HashSet<>();
-            Set<String> roleList = new HashSet<>(sysUserService.getRolesByUserId(userDetails.getUserId()));
-            roleList.forEach(role -> {
-                authorities.add(new SimpleGrantedAuthority("ROLE_" + role));
-            });
-            Set<String> authList = new HashSet<>(sysUserService.getAuthsByUserId(userDetails.getUserId()));
+            Set<String> roleList = new HashSet<>(authUserService.getRolesByUserId(userDetails.getUserId()));
+            roleList.forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role)));
+            Set<String> authList = new HashSet<>(authUserService.getAuthsByUserId(userDetails.getUserId()));
             for (String s : authList) {
                 Set<String> list = new HashSet<>(Arrays.asList(s.split(",")));
-                list.forEach(auth -> {
-                    authorities.add(new SimpleGrantedAuthority(auth));
-                });
+                list.forEach(auth -> authorities.add(new SimpleGrantedAuthority(auth)));
             }
             userDetails.setAuthorities(authorities);
             return userDetails;

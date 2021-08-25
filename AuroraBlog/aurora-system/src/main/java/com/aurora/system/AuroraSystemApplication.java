@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author Admin
  */
-@SpringBootApplication(scanBasePackages = {"com.aurora.**"})
+@SpringBootApplication(scanBasePackages = {"com.aurora"})
 @EnableDubbo(scanBasePackages = {"com.aurora.system.controller"})
 public class AuroraSystemApplication {
 

@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * describe: 未登录处理类
+ * describe: 认证失败（token无效过期等）
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Component

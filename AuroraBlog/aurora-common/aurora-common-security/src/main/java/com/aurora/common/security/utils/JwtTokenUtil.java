@@ -3,7 +3,7 @@ package com.aurora.common.security.utils;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.aurora.common.security.config.JWTConfig;
+import com.aurora.common.security.config.JwtConfig;
 import com.aurora.common.security.domain.SecurityUserDetails;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -11,6 +11,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.util.Assert;
 
 import java.util.*;
 
@@ -19,11 +20,11 @@ import java.util.*;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Slf4j
-public class JWTTokenUtil {
+public class JwtTokenUtil {
 
     /**
      * 创建Token
@@ -43,13 +44,13 @@ public class JWTTokenUtil {
                 // 签发者
                 .setIssuer("aurora")
                 // 过期时间
-                .setExpiration(new Date(System.currentTimeMillis() + JWTConfig.expiration))
+                .setExpiration(new Date(System.currentTimeMillis() + JwtConfig.expiration))
                 // 签名算法、密钥
-                .signWith(SignatureAlgorithm.HS512, JWTConfig.secret)
+                .signWith(SignatureAlgorithm.HS512, JwtConfig.secret)
                 // 自定义其他属性，如用户组织机构ID，用户所拥有的角色，用户权限信息等
                 .claim("userDetails", JSON.toJSONString(userDetails))
                 .claim("authorities", JSON.toJSONString(userDetails.getAuthorities())).compact();
-        return JWTConfig.tokenPrefix + token;
+        return JwtConfig.tokenPrefix + token;
     }
 
     /**
@@ -61,11 +62,9 @@ public class JWTTokenUtil {
     public static SecurityUserDetails parseAccessToken(String token) {
         SecurityUserDetails userDetails = null;
         if (StrUtil.isNotEmpty(token)) {
+            Assert.isTrue(JwtTokenUtil.isTokenExpired(token), "token过期");
             try {
-                // 去除JWT前缀
-                token = token.substring(JWTConfig.tokenPrefix.length());
-                // 解析Token
-                Claims claims = Jwts.parser().setSigningKey(JWTConfig.secret).parseClaimsJws(token).getBody();
+                Claims claims = getClaimsFromToken(token);
                 // 获取用户信息
                 userDetails = JSON.parseObject(claims.get("userDetails").toString(), SecurityUserDetails.class);
                 // 获取角色
@@ -75,10 +74,9 @@ public class JWTTokenUtil {
                     List<Map<String, String>> authorityList = JSON.parseObject(authority,
                             new TypeReference<List<Map<String, String>>>() {
                             });
-                    for (Map<String, String> role : authorityList) {
-                        if (!role.isEmpty()) {
-                            authorities.add(new SimpleGrantedAuthority(role.get("authority")));
-                        }
+                    for (Map<String, String> auth : authorityList) {
+                        Optional.ofNullable(auth).ifPresent(role
+                                -> authorities.add(new SimpleGrantedAuthority(role.get("authority"))));
                     }
                 }
                 userDetails.setAuthorities(authorities);
@@ -87,6 +85,36 @@ public class JWTTokenUtil {
             }
         }
         return userDetails;
+    }
+
+    /**
+     * 验证token是否过期
+     *
+     * @param token
+     * @return
+     */
+    public static boolean isTokenExpired(String token) {
+        Claims claims = getClaimsFromToken(token);
+        return (claims.getExpiration().before(new Date()));
+    }
+
+    /**
+     * 获取Claims
+     *
+     * @param token
+     * @return
+     */
+    public static Claims getClaimsFromToken(String token) {
+        Claims claims;
+        // 去除JWT前缀
+        token = token.substring(JwtConfig.tokenPrefix.length());
+        try {
+            // 解析Token
+            claims = Jwts.parser().setSigningKey(JwtConfig.secret).parseClaimsJws(token).getBody();
+        } catch (Exception e) {
+            claims = null;
+        }
+        return claims;
     }
 
 }

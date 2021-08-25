@@ -8,8 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author Admin
  */
 @SpringBootApplication(scanBasePackages = {"com.aurora.*"})
-//@EnableDubbo(scanBasePackages = {"com.aurora.auth.service.impl"})
-@EnableDubbo
+@EnableDubbo(scanBasePackages = {"com.aurora.auth.service.impl"})
 public class AuroraAuthApplication {
 
     public static void main(String[] args) {

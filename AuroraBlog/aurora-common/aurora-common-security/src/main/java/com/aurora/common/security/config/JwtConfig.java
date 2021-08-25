@@ -8,38 +8,38 @@ import org.springframework.stereotype.Component;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Component
 @ConfigurationProperties(prefix = "jwt")
 @SuppressWarnings("static-access")
-public class JWTConfig {
+public class JwtConfig {
 
     /**
      * 密匙Key
      */
-    public static String secret;
+    public static String secret = "JWTSecret,C3Stones";
 
     /**
      * HeaderKey
      */
-    public static String tokenHeader;
+    public static String tokenHeader = "Authorization";
 
     /**
      * Token前缀
      */
-    public static String tokenPrefix;
+    public static String tokenPrefix = "Bearer ";
 
     /**
      * 过期时间
      */
-    public static Integer expiration;
+    public static Integer expiration = 86400;
 
     /**
      * 配置白名单
      */
-    public static String antMatchers;
+    public static String antMatchers = "/login/**,/register/**,/static/**";
 
     /**
      * 将过期时间单位换算成毫秒
@@ -47,23 +47,23 @@ public class JWTConfig {
      * @param expiration 过期时间，单位秒
      */
     public void setExpiration(Integer expiration) {
-        JWTConfig.expiration = expiration * 1000;
+        JwtConfig.expiration = expiration * 1000;
     }
 
     public void setSecret(String secret) {
-        JWTConfig.secret = secret;
+        JwtConfig.secret = secret;
     }
 
     public void setTokenHeader(String tokenHeader) {
-        JWTConfig.tokenHeader = tokenHeader;
+        JwtConfig.tokenHeader = tokenHeader;
     }
 
     public void setTokenPrefix(String tokenPrefix) {
-        JWTConfig.tokenPrefix = tokenPrefix + " ";
+        JwtConfig.tokenPrefix = tokenPrefix + " ";
     }
 
     public void setAntMatchers(String antMatchers) {
-        JWTConfig.antMatchers = antMatchers;
+        JwtConfig.antMatchers = antMatchers;
     }
 
 }

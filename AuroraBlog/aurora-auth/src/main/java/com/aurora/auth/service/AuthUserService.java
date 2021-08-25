@@ -1,6 +1,6 @@
 package com.aurora.auth.service;
 
-import com.aurora.auth.domain.SysUser;
+import com.aurora.auth.domain.AuthUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -10,10 +10,10 @@ import java.util.List;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
-public interface SysUserService extends IService<SysUser> {
+public interface AuthUserService extends IService<AuthUser> {
 
     /**
      * 根据用户名查询用户
@@ -21,7 +21,7 @@ public interface SysUserService extends IService<SysUser> {
      * @param userName
      * @return
      */
-    SysUser getUserByName(String userName);
+    AuthUser getUserByName(String userName);
 
     /**
      * 根据用户id查询用户角色

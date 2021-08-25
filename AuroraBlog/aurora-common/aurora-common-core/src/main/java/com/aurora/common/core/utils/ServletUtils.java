@@ -1,6 +1,8 @@
 package com.aurora.common.core.utils;
 
 import cn.hutool.core.convert.Convert;
+import com.aurora.common.core.constant.Constants;
+import com.aurora.common.core.enums.HttpStatusEnum;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -15,7 +17,7 @@ import java.io.IOException;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/3
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 public class ServletUtils {
@@ -78,15 +80,15 @@ public class ServletUtils {
      * 将字符串渲染到客户端
      *
      * @param response 渲染对象
-     * @param string   待渲染的字符串
+     * @param str      待渲染的字符串
      * @return null
      */
-    public static String renderString(HttpServletResponse response, String string) {
+    public static String renderString(HttpServletResponse response, String str) {
         try {
-            response.setStatus(200);
-            response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
-            response.getWriter().print(string);
+            response.setStatus(HttpStatusEnum.OK.getCode());
+            response.setContentType(Constants.RESPONSE_CONTENT_TYPE_JSON);
+            response.setCharacterEncoding(Constants.UTF8);
+            response.getWriter().print(str);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -100,12 +102,12 @@ public class ServletUtils {
      */
     public static boolean isAjaxRequest(HttpServletRequest request) {
         String accept = request.getHeader("accept");
-        if (accept != null && accept.indexOf("application/json") != -1) {
+        if (accept != null && accept.contains(Constants.RESPONSE_CONTENT_TYPE_JSON)) {
             return true;
         }
 
         String xRequestedWith = request.getHeader("X-Requested-With");
-        if (xRequestedWith != null && xRequestedWith.indexOf("XMLHttpRequest") != -1) {
+        if (xRequestedWith != null && xRequestedWith.contains(Constants.XML_HTTP_REQUEST)) {
             return true;
         }
         return false;

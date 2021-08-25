@@ -5,7 +5,7 @@ package com.aurora.rpc.auth;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 public interface LoginService {

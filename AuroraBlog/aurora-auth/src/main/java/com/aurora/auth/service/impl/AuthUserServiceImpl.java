@@ -1,8 +1,8 @@
 package com.aurora.auth.service.impl;
 
-import com.aurora.auth.domain.SysUser;
-import com.aurora.auth.mapper.SysUserMapper;
-import com.aurora.auth.service.SysUserService;
+import com.aurora.auth.domain.AuthUser;
+import com.aurora.auth.mapper.AuthUserMapper;
+import com.aurora.auth.service.AuthUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +15,14 @@ import java.util.List;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Service
-public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
+public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> implements AuthUserService {
 
     @Autowired
-    private SysUserMapper userMapper;
+    private AuthUserMapper userMapper;
 
     /**
      * 根据用户名查询用户
@@ -31,10 +31,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      * @return
      */
     @Override
-    public SysUser getUserByName(String userName) {
-        LambdaQueryWrapper<SysUser> sysUserLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        sysUserLambdaQueryWrapper.eq(SysUser::getUsername, userName);
-        SysUser user = getOne(sysUserLambdaQueryWrapper);
+    public AuthUser getUserByName(String userName) {
+        LambdaQueryWrapper<AuthUser> sysUserLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        sysUserLambdaQueryWrapper.eq(AuthUser::getUsername, userName);
+        AuthUser user = getOne(sysUserLambdaQueryWrapper);
         return user;
     }
 

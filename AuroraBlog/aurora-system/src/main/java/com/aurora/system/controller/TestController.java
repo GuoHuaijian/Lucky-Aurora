@@ -1,8 +1,8 @@
 package com.aurora.system.controller;
 
-import com.aurora.rpc.auth.LoginService;
 import com.aurora.common.security.domain.SecurityUserDetails;
-import com.aurora.common.security.utils.JWTTokenUtil;
+import com.aurora.common.security.utils.JwtTokenUtil;
+import com.aurora.rpc.auth.LoginService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @RestController
@@ -26,7 +26,7 @@ public class TestController {
     @PostMapping("user")
     public String getToken() {
         String admin = loginService.login("admin", "123456");
-        SecurityUserDetails sysUserDetails = JWTTokenUtil.parseAccessToken(admin);
+        SecurityUserDetails sysUserDetails = JwtTokenUtil.parseAccessToken(admin);
         System.out.println(sysUserDetails);
         return admin;
     }

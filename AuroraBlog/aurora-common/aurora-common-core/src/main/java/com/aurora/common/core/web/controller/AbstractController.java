@@ -21,7 +21,7 @@ import java.util.List;
  *
  * @Author Guo Huaijian
  * @Date 2020/12/31
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 public abstract class AbstractController {
@@ -49,7 +49,7 @@ public abstract class AbstractController {
         PageDomain pageDomain = PageSupport.buildPageRequest();
         Long pageNum = pageDomain.getCurrent();
         Long pageSize = pageDomain.getSize();
-        if (!StringUtils.isEmpty(pageNum) && !StringUtils.isEmpty(pageSize)) {
+        if (StringUtils.hasLength(String.valueOf(pageNum)) && StringUtils.hasLength(String.valueOf(pageSize))) {
             String orderBy = SqlUtil.escapeOrderBySql(pageDomain.getOrderBy());
             // 紧跟着的第一个select方法会被分页 后面的不会被分页，除非再次调用PageHelper.startPage
             PageHelper.startPage(pageNum.intValue(), pageSize.intValue(), orderBy);
@@ -74,6 +74,6 @@ public abstract class AbstractController {
      * @return 操作结果
      */
     protected Result toResult(int rows) {
-        return rows > 0 ? Result.OK() : Result.error();
+        return rows > 0 ? Result.success() : Result.error();
     }
 }

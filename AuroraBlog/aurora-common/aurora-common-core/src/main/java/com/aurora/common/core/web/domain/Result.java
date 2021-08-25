@@ -1,12 +1,13 @@
 package com.aurora.common.core.web.domain;
 
 import com.alibaba.fastjson.JSON;
+import com.aurora.common.core.constant.Constants;
 import com.aurora.common.core.enums.HttpStatusEnum;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
 
-import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletResponse;
 import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.HashMap;
@@ -16,7 +17,7 @@ import java.util.HashMap;
  *
  * @Author Guo Huaijian
  * @Date 2020/12/31
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Data
@@ -78,8 +79,8 @@ public class Result<T> extends HashMap<String, Object> implements Serializable {
      *
      * @return 成功消息
      */
-    public static Result OK() {
-        return Result.OK(HttpStatusEnum.OK.getMsg());
+    public static Result success() {
+        return Result.success(HttpStatusEnum.OK.getMsg());
     }
 
     /**
@@ -87,8 +88,8 @@ public class Result<T> extends HashMap<String, Object> implements Serializable {
      *
      * @return 成功消息
      */
-    public static Result OK(Object data) {
-        return Result.OK(HttpStatusEnum.OK.getMsg(), data);
+    public static Result success(Object data) {
+        return Result.success(HttpStatusEnum.OK.getMsg(), data);
     }
 
     /**
@@ -97,8 +98,8 @@ public class Result<T> extends HashMap<String, Object> implements Serializable {
      * @param msg 返回内容
      * @return 成功消息
      */
-    public static Result OK(String msg) {
-        return Result.OK(msg, null);
+    public static Result success(String msg) {
+        return Result.success(msg, null);
     }
 
     /**
@@ -108,7 +109,7 @@ public class Result<T> extends HashMap<String, Object> implements Serializable {
      * @param data 数据对象
      * @return 成功消息
      */
-    public static Result OK(String msg, Object data) {
+    public static Result success(String msg, Object data) {
         return new Result(HttpStatusEnum.OK.getCode(), msg, data);
     }
 
@@ -119,7 +120,7 @@ public class Result<T> extends HashMap<String, Object> implements Serializable {
      * @param code 状态码
      * @return 成功消息
      */
-    public static Result OK(String msg, int code) {
+    public static Result success(String msg, int code) {
         return new Result(code, msg);
     }
 
@@ -131,7 +132,7 @@ public class Result<T> extends HashMap<String, Object> implements Serializable {
      * @param msg  返回内容
      * @return
      */
-    public static Result OK(int code, String msg, Object data) {
+    public static Result success(int code, String msg, Object data) {
         return new Result(code, msg, data);
     }
 
@@ -143,7 +144,7 @@ public class Result<T> extends HashMap<String, Object> implements Serializable {
      * @param data       数据对象
      * @return
      */
-    public static Result OK(HttpStatusEnum statusEnum, Object data) {
+    public static Result success(HttpStatusEnum statusEnum, Object data) {
         return new Result(statusEnum.getCode(), statusEnum.getMsg(), data);
     }
 
@@ -155,7 +156,7 @@ public class Result<T> extends HashMap<String, Object> implements Serializable {
      * @param data       数据对象
      * @return
      */
-    public static Result OK(HttpStatusEnum statusEnum, String msg, Object data) {
+    public static Result success(HttpStatusEnum statusEnum, String msg, Object data) {
         return new Result(statusEnum.getCode(), msg, data);
     }
 
@@ -227,11 +228,12 @@ public class Result<T> extends HashMap<String, Object> implements Serializable {
      * @param response
      * @param data     返回数据
      */
-    public static void responseJson(ServletResponse response, Object data) {
+    public static void responseJson(HttpServletResponse response, Object data) {
         PrintWriter out = null;
         try {
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json");
+            response.setStatus(HttpStatusEnum.OK.getCode());
+            response.setCharacterEncoding(Constants.UTF8);
+            response.setContentType(Constants.RESPONSE_CONTENT_TYPE_JSON);
             out = response.getWriter();
             out.println(JSON.toJSONString(data));
             out.flush();

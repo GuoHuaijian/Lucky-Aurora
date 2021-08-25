@@ -1,8 +1,8 @@
 package com.aurora.common.security.filter;
 
-import com.aurora.common.security.config.JWTConfig;
+import com.aurora.common.security.config.JwtConfig;
 import com.aurora.common.security.domain.SecurityUserDetails;
-import com.aurora.common.security.utils.JWTTokenUtil;
+import com.aurora.common.security.utils.JwtTokenUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -19,12 +19,12 @@ import java.io.IOException;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
-public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
+public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
-    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+    public JwtAuthenticationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
     }
 
@@ -32,11 +32,9 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws IOException, ServletException {
         // 取出Token
-        String token = request.getHeader(JWTConfig.tokenHeader);
-
-        if (token != null && token.startsWith(JWTConfig.tokenPrefix)) {
-            SecurityUserDetails userDetails = JWTTokenUtil.parseAccessToken(token);
-
+        String token = request.getHeader(JwtConfig.tokenHeader);
+        if (token != null && token.startsWith(JwtConfig.tokenPrefix)) {
+            SecurityUserDetails userDetails = JwtTokenUtil.parseAccessToken(token);
             if (userDetails != null) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
                         userDetails, userDetails.getUserId(), userDetails.getAuthorities());

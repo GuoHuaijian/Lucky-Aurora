@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/2
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @RestController
@@ -23,9 +23,16 @@ public class HelloController {
         return "hello";
     }
 
-    @PreAuthorize("@ss.hasPermi('aa')")
+    @PreAuthorize("@ss.hasAuthority('aa')")
     @GetMapping("hello")
     public String get1() {
         return "hello";
     }
+
+    @PreAuthorize("hasAnyRole('admin','admin')")
+    @GetMapping("hell")
+    public String get2() {
+        return "hello";
+    }
+
 }

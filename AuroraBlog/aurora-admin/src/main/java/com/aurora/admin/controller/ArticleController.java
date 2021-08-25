@@ -17,7 +17,7 @@ import javax.annotation.Resource;
  *
  * @Author Guo Huaijian
  * @Date 2021/1/3
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @RestController
@@ -38,14 +38,14 @@ public class ArticleController extends AbstractController {
     public Result listArticle(String title) {
         startPage();
         PageDate pageDate = getPageDate(articleService.getArticleList(title));
-        return Result.OK(pageDate);
+        return Result.success(pageDate);
     }
 
     @GetMapping("/info/{articleId}")
     @PreAuthorize("hasPermission('article:list')")
     public Result info(@PathVariable Integer articleId) {
 
-        return Result.OK();
+        return Result.success();
     }
 
 }

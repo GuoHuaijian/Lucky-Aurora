@@ -2,18 +2,19 @@ package com.aurora.common.security.security;
 
 import org.springframework.security.access.PermissionEvaluator;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.io.Serializable;
-import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * describe: 用户权限注解处理类
  *
  * @Author Guo Huaijian
  * @Date 2021/1/1
- * @E-mail 564559079@qq.com
+ * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
 @Component
@@ -30,10 +31,8 @@ public class UserPermissionEvaluator implements PermissionEvaluator {
     @Override
     public boolean hasPermission(Authentication authentication, Object targetUrl, Object permission) {
         // 用户权限
-        Set<String> permissions = new HashSet<>();
-        authentication.getAuthorities().forEach(auth -> {
-            permissions.add(auth.getAuthority());
-        });
+        Set<String> permissions = authentication.getAuthorities()
+                .stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
         // 判断是否拥有权限
         if (permissions.contains(permission.toString())) {
             return true;
