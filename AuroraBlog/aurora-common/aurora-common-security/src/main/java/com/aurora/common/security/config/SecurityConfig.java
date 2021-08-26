@@ -98,12 +98,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 // 配置未登录处理类
                 .and().httpBasic().authenticationEntryPoint(userNotLoginHandler)
-                // 配置登录URL
-                .and().formLogin().loginProcessingUrl("/login/user")
-                // 配置登录成功处理类
-                .successHandler(userLoginSuccessHandler)
-                // 配置登录失败处理类
-                .failureHandler(userLoginFailureHandler)
+//                // 配置登录URL
+//                .and().formLogin().loginProcessingUrl("/login/user")
+//                // 配置登录成功处理类
+//                .successHandler(userLoginSuccessHandler)
+//                // 配置登录失败处理类
+//                .failureHandler(userLoginFailureHandler)
 //                // 配置登出地址
 //                .and().logout().logoutUrl("/logout/submit")
 //                // 配置用户登出处理类

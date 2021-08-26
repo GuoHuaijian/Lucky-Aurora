@@ -43,22 +43,22 @@ public class SecurityUserDetails implements UserDetails, Serializable {
     private Collection<GrantedAuthority> authorities;
 
     /**
-     * 账号是否过期
+     * 账号是否过期 true未到期
      */
-    private boolean isAccountNonExpired = false;
+    private boolean isAccountNonExpired = true;
 
     /**
-     * 账号是否锁定
+     * 账号是否锁定 true未锁定
      */
-    private boolean isAccountNonLocked = false;
+    private boolean isAccountNonLocked = true;
 
     /**
-     * 证书是否过期
+     * 证书是否过期 true未过期
      */
-    private boolean isCredentialsNonExpired = false;
+    private boolean isCredentialsNonExpired = true;
 
     /**
-     * 账号是否有效
+     * 账号是否有效 true有效
      */
     private boolean isEnabled = true;
 

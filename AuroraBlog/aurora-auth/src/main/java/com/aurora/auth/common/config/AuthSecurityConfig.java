@@ -2,6 +2,10 @@ package com.aurora.auth.common.config;
 
 import com.aurora.auth.service.impl.UserDetailsServiceImpl;
 import com.aurora.common.security.config.SecurityConfig;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 
 import javax.annotation.Resource;
@@ -14,6 +18,8 @@ import javax.annotation.Resource;
  * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
+@Order(10)
+@Configuration
 public class AuthSecurityConfig extends SecurityConfig {
 
     /**
@@ -22,11 +28,24 @@ public class AuthSecurityConfig extends SecurityConfig {
     @Resource
     private UserDetailsServiceImpl userDetailsService;
 
+
+    /**
+     * 解决 无法直接注入 AuthenticationManager
+     *
+     * @return
+     * @throws Exception
+     */
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     /**
      * 用户登录验证
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 }

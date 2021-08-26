@@ -44,7 +44,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) {
         AuthUser authUser = authUserService.getUserByName(username);
         AssertUtil.notNull(authUser, new UsernameNotFoundException("用户名不存在"));
-        AssertUtil.isTrue("2".equals(authUser.getStatus()), new LockedException("用户已禁用"));
+        AssertUtil.notTrue("2".equals(authUser.getStatus()), new LockedException("用户已禁用"));
         if (authUser != null) {
             SecurityUserDetails userDetails = new SecurityUserDetails();
             BeanUtils.copyProperties(authUser, userDetails);

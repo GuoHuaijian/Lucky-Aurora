@@ -17,7 +17,7 @@ spring:
     password: 564559079
 
 # JWT配置
-jwt:
+#jwt:
 #  # 密匙Key
 #  secret: JWTSecret,C3Stones
 #  # HeaderKey

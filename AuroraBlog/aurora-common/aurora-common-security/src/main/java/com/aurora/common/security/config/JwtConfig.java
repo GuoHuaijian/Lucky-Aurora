@@ -34,7 +34,7 @@ public class JwtConfig {
     /**
      * 过期时间
      */
-    public static Integer expiration = 86400;
+    public static Integer expiration = 86400000;
 
     /**
      * 配置白名单
@@ -47,7 +47,7 @@ public class JwtConfig {
      * @param expiration 过期时间，单位秒
      */
     public void setExpiration(Integer expiration) {
-        JwtConfig.expiration = expiration * 1000;
+        JwtConfig.expiration = expiration;
     }
 
     public void setSecret(String secret) {

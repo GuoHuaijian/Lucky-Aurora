@@ -95,7 +95,7 @@ public class JwtTokenUtil {
      */
     public static boolean isTokenExpired(String token) {
         Claims claims = getClaimsFromToken(token);
-        return (claims.getExpiration().before(new Date()));
+        return (claims.getExpiration().after(new Date()));
     }
 
     /**
