@@ -1,0 +1,96 @@
+version : '3.8'
+services:
+  aurora-nacos:
+    container_name: aurora-zookeeper
+    image: zookeeper
+    build:
+      context: zookeeper
+    environment:
+      - MODE=standalone
+    volumes:
+      - ./zookeeper/logs/:/home/zookeeper/logs
+      - ./zookeeper/conf/zoo.cfg:/home/zookeeper/conf/zoo.cfg
+    ports:
+      - "2181:2181"
+  aurora-mysql:
+    container_name: aurora-mysql
+    image: mysql:5.7
+    build:
+      context: ./mysql
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./mysql/conf:/etc/mysql/conf.d
+      - ./mysql/logs:/logs
+      - ./mysql/data:/var/lib/mysql
+    command: [
+          'mysqld',
+          '--innodb-buffer-pool-size=80M',
+          '--character-set-server=utf8mb4',
+          '--collation-server=utf8mb4_unicode_ci',
+          '--default-time-zone=+8:00',
+          '--lower-case-table-names=1'
+        ]
+    environment:
+      MYSQL_DATABASE: 'aurora-blog'
+      MYSQL_ROOT_PASSWORD: password
+  aurora-redis:
+    container_name: aurora-redis
+    image: redis
+    build:
+      context: ./redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./redis/conf/redis.conf:/home/aurora/redis/redis.conf
+      - ./redis/data:/data
+    command: redis-server /home/aurora/redis/redis.conf
+  aurora-nginx:
+    container_name: aurora-nginx
+    image: nginx
+    build:
+      context: ./nginx
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/html/dist:/home/aurora/projects/aurora-ui
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/logs:/var/log/nginx
+      - ./nginx/conf.d:/etc/nginx/conf.d
+  aurora-auth:
+    container_name: aurora-auth
+    build:
+      context: aurora/auth
+      dockerfile: aurora/auth/Dockerfile
+    ports:
+      - "9200:9200"
+    depends_on:
+      - aurora-redis
+    links:
+      - aurora-redis
+  aurora-system:
+    container_name: aurora-system
+    build:
+      context: aurora/system
+      dockerfile: aurora/system/Dockerfile
+    ports:
+      - "9201:9201"
+    depends_on:
+      - aurora-redis
+      - aurora-mysql
+    links:
+      - aurora-redis
+      - aurora-mysql
+  aurora-admin:
+    container_name: aurora-admin
+    build:
+      context: aurora/admin
+      dockerfile: aurora/admin/Dockerfile
+    ports:
+      - "9202:9202"
+    depends_on:
+      - aurora-mysql
+      - aurora-redis
+    links:
+      - aurora-mysql
+      - aurora-redis
