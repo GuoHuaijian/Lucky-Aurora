@@ -46,13 +46,15 @@ dubbo:
     name: dubbo
     #(默认20880,-1为随机端口)
     port: -1
+    #序列化方式
+  #    serialization: kryo
   #注册中心的地址和协议
   registry:
     address: zookeeper://127.0.0.1:2181
     protocol: zookeeper
   #连接监控中心
-  monitor:
-    protocol: registry
+  #  monitor:
+  #    protocol: registry
   consumer:
     check: false
 

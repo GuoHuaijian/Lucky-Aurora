@@ -23,7 +23,7 @@ public class HelloController {
         return "hello";
     }
 
-    @PreAuthorize("@ss.hasAuthority('aa')")
+    @PreAuthorize("@ss.hasAuthority('system:role:list')")
     @GetMapping("hello")
     public String get1() {
         return "hello";

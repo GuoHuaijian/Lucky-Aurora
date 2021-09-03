@@ -1,7 +1,7 @@
 package com.aurora.common.security.filter;
 
 import com.aurora.common.security.config.JwtConfig;
-import com.aurora.common.security.domain.SecurityUserDetails;
+import com.aurora.common.security.domain.SecurityUser;
 import com.aurora.common.security.utils.JwtTokenUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,10 +34,10 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
         // 取出Token
         String token = request.getHeader(JwtConfig.tokenHeader);
         if (token != null && token.startsWith(JwtConfig.tokenPrefix)) {
-            SecurityUserDetails userDetails = JwtTokenUtil.parseAccessToken(token);
-            if (userDetails != null) {
+            SecurityUser securityUser = JwtTokenUtil.parseAccessToken(token);
+            if (securityUser != null) {
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
-                        userDetails, userDetails.getUserId(), userDetails.getAuthorities());
+                        securityUser, securityUser.getUserId(), securityUser.getAuthorities());
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
         }

@@ -1,7 +1,7 @@
 package com.aurora.common.security.handler;
 
 import com.aurora.common.core.web.domain.Result;
-import com.aurora.common.security.domain.SecurityUserDetails;
+import com.aurora.common.security.domain.SecurityUser;
 import com.aurora.common.security.utils.JwtTokenUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -26,8 +26,8 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) {
-        SecurityUserDetails sysUserDetails = (SecurityUserDetails) authentication.getPrincipal();
-        String token = JwtTokenUtil.createAccessToken(sysUserDetails);
+        SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
+        String token = JwtTokenUtil.createAccessToken(securityUser);
         Map<String, String> tokenMap = new HashMap<>(1);
         tokenMap.put("token", token);
         Result.responseJson(response, Result.success());

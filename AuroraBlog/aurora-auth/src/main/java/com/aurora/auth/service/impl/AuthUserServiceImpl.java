@@ -32,9 +32,9 @@ public class AuthUserServiceImpl extends ServiceImpl<AuthUserMapper, AuthUser> i
      */
     @Override
     public AuthUser getUserByName(String userName) {
-        LambdaQueryWrapper<AuthUser> sysUserLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        sysUserLambdaQueryWrapper.eq(AuthUser::getUsername, userName);
-        AuthUser user = getOne(sysUserLambdaQueryWrapper);
+        LambdaQueryWrapper<AuthUser> authUserLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        authUserLambdaQueryWrapper.eq(AuthUser::getUsername, userName);
+        AuthUser user = getOne(authUserLambdaQueryWrapper);
         return user;
     }
 

@@ -18,7 +18,7 @@ import java.util.Collection;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class SecurityUserDetails implements UserDetails, Serializable {
+public class SecurityUser implements UserDetails, Serializable {
 
     private static final long serialVersionUID = 1L;
 

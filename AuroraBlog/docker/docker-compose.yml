@@ -1,6 +1,6 @@
-version : '3.8'
+version: '3.8'
 services:
-  aurora-nacos:
+  aurora-zookeeper:
     container_name: aurora-zookeeper
     image: zookeeper
     build:
@@ -24,13 +24,13 @@ services:
       - ./mysql/logs:/logs
       - ./mysql/data:/var/lib/mysql
     command: [
-          'mysqld',
-          '--innodb-buffer-pool-size=80M',
-          '--character-set-server=utf8mb4',
-          '--collation-server=utf8mb4_unicode_ci',
-          '--default-time-zone=+8:00',
-          '--lower-case-table-names=1'
-        ]
+      'mysqld',
+      '--innodb-buffer-pool-size=80M',
+      '--character-set-server=utf8mb4',
+      '--collation-server=utf8mb4_unicode_ci',
+      '--default-time-zone=+8:00',
+      '--lower-case-table-names=1'
+    ]
     environment:
       MYSQL_DATABASE: 'aurora-blog'
       MYSQL_ROOT_PASSWORD: password

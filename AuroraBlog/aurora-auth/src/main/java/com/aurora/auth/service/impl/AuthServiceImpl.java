@@ -1,8 +1,8 @@
 package com.aurora.auth.service.impl;
 
-import com.aurora.common.security.domain.SecurityUserDetails;
+import com.aurora.common.security.domain.SecurityUser;
 import com.aurora.common.security.utils.JwtTokenUtil;
-import com.aurora.rpc.auth.LoginService;
+import com.aurora.rpc.auth.AuthService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,26 +20,26 @@ import javax.annotation.Resource;
  * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
-@DubboService
+@DubboService(version = "1.0.0", interfaceClass = AuthService.class)
 @Slf4j
-public class LoginServiceImpl implements LoginService {
+public class AuthServiceImpl implements AuthService {
 
     @Resource
     private AuthenticationManager authenticationManager;
 
     /**
-     * 用户登录
+     * 获取token
      *
      * @param username
      * @param password
      * @return
      */
     @Override
-    public String login(String username, String password) {
+    public String createToken(String username, String password) {
         // 此方法会调用userDetailsService AuthSecurityConfig中可以配置userDetailsService的实现
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-        SecurityUserDetails userDetails = (SecurityUserDetails) authenticate.getPrincipal();
-        String token = JwtTokenUtil.createAccessToken(userDetails);
+        SecurityUser securityUser = (SecurityUser) authenticate.getPrincipal();
+        String token = JwtTokenUtil.createAccessToken(securityUser);
         return token;
     }
 }

@@ -70,7 +70,10 @@ public class PermissionService {
      */
     private boolean hasAnyAuthorityName(String prefix, String... roles) {
         Set<String> roleSet = SecurityContextHolder.getContext().getAuthentication()
-                .getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+                .getAuthorities()
+                .stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toSet());
         String[] var = roles;
         for (int i = 0; i < roles.length; ++i) {
             String defaultedRole = getRoleWithDefaultPrefix(prefix, var[i]);

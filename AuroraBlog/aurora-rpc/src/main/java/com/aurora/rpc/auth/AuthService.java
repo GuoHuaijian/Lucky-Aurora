@@ -8,15 +8,15 @@ package com.aurora.rpc.auth;
  * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0
  */
-public interface LoginService {
+public interface AuthService {
 
     /**
-     * 用户登录
+     * 获取token
      *
      * @param username
      * @param password
      * @return
      */
-    String login(String username, String password);
+    String createToken(String username, String password);
 
 }

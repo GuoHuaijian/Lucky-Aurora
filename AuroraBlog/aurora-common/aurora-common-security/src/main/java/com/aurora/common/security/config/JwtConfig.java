@@ -34,7 +34,7 @@ public class JwtConfig {
     /**
      * 过期时间
      */
-    public static Integer expiration = 86400000;
+    public static Integer expiration = 1800000;
 
     /**
      * 配置白名单

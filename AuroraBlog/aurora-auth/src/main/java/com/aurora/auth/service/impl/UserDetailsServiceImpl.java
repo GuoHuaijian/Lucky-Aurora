@@ -3,7 +3,7 @@ package com.aurora.auth.service.impl;
 import com.aurora.auth.domain.AuthUser;
 import com.aurora.auth.service.AuthUserService;
 import com.aurora.common.core.utils.AssertUtil;
-import com.aurora.common.security.domain.SecurityUserDetails;
+import com.aurora.common.security.domain.SecurityUser;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,20 +46,20 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         AssertUtil.notNull(authUser, new UsernameNotFoundException("用户名不存在"));
         AssertUtil.notTrue("2".equals(authUser.getStatus()), new LockedException("用户已禁用"));
         if (authUser != null) {
-            SecurityUserDetails userDetails = new SecurityUserDetails();
-            BeanUtils.copyProperties(authUser, userDetails);
-            userDetails.setUsername(authUser.getUsername());
+            SecurityUser securityUser = new SecurityUser();
+            BeanUtils.copyProperties(authUser, securityUser);
+            securityUser.setUsername(authUser.getUsername());
             // 角色和权限集合
             Set<GrantedAuthority> authorities = new HashSet<>();
-            Set<String> roleList = new HashSet<>(authUserService.getRolesByUserId(userDetails.getUserId()));
+            Set<String> roleList = new HashSet<>(authUserService.getRolesByUserId(securityUser.getUserId()));
             roleList.forEach(role -> authorities.add(new SimpleGrantedAuthority("ROLE_" + role)));
-            Set<String> authList = new HashSet<>(authUserService.getAuthsByUserId(userDetails.getUserId()));
+            Set<String> authList = new HashSet<>(authUserService.getAuthsByUserId(securityUser.getUserId()));
             for (String s : authList) {
                 Set<String> list = new HashSet<>(Arrays.asList(s.split(",")));
                 list.forEach(auth -> authorities.add(new SimpleGrantedAuthority(auth)));
             }
-            userDetails.setAuthorities(authorities);
-            return userDetails;
+            securityUser.setAuthorities(authorities);
+            return securityUser;
         }
         return null;
     }
