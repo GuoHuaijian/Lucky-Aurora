@@ -98,7 +98,7 @@ public class JwtTokenUtil {
     public static void refreshToken(String token) {
         SecurityUser securityUser = getSecurityUser(token);
         String newToken = createAccessToken(securityUser);
-        ServletUtils.getResponse().addHeader("Authorization", newToken);
+        ServletUtils.getResponse().addHeader(JwtConfig.tokenHeader, newToken);
     }
 
     /**
