@@ -1,4 +1,4 @@
-package com.aurora.auth.common.config;
+package com.aurora.auth.config;
 
 import com.aurora.auth.service.impl.UserDetailsServiceImpl;
 import com.aurora.common.security.config.SecurityConfig;
@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 import javax.annotation.Resource;
 
@@ -20,6 +22,8 @@ import javax.annotation.Resource;
  */
 @Order(10)
 @Configuration
+@EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class AuthSecurityConfig extends SecurityConfig {
 
     /**

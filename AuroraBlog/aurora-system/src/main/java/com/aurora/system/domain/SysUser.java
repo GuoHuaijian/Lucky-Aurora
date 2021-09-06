@@ -25,7 +25,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "aurora_blog.sys_user")
-public class User implements Serializable {
+public class SysUser implements Serializable {
     /**
      * 用户id
      */

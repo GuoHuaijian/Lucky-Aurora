@@ -1,14 +1,13 @@
-package com.aurora.rpc.auth;
+package com.aurora.auth.service;
 
 /**
- * describe: 登录认证接口
+ * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/1/1
- * @E-mail guohuaijian9527@gmail.com
+ * @Author Guo
+ * @Date 2021/9/6 12:43
  * @Version 1.0
  */
-public interface AuthService {
+public interface LoginService {
 
     /**
      * 获取token
@@ -18,5 +17,4 @@ public interface AuthService {
      * @return
      */
     String createToken(String username, String password);
-
 }

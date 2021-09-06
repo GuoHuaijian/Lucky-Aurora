@@ -9,13 +9,6 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
-  datasource:
-    type: com.zaxxer.hikari.HikariDataSource
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/aurora_blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-    username: root
-    password: 564559079
-
 # JWT配置
 #jwt:
 #  # 密匙Key
@@ -28,16 +21,6 @@ spring:
 #  expiration: 86400
 #  # 配置白名单（不需要认证）
 #  antMatchers: /login/**,/register/**,/static/**
-
-# Mybatis-plus配置
-mybatis-plus:
-  mapper-locations: classpath:mapper/*.xml
-  global-config:
-    db-config:
-      id-type: AUTO
-  configuration:
-    # 打印sql
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 # Dubbo
 dubbo:

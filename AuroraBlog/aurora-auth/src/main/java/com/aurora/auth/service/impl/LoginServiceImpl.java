@@ -1,28 +1,24 @@
 package com.aurora.auth.service.impl;
 
+import com.aurora.auth.service.LoginService;
 import com.aurora.common.security.domain.SecurityUser;
 import com.aurora.common.security.utils.JwtTokenUtil;
-import com.aurora.rpc.auth.AuthService;
-import lombok.extern.slf4j.Slf4j;
-import org.apache.dubbo.config.annotation.DubboService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 
-
 /**
- * describe: 登录方法实现
+ * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/1/1
- * @E-mail guohuaijian9527@gmail.com
+ * @Author Guo
+ * @Date 2021/9/6 12:42
  * @Version 1.0
  */
-@DubboService(version = "1.0.0", interfaceClass = AuthService.class)
-@Slf4j
-public class AuthServiceImpl implements AuthService {
+@Service
+public class LoginServiceImpl implements LoginService {
 
     @Resource
     private AuthenticationManager authenticationManager;

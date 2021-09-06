@@ -7,6 +7,7 @@ import com.aurora.common.core.utils.ServletUtils;
 import com.aurora.common.security.config.JwtConfig;
 import com.aurora.common.security.domain.SecurityUser;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
@@ -80,7 +81,7 @@ public class JwtTokenUtil {
     public static SecurityUser parseAccessToken(String token) {
         SecurityUser securityUser = null;
         if (StrUtil.isNotEmpty(token)) {
-            Assert.isTrue(JwtTokenUtil.isTokenExpired(token), "token过期");
+            Assert.isTrue(isTokenExpired(token), "token过期");
             try {
                 securityUser = getSecurityUser(token);
                 Set<GrantedAuthority> authorities = getAuthorities(token);
@@ -109,14 +110,16 @@ public class JwtTokenUtil {
      */
     public static boolean isTokenExpired(String token) {
         Claims claims = getClaimsFromToken(token);
+        if (claims == null) {
+            return false;
+        }
         Long expireTime = claims.getExpiration().getTime();
         Long currentTime = System.currentTimeMillis();
-        // token过期三十分钟之内都可以用改token获取新的token
-        if ((currentTime - expireTime) <= MILLIS_MINUTE_TEN) {
+        // token后三十分钟之内都可以用该token获取新的token
+        if ((expireTime - currentTime) <= MILLIS_MINUTE_TEN) {
             refreshToken(token);
-            return true;
         }
-        return false;
+        return true;
     }
 
     /**
@@ -132,8 +135,11 @@ public class JwtTokenUtil {
         try {
             // 解析Token
             claims = Jwts.parser().setSigningKey(JwtConfig.secret).parseClaimsJws(token).getBody();
-        } catch (Exception e) {
+        } catch (ExpiredJwtException e) {
+            // token过期
             claims = null;
+        } catch (Exception e) {
+            throw new RuntimeException("解析Token异常");
         }
         return claims;
     }
