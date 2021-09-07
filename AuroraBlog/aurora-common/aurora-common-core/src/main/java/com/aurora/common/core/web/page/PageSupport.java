@@ -1,7 +1,9 @@
 package com.aurora.common.core.web.page;
 
-import com.aurora.common.core.utils.ServletUtils;
+import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.web.domain.PageDomain;
+
+import java.util.Optional;
 
 /**
  * describe: 分页支持
@@ -38,10 +40,12 @@ public class PageSupport {
      */
     public static PageDomain getPageDomain() {
         PageDomain pageDomain = new PageDomain();
-        pageDomain.setCurrent(ServletUtils.getParameterToLong(PAGE_NUM));
-        pageDomain.setSize(ServletUtils.getParameterToLong(PAGE_SIZE));
-        pageDomain.setOrderByColumn(ServletUtils.getParameter(ORDER_BY_COLUMN));
-        pageDomain.setIsAsc(ServletUtils.getParameter(IS_ASC));
+        Long current = Optional.ofNullable(ServletUtil.getParameterToLong(PAGE_NUM)).orElse(1L);
+        Long size = Optional.ofNullable(ServletUtil.getParameterToLong(PAGE_SIZE)).orElse(10L);
+        pageDomain.setCurrent(current);
+        pageDomain.setSize(size);
+        pageDomain.setOrderByColumn(ServletUtil.getParameter(ORDER_BY_COLUMN));
+        pageDomain.setIsAsc(ServletUtil.getParameter(IS_ASC));
         return pageDomain;
     }
 

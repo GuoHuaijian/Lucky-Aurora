@@ -16,6 +16,24 @@ spring:
     username: root
     password: 564559079
 
+  kafka:
+    bootstrap-servers: localhost:8082
+    producer:
+      retries: 1
+      batch-size: 16384
+      buffer-memory: 33554432
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    consumer:
+      enable-auto-commit: true
+      auto-commit-interval: 100
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      group-id: defaultConsumerGroup
+    listener:
+      missing-topics-fatal: false
+
 # JWT配置
 #jwt:
 #  # 密匙Key

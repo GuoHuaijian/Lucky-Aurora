@@ -1,7 +1,7 @@
 package com.aurora.admin.domain.vo;
 
-import com.aurora.admin.domain.Article;
-import com.aurora.admin.domain.Tag;
+import com.aurora.admin.domain.BlogArticle;
+import com.aurora.admin.domain.BlogTag;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ArticleVO extends Article {
+public class ArticleVO extends BlogArticle {
 
     /**
      * 所属分类，以逗号分隔
@@ -27,5 +27,5 @@ public class ArticleVO extends Article {
     /**
      * 所属标签
      */
-    private List<Tag> tagList;
+    private List<BlogTag> tagList;
 }

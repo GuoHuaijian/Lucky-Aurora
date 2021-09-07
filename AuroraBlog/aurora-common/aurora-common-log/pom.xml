@@ -4,27 +4,35 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.aurora</groupId>
-        <artifactId>aurora</artifactId>
+        <artifactId>aurora-common</artifactId>
         <version>1.0.0</version>
     </parent>
     <groupId>com.aurora</groupId>
-    <artifactId>aurora-admin</artifactId>
+    <artifactId>aurora-common-log</artifactId>
     <version>1.0.0</version>
-    <name>aurora-admin</name>
-    <description>后台管理页面</description>
-    <packaging>jar</packaging>
-
+    <name>aurora-common-log</name>
+    <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>1.8</java.version>
     </properties>
-
     <dependencies>
-        <!-- Aurora -->
         <dependency>
-            <groupId>com.aurora</groupId>
-            <artifactId>aurora-common-security</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- spring-boot-starter-aop -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!-- Aurora -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-core</artifactId>
@@ -37,37 +45,13 @@
         </dependency>
         <dependency>
             <groupId>com.aurora</groupId>
-            <artifactId>aurora-common-log</artifactId>
+            <artifactId>aurora-common-security</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>com.aurora</groupId>
-            <artifactId>aurora-common-config</artifactId>
+            <artifactId>aurora-common-kafka</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <!-- Spring Boot -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Mysql -->
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- Mybatis-Plus -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
         </dependency>
 
         <!-- Dubbo -->
@@ -82,27 +66,6 @@
                 <exclusion>
                     <groupId>log4j</groupId>
                     <artifactId>log4j</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- zookeeper -->
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-dependencies-zookeeper</artifactId>
-            <type>pom</type>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-log4j12</artifactId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>guava</artifactId>
-                    <groupId>com.google.guava</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>log4j</artifactId>
-                    <groupId>log4j</groupId>
                 </exclusion>
             </exclusions>
         </dependency>

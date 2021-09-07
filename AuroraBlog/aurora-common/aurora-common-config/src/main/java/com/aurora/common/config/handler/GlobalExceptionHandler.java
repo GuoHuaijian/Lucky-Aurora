@@ -56,4 +56,18 @@ public class GlobalExceptionHandler {
         String[] split = e.getMessage().split(":");
         return Result.error(split[1]);
     }
+
+    /**
+     * 参数校验失败
+     *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(Exception.class)
+    public Result exceptionHandler(Exception e) {
+        log.error("出现错误：{}", e);
+        return Result.error(e.getMessage());
+    }
+
+
 }

@@ -3,7 +3,7 @@ package com.aurora.common.security.utils;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
-import com.aurora.common.core.utils.ServletUtils;
+import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.security.config.JwtConfig;
 import com.aurora.common.security.domain.SecurityUser;
 import io.jsonwebtoken.Claims;
@@ -99,7 +99,7 @@ public class JwtTokenUtil {
     public static void refreshToken(String token) {
         SecurityUser securityUser = getSecurityUser(token);
         String newToken = createAccessToken(securityUser);
-        ServletUtils.getResponse().addHeader(JwtConfig.tokenHeader, newToken);
+        ServletUtil.getResponse().addHeader(JwtConfig.tokenHeader, newToken);
     }
 
     /**
