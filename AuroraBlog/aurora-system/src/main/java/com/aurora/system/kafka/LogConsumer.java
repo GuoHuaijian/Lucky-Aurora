@@ -2,6 +2,7 @@ package com.aurora.system.kafka;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.aurora.common.kafka.constant.ConsumerGroupConstant;
 import com.aurora.common.kafka.constant.TopicConstant;
 import com.aurora.system.domain.SysLog;
 import com.aurora.system.service.SysLogService;
@@ -24,8 +25,8 @@ public class LogConsumer {
     @Resource
     private SysLogService logService;
 
-    @KafkaListener(topics = {TopicConstant.LOG_TOPIC_NAME})
-    public void receiveLog(ConsumerRecord< ? , ? > record){
+    @KafkaListener(topics = {TopicConstant.LOG_TOPIC_NAME}, groupId = ConsumerGroupConstant.LOG_GROUP_ID)
+    public void receiveLog(ConsumerRecord<?, ?> record) {
         Object json = JSONObject.toJSON(record);
         SysLog sysLog = JSONObject.toJavaObject((JSON) json, SysLog.class);
         logService.saveLog(sysLog);

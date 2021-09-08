@@ -16,6 +16,7 @@
         <module>aurora-common</module>
         <module>aurora-system</module>
         <module>aurora-rpc</module>
+        <module>aurora-search</module>
     </modules>
 
     <properties>
