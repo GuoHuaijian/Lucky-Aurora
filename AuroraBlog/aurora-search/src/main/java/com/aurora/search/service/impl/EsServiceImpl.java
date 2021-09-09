@@ -13,7 +13,7 @@ import org.elasticsearch.index.reindex.BulkByScrollResponse;
 import org.elasticsearch.index.reindex.DeleteByQueryRequest;
 import org.elasticsearch.index.reindex.UpdateByQueryRequest;
 import org.elasticsearch.script.Script;
-import org.springframework.data.elasticsearch.core.ElasticsearchRestTemplate;
+import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,7 +32,7 @@ import java.util.Map;
 public class EsServiceImpl implements EsService {
 
     @Resource
-    private ElasticsearchRestTemplate restTemplate;
+    private ElasticsearchOperations elasticsearchRestTemplate;
 
     @Resource
     private RestHighLevelClient restHighLevelClient;
@@ -43,10 +43,9 @@ public class EsServiceImpl implements EsService {
      * @param object
      */
     @Override
-    public void addIndex(Object object) {
-        String str = JSONObject.toJSONString(object);
-        Article article = JSON.parseObject(str, Article.class);
-        restTemplate.save(article);
+    public void addIndex(String object) {
+        Article article = JSON.parseObject(object, Article.class);
+        elasticsearchRestTemplate.save(article);
     }
 
     /**

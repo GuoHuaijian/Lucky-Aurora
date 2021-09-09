@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.aurora.common.kafka.producer.KafkaProducer;
 import com.aurora.common.log.service.AsyncLogService;
 import com.aurora.rpc.system.domain.SysLog;
+import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,7 @@ import javax.annotation.Resource;
  * @Date 2021/9/8 9:42
  * @Version 1.0
  */
+@Primary
 @Service
 public class KafkaAsyncLogServiceImpl implements AsyncLogService {
 

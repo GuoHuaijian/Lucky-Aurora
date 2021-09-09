@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 public class KafkaUtil {
 
     @Value("${spring.kafka.bootstrap-servers}")
-    private String springKafkaBootstrapServers;
+    private String kafkaServers;
 
     private AdminClient adminClient;
 
@@ -42,7 +42,7 @@ public class KafkaUtil {
     @PostConstruct
     private void initAdminClient() {
         Map<String, Object> props = new HashMap<>(1);
-        props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, springKafkaBootstrapServers);
+        props.put(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG, kafkaServers);
         adminClient = KafkaAdminClient.create(props);
     }
 

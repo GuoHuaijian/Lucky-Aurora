@@ -16,7 +16,7 @@ public interface EsService {
      *
      * @param object
      */
-    void addIndex(Object object);
+    void addIndex(String object);
 
     /**
      * 更新索引
