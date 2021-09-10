@@ -1,6 +1,7 @@
 package com.aurora.search.utils;
 
 import com.aurora.search.config.RestClientConfig;
+import com.google.common.collect.Lists;
 import org.elasticsearch.action.admin.indices.create.CreateIndexRequest;
 import org.elasticsearch.action.admin.indices.create.CreateIndexResponse;
 import org.elasticsearch.action.admin.indices.delete.DeleteIndexRequest;
@@ -20,12 +21,18 @@ import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClientBuilder;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.io.stream.StreamInput;
+import org.elasticsearch.common.text.Text;
 import org.elasticsearch.common.xcontent.XContentType;
 import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.fetch.subphase.highlight.HighlightField;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * describe: ES工具类
@@ -157,4 +164,49 @@ public class EsUtil {
         boolean exists = restHighLevelClient.indices().exists(request, RequestOptions.DEFAULT);
         return exists;
     }
+
+    /**
+     * 高亮查询
+     *
+     * @param title
+     * @return
+     */
+    public List<Map<String, Object>> highlighted(String title) throws IOException {
+        //定义索引库
+        SearchRequest searchRequest = new SearchRequest(INDEX);
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        //定义query查询
+        QueryBuilder queryBuilder = QueryBuilders.matchQuery("title", title);
+        //定义高亮查询
+        HighlightBuilder highlightBuilder = new HighlightBuilder();
+        //设置需要高亮的字段
+        highlightBuilder.field("title")
+                // 设置前缀、后缀
+                .preTags("<font color='red'>")
+                .postTags("</font>");
+        searchSourceBuilder.query(queryBuilder);
+        searchSourceBuilder.highlighter(highlightBuilder);
+        searchRequest.source(searchSourceBuilder);
+        SearchResponse searchResponse = restHighLevelClient.search(searchRequest, RequestOptions.DEFAULT);
+
+        List<Map<String, Object>> list = Lists.newArrayList();
+        //遍历高亮结果
+        for (SearchHit hit : searchResponse.getHits().getHits()) {
+            Map<String, HighlightField> highlightFields = hit.getHighlightFields();
+            HighlightField nameHighlight = highlightFields.get("title");
+            Map<String, Object> sourceAsMap = hit.getSourceAsMap();
+
+            if (nameHighlight != null) {
+                Text[] fragments = nameHighlight.getFragments();
+                String _title = "";
+                for (Text text : fragments) {
+                    _title += text;
+                }
+                sourceAsMap.put("title", _title);
+                list.add(sourceAsMap);
+            }
+        }
+        return list;
+    }
+
 }

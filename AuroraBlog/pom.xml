@@ -17,6 +17,7 @@
         <module>aurora-system</module>
         <module>aurora-rpc</module>
         <module>aurora-search</module>
+        <module>aurora-file</module>
     </modules>
 
     <properties>
@@ -100,6 +101,11 @@
             <dependency>
                 <groupId>com.baomidou</groupId>
                 <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-extension</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
 

@@ -1,0 +1,37 @@
+# Dubbo
+dubbo:
+  # 通信规则（通信协议和端口）
+  protocol:
+    name: dubbo
+    # (默认20880,-1为随机端口)
+    port: -1
+    # 序列化方式
+  #    serialization: kryo
+  # 注册中心的地址和协议
+  registry:
+    address: zookeeper://127.0.0.1:2181
+    protocol: zookeeper
+  # 连接监控中心
+  #  monitor:
+  #    protocol: registry
+  consumer:
+    check: false
+
+# 日志配置
+logging:
+  level:
+    com.aurora: debug
+    org.springframework: warn
+
+# JWT配置
+#jwt:
+#  # 密匙Key
+#  secret: JWTSecret,C3Stones
+#  # HeaderKey
+#  tokenHeader: Authorization
+#  # Token前缀
+#  tokenPrefix: Bearer
+#  # 过期时间，单位秒
+#  expiration: 86400
+#  # 配置白名单（不需要认证）
+#  antMatchers: /login/**,/register/**,/static/**

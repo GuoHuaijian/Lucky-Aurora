@@ -32,7 +32,7 @@ public class KafkaConsumerConfig {
     @Value("${spring.kafka.bootstrap-servers}")
     private String KafkaServers;
 
-    public Map<String, Object> consumerConfig(String consumerGroupId) {
+    public Map<String, Object> consumerConfig() {
         Map<String, Object> props = new HashMap<>(16);
         // kafka服务地址
         props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, KafkaServers);
@@ -42,8 +42,6 @@ public class KafkaConsumerConfig {
         props.put(ConsumerConfig.AUTO_COMMIT_INTERVAL_MS_CONFIG, "100");
         // 超时时间，服务端没有收到心跳就会认为当前消费者失效
         props.put(ConsumerConfig.SESSION_TIMEOUT_MS_CONFIG, "15000");
-        // 默认消费组
-        props.put(ConsumerConfig.GROUP_ID_CONFIG, consumerGroupId);
         // earliest从头开始消费、latest获取最新消息
         props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "latest");
         // 序列化
@@ -53,7 +51,12 @@ public class KafkaConsumerConfig {
     }
 
     public ConsumerFactory<String, String> consumerFactory(String consumerGroupId) {
-        return new DefaultKafkaConsumerFactory<>(consumerConfig(consumerGroupId));
+        if (consumerGroupId == null) {
+            return new DefaultKafkaConsumerFactory<>(consumerConfig());
+        }
+        Map<String, Object> config = consumerConfig();
+        config.put(ConsumerConfig.GROUP_ID_CONFIG, consumerGroupId);
+        return new DefaultKafkaConsumerFactory<>(config);
     }
 
     /**
@@ -62,23 +65,8 @@ public class KafkaConsumerConfig {
      * @return
      */
     @Bean(name = ContainerFactoryConstant.LOG_CONTAINER_FACTORY_NAME)
-    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
-        ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory(ConsumerGroupConstant.LOG_GROUP_ID));
-        // 监听的线程数量，多个线程入库，数据库的id是自增的话，可能导致死锁，建议使用UUID
-        factory.setConcurrency(1);
-        // 消费者有两种消费模式，一种是kafka实例主动推送push模式，推送速度由kafka决定，很有可能导致消费端阻塞
-        // 另一种就是 消费者主动拉取，poll模式
-        factory.getContainerProperties().setPollTimeout(3000);
-        // 当使用手动提交时必须设置ackMode为MANUAL,否则会报错No Acknowledgment available as an argument,
-        // the listener container must have a MANUAL AckMode to populate the Acknowledgment.
-        factory.getContainerProperties().setAckMode(ContainerProperties.AckMode.MANUAL);
-        // 下面两个条件哪个先满足，就会先使用那个
-        // 达到1条数据的时候提交一次
-        factory.getContainerProperties().setAckCount(1);
-        // 10s提交一次
-        factory.getContainerProperties().setAckTime(10000);
-        return factory;
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaLogListenerContainerFactory() {
+        return getKafkaListenerContainerFactory(ConsumerGroupConstant.LOG_GROUP_ID);
     }
 
     /**
@@ -88,8 +76,28 @@ public class KafkaConsumerConfig {
      */
     @Bean(name = ContainerFactoryConstant.ARTICLE_CONTAINER_FACTORY_NAME)
     public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaArticleListenerContainerFactory() {
+        return getKafkaListenerContainerFactory(ConsumerGroupConstant.ARTICLE_GROUP_ID);
+    }
+
+    /**
+     * 需要注解或配置文件方式指定消费组
+     *
+     * @return
+     */
+    @Bean(name = ContainerFactoryConstant.COMMON_CONTAINER_FACTORY_NAME)
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> kafkaListenerContainerFactory() {
+        return getKafkaListenerContainerFactory(null);
+    }
+
+    /**
+     * 创建不同消费者的KafkaListenerContainerFactory
+     *
+     * @param consumerGroupId
+     * @return
+     */
+    public KafkaListenerContainerFactory<ConcurrentMessageListenerContainer<String, String>> getKafkaListenerContainerFactory(String consumerGroupId) {
         ConcurrentKafkaListenerContainerFactory<String, String> factory = new ConcurrentKafkaListenerContainerFactory<>();
-        factory.setConsumerFactory(consumerFactory(ConsumerGroupConstant.ARTICLE_GROUP_ID));
+        factory.setConsumerFactory(consumerFactory(consumerGroupId));
         // 监听的线程数量，多个线程入库，数据库的id是自增的话，可能导致死锁，建议使用UUID
         factory.setConcurrency(1);
         // 消费者有两种消费模式，一种是kafka实例主动推送push模式，推送速度由kafka决定，很有可能导致消费端阻塞

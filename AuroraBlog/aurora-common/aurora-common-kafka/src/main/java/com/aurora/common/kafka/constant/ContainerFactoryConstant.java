@@ -18,4 +18,9 @@ public class ContainerFactoryConstant {
      * 博文ContainerFactory
      */
     public static final String ARTICLE_CONTAINER_FACTORY_NAME = "articleContainerFactory";
+
+    /**
+     * 公共ContainerFactory
+     */
+    public static final String COMMON_CONTAINER_FACTORY_NAME = "commonContainerFactory";
 }
