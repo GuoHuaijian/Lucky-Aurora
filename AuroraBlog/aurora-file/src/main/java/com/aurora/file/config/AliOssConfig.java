@@ -1,6 +1,6 @@
 package com.aurora.file.config;
 
-import com.aliyun.oss.OSS;
+import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.OSSClientBuilder;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -41,7 +41,7 @@ public class AliOssConfig {
     private String objectName;
 
     @Bean
-    public OSS getOSSClient() {
-        return new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
+    public OSSClient getOSSClient() {
+        return (OSSClient) new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
     }
 }

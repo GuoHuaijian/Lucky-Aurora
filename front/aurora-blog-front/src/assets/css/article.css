@@ -1,0 +1,604 @@
+article#article-main-page,
+div.gt-comments {
+    text-align: left;
+}
+article#article-main-page h1,
+div.gt-comments h1,
+article#article-main-page h2,
+div.gt-comments h2,
+article#article-main-page h3,
+div.gt-comments h3,
+article#article-main-page h4,
+div.gt-comments h4,
+article#article-main-page h5,
+div.gt-comments h5,
+article#article-main-page h6,
+div.gt-comments h6 {
+    padding-bottom: 15px;
+    padding-top: 90px;
+    margin-top: -70px;
+    font-weight: 700;
+    text-align: justify;
+    color: #333;
+}
+article#article-main-page h1:focus,
+div.gt-comments h1:focus,
+article#article-main-page h2:focus,
+div.gt-comments h2:focus,
+article#article-main-page h3:focus,
+div.gt-comments h3:focus,
+article#article-main-page h4:focus,
+div.gt-comments h4:focus,
+article#article-main-page h5:focus,
+div.gt-comments h5:focus,
+article#article-main-page h6:focus,
+div.gt-comments h6:focus {
+    outline: none;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page h1,
+    div.gt-comments h1,
+    article#article-main-page h2,
+    div.gt-comments h2,
+    article#article-main-page h3,
+    div.gt-comments h3,
+    article#article-main-page h4,
+    div.gt-comments h4,
+    article#article-main-page h5,
+    div.gt-comments h5,
+    article#article-main-page h6,
+    div.gt-comments h6 {
+        padding-top: 35px;
+        margin-top: -15px;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page h1,
+    div.gt-comments h1,
+    article#article-main-page h2,
+    div.gt-comments h2,
+    article#article-main-page h3,
+    div.gt-comments h3,
+    article#article-main-page h4,
+    div.gt-comments h4,
+    article#article-main-page h5,
+    div.gt-comments h5,
+    article#article-main-page h6,
+    div.gt-comments h6 {
+        padding-top: 50px;
+        margin-top: -30px;
+    }
+}
+@media screen and (min-width: 992px) {
+    article#article-main-page h1,
+    div.gt-comments h1,
+    article#article-main-page h2,
+    div.gt-comments h2,
+    article#article-main-page h3,
+    div.gt-comments h3,
+    article#article-main-page h4,
+    div.gt-comments h4,
+    article#article-main-page h5,
+    div.gt-comments h5,
+    article#article-main-page h6,
+    div.gt-comments h6 {
+        padding-top: 70px;
+        margin-top: -50px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page h1,
+    div.gt-comments h1,
+    article#article-main-page h2,
+    div.gt-comments h2,
+    article#article-main-page h3,
+    div.gt-comments h3,
+    article#article-main-page h4,
+    div.gt-comments h4,
+    article#article-main-page h5,
+    div.gt-comments h5,
+    article#article-main-page h6,
+    div.gt-comments h6 {
+        padding-top: 90px;
+        margin-top: -70px;
+    }
+}
+article#article-main-page h1,
+div.gt-comments h1 {
+    font-size: 27px;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page h1,
+    div.gt-comments h1 {
+        font-size: 20px;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page h1,
+    div.gt-comments h1 {
+        font-size: 22px;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page h1,
+    div.gt-comments h1 {
+        font-size: 24px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page h1,
+    div.gt-comments h1 {
+        font-size: 27px;
+    }
+}
+article#article-main-page h2,
+div.gt-comments h2 {
+    font-size: 25px;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page h2,
+    div.gt-comments h2 {
+        font-size: 18px;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page h2,
+    div.gt-comments h2 {
+        font-size: 20px;
+    }
+}
+@media screen and (min-width: 992px) {
+    article#article-main-page h2,
+    div.gt-comments h2 {
+        font-size: 22px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page h2,
+    div.gt-comments h2 {
+        font-size: 25px;
+    }
+}
+article#article-main-page h3,
+div.gt-comments h3 {
+    font-size: 22px;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page h3,
+    div.gt-comments h3 {
+        font-size: 16px;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page h3,
+    div.gt-comments h3 {
+        font-size: 18px;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page h3,
+    div.gt-comments h3 {
+        font-size: 20px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page h3,
+    div.gt-comments h3 {
+        font-size: 22px;
+    }
+}
+article#article-main-page h4,
+div.gt-comments h4,
+article#article-main-page h5,
+div.gt-comments h5,
+article#article-main-page h6,
+div.gt-comments h6 {
+    font-size: 20px;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page h4,
+    div.gt-comments h4,
+    article#article-main-page h5,
+    div.gt-comments h5,
+    article#article-main-page h6,
+    div.gt-comments h6 {
+        font-size: 14px;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page h4,
+    div.gt-comments h4,
+    article#article-main-page h5,
+    div.gt-comments h5,
+    article#article-main-page h6,
+    div.gt-comments h6 {
+        font-size: 16px;
+    }
+}
+@media screen and (min-width: 992px) {
+    article#article-main-page h4,
+    div.gt-comments h4,
+    article#article-main-page h5,
+    div.gt-comments h5,
+    article#article-main-page h6,
+    div.gt-comments h6 {
+        font-size: 18px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page h4,
+    div.gt-comments h4,
+    article#article-main-page h5,
+    div.gt-comments h5,
+    article#article-main-page h6,
+    div.gt-comments h6 {
+        font-size: 20px;
+    }
+}
+article#article-main-page ul,
+div.gt-comments ul {
+    list-style-type: square;
+    color: #888;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page ul,
+    div.gt-comments ul {
+        line-height: 1.1em;
+        padding-left: 0.5em;
+        margin: 0.3em 0;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page ul,
+    div.gt-comments ul {
+        line-height: 1.1em;
+        padding-left: 0.5em;
+        margin: 0.5em 0;
+    }
+}
+@media screen and (min-width: 992px) {
+    article#article-main-page ul,
+    div.gt-comments ul {
+        line-height: 1.1em;
+        padding-left: 0.5em;
+        margin: 1em 0;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page ul,
+    div.gt-comments ul {
+        line-height: 1.1em;
+        padding-left: 0.5em;
+        margin: 1em 0;
+    }
+}
+article#article-main-page ul > li,
+div.gt-comments ul > li {
+    list-style: disc;
+    font-weight: 200;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page ul > li,
+    div.gt-comments ul > li {
+        font-size: 14px;
+        margin: 0.2em 0;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page ul > li,
+    div.gt-comments ul > li {
+        font-size: 14px;
+        margin: 0.3em 0;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page ul > li,
+    div.gt-comments ul > li {
+        font-size: 15px;
+        margin: 0.3em 0;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page ul > li,
+    div.gt-comments ul > li {
+        font-size: 17px;
+        line-height: 1.2em;
+        margin: 0.5em 0;
+    }
+}
+article#article-main-page ul > li > blockquote,
+div.gt-comments ul > li > blockquote {
+    border-left: none;
+}
+article#article-main-page ul > li > blockquote > p,
+div.gt-comments ul > li > blockquote > p {
+    font-size: 0.82em;
+}
+article#article-main-page ol,
+div.gt-comments ol {
+    color:  #888;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page ol,
+    div.gt-comments ol {
+        line-height: 1.1em;
+        padding-left: 1em;
+        margin: 0.3em 0;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page ol,
+    div.gt-comments ol {
+        line-height: 1.2em;
+        padding-left: 1em;
+        margin: 0.5em 0;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page ol,
+    div.gt-comments ol {
+        line-height: 1.5em;
+        padding-left: 1.5em;
+        margin: 1em 0;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page ol,
+    div.gt-comments ol {
+        line-height: 1.5em;
+        padding-left: 1.5em;
+        margin: 1em 0;
+    }
+}
+article#article-main-page ol > li,
+div.gt-comments ol > li {
+    list-style: decimal;
+    font-weight: 200;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page ol > li,
+    div.gt-comments ol > li {
+        font-size: 14px;
+        margin: 0.2em 0;
+        line-height: 1.3em;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page ol > li,
+    div.gt-comments ol > li {
+        font-size: 14px;
+        margin: 0.3em 0;
+        line-height: 1.4em;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page ol > li,
+    div.gt-comments ol > li {
+        font-size: 15px;
+        margin: 0.4em 0;
+        line-height: 1.4em;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page ol > li,
+    div.gt-comments ol > li {
+        font-size: 17px;
+        margin: 0.5em 0;
+        line-height: 1.2em;
+    }
+}
+article#article-main-page ol > li > blockquote,
+div.gt-comments ol > li > blockquote {
+    border-left: none;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page ol + ul,
+    div.gt-comments ol + ul,
+    article#article-main-page ul + ol,
+    div.gt-comments ul + ol {
+        margin-left: 0.4em;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page ol + ul,
+    div.gt-comments ol + ul,
+    article#article-main-page ul + ol,
+    div.gt-comments ul + ol {
+        margin-left: 0.6em;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page ol + ul,
+    div.gt-comments ol + ul,
+    article#article-main-page ul + ol,
+    div.gt-comments ul + ol {
+        margin-left: 0.7em;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page ol + ul,
+    div.gt-comments ol + ul,
+    article#article-main-page ul + ol,
+    div.gt-comments ul + ol {
+        margin-left: 1em;
+    }
+}
+article#article-main-page p,
+div.gt-comments p {
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 25px;
+    margin: 15px 0;
+    color: #333;
+    word-wrap: break-word;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page p,
+    div.gt-comments p {
+        font-size: 14px;
+        line-height: 20px;
+        margin: 5px 0;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page p,
+    div.gt-comments p {
+        font-size: 14px;
+        line-height: 20px;
+        margin: 8px 0;
+    }
+}
+@media screen and (min-width: 992px) {
+    article#article-main-page p,
+    div.gt-comments p {
+        font-size: 15px;
+        line-height: 22px;
+        margin: 10px 0;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page p,
+    div.gt-comments p {
+        font-size: 17px;
+        line-height: 25px;
+        margin: 15px 0;
+    }
+}
+article#article-main-page img,
+div.gt-comments img {
+    display: block;
+    max-width: 100%;
+    margin: 0 auto;
+    cursor: pointer;
+}
+article#article-main-page blockquote,
+div.gt-comments blockquote {
+    padding: 4px 5px 4px 12px;
+    margin: 15px 0;
+    word-wrap: break-word;
+    border-left: 0.25em solid #409EFF;
+    background: #eee;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page blockquote,
+    div.gt-comments blockquote {
+        padding-left: 5px;
+        margin: 8px 0;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page blockquote,
+    div.gt-comments blockquote {
+        padding-left: 8px;
+        margin: 10px 0;
+    }
+}
+@media screen and (min-width: 992px) {
+    article#article-main-page blockquote,
+    div.gt-comments blockquote {
+        padding-left: 10px;
+        margin: 12px 0;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page blockquote,
+    div.gt-comments blockquote {
+        padding-left: 12px;
+        margin: 15px 0;
+    }
+}
+article#article-main-page blockquote > p,
+div.gt-comments blockquote > p {
+    font-weight: 300;
+    color: #888;
+}
+@media only screen and (max-width: 768px) {
+    article#article-main-page blockquote > p,
+    div.gt-comments blockquote > p {
+        font-size: 12px;
+        margin: 0;
+        line-height: 15px;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page blockquote > p,
+    div.gt-comments blockquote > p {
+        font-size: 13px;
+        margin: 3px 0;
+        line-height: 17px;
+    }
+}
+@media screen and (min-width: 768px) {
+    article#article-main-page blockquote > p,
+    div.gt-comments blockquote > p {
+        font-size: 14px;
+        margin: 5px 0;
+        line-height: 18px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    article#article-main-page blockquote > p,
+    div.gt-comments blockquote > p {
+        font-size: 15px;
+        margin: 5px 0;
+        line-height: 20px;
+    }
+}
+
+article#article-main-page code li,
+div.gt-comments code li {
+    list-style: none;
+    line-height: 1em;
+    font-size: 0.88em;
+}
+article#article-main-page strong,
+div.gt-comments strong,
+article#article-main-page b,
+div.gt-comments b,
+article#article-main-page em,
+div.gt-comments em {
+    font-weight: 700;
+    color: #ffa500;
+}
+
+article#article-main-page table,
+div.gt-comments table {
+    border-collapse: collapse;
+    word-break: normal;
+    width: 100%;
+    margin: 10px 0;
+    overflow: auto;
+}
+article#article-main-page table::-webkit-scrollbar,
+div.gt-comments table::-webkit-scrollbar {
+    width: 0.4rem;
+    height: 0.4rem;
+}
+article#article-main-page table::-webkit-scrollbar-thumb,
+div.gt-comments table::-webkit-scrollbar-thumb {
+    background-color: rgba(0,0,0,0.26);
+}
+article#article-main-page table td,
+div.gt-comments table td,
+article#article-main-page table th,
+div.gt-comments table th {
+    border: 1px solid #ddd;
+    color: #888;
+    padding: 8px;
+    min-height: 30px !important;
+    vertical-align: middle;
+}
+article#article-main-page table thead th,
+div.gt-comments table thead th {
+    color: #444;
+    background-color: rgba(64,158,255, 0.1);
+    font-weight: 700;
+}
+article#article-main-page table tr:nth-child(odd),
+div.gt-comments table tr:nth-child(odd) {
+    background: #fff
+}
+article#article-main-page table tr:nth-child(even),
+div.gt-comments table tr:nth-child(even) {
+    background: rgba(64,158,255, 0.03)
+}
