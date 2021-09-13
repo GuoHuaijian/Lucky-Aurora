@@ -60,12 +60,12 @@ export default {
   vertical-align: middle;
 }
 
-.article-list-year-title.style-date-year .date .iconfont{
+.article-list-year-title.style-date-year .date .iconfont {
   font-size: 40px;
   color: #53a8ff;
 }
 
-.article-list-year-title.style-date-month .date .iconfont{
+.article-list-year-title.style-date-month .date .iconfont {
   font-size: 24px;
   color: #53a8ff;
 }

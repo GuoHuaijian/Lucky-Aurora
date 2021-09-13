@@ -88,29 +88,35 @@ export default {
 .title-menu-timeline {
   display: flex;
 }
+
 .title-menu-timeline ul li {
   float: left;
   margin: 0 6px;
 }
+
 .title-menu-timeline ul li a {
   font-size: 15px;
   color: #7e8c8d;
   padding: 6px 0;
 }
+
 .title-menu-timeline ul li a:hover,
 .title-menu-timeline ul li a.active {
   color: #409EFF;
   border-bottom: 2px solid #409EFF;
 }
+
 .title-menu-timeline .refresh {
   margin-left: 15px;
   line-height: inherit;
 }
+
 .title-menu-timeline .refresh a {
   font-size: 20px;
   color: #696969;
   cursor: pointer;
 }
+
 .title-menu-timeline .refresh a:hover {
   color: #409EFF;
 }

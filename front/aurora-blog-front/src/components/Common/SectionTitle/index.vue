@@ -2,11 +2,11 @@
   <div class="section-title">
     <div class="title">
       <span class="square"></span>
-      <span class="main-title">{{mainTitle}}</span>
+      <span class="main-title">{{ mainTitle }}</span>
       <span class="vertical-line"></span>
-      <span class="sub-title">{{subTitle}}</span>
+      <span class="sub-title">{{ subTitle }}</span>
       <span class="view-more"
-      ><a :href="tipHref" v-if="tipText">{{tipText}}<i class="el-icon-caret-right"></i></a
+      ><a :href="tipHref" v-if="tipText">{{ tipText }}<i class="el-icon-caret-right"></i></a
       ></span>
     </div>
     <div class="menu">
@@ -41,7 +41,8 @@ export default {
 
   computed: {},
 
-  mounted() {},
+  mounted() {
+  },
 
   methods: {},
 };

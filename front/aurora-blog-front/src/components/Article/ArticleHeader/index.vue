@@ -1,6 +1,6 @@
 <template>
   <section-title :main-title="mainTitle" :sub-title="subTitle" tip-text="View More" tip-href="/articles">
-    <title-menu-filter @filterByMenu="filterByMenu"  slot="menu" :menu-filter-list="menuFilterList"></title-menu-filter>
+    <title-menu-filter @filterByMenu="filterByMenu" slot="menu" :menu-filter-list="menuFilterList"></title-menu-filter>
   </section-title>
 </template>
 
@@ -41,9 +41,10 @@ export default {
 
   mounted() {
   },
-  created: function () {},
+  created: function () {
+  },
   methods: {
-    filterByMenu (params) {
+    filterByMenu(params) {
       this.$emit('filterByMenu', params)
     }
   }

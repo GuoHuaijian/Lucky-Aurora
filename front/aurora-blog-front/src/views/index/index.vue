@@ -14,7 +14,7 @@
         <bg-carousel :items="items"/>
         <articles-header :main-title="'文章'" :sub-title="'Articles'"/>
         <article-cell v-for="article in articleList" :article="article" :key="article.id"/>
-        <browse-more @browseMore="browseMore" :noMoreData="noMoreData"  ref="browseMore"/>
+        <browse-more @browseMore="browseMore" :noMoreData="noMoreData" ref="browseMore"/>
       </template>
     </common-layout>
   </div>
@@ -321,52 +321,52 @@ export default {
           ]
         }],
       categoryList: [{
-        "id":1,
-        "name":"漫谈",
-        "type":0,
-        "ranks":0,
-        "parentId":-1,
-        "parentName":null
+        "id": 1,
+        "name": "漫谈",
+        "type": 0,
+        "ranks": 0,
+        "parentId": -1,
+        "parentName": null
       },
         {
-          "id":2,
-          "name":"本站相关",
-          "type":0,
-          "ranks":1,
-          "parentId":1,
-          "parentName":null
+          "id": 2,
+          "name": "本站相关",
+          "type": 0,
+          "ranks": 1,
+          "parentId": 1,
+          "parentName": null
         },
         {
-          "id":3,
-          "name":"关于",
-          "type":0,
-          "ranks":2,
-          "parentId":2,
-          "parentName":null
+          "id": 3,
+          "name": "关于",
+          "type": 0,
+          "ranks": 2,
+          "parentId": 2,
+          "parentName": null
         },
         {
-          "id":9,
-          "name":"后端",
-          "type":0,
-          "ranks":0,
-          "parentId":-1,
-          "parentName":null
+          "id": 9,
+          "name": "后端",
+          "type": 0,
+          "ranks": 0,
+          "parentId": -1,
+          "parentName": null
         },
         {
-          "id":11,
-          "name":"Java基础",
-          "type":0,
-          "ranks":1,
-          "parentId":9,
-          "parentName":null
+          "id": 11,
+          "name": "Java基础",
+          "type": 0,
+          "ranks": 1,
+          "parentId": 9,
+          "parentName": null
         },
         {
-          "id":12,
-          "name":"面试",
-          "type":0,
-          "ranks":2,
-          "parentId":11,
-          "parentName":null
+          "id": 12,
+          "name": "面试",
+          "type": 0,
+          "ranks": 2,
+          "parentId": 11,
+          "parentName": null
         }],
       noMoreData: false
     }
@@ -375,7 +375,8 @@ export default {
   components: {},
 
   methods: {
-    browseMore () {}
+    browseMore() {
+    }
   }
 }
 </script>

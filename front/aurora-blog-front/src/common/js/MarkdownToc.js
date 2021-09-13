@@ -1,4 +1,4 @@
-var Toc = function Toc (id, options) {
+var Toc = function Toc(id, options) {
     this.el = document.getElementById(id)
     if (!this.el) return
     this.options = options || {}

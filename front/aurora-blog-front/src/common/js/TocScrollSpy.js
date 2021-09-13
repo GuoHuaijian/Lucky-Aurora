@@ -1,4 +1,4 @@
-import { scrollTop } from './SmoothScroll'
+import {scrollTop} from './SmoothScroll'
 
 var TocScrollSpy = function (articleId, tocId, options) {
     this.articleElement = document.getElementById(articleId)
@@ -92,13 +92,13 @@ TocScrollSpy.prototype._handleScroll = function () {
         // 对数组各个数值求差值
         let distance = scrollTop - fitDistance
         // eslint-disable-next-line no-empty
-        if (distance < 0){
+        if (distance < 0) {
             distance = (distance - 1000000000000)
         }
         distances.push(Math.abs(distance))
     })
     let index = distances.indexOf(Math.min.apply(null, distances))
-    let calcElement = this. _getCurrentTitleElement(index)
+    let calcElement = this._getCurrentTitleElement(index)
     if (calcElement !== this.currentTitleElement) {
         this.currentTitleElement = calcElement
         this._updateTocStatus(this.currentTitleElement)

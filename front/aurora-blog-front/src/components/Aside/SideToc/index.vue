@@ -8,7 +8,7 @@
 <script>
 export default {
   methods: {
-    recalcActive () {
+    recalcActive() {
       // 先计算list相对于页面的顶部距离
       var listScrollTop = this.$refs.list.getBoundingClientRect().top + document.documentElement.scrollTop
       // 再计算active相对于页面的顶部距离
@@ -21,7 +21,7 @@ export default {
       activeIndicator.style.top = activeANodeScrollTop - listScrollTop + 'px'
       activeIndicator.style.height = activeAnode.clientHeight + 'px'
     },
-    beActive (event) {
+    beActive(event) {
       var activeANode = this.$refs.list.querySelector('.active')
       if (activeANode !== null) {
         activeANode.classList.remove('active')
@@ -42,22 +42,25 @@ export default {
 }
 </script>
 
-<style >
+<style>
 .side-toc {
   position: relative;
   background: #fff;
 }
+
 .side-toc h4 {
   font-size: 18px;
   padding: 13px 13px 0;
   line-height: 18px;
   text-align: left;
 }
+
 .side-toc .list {
   position: relative;
   padding: 0 25px 15px;
   margin-top: 10px;
 }
+
 .side-toc .list .active-indicator {
   position: absolute;
   left: -1px;
@@ -67,16 +70,19 @@ export default {
   z-index: 1;
   transition: all 0.2s ease-out;
 }
+
 .side-toc .list ul {
   position: relative;
   padding-left: 1em;
   z-index: 2;
 }
+
 .side-toc .list ul > li {
   list-style-type: square;
   line-height: 2.2em;
   text-align: left;
 }
+
 .side-toc .list ul > li > a {
   cursor: pointer;
   display: block;
@@ -88,11 +94,13 @@ export default {
   color: #363636;
   text-decoration: none;
 }
+
 .side-toc .list ul > li > a.active {
   font-weight: 800;
   color: #409EFF;
   text-decoration: none;
 }
+
 .side-toc .list ul > li > ul > li > a {
   font-size: 16px;
   color: #828282;

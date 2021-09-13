@@ -13,7 +13,7 @@
               </li>
               <li>
                 <router-link to="/articles">
-                 文章
+                  文章
                 </router-link>
               </li>
               <li>
