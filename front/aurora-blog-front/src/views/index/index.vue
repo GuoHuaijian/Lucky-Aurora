@@ -1,37 +1,35 @@
 <template>
   <div>
-    <CommonLayout>
+    <common-layout>
       <div slot="profile">
-        <Profile/>
+        <profile/>
       </div>
       <div slot="aside-content">
-        <HotRead/>
+        <hot-read/>
       </div>
       <div slot="friend-links">
-        <FriendLinks/>
+        <friend-links/>
       </div>
-      <template v-slot:main>
-        <Carousel/>
-        <ArticlesHeader :main-title="'文章'" :sub-title="'Articles'"/>
-        <ArticleCell v-for="article in articleList" :article="article" :key="article.id"/>
-        <BrowseMore @browseMore="browseMore" :noMoreData="noMoreData"  ref="browseMore"></BrowseMore>
+      <template v-slot:content>
+        <bg-carousel :items="items"/>
+        <articles-header :main-title="'文章'" :sub-title="'Articles'"/>
+        <article-cell v-for="article in articleList" :article="article" :key="article.id"/>
+        <browse-more @browseMore="browseMore" :noMoreData="noMoreData"  ref="browseMore"/>
       </template>
-    </CommonLayout>
+    </common-layout>
   </div>
 </template>
 
 <script>
-import HotRead from '../../components/aside/hotread'
-import Profile from '../../components/aside/profile'
-import FriendLinks from '../../components/aside/friendlinks'
-import CommonLayout from '../../components/layout/BaseLayout/common'
-import Carousel from '../../components/carousel'
-import ArticlesHeader from '../../components/article/articleHeader'
-import ArticleCell from '../../components/article/articleCell'
 
 export default {
   data() {
     return {
+      items: [
+        'https://cdn.jsdelivr.net/gh/GuoHuaijian/picture@main/data/1.jpeg',
+        'https://cdn.jsdelivr.net/gh/GuoHuaijian/picture@main/data/2.jpeg',
+        'https://cdn.jsdelivr.net/gh/GuoHuaijian/picture@main/data/3.jpeg'
+      ],
       articleList: [{
         "id": 1,
         "title": "关于本站和博主",
@@ -374,15 +372,7 @@ export default {
     }
   },
 
-  components: {
-    CommonLayout,
-    HotRead,
-    Profile,
-    FriendLinks,
-    Carousel,
-    ArticlesHeader,
-    ArticleCell
-  },
+  components: {},
 
   methods: {
     browseMore () {}

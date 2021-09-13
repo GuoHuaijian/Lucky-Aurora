@@ -1,22 +1,17 @@
 <template>
   <div>
-    <CommonLayout>
+    <common-layout>
       <template v-slot:content>
-        <Classify :categorys="categoryList"/>
-        <ArticlesHeader :main-title="'文章列表'" :sub-title="'Articles'"/>
-        <ArticleCell v-for="article in articleList" :article="article" :key="article.id"/>
-        <BrowseMore @browseMore="browseMore" :noMoreData="noMoreData"  ref="browseMore"></BrowseMore>
+        <classify :category-list="categoryList"/>
+        <articles-header :main-title="'文章列表'" :sub-title="'Articles'"/>
+        <article-cell v-for="article in articleList" :article="article" :key="article.id"/>
+        <browse-more @browseMore="browseMore" :noMoreData="noMoreData"  ref="browseMore"></browse-more>
       </template>
-    </CommonLayout>
+    </common-layout>
   </div>
 </template>
 
 <script>
-import ArticlesHeader from "../../../components/article/articleHeader";
-import ArticleCell from '../../../components/article/articleCell'
-import CommonLayout from '../../../components/layout/BaseLayout/common'
-import Classify from '../../../components/article/classify'
-import BrowseMore from '../../../components/common/browsemore'
 
 export default {
   data() {
@@ -164,7 +159,8 @@ export default {
               "type": 0
             }
           ]
-        }, {
+        },
+        {
           "id": 15,
           "title": "2019Java最新面试题——Java基础（持续更新）",
           "description": "网上找的面试题大多比较老旧，很多还是Java6以前的。现在都更新到Java11了，面试题也应该与时俱进。本文搜罗各大厂的Java面试题，力求题目从简到难，分类明确，答案详细！也借此来巩固自己的知识。",
@@ -193,7 +189,8 @@ export default {
               "type": 0
             }
           ]
-        }, {
+        },
+        {
           "id": 14,
           "title": "2019Java最新面试题——Java基础（持续更新）",
           "description": "网上找的面试题大多比较老旧，很多还是Java6以前的。现在都更新到Java11了，面试题也应该与时俱进。本文搜罗各大厂的Java面试题，力求题目从简到难，分类明确，答案详细！也借此来巩固自己的知识。",
@@ -251,7 +248,8 @@ export default {
               "type": 0
             }
           ]
-        }, {
+        },
+        {
           "id": 12,
           "title": "2019Java最新面试题——Java基础（持续更新）",
           "description": "网上找的面试题大多比较老旧，很多还是Java6以前的。现在都更新到Java11了，面试题也应该与时俱进。本文搜罗各大厂的Java面试题，力求题目从简到难，分类明确，答案详细！也借此来巩固自己的知识。",
@@ -363,13 +361,7 @@ export default {
     }
   },
 
-  components: {
-    ArticlesHeader,
-    ArticleCell,
-    Classify,
-    CommonLayout,
-    BrowseMore,
-  },
+  components: {},
 
   methods: {
     browseMore () {}

@@ -7,6 +7,7 @@ import 'iview/dist/styles/iview.css';
 import '../src/assets/aliicon/iconfont.css'
 import '../src/assets/aliicon/iconfont'
 import * as formatFilter from '../src/utils/filter'
+import '../src/utils/GlobalComponents'
 
 Vue.config.productionTip = false
 

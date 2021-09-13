@@ -19,14 +19,14 @@ const routes = [
         // which is lazy-loaded when the route is visited.
         component: () => import('../views/article/list/index')
     }, {
-        path: '/article',
+        path: '/Article',
         name: 'article',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
         component: () => import('../views/article/detail/index')
     }, {
-        path: '/archive',
+        path: '/Archive',
         name: 'archive',
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route

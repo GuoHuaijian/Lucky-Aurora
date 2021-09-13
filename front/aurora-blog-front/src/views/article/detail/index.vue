@@ -1,6 +1,6 @@
 <template>
   <div>
-    <CommonLayout>
+    <common-layout>
       <div slot="content">
         <div class="article-page-header">
           <div class="tags">
@@ -32,15 +32,13 @@
         </div>
       </div>
       <iv-affix :offset-top="60" slot="side-toc">
-        <SideToc></SideToc>
+        <side-toc/>
       </iv-affix>
-    </CommonLayout>
+    </common-layout>
   </div>
 </template>
 
 <script>
-import CommonLayout from '../../../components/layout/BaseLayout/common'
-import SideToc from '../../../components/aside/sidetoc'
 import TOC from '../../../common/js/MarkdownToc'
 // TOC滚动监听
 import TocScrollSpy from '../../../common/js/TocScrollSpy'
@@ -82,10 +80,7 @@ export default {
     };
   },
 
-  components: {
-    CommonLayout,
-    SideToc
-  },
+  components: {},
 
   computed: {},
 
@@ -97,7 +92,7 @@ export default {
   methods: {
     likePost(post) {
       this.$http({
-        url: this.$http.adornUrl('/article/like/' + post.id),
+        url: this.$http.adornUrl('/Article/like/' + post.id),
         method: 'put',
         data: this.$http.adornData()
       }).then(({data}) => {
@@ -120,7 +115,7 @@ export default {
     },
     getArticle (articleId) {
       this.$http({
-        url: this.$http.adornUrl('/article/' + articleId),
+        url: this.$http.adornUrl('/Article/' + articleId),
         method: 'get'
       }).then(({data}) => {
         if (data && data.code === 200) {
@@ -151,13 +146,13 @@ export default {
     },
     // refreshMobileDirectory () {
     //   /* eslint-disable */
-    //   new TOC('article-main-page', {
+    //   new TOC('Article-main-page', {
     //     'level': 5,
     //     'top': 200,
     //     'class': 'list',
     //     'targetId': 'sidebar-toc'
     //   })
-    //   new TocScrollSpy('article-main-page', 'sidebar-toc', {
+    //   new TocScrollSpy('Article-main-page', 'sidebar-toc', {
     //     'spayLevel': 5,
     //     'articleMarginTop': 15
     //   })
