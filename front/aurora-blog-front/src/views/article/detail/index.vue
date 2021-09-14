@@ -37,7 +37,10 @@
           <article id="article-main-page" class="typo container" ref="article"
                    v-html="article.contentFormat">
           </article>
+          <div class="detail-footer"> 以上内容添加于  {{ article.createTime | socialDate }} &nbsp;&nbsp;&nbsp; 更新于  {{
+            article.updateTime | socialDate }} </div>
         </div>
+        <bg-comment :comments="commentData"></bg-comment>
       </div>
       <iv-affix :offset-top="60" slot="side-toc">
         <side-toc/>
@@ -50,10 +53,12 @@
 import TOC from '../../../common/js/MarkdownToc'
 // TOC滚动监听
 import TocScrollSpy from '../../../common/js/TocScrollSpy'
+import * as CommentData from '../../../mock/commentdata'
 
 export default {
   data() {
     return {
+      commentData: [],
       article: {
         "id": 4,
         "title": "用最简单的话告诉你什么是ElasticSearch",
@@ -91,6 +96,10 @@ export default {
   components: {},
 
   computed: {},
+
+  created() {
+    this.commentData = CommentData.comment.data;
+  },
 
   mounted() {
     this.addCodeLineNumber()
@@ -303,5 +312,14 @@ export default {
 
 #article-page-content {
   padding: 5px
+}
+
+.detail-footer {
+  text-align: right;
+  font-size: 12px;
+  color: #444;
+  border-bottom: 2px dashed #eee;
+  padding-bottom: 10px;
+  margin: 15px 0;
 }
 </style>

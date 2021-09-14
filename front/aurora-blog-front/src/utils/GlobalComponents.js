@@ -19,6 +19,7 @@ import TagWall from '../components/Aside/TagWall'
 import Recommend from '../components/Aside/Recommend'
 import Footer from '../components/Layout/Footer'
 import BaseLayout from '../components/Layout/BaseLayout'
+import Comment from '../components/Common/Comment'
 
 
 // 全局注册组件
@@ -42,4 +43,5 @@ Vue.component("title-menu-filter", TitleMenuFilter)
 Vue.component("panel", Panel)
 Vue.component("bg-footer", Footer)
 Vue.component("base-layout", BaseLayout)
+Vue.component("bg-comment", Comment)
 
