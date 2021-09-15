@@ -3,12 +3,12 @@
     <common-layout>
       <div slot="content">
         <div class="article-page-header">
+          <p class="title">{{ article.title }}</p>
           <div class="tags">
-            <el-tag effect="dark" :type="index | mapTagColors" v-for="(tag , index) in article.tagList" :key="tag.id">
+            <el-tag size="small" effect="dark" :type="index | mapTagColors" v-for="(tag , index) in article.tagList" :key="tag.id">
               {{ tag.name }}
             </el-tag>
           </div>
-          <p class="title">{{ article.title }}</p>
           <el-row>
             <el-col :xs="24" :sm="10" :md="10" :lg="10" style="padding-left: 0;padding-right: 0;">
               <p class="info"><span class="author"><a><i class="iconfont icon-zuozhe"></i>{{
@@ -20,12 +20,12 @@
             </el-col>
             <el-col :xs="24" :sm="14" :md="14" :lg="14" style="padding-left: 0;padding-right: 0;">
               <p class="operate_info">
-                <span class="comment"><a><i class="iconfont icon-comment"></i> {{ article.readNum }} 阅读</a></span>
+                <span class="comments"><a><i class="iconfont icon-comment"></i> {{ article.readNum }} 评论</a></span>
                 <span class="readings"><a><i class="iconfont icon-ico_yueduliang"></i> {{
                     article.readNum
                   }} 阅读</a></span>
                 <span class="likes"><a @click="likePost(article)"><i
-                    class="iconfont icon-xihuan"></i> {{ article.likeNum }} 喜欢</a></span>
+                    class="iconfont icon-xihuan1"></i> {{ article.likeNum }} 喜欢</a></span>
               </p>
             </el-col>
           </el-row>
@@ -37,8 +37,10 @@
           <article id="article-main-page" class="typo container" ref="article"
                    v-html="article.contentFormat">
           </article>
-          <div class="detail-footer"> 以上内容添加于  {{ article.createTime | socialDate }} &nbsp;&nbsp;&nbsp; 更新于  {{
-            article.updateTime | socialDate }} </div>
+          <div class="detail-footer"> 以上内容添加于 {{ article.createTime | socialDate }} &nbsp;&nbsp;&nbsp; 更新于 {{
+              article.updateTime | socialDate
+            }}
+          </div>
         </div>
         <bg-comment :comments="commentData"></bg-comment>
       </div>
@@ -205,7 +207,7 @@ export default {
 }
 
 .article-page-header .tags {
-  margin-bottom: 18px;
+  margin-bottom: 10px;
 }
 
 .article-page-header .tags span {
@@ -217,7 +219,7 @@ export default {
   line-height: 33px;
   font-weight: 500;
   color: #333;
-  margin-bottom: 23px;
+  margin-bottom: 15px;
 }
 
 .article-page-header .info {

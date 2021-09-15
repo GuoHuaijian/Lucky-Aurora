@@ -7,31 +7,27 @@ const routes = [
     {
         path: '/',
         name: 'index',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import('../views/index/index')
     }, {
         path: '/articles',
         name: 'articles',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import('../views/article/list/index')
     }, {
         path: '/Article',
         name: 'article',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import('../views/article/detail/index')
     }, {
         path: '/Archive',
         name: 'archive',
-        // route level code-splitting
-        // this generates a separate chunk (about.[hash].js) for this route
-        // which is lazy-loaded when the route is visited.
         component: () => import('../views/archive/index')
+    },{
+        path: '/message',
+        name: 'message',
+        component: () => import('../views/message/index')
+    },{
+        path: '/about',
+        name: 'about',
+        component: () => import('../views/about/index')
     }
 ]
 

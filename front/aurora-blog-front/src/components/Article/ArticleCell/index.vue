@@ -48,7 +48,7 @@
                 ></span>
                 <span class="likes"
                 ><a @click="likePost(article)"
-                ><i class="iconfont icon-xihuan"></i>
+                ><i class="iconfont icon-xihuan1"></i>
                   {{ article.likeNum }} 喜欢</a></span>
               </p>
             </div>
@@ -291,6 +291,7 @@ export default {
 
 .article-cell > a .text-wrapper .operate_info span a {
   cursor: pointer;
+  color: #909399;
 }
 
 .article-cell > a .text-wrapper .operate_info span a:hover {

@@ -22,10 +22,14 @@
                 </router-link>
               </li>
               <li>
-                <a href="#">留言</a>
+                <router-link to="/message">
+                  留言
+                </router-link>
               </li>
               <li>
-                <a href="#">关于</a>
+                <router-link to="/about">
+                  关于
+                </router-link>
               </li>
             </ul>
             <div class="search">

@@ -19,7 +19,7 @@
               <span class="time"><a><i class="iconfont icon-shijian"></i>{{
                   topHotRead.createTime | socialDate
                 }}</a></span>
-              <span class="likes"><a><i class="iconfont icon-xihuan"></i> {{ topHotRead.likeNum }} </a></span>
+              <span class="likes"><a><i class="iconfont icon-xihuan1"></i> {{ topHotRead.likeNum }} </a></span>
               <span class="comments"><a><i class="iconfont icon-comment"></i>{{ topHotRead.commentNum }} </a></span>
               <span class="readings"><a><i
                   class="iconfont icon-ico_yueduliang"></i> {{ topHotRead.readNum }} </a></span>
@@ -34,7 +34,7 @@
                 <span class="time"><a><i class="iconfont icon-shijian"></i>{{
                     hotRead.createTime | socialDate
                   }}</a></span>
-                <span class="likes"><a><i class="iconfont icon-xihuan"></i> {{ hotRead.likeNum }} </a></span>
+                <span class="likes"><a><i class="iconfont icon-xihuan1"></i> {{ hotRead.likeNum }} </a></span>
                 <span class="comments"><a><i class="iconfont icon-comment"></i> {{ hotRead.commentNum }} </a></span>
                 <span class="readings"><a><i class="iconfont icon-ico_yueduliang"></i> {{ hotRead.readNum }} </a></span>
               </p>

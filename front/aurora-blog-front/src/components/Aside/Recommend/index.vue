@@ -17,7 +17,7 @@
             <p class="desc">{{ topRecommend.description | textLineBreak(60) }}</p>
             <p class="info">
               <span class="time"><a><i class="iconfont icon-shijian"></i>{{ topRecommend.createTime | socialDate }}</a></span>
-              <span class="likes"><a><i class="iconfont icon-xihuan"></i> {{ topRecommend.likeNum }} </a></span>
+              <span class="likes"><a><i class="iconfont icon-xihuan1"></i> {{ topRecommend.likeNum }} </a></span>
               <span class="comments"><a><i class="iconfont icon-comment"></i> {{ topRecommend.commentNum }} </a></span>
               <span class="readings"><a><i
                   class="iconfont icon-ico_yueduliang"></i> {{ topRecommend.readNum }} </a></span>
@@ -32,7 +32,7 @@
                 <span class="time"><a><i class="iconfont icon-shijian"></i>{{
                     recommend.createTime | socialDate
                   }}</a></span>
-                <span class="likes"><a><i class="iconfont icon-xihuan"></i> {{ recommend.likeNum }} </a></span>
+                <span class="likes"><a><i class="iconfont icon-xihuan1"></i> {{ recommend.likeNum }} </a></span>
                 <span class="comments"><a><i class="iconfont icon-comment"></i> {{ recommend.commentNum }} </a></span>
                 <span class="readings"><a><i
                     class="iconfont icon-ico_yueduliang"></i> {{ recommend.readNum }} </a></span>
