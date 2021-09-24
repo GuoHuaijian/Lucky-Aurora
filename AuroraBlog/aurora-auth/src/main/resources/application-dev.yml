@@ -1,3 +1,12 @@
+spring:
+
+  cloud:
+    # Nacos配置
+    nacos:
+      # Nacos服务发现与注册配置
+      discovery:
+        server-addr: 1.14.72.150:8848
+
 # Dubbo
 dubbo:
   # 通信规则（通信协议和端口）
@@ -7,10 +16,10 @@ dubbo:
     port: -1
     # 序列化方式
   #    serialization: kryo
-  # 注册中心的地址和协议
+  # 注册中心的地址
   registry:
-    address: zookeeper://127.0.0.1:2181
-    protocol: zookeeper
+    # 挂载到Spring Cloud注册中心
+    address: spring-cloud://localhost
   # 连接监控中心
   #  monitor:
   #    protocol: registry

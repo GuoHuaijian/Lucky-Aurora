@@ -1,0 +1,100 @@
+spring:
+
+  cloud:
+    # Nacos配置
+    nacos:
+      # Nacos服务发现与注册配置
+      discovery:
+        server-addr: 1.14.72.150:8848
+
+  # 数据源配置
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://1.14.72.150:3306/aurora_blog?useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: 564559079
+
+  # redis配置
+  redis:
+    # 地址
+    host: 1.14.72.150
+    # 端口，默认为6379
+    port: 6379
+    # 连接超时时间
+    timeout: 10s
+    lettuce:
+      pool:
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池的最大数据库连接数
+        max-active: 8
+        # #连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+
+  # kafka配置
+  kafka:
+    # kafka服务器ip和端口号
+    bootstrap-servers: 127.0.0.1:9092
+
+# Mybatis-plus配置
+mybatis-plus:
+  # xml扫描，多个目录用逗号或者分号分隔（告诉 Mapper 所对应的 XML 文件位置）
+  mapper-locations: classpath:mapper/*.xml
+  # 搜索指定包别名
+  typeAliasesPackage: com.aurora.**.domain
+  # 以下配置均有默认值,可以不设置
+  global-config:
+    db-config:
+      # 主键类型  auto:"数据库ID自增" 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      id-type: auto
+      # 策略 IGNORED:"忽略判断"  NOT_NULL:"非 NULL 判断")  NOT_EMPTY:"非空判断"
+      insert-strategy: not_empty
+      update-strategy: not_empty
+  configuration:
+    # 是否开启自动驼峰命名规则映射:从数据库列名到Java属性驼峰命名的类似映射
+    map-underscore-to-camel-case: true
+    # 如果查询结果中包含空值的列，则 MyBatis 在映射的时候，不会映射这个字段
+    call-setters-on-nulls: true
+    # 这个配置会将执行的sql打印出来，在开发或测试的时候可以用
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# Dubbo配置
+dubbo:
+  # 通信规则（通信协议和端口）
+  protocol:
+    name: dubbo
+    # (默认20880,-1为随机端口)
+    port: -1
+    # 序列化方式
+  #    serialization: kryo
+  # 注册中心的地址
+  registry:
+    # 挂载到Spring Cloud注册中心
+    address: spring-cloud://localhost
+  # 连接监控中心
+  #  monitor:
+  #    protocol: registry
+  consumer:
+    check: false
+
+# 日志配置
+logging:
+  level:
+    com.aurora: debug
+    org.springframework: warn
+
+# JWT配置
+#jwt:
+#  # 密匙Key
+#  secret: JWTSecret,C3Stones
+#  # HeaderKey
+#  tokenHeader: Authorization
+#  # Token前缀
+#  tokenPrefix: Bearer
+#  # 过期时间，单位秒
+#  expiration: 86400
+#  # 配置白名单（不需要认证）
+#  antMatchers: /login/**,/register/**,/static/**

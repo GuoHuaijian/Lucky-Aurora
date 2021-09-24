@@ -2,6 +2,8 @@ package com.aurora.common.log.service;
 
 import com.aurora.rpc.system.domain.SysLog;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * describe: 异步调用日志服务
  *
@@ -17,5 +19,5 @@ public interface AsyncLogService {
      *
      * @param sysLog
      */
-    void saveSysLog(SysLog sysLog);
+    void saveSysLog(SysLog sysLog) throws UnsupportedEncodingException;
 }

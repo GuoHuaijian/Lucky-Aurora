@@ -23,7 +23,7 @@
         <module>aurora-common-security</module>
         <module>aurora-common-config</module>
         <module>aurora-common-log</module>
-        <module>aurora-common-kafka</module>
+        <module>aurora-common-rocketmq</module>
     </modules>
 
     <dependencies>

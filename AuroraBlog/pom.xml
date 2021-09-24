@@ -11,19 +11,21 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>aurora-admin</module>
         <module>aurora-auth</module>
         <module>aurora-common</module>
-        <module>aurora-system</module>
+        <module>aurora-business</module>
+        <module>aurora-gateway</module>
+        <module>aurora-monitor</module>
         <module>aurora-rpc</module>
-        <module>aurora-search</module>
-        <module>aurora-file</module>
     </modules>
 
     <properties>
         <java.version>1.8</java.version>
-        <spring-boot.version>2.5.3</spring-boot.version>
-        <dubbo.version>3.0.2</dubbo.version>
+        <spring-cloud.version>2020.0.3</spring-cloud.version>
+        <alibaba-cloud.version>2021.1</alibaba-cloud.version>
+        <spring-boot.version>2.4.10</spring-boot.version>
+        <oauth2.version>2.2.5.RELEASE</oauth2.version>
+        <rocketmq.version>2.2.1</rocketmq.version>
         <kryo.version>0.45</kryo.version>
         <jjwt.version>0.9.1</jjwt.version>
         <jwt.version>1.1.1.RELEASE</jwt.version>
@@ -36,6 +38,25 @@
     <dependencyManagement>
 
         <dependencies>
+
+            <!-- Spring Cloud Alibaba-->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${alibaba-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>runtime</scope>
+            </dependency>
+
             <!-- Spring Boot -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -45,28 +66,18 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Apache Dubbo  -->
+            <!-- Spring Cloud Oauth2 -->
             <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-dependencies-bom</artifactId>
-                <version>${dubbo.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-oauth2</artifactId>
+                <version>${oauth2.version}</version>
             </dependency>
 
-            <!-- Dubbo Spring Boot Starter -->
+            <!-- Spring Boot RocketMQ -->
             <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-spring-boot-starter</artifactId>
-                <version>${dubbo.version}</version>
-            </dependency>
-
-            <!-- Dubbo-Registry-Zookeeper -->
-            <dependency>
-                <groupId>org.apache.dubbo</groupId>
-                <artifactId>dubbo-dependencies-zookeeper</artifactId>
-                <version>${dubbo.version}</version>
-                <type>pom</type>
+                <groupId>org.apache.rocketmq</groupId>
+                <artifactId>rocketmq-spring-boot-starter</artifactId>
+                <version>${rocketmq.version}</version>
             </dependency>
 
             <!-- Dubbo-kryo -->

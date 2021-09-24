@@ -1,14 +1,15 @@
 package com.aurora.common.log.service.impl;
 
 import com.alibaba.fastjson.JSON;
-import com.aurora.common.kafka.producer.KafkaProducer;
 import com.aurora.common.log.service.AsyncLogService;
+import com.aurora.common.rocketmq.producer.RocketMqProducer;
 import com.aurora.rpc.system.domain.SysLog;
 import org.springframework.context.annotation.Primary;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
 
 /**
  * describe: kafka异步处理日志
@@ -22,14 +23,14 @@ import javax.annotation.Resource;
 public class KafkaAsyncLogServiceImpl implements AsyncLogService {
 
     @Resource
-    private KafkaProducer logProducer;
+    private RocketMqProducer rocketMqProducer;
 
     /**
      * 保存系统日志记录
      */
     @Async("asyncExecutor")
     @Override
-    public void saveSysLog(SysLog sysLog) {
-        logProducer.sendLog(JSON.toJSONString(sysLog));
+    public void saveSysLog(SysLog sysLog) throws UnsupportedEncodingException {
+        rocketMqProducer.sendLog(JSON.toJSONString(sysLog));
     }
 }
