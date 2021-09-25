@@ -97,8 +97,6 @@ logging:
 aurora:
   rocketmq:
     name-server: 1.14.72.150:9876
-    producer:
-      group: hello1
     consumer:
-      group: test1
-
+      topic: sysLog
+      group: LOG

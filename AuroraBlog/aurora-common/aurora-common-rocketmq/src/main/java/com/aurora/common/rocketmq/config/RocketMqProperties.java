@@ -112,7 +112,7 @@ public class RocketMqProperties {
         /**
          * 使用者的主题名称。
          */
-        private String topic = "denft";
+        private String topic;
 
         /**
          * 控制消息方式，如果想让所有订户都收到消息全部消息，广播是一个不错的选择。

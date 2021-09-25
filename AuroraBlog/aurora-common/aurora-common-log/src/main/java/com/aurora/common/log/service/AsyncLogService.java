@@ -1,6 +1,9 @@
 package com.aurora.common.log.service;
 
 import com.aurora.rpc.system.domain.SysLog;
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.remoting.exception.RemotingException;
 
 import java.io.UnsupportedEncodingException;
 
@@ -19,5 +22,5 @@ public interface AsyncLogService {
      *
      * @param sysLog
      */
-    void saveSysLog(SysLog sysLog) throws UnsupportedEncodingException;
+    void saveSysLog(SysLog sysLog) throws UnsupportedEncodingException, MQBrokerException, RemotingException, InterruptedException, MQClientException;
 }

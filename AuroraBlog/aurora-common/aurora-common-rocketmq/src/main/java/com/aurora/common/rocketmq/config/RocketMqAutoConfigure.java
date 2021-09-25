@@ -1,13 +1,13 @@
 package com.aurora.common.rocketmq.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.AccessChannel;
-import org.apache.rocketmq.client.consumer.DefaultLitePullConsumer;
+import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
-import org.apache.rocketmq.spring.annotation.MessageModel;
-import org.apache.rocketmq.spring.annotation.SelectorType;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
-import org.apache.rocketmq.spring.support.RocketMQUtil;
+import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,34 +24,29 @@ import javax.annotation.Resource;
  * @Version 1.0
  */
 @Configuration
-//@ConditionalOnClass({RocketMqConsumer.class, RocketMqProducer.class})
-//@ConditionalOnProperty(prefix = "aurora.rocketmq")
 @EnableConfigurationProperties(RocketMqProperties.class)
+@Slf4j
+@ConditionalOnProperty(name = "aurora.rocketmq.name-server")
 public class RocketMqAutoConfigure {
 
     @Resource
     private RocketMqProperties rocketMqProperties;
 
-    public static final String PRODUCER_BEAN_NAME = "auroraMQProducer";
-    public static final String CONSUMER_BEAN_NAME = "auroraLitePullConsumer";
-
-    @Bean(PRODUCER_BEAN_NAME)
-    public DefaultMQProducer defaultMQProducer(RocketMqProperties rocketMqProperties) {
+    /**
+     * 生产者配置
+     *
+     * @return
+     */
+    @ConditionalOnProperty(name = "aurora.rocketmq.producer.group")
+    @Bean(name = "defaultMQProducer")
+    public DefaultMQProducer defaultMQProducer() throws MQClientException {
         RocketMqProperties.Producer producerConfig = rocketMqProperties.getProducer();
         String nameServer = rocketMqProperties.getNameServer();
         String groupName = producerConfig.getGroup();
         Assert.hasText(nameServer, "[rocketmq.name-server] must not be null");
         Assert.hasText(groupName, "[rocketmq.producer.group] must not be null");
-
         String accessChannel = rocketMqProperties.getAccessChannel();
-
-        String ak = rocketMqProperties.getProducer().getAccessKey();
-        String sk = rocketMqProperties.getProducer().getSecretKey();
-        boolean isEnableMsgTrace = rocketMqProperties.getProducer().isEnableMsgTrace();
-        String customizedTraceTopic = rocketMqProperties.getProducer().getCustomizedTraceTopic();
-
-        DefaultMQProducer producer = RocketMQUtil.createDefaultMQProducer(groupName, ak, sk, isEnableMsgTrace, customizedTraceTopic);
-
+        DefaultMQProducer producer = new DefaultMQProducer(groupName);
         producer.setNamesrvAddr(nameServer);
         if (!StringUtils.isEmpty(accessChannel)) {
             producer.setAccessChannel(AccessChannel.valueOf(accessChannel));
@@ -62,13 +57,20 @@ public class RocketMqAutoConfigure {
         producer.setMaxMessageSize(producerConfig.getMaxMessageSize());
         producer.setCompressMsgBodyOverHowmuch(producerConfig.getCompressMessageBodyThreshold());
         producer.setRetryAnotherBrokerWhenNotStoreOK(producerConfig.isRetryNextServer());
-
+        producer.start();
+        log.info("初始化生产者完成");
         return producer;
     }
 
-    @Bean(CONSUMER_BEAN_NAME)
-    public DefaultLitePullConsumer defaultLitePullConsumer(RocketMqProperties rocketMqProperties)
-            throws MQClientException {
+    /**
+     * 消费者配置
+     *
+     * @return
+     * @throws MQClientException
+     */
+    @ConditionalOnProperty(value = "aurora.rocketmq.consumer.group")
+    @Bean(name = "defaultMQPushConsumer")
+    public DefaultMQPushConsumer defaultMQPushConsumer() throws MQClientException {
         RocketMqProperties.Consumer consumerConfig = rocketMqProperties.getConsumer();
         String nameServer = rocketMqProperties.getNameServer();
         String groupName = consumerConfig.getGroup();
@@ -76,28 +78,15 @@ public class RocketMqAutoConfigure {
         Assert.hasText(nameServer, "[rocketmq.name-server] must not be null");
         Assert.hasText(groupName, "[rocketmq.consumer.group] must not be null");
         Assert.hasText(topicName, "[rocketmq.consumer.topic] must not be null");
-
-        String accessChannel = rocketMqProperties.getAccessChannel();
         MessageModel messageModel = MessageModel.valueOf(consumerConfig.getMessageModel());
-        SelectorType selectorType = SelectorType.valueOf(consumerConfig.getSelectorType());
-        String selectorExpression = consumerConfig.getSelectorExpression();
-        String ak = consumerConfig.getAccessKey();
-        String sk = consumerConfig.getSecretKey();
         int pullBatchSize = consumerConfig.getPullBatchSize();
-
-        DefaultLitePullConsumer litePullConsumer = RocketMQUtil.createDefaultLitePullConsumer(nameServer, accessChannel,
-                groupName, topicName, messageModel, selectorType, selectorExpression, ak, sk, pullBatchSize);
-        litePullConsumer.setEnableMsgTrace(consumerConfig.isEnableMsgTrace());
-        litePullConsumer.setCustomizedTraceTopic(consumerConfig.getCustomizedTraceTopic());
-        return litePullConsumer;
+        DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer(groupName);
+        defaultMQPushConsumer.setNamesrvAddr(nameServer);
+        defaultMQPushConsumer.subscribe(topicName,"*");
+        defaultMQPushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
+        defaultMQPushConsumer.setMessageModel(messageModel);
+        defaultMQPushConsumer.setPullBatchSize(pullBatchSize);
+        log.info("初始化消费者完成");
+        return defaultMQPushConsumer;
     }
-
-    @Bean
-    public RocketMQTemplate rocketMQTemplate() throws MQClientException {
-        RocketMQTemplate rocketMQTemplate = new RocketMQTemplate();
-        rocketMQTemplate.setProducer(defaultMQProducer(rocketMqProperties));
-        rocketMQTemplate.setConsumer(defaultLitePullConsumer(rocketMqProperties));
-        return rocketMQTemplate;
-    }
-
 }

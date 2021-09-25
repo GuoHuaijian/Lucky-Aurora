@@ -1,82 +1,73 @@
 package com.aurora.common.rocketmq.producer;
 
-import com.aurora.common.rocketmq.constant.TopicConstant;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.common.message.Message;
-import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.apache.rocketmq.remoting.exception.RemotingException;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.io.UnsupportedEncodingException;
+import java.util.UUID;
 
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/24 14:54
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/25
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
+@ConditionalOnProperty(name = "aurora.rocketmq.producer.group")
 @Component
 @Slf4j
 public class RocketMqProducer {
 
     @Resource
-    private RocketMQTemplate rocketMQTemplate;
-
-    @Resource
-    private DefaultMQProducer auroraMQProducer;
-
+    private DefaultMQProducer defaultMQProducer;
 
     /**
-     * 日志处理
+     * 发送带tag的消息
      *
-     * @param sysLog
+     * @param msg
+     * @param topic
+     * @param group
+     * @param tag
+     * @param <T>
+     * @return
      */
-    public void sendLog(String sysLog) throws UnsupportedEncodingException {
-//        Message message = new Message();
-//        message.setTopic(TopicConstant.LOG_TOPIC_NAME);
-//        message.setBody(sysLog.getBytes("UTF-8"));
-        rocketMQTemplate.setProducer(auroraMQProducer);
-        rocketMQTemplate.syncSend(TopicConstant.LOG_TOPIC_NAME, sysLog);
-//        rocketMQTemplate.send((org.springframework.messaging.Message<?>) message);
-    }
-
-    /**
-     * 博文添加处理
-     *
-     * @param article
-     */
-    public void sendArticleAdd(String article) throws UnsupportedEncodingException {
-//        Message message = new Message();
-//        message.setTopic(TopicConstant.ARTICLE_ADD_TOPIC_NAME);
-//        message.setBody(article.getBytes("UTF-8"));
-//        rocketMQTemplate.send(message);
-        rocketMQTemplate.setProducer(auroraMQProducer);
-        rocketMQTemplate.syncSend(TopicConstant.ARTICLE_ADD_TOPIC_NAME, article);
-    }
-
-    /**
-     * 博文更新处理
-     *
-     * @param article
-     */
-    public void sendArticleUpdate(String article) throws UnsupportedEncodingException {
+    public <T> SendResult send(T msg, String topic, String group, String tag) throws MQBrokerException, RemotingException, InterruptedException, MQClientException {
+        if (StringUtils.isBlank(topic) || StringUtils.isBlank(group)) {
+            new Throwable("发送方topic或者group不能为空");
+        }
+        String uuid = UUID.randomUUID().toString().replaceAll("-", "");
         Message message = new Message();
-        message.setTopic(TopicConstant.ARTICLE_UPDATE_TOPIC_NAME);
-        message.setBody(article.getBytes("UTF-8"));
-        rocketMQTemplate.send((org.springframework.messaging.Message<?>) message);
+        message.setBody(JSON.toJSONBytes(msg));
+        message.setTopic(topic);
+        message.setTags(tag);
+        message.setKeys(uuid);
+        defaultMQProducer.setProducerGroup(group);
+        SendResult result = defaultMQProducer.send(message);
+        log.info("成功发送消息,消息内容为:{},返回值为:{}", message, result);
+        return result;
     }
 
     /**
-     * 博文删除处理
+     * 发送不带tag的消息
      *
-     * @param article
+     * @param msg
+     * @param topic
+     * @param group
+     * @param <T>
+     * @return
      */
-    public void sendArticleDelete(String article) throws UnsupportedEncodingException {
-        Message message = new Message();
-        message.setTopic(TopicConstant.ARTICLE_DELETE_TOPIC_NAME);
-        message.setBody(article.getBytes("UTF-8"));
-        rocketMQTemplate.send((org.springframework.messaging.Message<?>) message);
+    public <T> SendResult send(T msg, String topic, String group) throws MQBrokerException, RemotingException, InterruptedException, MQClientException {
+        return this.send(msg, topic, group, null);
     }
+
 }

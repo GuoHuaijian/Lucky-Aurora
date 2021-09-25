@@ -1,6 +1,5 @@
 package com.aurora.admin.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.aurora.admin.domain.BlogArticle;
 import com.aurora.admin.service.BlogArticleService;
 import com.aurora.common.core.web.controller.AbstractController;
@@ -8,7 +7,13 @@ import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.core.web.page.PageDate;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
+import com.aurora.common.rocketmq.constant.ConsumerGroupConstant;
+import com.aurora.common.rocketmq.constant.TagConstant;
+import com.aurora.common.rocketmq.constant.TopicConstant;
 import com.aurora.common.rocketmq.producer.RocketMqProducer;
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,7 +37,7 @@ public class ArticleController extends AbstractController {
     private BlogArticleService articleService;
 
     @Resource
-    private RocketMqProducer producer;
+    private RocketMqProducer sendService;
 
     /**
      * 获取文章列表
@@ -68,7 +73,7 @@ public class ArticleController extends AbstractController {
     @Log(value = "添加文章", LogType = LogType.OTHER)
     @PostMapping("/test")
     @PreAuthorize("hasRole('admin')")
-    public String add() throws UnsupportedEncodingException {
+    public String add() throws UnsupportedEncodingException, MQBrokerException, RemotingException, InterruptedException, MQClientException {
         BlogArticle article = new BlogArticle();
         article.setArticleId(1);
         article.setTitle("文章");
@@ -87,8 +92,8 @@ public class ArticleController extends AbstractController {
         article.setIsTop(false);
         article.setCreateTime(new Date());
         article.setUpdateTime(new Date());
-        String jsonString = JSONObject.toJSONString(article);
-        producer.sendArticleAdd(jsonString);
+        sendService.send(article,TopicConstant.ARTICLE_ADD_TOPIC_NAME, ConsumerGroupConstant.ARTICLE_GROUP_ID,
+                TagConstant.ARTICLE_ADD);
         return "成功";
     }
 

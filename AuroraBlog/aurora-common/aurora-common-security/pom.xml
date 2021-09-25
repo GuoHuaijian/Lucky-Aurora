@@ -12,6 +12,7 @@
     <version>1.0.0</version>
     <name>aurora-common-security</name>
     <description>公共的权限认证模块</description>
+    <packaging>jar</packaging>
 
     <properties>
         <java.version>1.8</java.version>

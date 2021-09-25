@@ -13,6 +13,8 @@
     <version>1.0.0</version>
     <name>aurora-gateway</name>
     <description>Demo project for Spring Boot</description>
+    <packaging>jar</packaging>
+
     <properties>
         <java.version>1.8</java.version>
     </properties>

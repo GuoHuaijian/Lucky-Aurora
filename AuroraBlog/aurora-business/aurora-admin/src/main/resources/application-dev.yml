@@ -98,6 +98,4 @@ aurora:
   rocketmq:
     name-server: 1.14.72.150:9876
     producer:
-      group: hello2
-    consumer:
-      group: test2
+      group: ARTICLE

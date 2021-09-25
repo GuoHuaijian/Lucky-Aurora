@@ -1,15 +1,21 @@
 package com.aurora.search.kafka;
 
+import com.aurora.common.rocketmq.constant.ConsumerGroupConstant;
+import com.aurora.common.rocketmq.constant.TagConstant;
+import com.aurora.common.rocketmq.constant.TopicConstant;
 import com.aurora.common.rocketmq.consumer.RocketMqConsumer;
 import com.aurora.search.service.EsService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * describe:
@@ -20,24 +26,38 @@ import java.util.Optional;
  */
 @Component
 @Slf4j
-public class ArticleStorageService {
+public class ArticleStorageService{
 
     @Resource
     private EsService esService;
 
     @Resource
-    private RocketMqConsumer rocketMqConsumer;
+    private RocketMqConsumer consumer;
 
-    /**
-     * 博文添加处理
-     */
-    public void articleAdd() throws MQClientException {
-        List<MessageExt> messageExts = rocketMqConsumer.receiveArticleAdd();
-        Optional message = Optional.ofNullable(messageExts);
-        message.ifPresent(msg -> {
-//            esService.addIndex(msg.toString());
-            log.info("消息队列消费消息： Message:" + msg);
+    @PostConstruct
+    public void onMessage() throws MQClientException {
+        DefaultMQPushConsumer pushConsumer = consumer.buildConsumer(TopicConstant.ARTICLE_ADD_TOPIC_NAME, ConsumerGroupConstant.ARTICLE_GROUP_ID);
+        pushConsumer.subscribe(TopicConstant.ARTICLE_ADD_TOPIC_NAME,TagConstant.ARTICLE_ADD);
+        pushConsumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
+            if (CollectionUtils.isEmpty(msgs)) {
+                log.info("MQ接收消息为空，直接返回成功");
+                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+            }
+            for (MessageExt msg : msgs) {
+                log.info("MQ接收到的消息为：" + msg.toString());
+                try {
+                    String topic = msg.getTopic();
+                    String tags = msg.getTags();
+                    String body = new String(msg.getBody(), "utf-8");
+                    log.info("MQ消息topic={}, tags={}, 消息内容={}", topic,tags,body);
+                    esService.addIndex(body);
+                } catch (Exception e) {
+                    log.error("获取MQ消息内容异常{}",e);
+                }
+            }
+            return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
         });
+        pushConsumer.start();
     }
 
 //    /**
