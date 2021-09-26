@@ -1,7 +1,5 @@
 package com.aurora.system.controller;
 
-import com.aurora.common.security.domain.SecurityUser;
-import com.aurora.common.security.utils.JwtTokenUtil;
 import com.aurora.rpc.auth.RemoteAuthService;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,8 +24,8 @@ public class TestController {
     @PostMapping("user")
     public String getToken() {
         String admin = remoteAuthService.createToken("admin", "123456");
-        SecurityUser securityUser = JwtTokenUtil.parseAccessToken(admin);
-        System.out.println(securityUser);
+//        SecurityUser securityUser = JwtTokenUtil.parseAccessToken(admin);
+//        System.out.println(securityUser);
         return admin;
     }
 }

@@ -1,6 +1,5 @@
 package com.aurora.system.controller;
 
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,19 +16,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("test")
 public class HelloController {
 
-    @PreAuthorize(value = "hasPermission('sys:user:list,sys:user:info','ddd')")
+//    @PreAuthorize(value = "hasPermission('sys:user:list,sys:user:info','ddd')")
     @GetMapping("hi")
     public String get() {
         return "hello";
     }
 
-    @PreAuthorize("@ss.hasAuthority('system:role:list')")
+//    @PreAuthorize("@ss.hasAuthority('system:role:list')")
     @GetMapping("hello")
     public String get1() {
         return "hello";
     }
 
-    @PreAuthorize("hasAnyRole('admin','admin')")
+//    @PreAuthorize("hasAnyRole('admin','admin')")
     @GetMapping("hell")
     public String get2() {
         return "hello";

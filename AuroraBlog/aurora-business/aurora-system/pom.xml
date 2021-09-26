@@ -20,11 +20,11 @@
 
     <dependencies>
         <!-- Aurora -->
-        <dependency>
-            <groupId>com.aurora</groupId>
-            <artifactId>aurora-common-security</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.aurora</groupId>-->
+<!--            <artifactId>aurora-common-security</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-core</artifactId>
