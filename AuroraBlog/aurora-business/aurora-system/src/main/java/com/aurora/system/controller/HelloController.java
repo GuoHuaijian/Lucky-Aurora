@@ -1,5 +1,6 @@
 package com.aurora.system.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,6 +20,7 @@ public class HelloController {
 //    @PreAuthorize(value = "hasPermission('sys:user:list,sys:user:info','ddd')")
     @GetMapping("hi")
     public String get() {
+        System.out.println(SecurityContextHolder.getContext().getAuthentication());
         return "hello";
     }
 

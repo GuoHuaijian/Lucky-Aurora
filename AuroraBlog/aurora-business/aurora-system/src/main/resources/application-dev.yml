@@ -81,18 +81,19 @@ logging:
     com.aurora: debug
     org.springframework: warn
 
-# JWT配置
-#jwt:
-#  # 密匙Key
-#  secret: JWTSecret,C3Stones
-#  # HeaderKey
-#  tokenHeader: Authorization
-#  # Token前缀
-#  tokenPrefix: Bearer
-#  # 过期时间，单位秒
-#  expiration: 86400
-#  # 配置白名单（不需要认证）
-#  antMatchers: /login/**,/register/**,/static/**
+security:
+  oauth2:
+    client:
+      client-id: aurora_client
+      client-secret: aurora_secret
+      scope: all
+      access-token-uri: http://localhost:8081/oauth/token
+      user-authorization-uri: http://localhost:8081/oauth/authorize
+    resource:
+      token-info-uri: http://localhost:8081/oauth/check_token #检查令牌
+      user-info-uri: http://localhost:8081/oauth/user
+    authorization:
+      check-token-access: http://localhost:8081/oauth/check_token
 
 aurora:
   rocketmq:

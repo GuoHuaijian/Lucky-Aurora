@@ -70,11 +70,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
-                // 密码模式需要
-                .authenticationManager(authenticationManager)
                 // 刷新token需要验证用户
                 .userDetailsService(userDetailsService)
                 .tokenStore(tokenStore())
+                // 密码模式需要
+                .authenticationManager(authenticationManager)
                 .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
 
     }
@@ -100,7 +100,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         // // 允许表单认证
         security.allowFormAuthenticationForClients();
         // 允许客户端访问 /oauth/check_token 检查 token
-        security.checkTokenAccess("isAuthenticated()");
+        security.checkTokenAccess("permitAll()");
         security.tokenKeyAccess("permitAll()");
     }
 

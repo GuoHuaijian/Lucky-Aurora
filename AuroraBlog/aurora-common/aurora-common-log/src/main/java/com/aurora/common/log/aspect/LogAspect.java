@@ -9,7 +9,6 @@ import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogStatus;
 import com.aurora.common.log.service.AsyncLogService;
-import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.rpc.system.domain.SysLog;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -93,7 +92,7 @@ public class LogAspect {
             // 返回参数
             sysLog.setJsonResult(JSON.toJSONString(jsonResult));
             sysLog.setOperUrl(ServletUtil.getRequest().getRequestURI());
-            String username = SecurityUtil.getUsername();
+            String username = "SecurityUtil.getUsername()";
             if (StrUtil.isNotBlank(username)) {
                 sysLog.setOperName(username);
             }
