@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
@@ -40,6 +41,10 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Resource
     private RedisConnectionFactory redisConnectionFactory;
 
+
+    @Resource
+    private AuthenticationManager authenticationManager;
+
     @Resource
     private DataSource dataSource;
 
@@ -65,6 +70,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints
+                // 密码模式需要
+                .authenticationManager(authenticationManager)
                 // 刷新token需要验证用户
                 .userDetailsService(userDetailsService)
                 .tokenStore(tokenStore())

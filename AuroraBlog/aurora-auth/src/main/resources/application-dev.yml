@@ -69,6 +69,7 @@ management:
 #    resource:
 #      token-info-uri: http://localhost:8081/oauth/check_token #检查令牌
 
+
 # 日志配置
 logging:
   level:
