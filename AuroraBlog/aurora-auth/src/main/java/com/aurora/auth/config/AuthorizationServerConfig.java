@@ -1,6 +1,7 @@
 package com.aurora.auth.config;
 
 import com.aurora.auth.service.impl.UserDetailsServiceImpl;
+import com.aurora.common.security.component.AuroraTokenEnhancer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -46,6 +47,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     private AuthenticationManager authenticationManager;
 
     @Resource
+    private AuroraTokenEnhancer tokenEnhancer;
+
+    @Resource
     private DataSource dataSource;
 
     @Bean
@@ -72,6 +76,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         endpoints
                 // 刷新token需要验证用户
                 .userDetailsService(userDetailsService)
+                .tokenEnhancer(tokenEnhancer)
                 .tokenStore(tokenStore())
                 // 密码模式需要
                 .authenticationManager(authenticationManager)
@@ -100,8 +105,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         // // 允许表单认证
         security.allowFormAuthenticationForClients();
         // 允许客户端访问 /oauth/check_token 检查 token
-        security.checkTokenAccess("permitAll()");
-        security.tokenKeyAccess("permitAll()");
+        security.checkTokenAccess("isAuthenticated()");
+        security.tokenKeyAccess("isAuthenticated()");
     }
 
 }
