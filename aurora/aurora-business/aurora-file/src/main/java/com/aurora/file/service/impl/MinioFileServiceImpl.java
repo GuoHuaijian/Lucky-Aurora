@@ -11,11 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 
 /**
- * describe: 文件存储
+ * describe: Minio文件存储
  *
- * @Author Guo
+ * @Author Guo Huaijian
  * @Date 2021/9/10
- * @Version 1.0
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Service
 public class MinioFileServiceImpl implements FileService {

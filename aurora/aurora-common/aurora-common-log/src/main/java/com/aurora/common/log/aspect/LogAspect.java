@@ -36,9 +36,10 @@ import java.util.Map;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/7 9:23
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/7
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Aspect
 @Component

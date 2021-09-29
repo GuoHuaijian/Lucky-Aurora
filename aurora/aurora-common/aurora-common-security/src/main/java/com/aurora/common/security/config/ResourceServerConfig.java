@@ -37,7 +37,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Resource
     private IgnoreUrlProperties ignoreUrlProperties;
 
-    public RemoteTokenServices tokenServices(){
+    public RemoteTokenServices tokenServices() {
         DefaultAccessTokenConverter tokenConverter = new DefaultAccessTokenConverter();
         tokenConverter.setUserTokenConverter(userAuthenticationConverter);
         remoteTokenServices.setAccessTokenConverter(tokenConverter);
@@ -49,24 +49,24 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
      *
      * @param httpSecurity
      */
-   @Override
-   @SneakyThrows
-   public void configure(HttpSecurity httpSecurity) {
-       httpSecurity.headers().frameOptions().disable();
-       // 白名单过滤
-       httpSecurity
-               .authorizeRequests()
-               .antMatchers(ignoreUrlProperties.getUrlStr()).permitAll()
-               .anyRequest().authenticated().and().csrf().disable();
-       // 配置没有权限处理类
-       httpSecurity.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
-       // 添加过滤器
-       httpSecurity.addFilterBefore(new AuthenticationFilter(),  BasicAuthenticationFilter.class);
-   }
+    @Override
+    @SneakyThrows
+    public void configure(HttpSecurity httpSecurity) {
+        httpSecurity.headers().frameOptions().disable();
+        // 白名单过滤
+        httpSecurity
+                .authorizeRequests()
+                .antMatchers(ignoreUrlProperties.getUrlStr()).permitAll()
+                .anyRequest().authenticated().and().csrf().disable();
+        // 配置没有权限处理类
+        httpSecurity.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
+        // 添加过滤器
+        httpSecurity.addFilterBefore(new AuthenticationFilter(), BasicAuthenticationFilter.class);
+    }
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         // 设置用户信息转化
-       resources.tokenServices(tokenServices());
+        resources.tokenServices(tokenServices());
     }
 }

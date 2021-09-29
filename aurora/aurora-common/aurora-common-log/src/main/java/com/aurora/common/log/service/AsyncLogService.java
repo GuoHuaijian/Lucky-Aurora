@@ -10,11 +10,11 @@ import java.io.UnsupportedEncodingException;
 /**
  * describe: 异步调用日志服务
  *
- * @Author Guo
- * @Date 2021/9/7 10:49
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/7
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
-
 public interface AsyncLogService {
 
     /**

@@ -8,9 +8,10 @@ import org.springframework.util.Assert;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/8/24 17:37
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/8/24
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Slf4j
 public class AssertUtil extends Assert {

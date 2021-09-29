@@ -7,9 +7,10 @@ import org.apache.ibatis.annotations.Mapper;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/7 10:01
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/1/30
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Mapper
 public interface SysLogMapper extends BaseMapper<SysLog> {

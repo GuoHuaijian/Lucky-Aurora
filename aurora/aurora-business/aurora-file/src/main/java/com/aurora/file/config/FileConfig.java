@@ -11,9 +11,10 @@ import org.springframework.context.annotation.Configuration;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/29 16:03
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/29
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
 @Configuration
@@ -144,7 +145,7 @@ public class FileConfig {
      * FastDfs配置
      */
     @Data
-    public static class FastDfs{
+    public static class FastDfs {
 
         private String domain;
     }

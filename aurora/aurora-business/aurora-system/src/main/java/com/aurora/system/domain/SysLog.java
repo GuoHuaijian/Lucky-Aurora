@@ -15,9 +15,10 @@ import java.util.Date;
 /**
  * describe: 操作日志记录
  *
- * @Author Guo
- * @Date 2021/9/7 10:01
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/7
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
 @Builder

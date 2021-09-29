@@ -12,9 +12,10 @@ import java.nio.charset.StandardCharsets;
 /**
  * describe: 文件处理工具类
  *
- * @Author Guo
- * @Date 2021/9/10 13:30
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/10
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class FileUtil {
 

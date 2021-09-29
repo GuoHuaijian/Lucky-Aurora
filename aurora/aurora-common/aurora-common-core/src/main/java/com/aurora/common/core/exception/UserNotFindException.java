@@ -3,9 +3,10 @@ package com.aurora.common.core.exception;
 /**
  * describe: 自定义用户校验异常
  *
- * @Author Guo
- * @Date 2021/8/26 14:18
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2020/12/31
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class UserNotFindException extends RuntimeException {
 

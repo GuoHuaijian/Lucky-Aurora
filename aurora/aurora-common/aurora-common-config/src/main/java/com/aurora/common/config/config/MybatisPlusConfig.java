@@ -9,9 +9,10 @@ import org.springframework.context.annotation.Configuration;
 /**
  * describe: MybatisPlus分页配置
  *
- * @Author Guo
- * @Date 2021/9/10 16:00
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/10
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Configuration
 public class MybatisPlusConfig {

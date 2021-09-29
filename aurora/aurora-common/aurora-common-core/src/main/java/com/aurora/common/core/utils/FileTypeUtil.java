@@ -7,9 +7,10 @@ import java.io.File;
 /**
  * describe: 文件类型工具类
  *
- * @Author Guo
+ * @Author Guo Huaijian
  * @Date 2021/9/10
- * @Version 1.0
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class FileTypeUtil {
 

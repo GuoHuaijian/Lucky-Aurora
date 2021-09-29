@@ -11,11 +11,13 @@ import javax.annotation.Resource;
 import java.io.File;
 
 /**
- * describe:
+ * /**
+ * describe: 阿里云文件上传
  *
- * @Author Guo
- * @Date 2021/9/10 15:20
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/10
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Service
 public class AliOssFileServiceImpl implements FileService {

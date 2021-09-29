@@ -9,9 +9,10 @@ import java.util.HashMap;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/7 14:21
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/7
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Slf4j
 public class AddressUtil {

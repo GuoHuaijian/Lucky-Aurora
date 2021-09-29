@@ -43,12 +43,12 @@ public class AuroraUserAuthenticationConverter implements UserAuthenticationConv
         Map<String, Object> response = new LinkedHashMap();
         response.put(USERNAME, authentication.getName());
         Object principal = authentication.getPrincipal();
-        if(principal instanceof SecurityUser){
+        if (principal instanceof SecurityUser) {
             SecurityUser user;
             user = (SecurityUser) principal;
-            if(!StringUtils.isEmpty(user)){
-                response.put("userId",user.getUserId());
-                response.put("password",user.getPassword());
+            if (!StringUtils.isEmpty(user)) {
+                response.put("userId", user.getUserId());
+                response.put("password", user.getPassword());
             }
         }
         if (authentication.getAuthorities() != null && !authentication.getAuthorities().isEmpty()) {
@@ -68,7 +68,7 @@ public class AuroraUserAuthenticationConverter implements UserAuthenticationConv
             Collection<? extends GrantedAuthority> authorities = this.getAuthorities(map);
             securityUser.setAuthorities((Collection<GrantedAuthority>) authorities);
             if (this.userDetailsService != null) {
-                UserDetails user = this.userDetailsService.loadUserByUsername((String)map.get(USERNAME));
+                UserDetails user = this.userDetailsService.loadUserByUsername((String) map.get(USERNAME));
                 authorities = user.getAuthorities();
                 securityUser = (SecurityUser) user;
             }
@@ -85,9 +85,9 @@ public class AuroraUserAuthenticationConverter implements UserAuthenticationConv
         } else {
             Object authorities = map.get(AUTHORITIES);
             if (authorities instanceof String) {
-                return AuthorityUtils.commaSeparatedStringToAuthorityList((String)authorities);
+                return AuthorityUtils.commaSeparatedStringToAuthorityList((String) authorities);
             } else if (authorities instanceof Collection) {
-                return AuthorityUtils.commaSeparatedStringToAuthorityList(StringUtils.collectionToCommaDelimitedString((Collection)authorities));
+                return AuthorityUtils.commaSeparatedStringToAuthorityList(StringUtils.collectionToCommaDelimitedString((Collection) authorities));
             } else {
                 throw new IllegalArgumentException("Authorities must be either a String or a Collection");
             }

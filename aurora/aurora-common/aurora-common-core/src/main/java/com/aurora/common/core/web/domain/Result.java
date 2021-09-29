@@ -18,7 +18,7 @@ import java.util.HashMap;
  * @Author Guo Huaijian
  * @Date 2020/12/31
  * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0
+ * @Version 1.0.0
  */
 @Data
 @Slf4j

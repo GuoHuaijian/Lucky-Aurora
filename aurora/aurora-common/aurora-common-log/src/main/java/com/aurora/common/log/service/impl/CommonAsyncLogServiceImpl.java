@@ -10,11 +10,11 @@ import org.springframework.stereotype.Service;
 /**
  * describe: 普通注解异步处理日志
  *
- * @Author Guo
- * @Date 2021/9/8 9:44
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/8
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
-
 @Service
 public class CommonAsyncLogServiceImpl implements AsyncLogService {
 

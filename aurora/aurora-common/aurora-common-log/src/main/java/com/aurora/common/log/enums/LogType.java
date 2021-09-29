@@ -3,9 +3,10 @@ package com.aurora.common.log.enums;
 /**
  * describe: 日志类型
  *
- * @Author Guo
- * @Date 2021/9/6 16:47
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/6
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public enum LogType {
 

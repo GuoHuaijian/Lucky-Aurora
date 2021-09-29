@@ -6,7 +6,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 
 /**
- * @author huaijian.guo
+ * describe: 文件上传工具类
+ *
+ * @Author Guo Huaijian
+ * @Date 2021/9/10
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @SpringBootApplication(scanBasePackages = {"com.aurora.*"}, exclude = {DataSourceAutoConfiguration.class})
 @EnableDubbo(scanBasePackages = {"com.aurora.*"})

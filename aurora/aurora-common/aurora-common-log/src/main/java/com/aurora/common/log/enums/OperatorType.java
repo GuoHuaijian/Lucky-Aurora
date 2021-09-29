@@ -1,11 +1,12 @@
 package com.aurora.common.log.enums;
 
 /**
- * describe:操作人类别
+ * describe: 操作人类别
  *
- * @Author Guo
- * @Date 2021/9/6 17:02
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/6
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public enum OperatorType {
     /**

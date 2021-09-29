@@ -13,11 +13,12 @@ import javax.annotation.Resource;
 
 
 /**
- * describe: Minio 配置信息 文件请求处理
+ * describe: 文件请求处理
  *
- * @Author Guo
+ * @Author Guo Huaijian
  * @Date 2021/9/10
- * @Version 1.0
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @RestController
 @Slf4j

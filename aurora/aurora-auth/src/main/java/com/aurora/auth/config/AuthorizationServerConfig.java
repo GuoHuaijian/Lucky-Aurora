@@ -92,7 +92,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
      */
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-                    clients.withClientDetails(jdbcClientDetailsService());
+        clients.withClientDetails(jdbcClientDetailsService());
     }
 
     /**

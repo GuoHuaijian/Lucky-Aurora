@@ -1,7 +1,7 @@
 package com.aurora.common.rocketmq.constant;
 
 /**
- * describe:
+ * describe:消息tag常量
  *
  * @Author Guo Huaijian
  * @Date 2021/9/25
@@ -11,7 +11,7 @@ package com.aurora.common.rocketmq.constant;
 public class TagConstant {
 
     /**
-     * 日志TOPIC
+     * 日志tag
      */
     public static final String ARTICLE_ADD = "article_add";
 }

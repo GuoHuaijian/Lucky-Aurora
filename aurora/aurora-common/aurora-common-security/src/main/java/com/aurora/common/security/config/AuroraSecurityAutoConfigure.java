@@ -15,9 +15,10 @@ import javax.annotation.Resource;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/29 10:52
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/29
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Configuration
 @EnableConfigurationProperties(IgnoreUrlProperties.class)
@@ -30,12 +31,12 @@ public class AuroraSecurityAutoConfigure {
     public UserPermissionEvaluator userPermissionEvaluator;
 
     @Bean
-    public AuroraTokenEnhancer auroraTokenEnhancer(){
+    public AuroraTokenEnhancer auroraTokenEnhancer() {
         return new AuroraTokenEnhancer();
     }
 
     @Bean
-    public AuroraUserAuthenticationConverter userAuthenticationConverter(){
+    public AuroraUserAuthenticationConverter userAuthenticationConverter() {
         return new AuroraUserAuthenticationConverter();
     }
 
@@ -46,7 +47,7 @@ public class AuroraSecurityAutoConfigure {
     }
 
     @Bean
-    public RemoteTokenServices remoteTokenServices(){
+    public RemoteTokenServices remoteTokenServices() {
         RemoteTokenServices services = new RemoteTokenServices();
         services.setCheckTokenEndpointUrl(this.resource.getTokenInfoUri());
         services.setClientId(this.resource.getClientId());

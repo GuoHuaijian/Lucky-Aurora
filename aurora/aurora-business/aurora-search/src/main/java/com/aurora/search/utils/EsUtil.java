@@ -37,9 +37,10 @@ import java.util.Map;
 /**
  * describe: ES工具类
  *
- * @Author Guo
- * @Date 2021/9/9 16:38
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/9
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class EsUtil {
 

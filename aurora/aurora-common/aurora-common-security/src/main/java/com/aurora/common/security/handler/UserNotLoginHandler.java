@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Author Guo Huaijian
  * @Date 2021/1/1
  * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0
+ * @Version 1.0.0
  */
 @Component
 public class UserNotLoginHandler implements AuthenticationEntryPoint {

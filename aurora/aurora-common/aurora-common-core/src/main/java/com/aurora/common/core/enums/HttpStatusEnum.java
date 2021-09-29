@@ -7,7 +7,7 @@ package com.aurora.common.core.enums;
  * @Author Guo Huaijian
  * @Date 2020/12/31
  * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0
+ * @Version 1.0.0
  */
 public enum HttpStatusEnum {
 

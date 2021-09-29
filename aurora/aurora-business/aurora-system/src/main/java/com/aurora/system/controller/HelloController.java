@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @Version 1.0
  */
 @RestController
-@RequestMapping("test")
+@RequestMapping("system")
 public class HelloController {
 
-//    @PreAuthorize(value = "hasPermission('sys:user:list,sys:user:info','ddd')")
+    //    @PreAuthorize(value = "hasPermission('sys:user:list,sys:user:info','ddd')")
     @GetMapping("hi")
     public String get() {
         System.out.println(SecurityContextHolder.getContext().getAuthentication());

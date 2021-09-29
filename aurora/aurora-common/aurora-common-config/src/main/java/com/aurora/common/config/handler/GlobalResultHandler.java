@@ -1,7 +1,7 @@
 package com.aurora.common.config.handler;
 
 import com.alibaba.fastjson.JSON;
-import com.aurora.common.core.annotation.IgnoreResponseAdvice;
+import com.aurora.common.config.annotation.IgnoreResponseAdvice;
 import com.aurora.common.core.enums.Enabled;
 import com.aurora.common.core.web.domain.Result;
 import org.springframework.core.MethodParameter;
@@ -14,9 +14,10 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 /**
  * describe: 统一返回数据格式
  *
- * @Author Guo
- * @Date 2021/8/26 14:16
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/8/26
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @RestControllerAdvice
 public class GlobalResultHandler implements ResponseBodyAdvice {

@@ -1,0 +1,18 @@
+server:
+  # 端口
+  port: 9527
+  servlet:
+    # 应用的访问路径
+    context-path:
+
+spring:
+  # 服务名
+  application:
+    name: aurora-gateway
+  profiles:
+    # 激活配置
+    active: dev
+
+  main:
+    allow-bean-definition-overriding: true
+    web-application-type: reactive

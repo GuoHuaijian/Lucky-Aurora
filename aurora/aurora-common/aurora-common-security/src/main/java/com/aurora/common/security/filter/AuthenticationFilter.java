@@ -16,7 +16,7 @@ import java.io.IOException;
  * @Author Guo Huaijian
  * @Date 2021/1/1
  * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0
+ * @Version 1.0.0
  */
 @Slf4j
 public class AuthenticationFilter extends OncePerRequestFilter {
@@ -27,7 +27,7 @@ public class AuthenticationFilter extends OncePerRequestFilter {
         // 取出Token
         String token = SecurityUtil.getToken(request);
         if (token != null && token.startsWith(SecurityUtil.tokenPrefix)) {
-           log.info("请求token:{}",token);
+            log.info("请求token:{}", token);
         }
         filterChain.doFilter(request, response);
     }

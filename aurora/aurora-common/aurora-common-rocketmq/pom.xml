@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.aurora</groupId>
-        <artifactId>aurora</artifactId>
+        <artifactId>aurora-common</artifactId>
         <version>1.0.0</version>
     </parent>
 

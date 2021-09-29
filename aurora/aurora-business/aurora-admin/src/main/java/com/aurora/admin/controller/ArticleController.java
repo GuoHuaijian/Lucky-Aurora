@@ -92,7 +92,7 @@ public class ArticleController extends AbstractController {
         article.setIsTop(false);
         article.setCreateTime(new Date());
         article.setUpdateTime(new Date());
-        sendService.send(article,TopicConstant.ARTICLE_ADD_TOPIC_NAME, ConsumerGroupConstant.ARTICLE_GROUP_ID,
+        sendService.send(article, TopicConstant.ARTICLE_ADD_TOPIC_NAME, ConsumerGroupConstant.ARTICLE_GROUP_ID,
                 TagConstant.ARTICLE_ADD);
         return "成功";
     }

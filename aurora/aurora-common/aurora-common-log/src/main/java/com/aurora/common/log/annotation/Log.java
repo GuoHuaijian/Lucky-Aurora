@@ -8,9 +8,10 @@ import java.lang.annotation.*;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/6 16:44
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/6
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Target({ElementType.PARAMETER, ElementType.METHOD})
 @Retention(RetentionPolicy.RUNTIME)

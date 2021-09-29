@@ -11,7 +11,7 @@ import java.util.List;
  * @Author Guo Huaijian
  * @Date 2021/9/6
  * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0
+ * @Version 1.0.0
  */
 public interface RemoteAuthUserService {
 

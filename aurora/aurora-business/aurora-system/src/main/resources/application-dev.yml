@@ -95,7 +95,7 @@ security:
       # 放行地址
     ignore:
       urls:
-        - /test/hi
+        - /system/hi
 
 # RocketMQ配置
 aurora:

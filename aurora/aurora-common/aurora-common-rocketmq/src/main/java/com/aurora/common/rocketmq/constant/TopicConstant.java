@@ -1,11 +1,12 @@
 package com.aurora.common.rocketmq.constant;
 
 /**
- * describe:
+ * describe:消息topic常量
  *
- * @Author Guo
- * @Date 2021/9/7 16:31
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/7
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class TopicConstant {
 

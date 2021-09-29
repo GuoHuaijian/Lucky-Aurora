@@ -1,11 +1,12 @@
 package com.aurora.common.rocketmq.constant;
 
 /**
- * describe: kafka 消费者组常量
+ * describe: 消费者组常量
  *
- * @Author Guo
- * @Date 2021/9/8 13:49
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/8
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class ConsumerGroupConstant {
 

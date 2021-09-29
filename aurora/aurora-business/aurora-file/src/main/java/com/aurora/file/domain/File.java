@@ -5,9 +5,10 @@ import lombok.Data;
 /**
  * describe: 文件信息
  *
- * @Author Guo
+ * @Author Guo Huaijian
  * @Date 2021/9/10
- * @Version 1.0
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
 public class File {

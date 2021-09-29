@@ -25,7 +25,7 @@ import javax.annotation.Resource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
-    public PasswordEncoder passwordEncoder()  {
+    public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and().logout().logoutUrl("/logout").logoutSuccessUrl("/")
                 // 允许访问的链接
                 .and().authorizeRequests().antMatchers(urlProperties.getUrlStr()).permitAll()
-                 // 其余所有接口需要认证
+                // 其余所有接口需要认证
                 .anyRequest().authenticated()
                 // 开启跨域
                 .and().cors()

@@ -6,9 +6,10 @@ import com.baomidou.mybatisplus.extension.service.IService;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/7 10:01
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/7
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public interface SysLogService extends IService<SysLog> {
 

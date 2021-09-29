@@ -10,9 +10,10 @@ import java.util.Map;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/24 13:39
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/24
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
 @ConfigurationProperties(prefix = "aurora.rocketmq")

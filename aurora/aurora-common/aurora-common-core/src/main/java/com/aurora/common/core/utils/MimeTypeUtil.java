@@ -3,9 +3,10 @@ package com.aurora.common.core.utils;
 /**
  * describe: 媒体类型工具类
  *
- * @Author Guo
+ * @Author Guo Huaijian
  * @Date 2021/9/10
- * @Version 1.0
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class MimeTypeUtil {
 

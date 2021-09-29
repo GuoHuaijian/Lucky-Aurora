@@ -1,4 +1,3 @@
-
 # Elasticsearch 地址
 elasticsearch:
   hostname: localhost

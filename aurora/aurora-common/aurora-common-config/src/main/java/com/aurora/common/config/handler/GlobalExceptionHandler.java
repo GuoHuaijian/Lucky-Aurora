@@ -12,9 +12,10 @@ import javax.validation.ConstraintViolationException;
 /**
  * describe: 全局异常捕获处理
  *
- * @Author Guo
- * @Date 2021/8/26 14:16
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/8/26
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @RestControllerAdvice
 @Slf4j

@@ -12,9 +12,10 @@ import javax.annotation.Resource;
 /**
  * describe: 本地文件存储
  *
- * @Author Guo
+ * @Author Guo Huaijian
  * @Date 2021/9/10
- * @Version 1.0
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Primary
 @Service

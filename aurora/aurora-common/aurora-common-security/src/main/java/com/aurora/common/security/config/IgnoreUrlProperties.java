@@ -20,15 +20,15 @@ import java.util.regex.Pattern;
 @Data
 @Slf4j
 @ConfigurationProperties(prefix = "security.oauth2.ignore")
-public class IgnoreUrlProperties{
+public class IgnoreUrlProperties {
 
     private static final Pattern PATTERN = Pattern.compile("\\{(.*?)\\}");
 
     public List<String> urls = new ArrayList<>();
 
-    public String[] getUrlStr(){
+    public String[] getUrlStr() {
         String[] str = urls.toArray(new String[urls.size()]);
-        log.info("放行白名单:{}",Arrays.toString(str));
+        log.info("放行白名单:{}", Arrays.toString(str));
         return str;
     }
 }

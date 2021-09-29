@@ -19,9 +19,10 @@ import javax.annotation.Resource;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/24 14:16
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/24
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Configuration
 @EnableConfigurationProperties(RocketMqProperties.class)
@@ -82,7 +83,7 @@ public class RocketMqAutoConfigure {
         int pullBatchSize = consumerConfig.getPullBatchSize();
         DefaultMQPushConsumer defaultMQPushConsumer = new DefaultMQPushConsumer(groupName);
         defaultMQPushConsumer.setNamesrvAddr(nameServer);
-        defaultMQPushConsumer.subscribe(topicName,"*");
+        defaultMQPushConsumer.subscribe(topicName, "*");
         defaultMQPushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
         defaultMQPushConsumer.setMessageModel(messageModel);
         defaultMQPushConsumer.setPullBatchSize(pullBatchSize);

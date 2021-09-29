@@ -12,9 +12,10 @@ import javax.annotation.Resource;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/24 15:12
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/24
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @ConditionalOnProperty(name = "aurora.rocketmq.consumer.group")
 @Component
@@ -25,12 +26,12 @@ public class RocketMqConsumer {
     private DefaultMQPushConsumer defaultMQPushConsumer;
 
 
-    public DefaultMQPushConsumer buildConsumer(){
+    public DefaultMQPushConsumer buildConsumer() {
         return defaultMQPushConsumer;
     }
 
-    public DefaultMQPushConsumer buildConsumer(String topic,String consumerGroup) throws MQClientException {
-        defaultMQPushConsumer.subscribe(topic,"*");
+    public DefaultMQPushConsumer buildConsumer(String topic, String consumerGroup) throws MQClientException {
+        defaultMQPushConsumer.subscribe(topic, "*");
         defaultMQPushConsumer.setConsumerGroup(consumerGroup);
         defaultMQPushConsumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         return defaultMQPushConsumer;

@@ -10,16 +10,17 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/7 10:28
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/9/7
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class SecurityUtil {
 
     /**
      * HeaderKey
      */
-    public static final String  tokenHeader = "Authorization";
+    public static final String tokenHeader = "Authorization";
 
     /**
      * Token前缀
@@ -31,9 +32,9 @@ public class SecurityUtil {
      *
      * @return
      */
-    public static SecurityUser getSecurityUser(){
+    public static SecurityUser getSecurityUser() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof SecurityUser){
+        if (principal instanceof SecurityUser) {
             SecurityUser user = (SecurityUser) principal;
             return user;
         }
