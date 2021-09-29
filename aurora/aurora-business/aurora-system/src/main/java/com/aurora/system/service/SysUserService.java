@@ -39,4 +39,35 @@ public interface SysUserService extends IService<SysUser> {
      */
     List<String> getAuthsByUserId(Long userId);
 
+    /**
+     * 添加用户
+     *
+     * @param user
+     * @return
+     */
+    boolean addUser(SysUser user);
+
+    /**
+     * 修改用户信息
+     *
+     * @param user
+     * @return
+     */
+    boolean updateUser(SysUser user);
+
+    /**
+     * 获取用户列表
+     *
+     * @return
+     */
+    List<SysUser> getUserList();
+
+    /**
+     * 删除用户
+     *
+     * @param ids
+     * @return
+     */
+    boolean deleteUser(List<Long> ids);
+
 }

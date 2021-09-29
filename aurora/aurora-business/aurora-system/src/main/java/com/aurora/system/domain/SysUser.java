@@ -75,6 +75,30 @@ public class SysUser implements Serializable {
     private Boolean status;
 
     /**
+     * 性别 0男 1女
+     */
+    @TableField(value = "sex")
+    private Integer sex;
+
+    /**
+     * 用户类型 0后台 1门户 3第三方
+     */
+    @TableField(value = "user_type")
+    private Integer userType;
+
+    /**
+     * 登录ip
+     */
+    @TableField(value = "login_ip")
+    private String loginIp;
+
+    /**
+     * 登录时间
+     */
+    @TableField(value = "login_time")
+    private Date loginTime;
+
+    /**
      * 创建时间
      */
     @TableField(value = "create_time")

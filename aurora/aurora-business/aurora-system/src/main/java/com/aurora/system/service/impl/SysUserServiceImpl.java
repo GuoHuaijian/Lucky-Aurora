@@ -60,4 +60,47 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public List<String> getAuthsByUserId(Long userId) {
         return userMapper.getAuthsByUserId(userId);
     }
+
+    /**
+     * 添加用户
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean addUser(SysUser user) {
+        return save(user);
+    }
+
+    /**
+     * 修改用户信息
+     *
+     * @param user
+     * @return
+     */
+    @Override
+    public boolean updateUser(SysUser user) {
+        return updateById(user);
+    }
+
+    /**
+     * 获取用户列表
+     *
+     * @return
+     */
+    @Override
+    public List<SysUser> getUserList() {
+        return list();
+    }
+
+    /**
+     * 删除用户
+     *
+     * @param ids
+     * @return
+     */
+    @Override
+    public boolean deleteUser(List<Long> ids) {
+        return removeByIds(ids);
+    }
 }

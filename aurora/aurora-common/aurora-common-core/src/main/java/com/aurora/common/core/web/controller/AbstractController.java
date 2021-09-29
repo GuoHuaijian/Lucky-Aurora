@@ -70,10 +70,13 @@ public abstract class AbstractController {
     /**
      * 响应返回结果
      *
-     * @param rows 影响行数
+     * @param result
      * @return 操作结果
      */
-    protected Result toResult(int rows) {
-        return rows > 0 ? Result.success() : Result.error();
+    protected Result toResult(Boolean result) {
+        if (result){
+            return Result.success();
+        }
+        return Result.error();
     }
 }
