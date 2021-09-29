@@ -1,0 +1,17 @@
+server:
+  # 端口
+  port: 8081
+  servlet:
+    # 应用的访问路径
+    context-path:
+
+spring:
+  # 服务名
+  application:
+    name: aurora-auth
+  profiles:
+    # 激活配置
+    active: dev
+
+  main:
+    allow-bean-definition-overriding: true

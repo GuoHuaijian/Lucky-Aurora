@@ -1,0 +1,25 @@
+
+# Elasticsearch 地址
+elasticsearch:
+  hostname: localhost
+  port: 9200
+
+# RocketMQ配置
+aurora:
+  rocketmq:
+    name-server: localhost:9876
+    consumer:
+      topic: article
+      group: ARTICLE
+
+# 端点检查
+management:
+  endpoint:
+    health:
+      enabled: true
+
+# 日志配置
+logging:
+  level:
+    com.aurora: debug
+    org.springframework: info
