@@ -37,7 +37,37 @@
         where menu_id in (select menu_id
                           from sys_role_menu
                           where role_id in (select role_id
-                          from sys_user_role
-                          where user_id = #{userId}));
+                                            from sys_user_role
+                                            where user_id = #{userId}));
+    </select>
+
+    <select id="selectAllocatedList" parameterType="SysUser" resultMap="BaseResultMap">
+        select distinct u.user_id, u.user_name, u.nick_name, u.email, u.phone_number, u.status, u.create_time
+        from sys_user u
+        left join sys_user_role ur on u.user_id = ur.user_id
+        left join sys_role r on r.role_id = ur.role_id
+        where r.role_id = #{roleId}
+        <if test="userName != null and userName != ''">
+            AND u.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="phoneNumber != null and phoneNumber != ''">
+            AND u.phone_number like concat('%', #{phoneNumber}, '%')
+        </if>
+    </select>
+
+    <select id="selectUnallocatedList" parameterType="SysUser" resultMap="BaseResultMap">
+        select distinct u.user_id,u.user_name, u.nick_name, u.email, u.phone_number, u.status, u.create_time
+        from sys_user u
+        left join sys_user_role ur on u.user_id = ur.user_id
+        left join sys_role r on r.role_id = ur.role_id
+        where (r.role_id != #{roleId} or r.role_id IS NULL)
+        and u.user_id not in (select u.user_id from sys_user u inner join sys_user_role ur on u.user_id = ur.user_id and
+        ur.role_id = #{roleId})
+        <if test="userName != null and userName != ''">
+            AND u.user_name like concat('%', #{userName}, '%')
+        </if>
+        <if test="phoneNumber != null and phoneNumber != ''">
+            AND u.phone_number like concat('%', #{phoneNumber}, '%')
+        </if>
     </select>
 </mapper>

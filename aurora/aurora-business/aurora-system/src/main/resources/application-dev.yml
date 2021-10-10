@@ -82,6 +82,7 @@ security:
       client-id: aurora_client
       client-secret: aurora_secret
       scope: all
+      grant-type: password
       # 获取token地址
       access-token-uri: http://localhost:8081/oauth/token
       # 获取授权code
@@ -96,6 +97,7 @@ security:
     ignore:
       urls:
         - /system/hi
+        - /system/login
 
 # RocketMQ配置
 aurora:

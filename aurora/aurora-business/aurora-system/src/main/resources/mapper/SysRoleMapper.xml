@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aurora.system.mapper.SysRoleMapper">
+    <resultMap id="BaseResultMap" type="com.aurora.system.domain.SysRole">
+        <!--@mbg.generated-->
+        <!--@Table sys_role-->
+        <id column="role_id" jdbcType="BIGINT" property="roleId"/>
+        <result column="role_name" jdbcType="VARCHAR" property="roleName"/>
+        <result column="role_code" jdbcType="VARCHAR" property="roleCode"/>
+        <result column="role_sort" jdbcType="INTEGER" property="roleSort"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="menu_check_strictly" jdbcType="BOOLEAN" property="menuCheckStrictly"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        role_id, role_name, role_code, role_sort, `status`, menu_check_strictly, create_time,
+        update_time, remark
+    </sql>
+</mapper>

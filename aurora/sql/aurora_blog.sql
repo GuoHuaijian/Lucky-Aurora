@@ -16,7 +16,7 @@
 
 SET NAMES utf8mb4;
 SET
-FOREIGN_KEY_CHECKS = 0;
+    FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for blog_about
@@ -24,12 +24,15 @@ FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `blog_about`;
 CREATE TABLE `blog_about`
 (
-    `about_id`    int(11) NOT NULL COMMENT '关于id',
+    `about_id`    int(11)                                                       NOT NULL COMMENT '关于id',
     `content`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '关于内容',
-    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+    `create_time` datetime(0)                                                   NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime(0)                                                   NULL DEFAULT NULL COMMENT '修改时间',
     PRIMARY KEY (`about_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of blog_about
@@ -41,25 +44,29 @@ CREATE TABLE `blog_about`
 DROP TABLE IF EXISTS `blog_article`;
 CREATE TABLE `blog_article`
 (
-    `article_id`     int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `article_id`     int(11)                                               NOT NULL AUTO_INCREMENT COMMENT '主键',
     `title`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '文章标题',
-    `description`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '文章描述',
-    `author`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '文章作者',
-    `content`        longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '文章内容',
-    `content_format` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT 'html的content',
-    `read_num`       int(11) NULL DEFAULT 0 COMMENT '阅读量',
-    `comment_num`    int(11) NULL DEFAULT 0 COMMENT '评论量',
-    `like_num`       int(11) NULL DEFAULT 0 COMMENT '点赞量',
-    `cover_type`     int(11) NULL DEFAULT NULL COMMENT '文章展示类别,1:普通，2：大图片，3：无图片',
-    `cover`          text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL COMMENT '封面',
-    `is_recommend`   tinyint(1) NOT NULL DEFAULT 0 COMMENT '是否推荐文章',
-    `category_id`    varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '分类类别存在多级分类，用逗号隔开',
-    `publish`        tinyint(4) NULL DEFAULT 0 COMMENT '发布状态',
-    `is_top`         tinyint(1) NULL DEFAULT 0 COMMENT '是否置顶',
-    `create_time`    datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP (0) COMMENT '创建时间',
-    `update_time`    datetime(0) NOT NULL DEFAULT CURRENT_TIMESTAMP (0) COMMENT '更新时间',
+    `description`    text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin        NULL COMMENT '文章描述',
+    `author`         varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL     DEFAULT NULL COMMENT '文章作者',
+    `content`        longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin    NULL COMMENT '文章内容',
+    `content_format` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin    NULL COMMENT 'html的content',
+    `read_num`       int(11)                                               NULL     DEFAULT 0 COMMENT '阅读量',
+    `comment_num`    int(11)                                               NULL     DEFAULT 0 COMMENT '评论量',
+    `like_num`       int(11)                                               NULL     DEFAULT 0 COMMENT '点赞量',
+    `cover_type`     int(11)                                               NULL     DEFAULT NULL COMMENT '文章展示类别,1:普通，2：大图片，3：无图片',
+    `cover`          text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin        NULL COMMENT '封面',
+    `is_recommend`   tinyint(1)                                            NOT NULL DEFAULT 0 COMMENT '是否推荐文章',
+    `category_id`    varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL     DEFAULT NULL COMMENT '分类类别存在多级分类，用逗号隔开',
+    `publish`        tinyint(4)                                            NULL     DEFAULT 0 COMMENT '发布状态',
+    `is_top`         tinyint(1)                                            NULL     DEFAULT 0 COMMENT '是否置顶',
+    `create_time`    datetime(0)                                           NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+    `update_time`    datetime(0)                                           NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '更新时间',
     PRIMARY KEY (`article_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '文章' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 3
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_bin COMMENT = '文章'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of blog_article
@@ -79,7 +86,11 @@ CREATE TABLE `blog_article_tag`
     `tag_id`     int(11) NULL DEFAULT NULL COMMENT '标签Id',
     `article_id` int(11) NULL DEFAULT NULL COMMENT '文章Id',
     PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '标签文章多对多维护表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_bin COMMENT = '标签文章多对多维护表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of blog_article_tag
@@ -91,17 +102,21 @@ CREATE TABLE `blog_article_tag`
 DROP TABLE IF EXISTS `blog_carousel`;
 CREATE TABLE `blog_carousel`
 (
-    `carousel_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '轮播图id',
+    `carousel_id` int(11)                                                       NOT NULL AUTO_INCREMENT COMMENT '轮播图id',
     `img_url`     varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '轮播图url',
     `title`       varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '轮播图标题',
     `url`         varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '轮播图跳转地址',
-    `display`     char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '是否展示该轮播图，1展示，2不展示',
-    `type`        tinyint(1) NULL DEFAULT NULL COMMENT '1外链，2文章',
-    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+    `display`     char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci      NULL DEFAULT NULL COMMENT '是否展示该轮播图，1展示，2不展示',
+    `type`        tinyint(1)                                                    NULL DEFAULT NULL COMMENT '1外链，2文章',
+    `create_time` datetime(0)                                                   NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime(0)                                                   NULL DEFAULT NULL COMMENT '修改时间',
     `remark`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
     PRIMARY KEY (`carousel_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '轮播图' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '轮播图'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of blog_carousel
@@ -113,16 +128,20 @@ CREATE TABLE `blog_carousel`
 DROP TABLE IF EXISTS `blog_category`;
 CREATE TABLE `blog_category`
 (
-    `category_id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+    `category_id` int(11)                                                NOT NULL AUTO_INCREMENT COMMENT '主键',
     `name`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '名称',
-    `rank`        int(11) NULL DEFAULT NULL COMMENT '级别',
-    `parent_id`   int(11) NULL DEFAULT 0 COMMENT '父主键',
-    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+    `rank`        int(11)                                                NULL DEFAULT NULL COMMENT '级别',
+    `parent_id`   int(11)                                                NULL DEFAULT 0 COMMENT '父主键',
+    `create_time` datetime(0)                                            NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime(0)                                            NULL DEFAULT NULL COMMENT '修改时间',
     `remark`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
     PRIMARY KEY (`category_id`) USING BTREE,
-    UNIQUE INDEX `operation_category_id_uindex`(`category_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin ROW_FORMAT = DYNAMIC;
+    UNIQUE INDEX `operation_category_id_uindex` (`category_id`) USING BTREE
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_bin
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of blog_category
@@ -134,22 +153,25 @@ CREATE TABLE `blog_category`
 DROP TABLE IF EXISTS `blog_comment`;
 CREATE TABLE `blog_comment`
 (
-    `id`          varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '评论主键id',
-    `type`        tinyint(1) NOT NULL COMMENT '评论类型：0:留言 1:文章',
-    `owner_id`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '被评论id，可以是单个文章id、项目、资源',
-    `parent_id`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '评论id 第一级为0',
-    `name`        varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '评论者名字',
-    `avatar`      varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '评论者头像',
-    `like_num`    int(11) NULL DEFAULT 0 COMMENT '点赞的数量',
-    `dislike_num` int(11) NULL DEFAULT 0 COMMENT '踩的数量',
-    `content`     varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '评论内容',
-    `reply_id`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '回复的id',
-    `reply_name`  varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '回复评论者名字',
-    `create_time` timestamp(0)                                                 NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-    `update_time` timestamp(0)                                                 NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP (0) COMMENT '修改时间',
+    `id`          varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '评论主键id',
+    `type`        tinyint(1)                                                    NOT NULL COMMENT '评论类型：0:留言 1:文章',
+    `owner_id`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '被评论id，可以是单个文章id、项目、资源',
+    `parent_id`   varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT '0' COMMENT '评论id 第一级为0',
+    `name`        varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '评论者名字',
+    `avatar`      varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT '' COMMENT '评论者头像',
+    `like_num`    int(11)                                                       NULL     DEFAULT 0 COMMENT '点赞的数量',
+    `dislike_num` int(11)                                                       NULL     DEFAULT 0 COMMENT '踩的数量',
+    `content`     varchar(512) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL     DEFAULT NULL COMMENT '评论内容',
+    `reply_id`    varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT NULL COMMENT '回复的id',
+    `reply_name`  varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL     DEFAULT NULL COMMENT '回复评论者名字',
+    `create_time` timestamp(0)                                                  NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+    `update_time` timestamp(0)                                                  NOT NULL DEFAULT CURRENT_TIMESTAMP(0) ON UPDATE CURRENT_TIMESTAMP(0) COMMENT '修改时间',
     PRIMARY KEY (`id`) USING BTREE,
-    INDEX         `owner_id`(`owner_id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '评论表' ROW_FORMAT = Dynamic;
+    INDEX `owner_id` (`owner_id`) USING BTREE
+) ENGINE = InnoDB
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '评论表'
+  ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of blog_comment
@@ -177,16 +199,20 @@ VALUES ('5', 0, '9527', '4', '夕阳红', 'https://wx4.sinaimg.cn/mw690/69e273f8
 DROP TABLE IF EXISTS `blog_notice`;
 CREATE TABLE `blog_notice`
 (
-    `notice_id`      int(4) NOT NULL AUTO_INCREMENT COMMENT '公告ID',
-    `notice_title`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '公告标题',
-    `notice_type`    tinyint(1) NOT NULL COMMENT '公告类型（1通知 2公告）',
+    `notice_id`      int(4)                                                         NOT NULL AUTO_INCREMENT COMMENT '公告ID',
+    `notice_title`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NOT NULL COMMENT '公告标题',
+    `notice_type`    tinyint(1)                                                     NOT NULL COMMENT '公告类型（1通知 2公告）',
     `notice_content` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '公告内容',
-    `status`         tinyint(1) NULL DEFAULT 0 COMMENT '公告状态（0正常 1关闭）',
-    `create_time`    datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time`    datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-    `remark`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
+    `status`         tinyint(1)                                                     NULL DEFAULT 0 COMMENT '公告状态（0正常 1关闭）',
+    `create_time`    datetime(0)                                                    NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`    datetime(0)                                                    NULL DEFAULT NULL COMMENT '更新时间',
+    `remark`         varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '备注',
     PRIMARY KEY (`notice_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '公告表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '公告表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of blog_notice
@@ -198,13 +224,17 @@ CREATE TABLE `blog_notice`
 DROP TABLE IF EXISTS `blog_tag`;
 CREATE TABLE `blog_tag`
 (
-    `tag_id`      int(11) NOT NULL AUTO_INCREMENT,
-    `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '标签名字',
-    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+    `tag_id`      int(11)                                                NOT NULL AUTO_INCREMENT,
+    `name`        varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin  NULL DEFAULT NULL COMMENT '标签名字',
+    `create_time` datetime(0)                                            NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime(0)                                            NULL DEFAULT NULL COMMENT '修改时间',
     `remark`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NULL DEFAULT NULL COMMENT '备注',
     PRIMARY KEY (`tag_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_bin COMMENT = '标签' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_bin COMMENT = '标签'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of blog_tag
@@ -216,24 +246,28 @@ CREATE TABLE `blog_tag`
 DROP TABLE IF EXISTS `sys_log`;
 CREATE TABLE `sys_log`
 (
-    `log_id`         bigint(20) NOT NULL AUTO_INCREMENT COMMENT '日志主键',
-    `value`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '模块标题',
-    `log_type`       int(2) NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
-    `method`         varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '方法名称',
-    `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求方式',
-    `operator_type`  int(1) NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
-    `oper_name`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '操作人员',
-    `dept_name`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '部门名称',
-    `oper_url`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求URL',
-    `oper_ip`        varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '主机地址',
-    `oper_location`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '操作地点',
+    `log_id`         bigint(20)                                                     NOT NULL AUTO_INCREMENT COMMENT '日志主键',
+    `value`          varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT '' COMMENT '模块标题',
+    `log_type`       int(2)                                                         NULL DEFAULT 0 COMMENT '业务类型（0其它 1新增 2修改 3删除）',
+    `method`         varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT '' COMMENT '方法名称',
+    `request_method` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT '' COMMENT '请求方式',
+    `operator_type`  int(1)                                                         NULL DEFAULT 0 COMMENT '操作类别（0其它 1后台用户 2手机端用户）',
+    `oper_name`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT '' COMMENT '操作人员',
+    `dept_name`      varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci   NULL DEFAULT '' COMMENT '部门名称',
+    `oper_url`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT '' COMMENT '请求URL',
+    `oper_ip`        varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT '' COMMENT '主机地址',
+    `oper_location`  varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT '' COMMENT '操作地点',
     `oper_param`     varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '请求参数',
     `json_result`    varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '返回参数',
-    `status`         int(1) NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
+    `status`         int(1)                                                         NULL DEFAULT 0 COMMENT '操作状态（0正常 1异常）',
     `error_msg`      varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '错误消息',
-    `oper_time`      datetime(0) NULL DEFAULT NULL COMMENT '操作时间',
+    `oper_time`      datetime(0)                                                    NULL DEFAULT NULL COMMENT '操作时间',
     PRIMARY KEY (`log_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 197 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 197
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '操作日志记录'
+  ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of sys_log
@@ -268,8 +302,11 @@ VALUES (108, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.l
 INSERT INTO `sys_log`
 VALUES (109, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', 'null', 1,
-        '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM article\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist', '2021-09-07 12:51:37');
-INSERT INTO `sys_log` VALUES (110, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '', '/admin/article/list', '127.0.0.1', '', '', 'null', 1, '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM article\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\n;
+        '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM article\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist',
+        '2021-09-07 12:51:37');
+INSERT INTO `sys_log`
+VALUES (110, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+        '/admin/article/list', '127.0.0.1', '', '', 'null', 1, '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM article\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\n;
 bad
 SQL grammar []; nested
 exception is java.sql.SQLSyntaxErrorException: Table
@@ -278,8 +315,11 @@ exception is java.sql.SQLSyntaxErrorException: Table
 INSERT INTO `sys_log`
 VALUES (111, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', 'null', 1,
-        '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM article\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist', '2021-09-07 13:02:16');
-INSERT INTO `sys_log` VALUES (112, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '', '/admin/article/list', '127.0.0.1', '', '', 'null', 1, '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column \'id\' in \'field list\'\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select                            id,
+        '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM article\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist',
+        '2021-09-07 13:02:16');
+INSERT INTO `sys_log`
+VALUES (112, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+        '/admin/article/list', '127.0.0.1', '', '', 'null', 1, '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column \'id\' in \'field list\'\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select                            id,
         title, description, author, content, content_format, read_num, comment_num, like_num, cover_type, cover,
         create_time, update_time, recommend, category_id, publish,
         top from blog_article                    order by update_time desc  LIMIT ?\r\n### Cause: java.sql.SQLSyntaxErrorException: Unknown column \'id\' in \'field list\'\n;
@@ -290,7 +330,9 @@ exception is java.sql.SQLSyntaxErrorException: Unknown column
 \'field list\'', '
 2021-09-07 13:03:15
 ');
-INSERT INTO `sys_log` VALUES (113, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '', '/admin/article/list', '
+INSERT INTO `sys_log`
+VALUES (113, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+        '/admin/article/list', '
 127.0.0.1
 ', '', '', 'null', 1, '
 \r
@@ -339,11 +381,17 @@ exception is java.sql.SQLSyntaxErrorException: Unknown column
 \'field list\'', '
 2021-09-07 13:05:19
 ');
-INSERT INTO `sys_log` VALUES (114, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '', '/admin/article/list', '
+INSERT INTO `sys_log`
+VALUES (114, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+        '/admin/article/list', '
 127.0.0.1
 ', '', '', '{
 \"msg\":\"OK\",\"code\":200,\"data\":{\"data\":[],\"total\":0}}', 0, '', '2021-09-07 13:33:45');
-INSERT INTO `sys_log` VALUES (115, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '', '/admin/article/list', '127.0.0.1', '', '', '{\"msg\":\"OK\",\"code\":200,\"data\":{\"data\":[{\"articleId\":1,\"author\":\"4\",\"commentNum\":0,\"content\":\"5\",\"createTime\":1630990204000,\"description\":\"3\",\"isRecommend\":false,\"isTop\":false,\"likeNum\":0,\"publish\":0,\"readNum\":0,\"title\":\"2\",\"updateTime\":1630990204000}],\"total\":1}}', 0, '', '2021-09-07 13:34:58');
+INSERT INTO `sys_log`
+VALUES (115, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+        '/admin/article/list', '127.0.0.1', '', '',
+        '{\"msg\":\"OK\",\"code\":200,\"data\":{\"data\":[{\"articleId\":1,\"author\":\"4\",\"commentNum\":0,\"content\":\"5\",\"createTime\":1630990204000,\"description\":\"3\",\"isRecommend\":false,\"isTop\":false,\"likeNum\":0,\"publish\":0,\"readNum\":0,\"title\":\"2\",\"updateTime\":1630990204000}],\"total\":1}}',
+        0, '', '2021-09-07 13:34:58');
 INSERT INTO `sys_log`
 VALUES (116, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', 'XX-XX-内网IP-', '',
@@ -600,24 +648,28 @@ VALUES (196, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.a
 DROP TABLE IF EXISTS `sys_menu`;
 CREATE TABLE `sys_menu`
 (
-    `menu_id`     bigint(20) NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
-    `menu_name`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '菜单名称',
-    `parent_id`   bigint(20) NULL DEFAULT 0 COMMENT '父菜单ID',
-    `order_num`   int(4) NULL DEFAULT 0 COMMENT '显示顺序',
+    `menu_id`     bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '菜单ID',
+    `menu_name`   varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NOT NULL COMMENT '菜单名称',
+    `parent_id`   bigint(20)                                                    NULL DEFAULT 0 COMMENT '父菜单ID',
+    `order_num`   int(4)                                                        NULL DEFAULT 0 COMMENT '显示顺序',
     `path`        varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '路由地址',
     `component`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '组件路径',
-    `is_frame`    int(1) NULL DEFAULT 1 COMMENT '是否为外链（0是 1否）',
-    `menu_type`   char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
-    `visible`     char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
+    `is_frame`    int(1)                                                        NULL DEFAULT 1 COMMENT '是否为外链（0是 1否）',
+    `menu_type`   char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci      NULL DEFAULT '' COMMENT '菜单类型（M目录 C菜单 F按钮）',
+    `visible`     char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci      NULL DEFAULT '0' COMMENT '菜单状态（0显示 1隐藏）',
     `perms`       varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '权限标识',
     `icon`        varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '#' COMMENT '菜单图标',
-    `create_by`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '创建者',
-    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-    `update_by`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '更新者',
-    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+    `create_by`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT '' COMMENT '创建者',
+    `create_time` datetime(0)                                                   NULL DEFAULT NULL COMMENT '创建时间',
+    `update_by`   varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT '' COMMENT '更新者',
+    `update_time` datetime(0)                                                   NULL DEFAULT NULL COMMENT '更新时间',
     `remark`      varchar(500) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '备注',
     PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1060 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表' ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 1060
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci COMMENT = '菜单权限表'
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -860,14 +912,18 @@ VALUES (1059, '生成代码', 114, 5, '#', '', 1, 'F', '0', 'tool:gen:code', '#'
 DROP TABLE IF EXISTS `sys_role`;
 CREATE TABLE `sys_role`
 (
-    `role_id`     bigint(20) NOT NULL AUTO_INCREMENT COMMENT '角色id',
+    `role_id`     bigint(20)                                                    NOT NULL AUTO_INCREMENT COMMENT '角色id',
     `role_name`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名字',
     `role_code`   varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色code值',
-    `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+    `create_time` datetime(0)                                                   NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time` datetime(0)                                                   NULL DEFAULT NULL COMMENT '修改时间',
     `remark`      varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
     PRIMARY KEY (`role_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 2
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role
@@ -885,7 +941,11 @@ CREATE TABLE `sys_role_menu`
     `role_id` bigint(20) NOT NULL COMMENT '角色id',
     `menu_id` bigint(20) NOT NULL COMMENT '菜单id',
     PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 3
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -901,19 +961,23 @@ VALUES (2, 1, 101);
 DROP TABLE IF EXISTS `sys_user`;
 CREATE TABLE `sys_user`
 (
-    `user_id`      bigint(255) NOT NULL AUTO_INCREMENT COMMENT '用户id',
+    `user_id`      bigint(255)                                                   NOT NULL AUTO_INCREMENT COMMENT '用户id',
     `user_name`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户名',
     `nick_name`    varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户昵称',
     `email`        varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户邮箱',
-    `phone_number` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户电话',
+    `phone_number` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci  NULL DEFAULT NULL COMMENT '用户电话',
     `avatar`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '用户头像',
     `password`     varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL COMMENT '用户密码',
-    `status`       tinyint(1) NULL DEFAULT NULL COMMENT '用户状态',
-    `create_time`  datetime(6) NULL DEFAULT NULL COMMENT '创建时间',
-    `update_time`  datetime(6) NULL DEFAULT NULL COMMENT '修改时间',
+    `status`       tinyint(1)                                                    NULL DEFAULT NULL COMMENT '用户状态',
+    `create_time`  datetime(6)                                                   NULL DEFAULT NULL COMMENT '创建时间',
+    `update_time`  datetime(6)                                                   NULL DEFAULT NULL COMMENT '修改时间',
     `remark`       varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
     PRIMARY KEY (`user_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 2
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user
@@ -932,7 +996,11 @@ CREATE TABLE `sys_user_role`
     `user_id` bigint(20) NOT NULL COMMENT '用户id',
     `role_id` bigint(20) NOT NULL COMMENT '角色id',
     PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB
+  AUTO_INCREMENT = 2
+  CHARACTER SET = utf8mb4
+  COLLATE = utf8mb4_general_ci
+  ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of sys_user_role
@@ -941,4 +1009,4 @@ INSERT INTO `sys_user_role`
 VALUES (1, 1, 1);
 
 SET
-FOREIGN_KEY_CHECKS = 1;
+    FOREIGN_KEY_CHECKS = 1;

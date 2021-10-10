@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aurora.system.mapper.SysLoginLogMapper">
+    <resultMap id="BaseResultMap" type="com.aurora.system.domain.SysLoginLog">
+        <!--@mbg.generated-->
+        <!--@Table sys_login_log-->
+        <id column="info_id" jdbcType="BIGINT" property="infoId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="ipaddr" jdbcType="VARCHAR" property="ipaddr"/>
+        <result column="login_location" jdbcType="VARCHAR" property="loginLocation"/>
+        <result column="browser" jdbcType="VARCHAR" property="browser"/>
+        <result column="os" jdbcType="VARCHAR" property="os"/>
+        <result column="status" jdbcType="CHAR" property="status"/>
+        <result column="msg" jdbcType="VARCHAR" property="msg"/>
+        <result column="login_time" jdbcType="TIMESTAMP" property="loginTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        info_id, user_name, ipaddr, login_location, browser, os, `status`, msg, login_time
+    </sql>
+
+    <update id="cleanLoginLog">
+        truncate table sys_login_log
+    </update>
+</mapper>

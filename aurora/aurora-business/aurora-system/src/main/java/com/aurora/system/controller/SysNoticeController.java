@@ -1,0 +1,82 @@
+package com.aurora.system.controller;
+
+import com.aurora.common.core.web.controller.AbstractController;
+import com.aurora.common.core.web.domain.Result;
+import com.aurora.common.log.annotation.Log;
+import com.aurora.common.log.enums.LogType;
+import com.aurora.system.domain.SysNotice;
+import com.aurora.system.service.SysNoticeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * describe:
+ *
+ * @Author Guo Huaijian
+ * @Date 2021/10/10
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
+ */
+@RestController
+@RequestMapping("/system/notice")
+public class SysNoticeController extends AbstractController {
+
+    @Autowired
+    private SysNoticeService noticeService;
+
+    /**
+     * 获取通知公告列表
+     */
+    @PreAuthorize("@hasAuthority('system:notice:list')")
+    @GetMapping("/list")
+    public Result list(SysNotice notice) {
+        startPage();
+        List<SysNotice> list = noticeService.selectNoticeList(notice);
+        return Result.success(getPageDate(list));
+    }
+
+    /**
+     * 根据通知公告编号获取详细信息
+     */
+    @PreAuthorize("@hasAuthority('system:notice:query')")
+    @GetMapping(value = "/{noticeId}")
+    public Result getInfo(@PathVariable Long noticeId) {
+        return Result.success(noticeService.selectNoticeById(noticeId));
+    }
+
+    /**
+     * 新增通知公告
+     */
+    @PreAuthorize("@hasAuthority('system:notice:add')")
+    @Log(value = "通知公告", LogType = LogType.INSERT)
+    @PostMapping
+    public Result add(@Validated @RequestBody SysNotice notice) {
+        notice.setCreateBy(getUsername());
+        return toResult(noticeService.insertNotice(notice));
+    }
+
+    /**
+     * 修改通知公告
+     */
+    @PreAuthorize("@hasAuthority('system:notice:edit')")
+    @Log(value = "通知公告", LogType = LogType.UPDATE)
+    @PutMapping
+    public Result edit(@Validated @RequestBody SysNotice notice) {
+        notice.setUpdateBy(getUsername());
+        return toResult(noticeService.updateNotice(notice));
+    }
+
+    /**
+     * 删除通知公告
+     */
+    @PreAuthorize("@hasAuthority('system:notice:remove')")
+    @Log(value = "通知公告", LogType = LogType.DELETE)
+    @DeleteMapping("/{noticeIds}")
+    public Result remove(@PathVariable Long[] noticeIds) {
+        return toResult(noticeService.deleteNoticeByIds(noticeIds));
+    }
+}

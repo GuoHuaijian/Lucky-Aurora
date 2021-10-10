@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * describe:
@@ -116,5 +117,32 @@ public class SysUser implements Serializable {
     @TableField(value = "remark")
     private String remark;
 
+    /**
+     * 角色对象
+     */
+    private List<SysRole> roles;
+
+    /**
+     * 角色组
+     */
+    private Long[] roleIds;
+
+    /**
+     * 角色ID
+     */
+    private Long roleId;
+
     private static final long serialVersionUID = 1L;
+
+    public SysUser(Long userId) {
+        this.userId = userId;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin(this.userId);
+    }
+
+    public static boolean isAdmin(Long userId) {
+        return userId != null && 1L == userId;
+    }
 }

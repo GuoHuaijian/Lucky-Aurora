@@ -32,6 +32,16 @@
         </dependency>
         <dependency>
             <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-config</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-log</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.aurora</groupId>
             <artifactId>aurora-rpc</artifactId>
             <version>${project.version}</version>
         </dependency>
