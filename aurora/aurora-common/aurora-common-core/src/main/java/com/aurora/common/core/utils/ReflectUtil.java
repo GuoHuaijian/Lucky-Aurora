@@ -3,8 +3,6 @@ package com.aurora.common.core.utils;
 import cn.hutool.core.convert.Convert;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.Validate;
-import org.apache.commons.lang3.time.DateUtils;
-import org.apache.poi.ss.usermodel.DateUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.cglib.core.ReflectUtils;
@@ -155,9 +153,9 @@ public class ReflectUtil {
                         args[i] = Convert.toFloat(args[i]);
                     } else if (cs[i] == Date.class) {
                         if (args[i] instanceof String) {
-                            args[i] = DateUtils.parseDate(args[i]);
+                            args[i] = DateUtil.parseDate(args[i]);
                         } else {
-                            args[i] = DateUtil.getJavaDate((Double) args[i]);
+                            args[i] = org.apache.poi.ss.usermodel.DateUtil.getJavaDate((Double) args[i]);
                         }
                     } else if (cs[i] == boolean.class || cs[i] == Boolean.class) {
                         args[i] = Convert.toBool(args[i]);

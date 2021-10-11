@@ -16,7 +16,6 @@ import com.aurora.system.service.SysUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import lombok.extern.slf4j.Slf4j;
@@ -34,7 +33,7 @@ import java.util.List;
  * @Author Guo Huaijian
  * @Date 2021/1/1
  * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0
+ * @Version 1.0.0
  */
 @Service
 @Slf4j
@@ -51,6 +50,42 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
 
     @Autowired
     private SysConfigService configService;
+
+    /**
+     * 根据用户名查询用户
+     *
+     * @param userName
+     * @return
+     */
+    @Override
+    public SysUser getUserByName(String userName) {
+        LambdaQueryWrapper<SysUser> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
+        userLambdaQueryWrapper.eq(SysUser::getUserName, userName);
+        SysUser user = getOne(userLambdaQueryWrapper);
+        return user;
+    }
+
+    /**
+     * 根据用户id查询用户角色
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<String> getRolesByUserId(Long userId) {
+        return userMapper.getRolesByUserId(userId);
+    }
+
+    /**
+     * 根据用户id查询用户权限
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<String> getAuthsByUserId(Long userId) {
+        return userMapper.getAuthsByUserId(userId);
+    }
 
     /**
      * 根据条件分页查询用户列表

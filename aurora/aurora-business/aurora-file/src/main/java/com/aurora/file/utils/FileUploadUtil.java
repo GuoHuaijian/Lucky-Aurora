@@ -2,7 +2,7 @@ package com.aurora.file.utils;
 
 import com.aurora.common.core.utils.DateUtil;
 import com.aurora.common.core.utils.IdUtil;
-import com.aurora.common.core.utils.MimeTypeUtil;
+import com.aurora.common.core.utils.file.MimeTypeUtil;
 import com.aurora.file.exception.InvalidExtensionException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;

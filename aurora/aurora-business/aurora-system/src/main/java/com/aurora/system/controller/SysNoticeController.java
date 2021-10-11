@@ -4,6 +4,7 @@ import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
+import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.domain.SysNotice;
 import com.aurora.system.service.SysNoticeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,7 +56,7 @@ public class SysNoticeController extends AbstractController {
     @Log(value = "通知公告", LogType = LogType.INSERT)
     @PostMapping
     public Result add(@Validated @RequestBody SysNotice notice) {
-        notice.setCreateBy(getUsername());
+        notice.setCreateBy(SecurityUtil.getUsername());
         return toResult(noticeService.insertNotice(notice));
     }
 
@@ -66,7 +67,7 @@ public class SysNoticeController extends AbstractController {
     @Log(value = "通知公告", LogType = LogType.UPDATE)
     @PutMapping
     public Result edit(@Validated @RequestBody SysNotice notice) {
-        notice.setUpdateBy(getUsername());
+        notice.setUpdateBy(SecurityUtil.getUsername());
         return toResult(noticeService.updateNotice(notice));
     }
 

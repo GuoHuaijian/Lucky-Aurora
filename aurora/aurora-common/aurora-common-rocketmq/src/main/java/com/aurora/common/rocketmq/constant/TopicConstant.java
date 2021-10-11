@@ -13,7 +13,7 @@ public class TopicConstant {
     /**
      * 日志TOPIC
      */
-    public static final String LOG_TOPIC_NAME = "sysLog";
+    public static final String LOG_TOPIC_NAME = "Log";
 
     /**
      * 文章TOPIC

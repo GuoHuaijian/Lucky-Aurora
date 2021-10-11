@@ -5,6 +5,7 @@ import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
+import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.constant.SystemConstants;
 import com.aurora.system.domain.SysDictType;
 import com.aurora.system.service.SysDictTypeService;
@@ -65,7 +66,7 @@ public class SysDictTypeController extends AbstractController {
         if (SystemConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict))) {
             return Result.error("新增字典'" + dict.getDictName() + "'失败，字典类型已存在");
         }
-        dict.setCreateBy(getUsername());
+        dict.setCreateBy(SecurityUtil.getUsername());
         return toResult(dictTypeService.insertDictType(dict));
     }
 
@@ -79,7 +80,7 @@ public class SysDictTypeController extends AbstractController {
         if (SystemConstants.NOT_UNIQUE.equals(dictTypeService.checkDictTypeUnique(dict))) {
             return Result.error("修改字典'" + dict.getDictName() + "'失败，字典类型已存在");
         }
-        dict.setUpdateBy(getUsername());
+        dict.setUpdateBy(SecurityUtil.getUsername());
         return toResult(dictTypeService.updateDictType(dict));
     }
 

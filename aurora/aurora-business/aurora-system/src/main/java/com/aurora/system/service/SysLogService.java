@@ -49,7 +49,7 @@ public interface SysLogService extends IService<SysLog> {
     /**
      * 查询操作日志详细
      *
-     * @param operId 操作ID
+     * @param id 操作ID
      * @return 操作日志对象
      */
     SysLog selectLogById(Long id);

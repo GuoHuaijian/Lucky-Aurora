@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aurora.system.mapper.SysVisitLogMapper">
+    <resultMap id="BaseResultMap" type="com.aurora.system.domain.SysVisitLog">
+        <!--@mbg.generated-->
+        <!--@Table sys_visit_log-->
+        <id column="visit_id" jdbcType="INTEGER" property="visitId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="blog_id" jdbcType="VARCHAR" property="blogId"/>
+        <result column="ip" jdbcType="VARCHAR" property="ip"/>
+        <result column="location" jdbcType="VARCHAR" property="location"/>
+        <result column="browser" jdbcType="VARCHAR" property="browser"/>
+        <result column="os" jdbcType="VARCHAR" property="os"/>
+        <result column="entry_url" jdbcType="VARCHAR" property="entryUrl"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="spider" jdbcType="VARCHAR" property="spider"/>
+        <result column="error_msg" jdbcType="VARCHAR" property="errorMsg"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="visit_time" jdbcType="TIMESTAMP" property="visitTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        visit_id, title,blog_id, ip, `location`, browser, os, entry_url, url, spider, error_msg,
+        `status`, visit_time
+    </sql>
+
+    <update id="cleanVisitLog">
+        truncate table sys_visit_log
+    </update>
+</mapper>

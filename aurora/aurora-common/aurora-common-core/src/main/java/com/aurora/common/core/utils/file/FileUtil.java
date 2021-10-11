@@ -1,9 +1,10 @@
-package com.aurora.common.core.utils;
+package com.aurora.common.core.utils.file;
 
 import cn.hutool.core.util.ArrayUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.util.IOUtils;
-import org.apache.commons.lang3.time.DateUtils;
+import com.aurora.common.core.utils.DateUtil;
+import com.aurora.common.core.utils.IdUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -232,8 +233,7 @@ public class FileUtil {
      * @throws IOException IO异常
      */
     public static String writeImportBytes(byte[] data) throws IOException {
-        // TODO 文件路径待完善
-        return writeBytes(data, "/import");
+        return writeBytes(data, FilePath.getImportPath());
     }
 
     /**
@@ -250,13 +250,13 @@ public class FileUtil {
         try {
             String extension = getFileExtendName(data);
             pathName = DateUtil.datePath() + "/" + IdUtil.fastUUID() + "." + extension;
-            File file = FileUploadUtils.getAbsoluteFile(uploadDir, pathName);
+            File file = FileUploadUtil.getAbsoluteFile(uploadDir, pathName);
             fos = new FileOutputStream(file);
             fos.write(data);
         } finally {
             IOUtils.close(fos);
         }
-        return FileUploadUtils.getPathFileName(uploadDir, pathName);
+        return FileUploadUtil.getPathFileName(uploadDir, pathName);
     }
 
 

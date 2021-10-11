@@ -1,4 +1,4 @@
-package com.aurora.common.core.utils;
+package com.aurora.common.core.utils.file;
 
 import cn.hutool.core.util.StrUtil;
 

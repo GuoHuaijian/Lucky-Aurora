@@ -2,6 +2,7 @@ package com.aurora.system.service.impl;
 
 import cn.hutool.core.bean.BeanUtil;
 import com.aurora.common.core.utils.DictUtil;
+import com.aurora.common.core.utils.domain.DictData;
 import com.aurora.system.domain.SysDictData;
 import com.aurora.system.mapper.SysDictDataMapper;
 import com.aurora.system.service.SysDictDataService;
@@ -116,11 +117,11 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
      * @param DictType
      * @return
      */
-    public List<com.aurora.common.core.utils.domain.SysDictData> selectDictDataByType(String DictType) {
-        List<SysDictData> dictDatas =
+    public List<DictData> selectDictDataByType(String DictType) {
+        List<SysDictData> sysDictData =
                 list(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType, DictType));
-        List<com.aurora.common.core.utils.domain.SysDictData> dictData = Lists.newArrayList();
-        BeanUtil.copyProperties(dictDatas, dictData);
+        List<DictData> dictData = Lists.newArrayList();
+        BeanUtil.copyProperties(sysDictData, dictData);
         return dictData;
     }
 }

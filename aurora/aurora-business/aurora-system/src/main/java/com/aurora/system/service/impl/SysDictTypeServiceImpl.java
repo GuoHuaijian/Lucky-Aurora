@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.aurora.common.core.exception.ServiceException;
 import com.aurora.common.core.utils.DictUtil;
 import com.aurora.common.core.utils.StringUtil;
+import com.aurora.common.core.utils.domain.DictData;
 import com.aurora.system.constant.SystemConstants;
 import com.aurora.system.domain.SysDictData;
 import com.aurora.system.domain.SysDictType;
@@ -76,15 +77,16 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
      */
     @Override
     public List<SysDictData> selectDictDataByType(String dictType) {
-        List<com.aurora.common.core.utils.domain.SysDictData> dictDatas = DictUtil.getDictCache(dictType);
-        if (StringUtil.isNotEmpty(dictDatas)) {
-            return dictDataConversion(dictDatas);
+        List<DictData> dictData = DictUtil.getDictCache(dictType);
+        if (StringUtil.isNotEmpty(dictData)) {
+            return castSysDictData(dictData);
         }
 
-        List<SysDictData> dictData = dictDataMapper.selectList(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType, dictType));
-        if (StringUtil.isNotEmpty(dictData)) {
-            DictUtil.setDictCache(dictType, dictDataConver(dictData));
-            return dictData;
+        List<SysDictData> sysDictData =
+                dictDataMapper.selectList(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType, dictType));
+        if (StringUtil.isNotEmpty(sysDictData)) {
+            DictUtil.setDictCache(dictType, castDictData(sysDictData));
+            return sysDictData;
         }
         return null;
     }
@@ -138,10 +140,10 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
     public void loadingDictCache() {
         List<SysDictType> dictTypeList = list();
         for (SysDictType dictType : dictTypeList) {
-            List<SysDictData> dictDatas =
+            List<SysDictData> sysDictData =
                     dictDataService.list(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType,
                             dictType.getDictType()));
-            DictUtil.setDictCache(dictType.getDictType(), dictDataConver(dictDatas));
+            DictUtil.setDictCache(dictType.getDictType(), castDictData(sysDictData));
         }
     }
 
@@ -190,9 +192,9 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
         dictDataMapper.updateDictDataType(oldDict.getDictType(), dict.getDictType());
         boolean flag = updateById(dict);
         if (flag) {
-            List<SysDictData> dictDatas =
+            List<SysDictData> sysDictData =
                     dictDataService.list(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType, dict.getDictType()));
-            DictUtil.setDictCache(dict.getDictType(), dictDataConver(dictDatas));
+            DictUtil.setDictCache(dict.getDictType(), castDictData(sysDictData));
         }
         return flag;
     }
@@ -213,16 +215,16 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
         return SystemConstants.UNIQUE;
     }
 
-    public List<SysDictData> dictDataConversion(List<com.aurora.common.core.utils.domain.SysDictData> dictData) {
-        List<SysDictData> dictDatas = Lists.newArrayList();
-        BeanUtil.copyProperties(dictData, dictDatas);
-        return dictDatas;
+    public List<SysDictData> castSysDictData(List<DictData> dictData) {
+        List<SysDictData> sysDictData = Lists.newArrayList();
+        BeanUtil.copyProperties(dictData, sysDictData);
+        return sysDictData;
     }
 
-    public List<com.aurora.common.core.utils.domain.SysDictData> dictDataConver(List<SysDictData> dictData) {
-        List<com.aurora.common.core.utils.domain.SysDictData> dictDatas = Lists.newArrayList();
-        BeanUtil.copyProperties(dictDatas, dictData);
-        return dictDatas;
+    public List<DictData> castDictData(List<SysDictData> sysDictData) {
+        List<DictData> dictData = Lists.newArrayList();
+        BeanUtil.copyProperties(sysDictData, dictData);
+        return dictData;
     }
 
 }

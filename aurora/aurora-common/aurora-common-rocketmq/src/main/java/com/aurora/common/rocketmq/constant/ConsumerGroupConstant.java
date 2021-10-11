@@ -13,7 +13,7 @@ public class ConsumerGroupConstant {
     /**
      * 日志GROUP_ID
      */
-    public static final String LOG_GROUP_ID = "sysLog_group_id";
+    public static final String LOG_GROUP_ID = "Log_group_id";
 
     /**
      * 博文GROUP_ID

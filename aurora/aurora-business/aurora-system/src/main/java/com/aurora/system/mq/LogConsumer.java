@@ -2,10 +2,13 @@ package com.aurora.system.mq;
 
 import com.alibaba.fastjson.JSON;
 import com.aurora.common.rocketmq.constant.ConsumerGroupConstant;
+import com.aurora.common.rocketmq.constant.TagConstant;
 import com.aurora.common.rocketmq.constant.TopicConstant;
 import com.aurora.common.rocketmq.consumer.RocketMqConsumer;
 import com.aurora.system.domain.SysLog;
+import com.aurora.system.domain.SysVisitLog;
 import com.aurora.system.service.SysLogService;
+import com.aurora.system.service.SysVisitLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
@@ -34,6 +37,9 @@ public class LogConsumer {
     private SysLogService logService;
 
     @Resource
+    private SysVisitLogService visitLogService;
+
+    @Resource
     private RocketMqConsumer consumer;
 
     @PostConstruct
@@ -51,7 +57,11 @@ public class LogConsumer {
                     String topic = msg.getTopic();
                     String tags = msg.getTags();
                     String body = new String(msg.getBody(), "utf-8");
-                    logService.saveLog(JSON.parseObject(body, SysLog.class));
+                    if (TagConstant.OPERATE_LOG.equals(tags)) {
+                        logService.saveLog(JSON.parseObject(body, SysLog.class));
+                    } else if (TagConstant.VISIT_LOG.equals(tags)) {
+                        visitLogService.saveVisitLog(JSON.parseObject(body, SysVisitLog.class));
+                    }
                     log.info("MQ消息topic={}, tags={}, 消息内容={}", topic, tags, body);
                 } catch (Exception e) {
                     log.error("获取MQ消息内容异常{}", e);

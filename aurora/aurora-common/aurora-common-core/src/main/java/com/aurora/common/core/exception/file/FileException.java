@@ -1,5 +1,7 @@
 package com.aurora.common.core.exception.file;
 
+import com.aurora.common.core.exception.BaseException;
+
 /**
  * describe: 文件信息异常类
  *

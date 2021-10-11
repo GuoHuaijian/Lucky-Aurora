@@ -1,4 +1,4 @@
-package com.aurora.common.core.utils;
+package com.aurora.common.core.utils.file;
 
 import com.aurora.common.core.constant.Constants;
 import org.apache.commons.lang3.StringUtils;
@@ -59,7 +59,7 @@ public class ImageUtil {
         InputStream in = null;
         ByteArrayOutputStream baos = null;
         try {
-            if (url.startsWith("http")) {
+            if (url.startsWith(Constants.HTTP)) {
                 // 网络地址
                 URL urlObj = new URL(url);
                 URLConnection urlConnection = urlObj.openConnection();
@@ -69,8 +69,7 @@ public class ImageUtil {
                 in = urlConnection.getInputStream();
             } else {
                 // 本机地址
-                // TODO 文件地址待完善
-                String localPath = "/upload";
+                String localPath = FilePath.getProfile();
                 String downloadPath = localPath + StringUtils.substringAfter(url, Constants.RESOURCE_PREFIX);
                 in = new FileInputStream(downloadPath);
             }

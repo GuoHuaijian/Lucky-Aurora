@@ -6,6 +6,7 @@ import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
+import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.domain.SysDictData;
 import com.aurora.system.service.SysDictDataService;
 import com.aurora.system.service.SysDictTypeService;
@@ -80,7 +81,7 @@ public class SysDictDataController extends AbstractController {
     @Log(value = "字典数据", LogType = LogType.INSERT)
     @PostMapping
     public Result add(@Validated @RequestBody SysDictData dict) {
-        dict.setCreateBy(getUsername());
+        dict.setCreateBy(SecurityUtil.getUsername());
         return toResult(dictDataService.insertDictData(dict));
     }
 
@@ -91,7 +92,7 @@ public class SysDictDataController extends AbstractController {
     @Log(value = "字典数据", LogType = LogType.UPDATE)
     @PutMapping
     public Result edit(@Validated @RequestBody SysDictData dict) {
-        dict.setUpdateBy(getUsername());
+        dict.setUpdateBy(SecurityUtil.getUsername());
         return toResult(dictDataService.updateDictData(dict));
     }
 

@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * @Version 1.0.0
  */
 @RestController
-@RequestMapping("system/user")
+@RequestMapping("/system/user")
 public class SysUserController extends AbstractController {
 
     @Autowired
@@ -66,7 +66,7 @@ public class SysUserController extends AbstractController {
     public Result importData(MultipartFile file, boolean updateSupport) throws Exception {
         ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
         List<SysUser> userList = util.importExcel(file.getInputStream());
-        String operName = getUsername();
+        String operName = SecurityUtil.getUsername();
         String message = userService.importUser(userList, updateSupport, operName);
         return Result.success(message);
     }
@@ -139,7 +139,7 @@ public class SysUserController extends AbstractController {
     @Log(value = "用户管理", LogType = LogType.DELETE)
     @DeleteMapping("/{userIds}")
     public Result remove(@PathVariable Long[] userIds) {
-        if (ArrayUtils.contains(userIds, getUserId())) {
+        if (ArrayUtils.contains(userIds, SecurityUtil.getUsername())) {
             return Result.error("当前用户不能删除");
         }
         return toResult(userService.deleteUserByIds(userIds));

@@ -1,7 +1,7 @@
 package com.aurora.common.core.utils;
 
 import com.aurora.common.core.constant.Constants;
-import com.aurora.common.core.utils.domain.SysDictData;
+import com.aurora.common.core.utils.domain.DictData;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Collection;
@@ -27,7 +27,7 @@ public class DictUtil {
      * @param key       参数键
      * @param dictDatas 字典数据列表
      */
-    public static void setDictCache(String key, List<SysDictData> dictDatas) {
+    public static void setDictCache(String key, List<DictData> dictDatas) {
         SpringUtil.getBean(RedisCache.class).setCacheObject(getCacheKey(key), dictDatas);
     }
 
@@ -37,11 +37,11 @@ public class DictUtil {
      * @param key 参数键
      * @return dictDatas 字典数据列表
      */
-    public static List<SysDictData> getDictCache(String key) {
+    public static List<DictData> getDictCache(String key) {
         Object cacheObj = SpringUtil.getBean(RedisCache.class).getCacheObject(getCacheKey(key));
         if (StringUtil.isNotNull(cacheObj)) {
-            List<SysDictData> dictDatas = StringUtil.cast(cacheObj);
-            return dictDatas;
+            List<DictData> dictData = StringUtil.cast(cacheObj);
+            return dictData;
         }
         return null;
     }
@@ -78,10 +78,10 @@ public class DictUtil {
      */
     public static String getDictLabel(String dictType, String dictValue, String separator) {
         StringBuilder propertyString = new StringBuilder();
-        List<SysDictData> datas = getDictCache(dictType);
+        List<DictData> data = getDictCache(dictType);
 
-        if (StringUtils.containsAny(separator, dictValue) && StringUtil.isNotEmpty(datas)) {
-            for (SysDictData dict : datas) {
+        if (StringUtils.containsAny(separator, dictValue) && StringUtil.isNotEmpty(data)) {
+            for (DictData dict : data) {
                 for (String value : dictValue.split(separator)) {
                     if (value.equals(dict.getDictValue())) {
                         propertyString.append(dict.getDictLabel() + separator);
@@ -90,7 +90,7 @@ public class DictUtil {
                 }
             }
         } else {
-            for (SysDictData dict : datas) {
+            for (DictData dict : data) {
                 if (dictValue.equals(dict.getDictValue())) {
                     return dict.getDictLabel();
                 }
@@ -109,10 +109,10 @@ public class DictUtil {
      */
     public static String getDictValue(String dictType, String dictLabel, String separator) {
         StringBuilder propertyString = new StringBuilder();
-        List<SysDictData> datas = getDictCache(dictType);
+        List<DictData> data = getDictCache(dictType);
 
-        if (StringUtils.containsAny(separator, dictLabel) && StringUtil.isNotEmpty(datas)) {
-            for (SysDictData dict : datas) {
+        if (StringUtils.containsAny(separator, dictLabel) && StringUtil.isNotEmpty(data)) {
+            for (DictData dict : data) {
                 for (String label : dictLabel.split(separator)) {
                     if (label.equals(dict.getDictLabel())) {
                         propertyString.append(dict.getDictValue() + separator);
@@ -121,7 +121,7 @@ public class DictUtil {
                 }
             }
         } else {
-            for (SysDictData dict : datas) {
+            for (DictData dict : data) {
                 if (dictLabel.equals(dict.getDictLabel())) {
                     return dict.getDictValue();
                 }

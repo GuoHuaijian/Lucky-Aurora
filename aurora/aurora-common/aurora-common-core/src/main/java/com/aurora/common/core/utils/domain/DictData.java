@@ -13,7 +13,7 @@ import java.util.Date;
  * @Version 1.0.0
  */
 @Data
-public class SysDictData {
+public class DictData {
 
     private static final long serialVersionUID = 1L;
 

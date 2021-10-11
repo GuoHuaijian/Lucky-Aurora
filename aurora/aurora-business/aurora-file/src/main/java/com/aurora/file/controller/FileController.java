@@ -1,6 +1,6 @@
 package com.aurora.file.controller;
 
-import com.aurora.common.core.utils.FileUtil;
+import com.aurora.common.core.utils.file.FileUtil;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.file.domain.File;
 import com.aurora.file.service.FileService;

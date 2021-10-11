@@ -1,11 +1,10 @@
 package com.aurora.common.log.service;
 
 import com.aurora.rpc.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysVisitLog;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.remoting.exception.RemotingException;
-
-import java.io.UnsupportedEncodingException;
 
 /**
  * describe: 异步调用日志服务
@@ -18,9 +17,25 @@ import java.io.UnsupportedEncodingException;
 public interface AsyncLogService {
 
     /**
-     * 保存系统日志记录
+     * 保存操作日志记录
      *
      * @param sysLog
+     * @throws MQBrokerException
+     * @throws RemotingException
+     * @throws InterruptedException
+     * @throws MQClientException
      */
-    void saveSysLog(SysLog sysLog) throws UnsupportedEncodingException, MQBrokerException, RemotingException, InterruptedException, MQClientException;
+    void saveLog(SysLog sysLog) throws MQBrokerException, RemotingException, InterruptedException, MQClientException;
+
+    /**
+     * 保存访问日志记录
+     *
+     * @param visitLog
+     * @throws MQBrokerException
+     * @throws RemotingException
+     * @throws InterruptedException
+     * @throws MQClientException
+     */
+    void saveLog(SysVisitLog visitLog) throws MQBrokerException, RemotingException,
+            InterruptedException, MQClientException;
 }

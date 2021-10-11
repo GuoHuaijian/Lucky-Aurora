@@ -3,6 +3,7 @@ package com.aurora.common.log.service.impl;
 import com.aurora.common.log.service.AsyncLogService;
 import com.aurora.rpc.system.RemoteLogService;
 import com.aurora.rpc.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysVisitLog;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -22,11 +23,20 @@ public class CommonAsyncLogServiceImpl implements AsyncLogService {
     private RemoteLogService remoteLogService;
 
     /**
-     * 保存系统日志记录
+     * 保存操作日志记录
      */
     @Async("asyncExecutor")
     @Override
-    public void saveSysLog(SysLog sysLog) {
+    public void saveLog(SysLog sysLog) {
         remoteLogService.saveLog(sysLog);
+    }
+
+    /**
+     * 保存访问日志记录
+     */
+    @Async("asyncExecutor")
+    @Override
+    public void saveLog(SysVisitLog visitLog) {
+        remoteLogService.saveLog(visitLog);
     }
 }

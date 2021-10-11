@@ -5,6 +5,7 @@ import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
+import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.constant.MenuConstants;
 import com.aurora.system.constant.SystemConstants;
 import com.aurora.system.domain.SysMenu;
@@ -37,7 +38,7 @@ public class SysMenuController extends AbstractController {
     @PreAuthorize("@hasAuthority('system:menu:list')")
     @GetMapping("/list")
     public Result list(SysMenu menu) {
-        List<SysMenu> menus = menuService.selectMenuList(menu, getUserId());
+        List<SysMenu> menus = menuService.selectMenuList(menu, SecurityUtil.getUserId());
         return Result.success(menus);
     }
 
@@ -55,7 +56,7 @@ public class SysMenuController extends AbstractController {
      */
     @GetMapping("/treeSelect")
     public Result treeselect(SysMenu menu) {
-        List<SysMenu> menus = menuService.selectMenuList(menu, getUserId());
+        List<SysMenu> menus = menuService.selectMenuList(menu, SecurityUtil.getUserId());
         return Result.success(menuService.buildMenuTreeSelect(menus));
     }
 
@@ -64,7 +65,7 @@ public class SysMenuController extends AbstractController {
      */
     @GetMapping(value = "/roleMenuTreeSelect/{roleId}")
     public Result roleMenuTreeselect(@PathVariable("roleId") Long roleId) {
-        List<SysMenu> menus = menuService.selectMenuList(getUserId());
+        List<SysMenu> menus = menuService.selectMenuList(SecurityUtil.getUserId());
         Result result = Result.success();
         result.put("checkedKeys", menuService.selectMenuListByRoleId(roleId));
         result.put("menus", menuService.buildMenuTreeSelect(menus));

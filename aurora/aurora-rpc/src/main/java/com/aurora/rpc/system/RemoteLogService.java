@@ -1,6 +1,7 @@
 package com.aurora.rpc.system;
 
 import com.aurora.rpc.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysVisitLog;
 
 /**
  * describe:
@@ -13,9 +14,16 @@ import com.aurora.rpc.system.domain.SysLog;
 public interface RemoteLogService {
 
     /**
-     * 保存日志
+     * 保存操作日志
      *
      * @param log
      */
     void saveLog(SysLog log);
+
+    /**
+     * 保存访问日志
+     *
+     * @param visitLog
+     */
+    void saveLog(SysVisitLog visitLog);
 }

@@ -111,7 +111,7 @@ public class LogAspect {
             // 处理设置注解上的参数
             getControllerMethodDescription(joinPoint, controllerLog, sysLog);
             // 保存数据库
-            asyncLogService.saveSysLog(sysLog);
+            asyncLogService.saveLog(sysLog);
         } catch (Exception exp) {
             // 记录本地异常日志
             log.error("==前置通知异常==");
@@ -125,9 +125,8 @@ public class LogAspect {
      *
      * @param log    日志
      * @param sysLog 操作日志
-     * @throws Exception
      */
-    public void getControllerMethodDescription(JoinPoint joinPoint, Log log, SysLog sysLog) throws Exception {
+    public void getControllerMethodDescription(JoinPoint joinPoint, Log log, SysLog sysLog) {
         // 设置action动作
         sysLog.setLogType(log.LogType().getCode());
         // 设置标题

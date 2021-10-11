@@ -1,14 +1,10 @@
 package com.aurora.system.service.impl;
 
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import java.util.List;
-
-import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.aurora.system.domain.SysUserRole;
 import com.aurora.system.mapper.SysUserRoleMapper;
 import com.aurora.system.service.SysUserRoleService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import org.springframework.stereotype.Service;
 
 /**
  * describe:

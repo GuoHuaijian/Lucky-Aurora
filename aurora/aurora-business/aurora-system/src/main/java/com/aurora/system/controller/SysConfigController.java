@@ -6,6 +6,7 @@ import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
+import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.constant.SystemConstants;
 import com.aurora.system.domain.SysConfig;
 import com.aurora.system.service.SysConfigService;
@@ -85,7 +86,7 @@ public class SysConfigController extends AbstractController {
         if (SystemConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config))) {
             return Result.error("新增参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
-        config.setCreateBy(getUsername());
+        config.setCreateBy(SecurityUtil.getUsername());
         return toResult(configService.insertConfig(config));
     }
 
@@ -99,7 +100,7 @@ public class SysConfigController extends AbstractController {
         if (SystemConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config))) {
             return Result.error("修改参数'" + config.getConfigName() + "'失败，参数键名已存在");
         }
-        config.setUpdateBy(getUsername());
+        config.setUpdateBy(SecurityUtil.getUsername());
         return toResult(configService.updateConfig(config));
     }
 

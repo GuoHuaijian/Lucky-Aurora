@@ -6,7 +6,6 @@ import com.aurora.common.core.web.domain.PageDomain;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.core.web.page.PageDate;
 import com.aurora.common.core.web.page.PageSupport;
-import com.aurora.common.security.utils.SecurityUtil;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.util.StringUtils;
@@ -79,23 +78,5 @@ public abstract class AbstractController {
             return Result.success();
         }
         return Result.error();
-    }
-
-    /**
-     * 获取当前用户账号
-     *
-     * @return
-     */
-    protected String getUsername() {
-        return SecurityUtil.getUsername();
-    }
-
-    /**
-     * 获取当前用户id
-     *
-     * @return
-     */
-    protected Long getUserId() {
-        return SecurityUtil.getUserId();
     }
 }

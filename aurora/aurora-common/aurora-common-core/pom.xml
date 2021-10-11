@@ -20,14 +20,6 @@
 
     <dependencies>
 
-        <!-- Aurora -->
-        <dependency>
-            <groupId>com.aurora</groupId>
-            <artifactId>aurora-common-security</artifactId>
-            <version>${project.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
         <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -90,6 +82,12 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>1.4</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

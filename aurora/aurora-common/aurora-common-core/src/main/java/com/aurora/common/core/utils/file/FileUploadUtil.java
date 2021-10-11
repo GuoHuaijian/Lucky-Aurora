@@ -1,10 +1,13 @@
-package com.aurora.common.core.utils;
+package com.aurora.common.core.utils.file;
 
 import com.aurora.common.core.constant.Constants;
+import com.aurora.common.core.exception.file.FileNameLengthLimitExceededException;
+import com.aurora.common.core.exception.file.FileSizeLimitExceededException;
+import com.aurora.common.core.exception.file.InvalidExtensionException;
+import com.aurora.common.core.utils.DateUtil;
+import com.aurora.common.core.utils.IdUtil;
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.time.DateUtils;
-import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
-import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -32,8 +35,7 @@ public class FileUploadUtil {
     /**
      * 默认上传的地址
      */
-    // TODO 文件路径待完善
-    private static String defaultBaseDir = "/upload";
+    private static String defaultBaseDir = FilePath.getProfile();
 
     public static void setDefaultBaseDir(String defaultBaseDir) {
         FileUploadUtil.defaultBaseDir = defaultBaseDir;
@@ -89,9 +91,9 @@ public class FileUploadUtil {
     public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
             throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
             InvalidExtensionException {
-        int fileNamelength = file.getOriginalFilename().length();
-        if (fileNamelength > FileUploadUtil.DEFAULT_FILE_NAME_LENGTH) {
-            throw new FileNameLengthLimitExceededException(FileUploadUtils.DEFAULT_FILE_NAME_LENGTH);
+        int fileNameLength = file.getOriginalFilename().length();
+        if (fileNameLength > FileUploadUtil.DEFAULT_FILE_NAME_LENGTH) {
+            throw new FileNameLengthLimitExceededException(FileUploadUtil.DEFAULT_FILE_NAME_LENGTH);
         }
 
         assertAllowed(file, allowedExtension);
@@ -108,13 +110,13 @@ public class FileUploadUtil {
      * 编码文件名
      */
     public static final String extractFilename(MultipartFile file) {
-        String fileName = file.getOriginalFilename();
+        String fileName;
         String extension = getExtension(file);
-        fileName = DateUtils.datePath() + "/" + IdUtils.fastUUID() + "." + extension;
+        fileName = DateUtil.datePath() + "/" + IdUtil.fastUUID() + "." + extension;
         return fileName;
     }
 
-    public static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException {
+    public static final File getAbsoluteFile(String uploadDir, String fileName) {
         File desc = new File(uploadDir + File.separator + fileName);
 
         if (!desc.exists()) {
@@ -125,8 +127,8 @@ public class FileUploadUtil {
         return desc;
     }
 
-    public static final String getPathFileName(String uploadDir, String fileName) throws IOException {
-        int dirLastIndex = RuoYiConfig.getProfile().length() + 1;
+    public static final String getPathFileName(String uploadDir, String fileName) {
+        int dirLastIndex = "RuoYiConfig.getProfile()".length() + 1;
         String currentDir = StringUtils.substring(uploadDir, dirLastIndex);
         String pathFileName = Constants.RESOURCE_PREFIX + "/" + currentDir + "/" + fileName;
         return pathFileName;
@@ -150,16 +152,16 @@ public class FileUploadUtil {
         String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension)) {
-            if (allowedExtension == MimeTypeUtils.IMAGE_EXTENSION) {
+            if (allowedExtension == MimeTypeUtil.IMAGE_EXTENSION) {
                 throw new InvalidExtensionException.InvalidImageExtensionException(allowedExtension, extension,
                         fileName);
-            } else if (allowedExtension == MimeTypeUtils.FLASH_EXTENSION) {
+            } else if (allowedExtension == MimeTypeUtil.FLASH_EXTENSION) {
                 throw new InvalidExtensionException.InvalidFlashExtensionException(allowedExtension, extension,
                         fileName);
-            } else if (allowedExtension == MimeTypeUtils.MEDIA_EXTENSION) {
+            } else if (allowedExtension == MimeTypeUtil.MEDIA_EXTENSION) {
                 throw new InvalidExtensionException.InvalidMediaExtensionException(allowedExtension, extension,
                         fileName);
-            } else if (allowedExtension == MimeTypeUtils.VIDEO_EXTENSION) {
+            } else if (allowedExtension == MimeTypeUtil.VIDEO_EXTENSION) {
                 throw new InvalidExtensionException.InvalidVideoExtensionException(allowedExtension, extension,
                         fileName);
             } else {
@@ -194,8 +196,9 @@ public class FileUploadUtil {
     public static final String getExtension(MultipartFile file) {
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         if (StringUtils.isEmpty(extension)) {
-            extension = MimeTypeUtils.getExtension(file.getContentType());
+            extension = MimeTypeUtil.getExtension(file.getContentType());
         }
         return extension;
     }
+
 }

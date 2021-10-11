@@ -11,7 +11,17 @@ package com.aurora.common.rocketmq.constant;
 public class TagConstant {
 
     /**
-     * 日志tag
+     * 文章tag
      */
     public static final String ARTICLE_ADD = "article_add";
+
+    /**
+     * 访问日志tag
+     */
+    public static final String VISIT_LOG = "visit_log";
+
+    /**
+     * 操作日志tag
+     */
+    public static final String OPERATE_LOG = "operate_log";
 }

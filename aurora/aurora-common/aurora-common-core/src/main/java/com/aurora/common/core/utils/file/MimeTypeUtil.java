@@ -1,4 +1,4 @@
-package com.aurora.common.core.utils;
+package com.aurora.common.core.utils.file;
 
 /**
  * describe: 媒体类型工具类
