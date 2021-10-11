@@ -12,16 +12,12 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * describe:
+ * describe: 系统访问记录
  *
  * @Author Guo Huaijian
  * @Date 2021/10/10
  * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0.0
- */
-
-/**
- * 系统访问记录
  */
 @Data
 @AllArgsConstructor

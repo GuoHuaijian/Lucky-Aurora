@@ -1,6 +1,6 @@
 package com.aurora.system.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
+import com.aurora.common.core.utils.BeanUtil;
 import com.aurora.common.core.utils.DictUtil;
 import com.aurora.common.core.utils.domain.DictData;
 import com.aurora.system.domain.SysDictData;
@@ -9,7 +9,6 @@ import com.aurora.system.service.SysDictDataService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -120,8 +119,7 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
     public List<DictData> selectDictDataByType(String DictType) {
         List<SysDictData> sysDictData =
                 list(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType, DictType));
-        List<DictData> dictData = Lists.newArrayList();
-        BeanUtil.copyProperties(sysDictData, dictData);
+        List<DictData> dictData = BeanUtil.copyListProperties(sysDictData, DictData::new);
         return dictData;
     }
 }

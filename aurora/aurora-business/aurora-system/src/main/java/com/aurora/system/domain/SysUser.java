@@ -25,7 +25,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "aurora_blog.sys_user")
+@TableName(value = "sys_user")
 public class SysUser implements Serializable {
     /**
      * 用户id
@@ -120,16 +120,19 @@ public class SysUser implements Serializable {
     /**
      * 角色对象
      */
+    @TableField(exist = false)
     private List<SysRole> roles;
 
     /**
      * 角色组
      */
+    @TableField(exist = false)
     private Long[] roleIds;
 
     /**
      * 角色ID
      */
+    @TableField(exist = false)
     private Long roleId;
 
     private static final long serialVersionUID = 1L;

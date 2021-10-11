@@ -1,7 +1,7 @@
 package com.aurora.system.service.impl;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.aurora.common.core.exception.ServiceException;
+import com.aurora.common.core.utils.BeanUtil;
 import com.aurora.common.core.utils.DictUtil;
 import com.aurora.common.core.utils.StringUtil;
 import com.aurora.common.core.utils.domain.DictData;
@@ -15,7 +15,6 @@ import com.aurora.system.service.SysDictTypeService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -216,14 +215,12 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
     }
 
     public List<SysDictData> castSysDictData(List<DictData> dictData) {
-        List<SysDictData> sysDictData = Lists.newArrayList();
-        BeanUtil.copyProperties(dictData, sysDictData);
+        List<SysDictData> sysDictData = BeanUtil.copyListProperties(dictData, SysDictData::new);
         return sysDictData;
     }
 
     public List<DictData> castDictData(List<SysDictData> sysDictData) {
-        List<DictData> dictData = Lists.newArrayList();
-        BeanUtil.copyProperties(sysDictData, dictData);
+        List<DictData> dictData = BeanUtil.copyListProperties(sysDictData, DictData::new);
         return dictData;
     }
 

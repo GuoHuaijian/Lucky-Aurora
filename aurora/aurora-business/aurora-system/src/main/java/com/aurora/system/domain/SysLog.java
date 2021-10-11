@@ -24,7 +24,7 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "aurora_blog.sys_log")
+@TableName(value = "sys_log")
 public class SysLog implements Serializable {
     /**
      * 日志主键

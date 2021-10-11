@@ -35,7 +35,7 @@ public class SysMenuController extends AbstractController {
     /**
      * 获取菜单列表
      */
-    @PreAuthorize("@hasAuthority('system:menu:list')")
+    @PreAuthorize("hasAuthority('system:menu:list')")
     @GetMapping("/list")
     public Result list(SysMenu menu) {
         List<SysMenu> menus = menuService.selectMenuList(menu, SecurityUtil.getUserId());
@@ -45,7 +45,7 @@ public class SysMenuController extends AbstractController {
     /**
      * 根据菜单编号获取详细信息
      */
-    @PreAuthorize("@hasAuthority('system:menu:query')")
+    @PreAuthorize("hasAuthority('system:menu:query')")
     @GetMapping(value = "/{menuId}")
     public Result getInfo(@PathVariable Long menuId) {
         return Result.success(menuService.selectMenuById(menuId));
@@ -75,7 +75,7 @@ public class SysMenuController extends AbstractController {
     /**
      * 新增菜单
      */
-    @PreAuthorize("@hasAuthority('system:menu:add')")
+    @PreAuthorize("hasAuthority('system:menu:add')")
     @Log(value = "菜单管理", LogType = LogType.INSERT)
     @PostMapping
     public Result add(@Validated @RequestBody SysMenu menu) {
@@ -90,7 +90,7 @@ public class SysMenuController extends AbstractController {
     /**
      * 修改菜单
      */
-    @PreAuthorize("@hasAuthority('system:menu:edit')")
+    @PreAuthorize("hasAuthority('system:menu:edit')")
     @Log(value = "菜单管理", LogType = LogType.UPDATE)
     @PutMapping
     public Result edit(@Validated @RequestBody SysMenu menu) {
@@ -107,7 +107,7 @@ public class SysMenuController extends AbstractController {
     /**
      * 删除菜单
      */
-    @PreAuthorize("@hasAuthority('system:menu:remove')")
+    @PreAuthorize("hasAuthority('system:menu:remove')")
     @Log(value = "菜单管理", LogType = LogType.DELETE)
     @DeleteMapping("/{menuId}")
     public Result remove(@PathVariable("menuId") Long menuId) {

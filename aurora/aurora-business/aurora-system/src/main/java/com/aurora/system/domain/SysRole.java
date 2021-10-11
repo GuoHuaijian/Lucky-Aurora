@@ -81,11 +81,13 @@ public class SysRole implements Serializable {
     /**
      * 用户是否存在此角色标识 默认不存在
      */
+    @TableField(exist = false)
     private boolean flag = false;
 
     /**
      * 菜单组
      */
+    @TableField(exist = false)
     private Long[] menuIds;
 
     private static final long serialVersionUID = 1L;

@@ -43,7 +43,7 @@ public class SysUserController extends AbstractController {
     /**
      * 获取用户列表
      */
-    @PreAuthorize("@hasAuthority('system:user:list')")
+    @PreAuthorize("hasAuthority('system:user:list')")
     @GetMapping("/list")
     public Result list(SysUser user) {
         startPage();
@@ -52,7 +52,7 @@ public class SysUserController extends AbstractController {
     }
 
     @Log(value = "用户管理", LogType = LogType.EXPORT)
-    @PreAuthorize("@hasAuthority('system:user:export')")
+    @PreAuthorize("hasAuthority('system:user:export')")
     @GetMapping("/export")
     public Result export(SysUser user) {
         List<SysUser> list = userService.selectUserList(user);
@@ -61,7 +61,7 @@ public class SysUserController extends AbstractController {
     }
 
     @Log(value = "用户管理", LogType = LogType.IMPORT)
-    @PreAuthorize("@hasAuthority('system:user:import')")
+    @PreAuthorize("hasAuthority('system:user:import')")
     @PostMapping("/importData")
     public Result importData(MultipartFile file, boolean updateSupport) throws Exception {
         ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
@@ -80,7 +80,7 @@ public class SysUserController extends AbstractController {
     /**
      * 根据用户编号获取详细信息
      */
-    @PreAuthorize("@hasAuthority('system:user:query')")
+    @PreAuthorize("hasAuthority('system:user:query')")
     @GetMapping(value = {"/", "/{userId}"})
     public Result getInfo(@PathVariable(value = "userId", required = false) Long userId) {
         userService.checkUserDataScope(userId);
@@ -97,7 +97,7 @@ public class SysUserController extends AbstractController {
     /**
      * 新增用户
      */
-    @PreAuthorize("@hasAuthority('system:user:add')")
+    @PreAuthorize("hasAuthority('system:user:add')")
     @Log(value = "用户管理", LogType = LogType.INSERT)
     @PostMapping
     public Result add(@Validated @RequestBody SysUser user) {
@@ -117,7 +117,7 @@ public class SysUserController extends AbstractController {
     /**
      * 修改用户
      */
-    @PreAuthorize("@hasAuthority('system:user:edit')")
+    @PreAuthorize("hasAuthority('system:user:edit')")
     @Log(value = "用户管理", LogType = LogType.UPDATE)
     @PutMapping
     public Result edit(@Validated @RequestBody SysUser user) {
@@ -135,7 +135,7 @@ public class SysUserController extends AbstractController {
     /**
      * 删除用户
      */
-    @PreAuthorize("@hasAuthority('system:user:remove')")
+    @PreAuthorize("hasAuthority('system:user:remove')")
     @Log(value = "用户管理", LogType = LogType.DELETE)
     @DeleteMapping("/{userIds}")
     public Result remove(@PathVariable Long[] userIds) {
@@ -148,7 +148,7 @@ public class SysUserController extends AbstractController {
     /**
      * 重置密码
      */
-    @PreAuthorize("@hasAuthority('system:user:resetPwd')")
+    @PreAuthorize("hasAuthority('system:user:resetPwd')")
     @Log(value = "用户管理", LogType = LogType.UPDATE)
     @PutMapping("/resetPwd")
     public Result resetPwd(@RequestBody SysUser user) {
@@ -160,7 +160,7 @@ public class SysUserController extends AbstractController {
     /**
      * 状态修改
      */
-    @PreAuthorize("@hasAuthority('system:user:edit')")
+    @PreAuthorize("hasAuthority('system:user:edit')")
     @Log(value = "用户管理", LogType = LogType.UPDATE)
     @PutMapping("/changeStatus")
     public Result changeStatus(@RequestBody SysUser user) {
@@ -171,7 +171,7 @@ public class SysUserController extends AbstractController {
     /**
      * 根据用户编号获取授权角色
      */
-    @PreAuthorize("@hasAuthority('system:user:query')")
+    @PreAuthorize("hasAuthority('system:user:query')")
     @GetMapping("/authRole/{userId}")
     public Result authRole(@PathVariable("userId") Long userId) {
         Result result = Result.success();
@@ -185,7 +185,7 @@ public class SysUserController extends AbstractController {
     /**
      * 用户授权角色
      */
-    @PreAuthorize("@hasAuthority('system:user:edit')")
+    @PreAuthorize("hasAuthority('system:user:edit')")
     @Log(value = "用户管理", LogType = LogType.GRANT)
     @PutMapping("/authRole")
     public Result insertAuthRole(Long userId, Long[] roleIds) {

@@ -32,7 +32,7 @@ public class SysNoticeController extends AbstractController {
     /**
      * 获取通知公告列表
      */
-    @PreAuthorize("@hasAuthority('system:notice:list')")
+    @PreAuthorize("hasAuthority('system:notice:list')")
     @GetMapping("/list")
     public Result list(SysNotice notice) {
         startPage();
@@ -43,7 +43,7 @@ public class SysNoticeController extends AbstractController {
     /**
      * 根据通知公告编号获取详细信息
      */
-    @PreAuthorize("@hasAuthority('system:notice:query')")
+    @PreAuthorize("hasAuthority('system:notice:query')")
     @GetMapping(value = "/{noticeId}")
     public Result getInfo(@PathVariable Long noticeId) {
         return Result.success(noticeService.selectNoticeById(noticeId));
@@ -52,7 +52,7 @@ public class SysNoticeController extends AbstractController {
     /**
      * 新增通知公告
      */
-    @PreAuthorize("@hasAuthority('system:notice:add')")
+    @PreAuthorize("hasAuthority('system:notice:add')")
     @Log(value = "通知公告", LogType = LogType.INSERT)
     @PostMapping
     public Result add(@Validated @RequestBody SysNotice notice) {
@@ -63,7 +63,7 @@ public class SysNoticeController extends AbstractController {
     /**
      * 修改通知公告
      */
-    @PreAuthorize("@hasAuthority('system:notice:edit')")
+    @PreAuthorize("hasAuthority('system:notice:edit')")
     @Log(value = "通知公告", LogType = LogType.UPDATE)
     @PutMapping
     public Result edit(@Validated @RequestBody SysNotice notice) {
@@ -74,7 +74,7 @@ public class SysNoticeController extends AbstractController {
     /**
      * 删除通知公告
      */
-    @PreAuthorize("@hasAuthority('system:notice:remove')")
+    @PreAuthorize("hasAuthority('system:notice:remove')")
     @Log(value = "通知公告", LogType = LogType.DELETE)
     @DeleteMapping("/{noticeIds}")
     public Result remove(@PathVariable Long[] noticeIds) {

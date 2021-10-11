@@ -28,7 +28,7 @@ public class SysLoginLogController extends AbstractController {
     @Autowired
     private SysLoginLogService loginLogService;
 
-    @PreAuthorize("@hasAuthority('system:loginlog:list')")
+    @PreAuthorize("hasAuthority('system:loginlog:list')")
     @GetMapping("/list")
     public Result list(SysLoginLog loginLog) {
         startPage();
@@ -37,7 +37,7 @@ public class SysLoginLogController extends AbstractController {
     }
 
     @Log(value = "登录日志", LogType = LogType.EXPORT)
-    @PreAuthorize("@hasAuthority('system:loginlog:export')")
+    @PreAuthorize("hasAuthority('system:loginlog:export')")
     @GetMapping("/export")
     public Result export(SysLoginLog loginLog) {
         List<SysLoginLog> list = loginLogService.selectLoginLogList(loginLog);
@@ -45,14 +45,14 @@ public class SysLoginLogController extends AbstractController {
         return util.exportExcel(list, "登录日志");
     }
 
-    @PreAuthorize("@hasAuthority('system:loginlog:remove')")
+    @PreAuthorize("hasAuthority('system:loginlog:remove')")
     @Log(value = "登录日志", LogType = LogType.DELETE)
     @DeleteMapping("/{infoIds}")
     public Result remove(@PathVariable Long[] infoIds) {
         return toResult(loginLogService.deleteLoginLogByIds(infoIds));
     }
 
-    @PreAuthorize("@hasAuthority('system:loginlog:remove')")
+    @PreAuthorize("hasAuthority('system:loginlog:remove')")
     @Log(value = "登录日志", LogType = LogType.CLEAN)
     @DeleteMapping("/clean")
     public Result clean() {

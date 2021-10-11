@@ -28,7 +28,7 @@ public class SyslogController extends AbstractController {
     @Autowired
     private SysLogService logService;
 
-    @PreAuthorize("@hasAuthority('system:log:list')")
+    @PreAuthorize("hasAuthority('system:log:list')")
     @GetMapping("/list")
     public Result list(SysLog log) {
         startPage();
@@ -37,7 +37,7 @@ public class SyslogController extends AbstractController {
     }
 
     @Log(value = "操作日志", LogType = LogType.EXPORT)
-    @PreAuthorize("@hasAuthority('system:log:export')")
+    @PreAuthorize("hasAuthority('system:log:export')")
     @GetMapping("/export")
     public Result export(SysLog log) {
         List<SysLog> list = logService.selectLogList(log);
@@ -46,14 +46,14 @@ public class SyslogController extends AbstractController {
     }
 
     @Log(value = "操作日志", LogType = LogType.DELETE)
-    @PreAuthorize("@hasAuthority('system:log:remove')")
+    @PreAuthorize("hasAuthority('system:log:remove')")
     @DeleteMapping("/{ids}")
     public Result remove(@PathVariable Long[] ids) {
         return toResult(logService.deleteLogByIds(ids));
     }
 
     @Log(value = "操作日志", LogType = LogType.CLEAN)
-    @PreAuthorize("@hasAuthority('system:log:remove')")
+    @PreAuthorize("hasAuthority('system:log:remove')")
     @DeleteMapping("/clean")
     public Result clean() {
         logService.cleanLog();

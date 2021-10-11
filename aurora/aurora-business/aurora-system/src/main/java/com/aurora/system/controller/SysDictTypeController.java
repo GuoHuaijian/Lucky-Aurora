@@ -30,7 +30,7 @@ public class SysDictTypeController extends AbstractController {
     @Autowired
     private SysDictTypeService dictTypeService;
 
-    @PreAuthorize("@hasAuthority('system:dict:list')")
+    @PreAuthorize("hasAuthority('system:dict:list')")
     @GetMapping("/list")
     public Result list(SysDictType dictType) {
         startPage();
@@ -39,7 +39,7 @@ public class SysDictTypeController extends AbstractController {
     }
 
     @Log(value = "字典类型", LogType = LogType.EXPORT)
-    @PreAuthorize("@hasAuthority('system:dict:export')")
+    @PreAuthorize("hasAuthority('system:dict:export')")
     @GetMapping("/export")
     public Result export(SysDictType dictType) {
         List<SysDictType> list = dictTypeService.selectDictTypeList(dictType);
@@ -50,7 +50,7 @@ public class SysDictTypeController extends AbstractController {
     /**
      * 查询字典类型详细
      */
-    @PreAuthorize("@hasAuthority('system:dict:query')")
+    @PreAuthorize("hasAuthority('system:dict:query')")
     @GetMapping(value = "/{dictId}")
     public Result getInfo(@PathVariable Long dictId) {
         return Result.success(dictTypeService.selectDictTypeById(dictId));
@@ -59,7 +59,7 @@ public class SysDictTypeController extends AbstractController {
     /**
      * 新增字典类型
      */
-    @PreAuthorize("@hasAuthority('system:dict:add')")
+    @PreAuthorize("hasAuthority('system:dict:add')")
     @Log(value = "字典类型", LogType = LogType.INSERT)
     @PostMapping
     public Result add(@Validated @RequestBody SysDictType dict) {
@@ -73,7 +73,7 @@ public class SysDictTypeController extends AbstractController {
     /**
      * 修改字典类型
      */
-    @PreAuthorize("@hasAuthority('system:dict:edit')")
+    @PreAuthorize("hasAuthority('system:dict:edit')")
     @Log(value = "字典类型", LogType = LogType.UPDATE)
     @PutMapping
     public Result edit(@Validated @RequestBody SysDictType dict) {
@@ -87,7 +87,7 @@ public class SysDictTypeController extends AbstractController {
     /**
      * 删除字典类型
      */
-    @PreAuthorize("@hasAuthority('system:dict:remove')")
+    @PreAuthorize("hasAuthority('system:dict:remove')")
     @Log(value = "字典类型", LogType = LogType.DELETE)
     @DeleteMapping("/{dictIds}")
     public Result remove(@PathVariable Long[] dictIds) {
@@ -98,7 +98,7 @@ public class SysDictTypeController extends AbstractController {
     /**
      * 刷新字典缓存
      */
-    @PreAuthorize("@hasAuthority('system:dict:remove')")
+    @PreAuthorize("hasAuthority('system:dict:remove')")
     @Log(value = "字典类型", LogType = LogType.CLEAN)
     @DeleteMapping("/refreshCache")
     public Result refreshCache() {

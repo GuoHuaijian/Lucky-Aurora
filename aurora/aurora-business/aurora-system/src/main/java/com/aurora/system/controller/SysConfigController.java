@@ -35,7 +35,7 @@ public class SysConfigController extends AbstractController {
     /**
      * 获取参数配置列表
      */
-    @PreAuthorize("@hasAuthority('system:config:list')")
+    @PreAuthorize("hasAuthority('system:config:list')")
     @GetMapping("/list")
     public Result list(SysConfig config) {
         startPage();
@@ -50,7 +50,7 @@ public class SysConfigController extends AbstractController {
      * @return
      */
     @Log(value = "参数管理", LogType = LogType.EXPORT)
-    @PreAuthorize("@hasAuthority('system:config:export')")
+    @PreAuthorize("hasAuthority('system:config:export')")
     @GetMapping("/export")
     public Result export(SysConfig config) {
         List<SysConfig> list = configService.selectConfigList(config);
@@ -61,7 +61,7 @@ public class SysConfigController extends AbstractController {
     /**
      * 根据参数编号获取详细信息
      */
-    @PreAuthorize("@hasAuthority('system:config:query')")
+    @PreAuthorize("hasAuthority('system:config:query')")
     @GetMapping(value = "/{configId}")
     public Result getInfo(@PathVariable Long configId) {
         return Result.success(configService.selectConfigById(configId));
@@ -78,7 +78,7 @@ public class SysConfigController extends AbstractController {
     /**
      * 新增参数配置
      */
-    @PreAuthorize("@hasAuthority('system:config:add')")
+    @PreAuthorize("hasAuthority('system:config:add')")
     @Log(value = "参数管理", LogType = LogType.INSERT)
     @PostMapping
     @RepeatSubmit
@@ -93,7 +93,7 @@ public class SysConfigController extends AbstractController {
     /**
      * 修改参数配置
      */
-    @PreAuthorize("@hasAuthority('system:config:edit')")
+    @PreAuthorize("hasAuthority('system:config:edit')")
     @Log(value = "参数管理", LogType = LogType.UPDATE)
     @PutMapping
     public Result edit(@Validated @RequestBody SysConfig config) {
@@ -107,7 +107,7 @@ public class SysConfigController extends AbstractController {
     /**
      * 删除参数配置
      */
-    @PreAuthorize("@hasAuthority('system:config:remove')")
+    @PreAuthorize("hasAuthority('system:config:remove')")
     @Log(value = "参数管理", LogType = LogType.DELETE)
     @DeleteMapping("/{configIds}")
     public Result remove(@PathVariable Long[] configIds) {
@@ -118,7 +118,7 @@ public class SysConfigController extends AbstractController {
     /**
      * 刷新参数缓存
      */
-    @PreAuthorize("@hasAuthority('system:config:remove')")
+    @PreAuthorize("hasAuthority('system:config:remove')")
     @Log(value = "参数管理", LogType = LogType.CLEAN)
     @DeleteMapping("/refreshCache")
     public Result refreshCache() {

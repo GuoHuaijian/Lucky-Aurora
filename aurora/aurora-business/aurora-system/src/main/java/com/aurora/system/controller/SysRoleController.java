@@ -42,7 +42,7 @@ public class SysRoleController extends AbstractController {
     @Autowired
     private SysUserService userService;
 
-    @PreAuthorize("@hasAuthority('system:role:list')")
+    @PreAuthorize("hasAuthority('system:role:list')")
     @GetMapping("/list")
     public Result list(SysRole role) {
         startPage();
@@ -51,7 +51,7 @@ public class SysRoleController extends AbstractController {
     }
 
     @Log(value = "角色管理", LogType = LogType.EXPORT)
-    @PreAuthorize("@hasAuthority('system:role:export')")
+    @PreAuthorize("hasAuthority('system:role:export')")
     @GetMapping("/export")
     public Result export(SysRole role) {
         List<SysRole> list = roleService.selectRoleList(role);
@@ -62,7 +62,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 根据角色编号获取详细信息
      */
-    @PreAuthorize("@hasAuthority('system:role:query')")
+    @PreAuthorize("hasAuthority('system:role:query')")
     @GetMapping(value = "/{roleId}")
     public Result getInfo(@PathVariable Long roleId) {
         roleService.checkRoleDataScope(roleId);
@@ -72,7 +72,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 新增角色
      */
-    @PreAuthorize("@hasAuthority('system:role:add')")
+    @PreAuthorize("hasAuthority('system:role:add')")
     @Log(value = "角色管理", LogType = LogType.INSERT)
     @PostMapping
     public Result add(@Validated @RequestBody SysRole role) {
@@ -87,7 +87,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 修改保存角色
      */
-    @PreAuthorize("@hasAuthority('system:role:edit')")
+    @PreAuthorize("hasAuthority('system:role:edit')")
     @Log(value = "角色管理", LogType = LogType.UPDATE)
     @PutMapping
     public Result edit(@Validated @RequestBody SysRole role) {
@@ -114,7 +114,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 状态修改
      */
-    @PreAuthorize("@hasAuthority('system:role:edit')")
+    @PreAuthorize("hasAuthority('system:role:edit')")
     @Log(value = "角色管理", LogType = LogType.UPDATE)
     @PutMapping("/changeStatus")
     public Result changeStatus(@RequestBody SysRole role) {
@@ -125,7 +125,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 删除角色
      */
-    @PreAuthorize("@hasAuthority('system:role:remove')")
+    @PreAuthorize("hasAuthority('system:role:remove')")
     @Log(value = "角色管理", LogType = LogType.DELETE)
     @DeleteMapping("/{roleIds}")
     public Result remove(@PathVariable Long[] roleIds) {
@@ -135,7 +135,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 获取角色选择框列表
      */
-    @PreAuthorize("@hasAuthority('system:role:query')")
+    @PreAuthorize("hasAuthority('system:role:query')")
     @GetMapping("/optionSelect")
     public Result optionSelect() {
         return Result.success(roleService.selectRoleAll());
@@ -144,7 +144,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 查询已分配用户角色列表
      */
-    @PreAuthorize("@hasAuthority('system:role:list')")
+    @PreAuthorize("hasAuthority('system:role:list')")
     @GetMapping("/authUser/allocatedList")
     public Result allocatedList(SysUser user) {
         startPage();
@@ -155,7 +155,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 查询未分配用户角色列表
      */
-    @PreAuthorize("@hasAuthority('system:role:list')")
+    @PreAuthorize("hasAuthority('system:role:list')")
     @GetMapping("/authUser/unallocatedList")
     public Result unallocatedList(SysUser user) {
         startPage();
@@ -166,7 +166,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 取消授权用户
      */
-    @PreAuthorize("@hasAuthority('system:role:edit')")
+    @PreAuthorize("hasAuthority('system:role:edit')")
     @Log(value = "角色管理", LogType = LogType.GRANT)
     @PutMapping("/authUser/cancel")
     public Result cancelAuthUser(@RequestBody SysUserRole userRole) {
@@ -176,7 +176,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 批量取消授权用户
      */
-    @PreAuthorize("@hasAuthority('system:role:edit')")
+    @PreAuthorize("hasAuthority('system:role:edit')")
     @Log(value = "角色管理", LogType = LogType.GRANT)
     @PutMapping("/authUser/cancelAll")
     public Result cancelAuthUserAll(Long roleId, Long[] userIds) {
@@ -186,7 +186,7 @@ public class SysRoleController extends AbstractController {
     /**
      * 批量选择用户授权
      */
-    @PreAuthorize("@hasAuthority('system:role:edit')")
+    @PreAuthorize("hasAuthority('system:role:edit')")
     @Log(value = "角色管理", LogType = LogType.GRANT)
     @PutMapping("/authUser/selectAll")
     public Result selectAuthUserAll(Long roleId, Long[] userIds) {

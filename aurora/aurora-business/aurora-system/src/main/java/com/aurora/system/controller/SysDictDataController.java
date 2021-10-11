@@ -36,7 +36,7 @@ public class SysDictDataController extends AbstractController {
     @Autowired
     private SysDictTypeService dictTypeService;
 
-    @PreAuthorize("@hasAuthority('system:dict:list')")
+    @PreAuthorize("hasAuthority('system:dict:list')")
     @GetMapping("/list")
     public Result list(SysDictData dictData) {
         startPage();
@@ -45,7 +45,7 @@ public class SysDictDataController extends AbstractController {
     }
 
     @Log(value = "字典数据", LogType = LogType.EXPORT)
-    @PreAuthorize("@hasAuthority('system:dict:export')")
+    @PreAuthorize("hasAuthority('system:dict:export')")
     @GetMapping("/export")
     public Result export(SysDictData dictData) {
         List<SysDictData> list = dictDataService.selectDictDataList(dictData);
@@ -56,7 +56,7 @@ public class SysDictDataController extends AbstractController {
     /**
      * 查询字典数据详细
      */
-    @PreAuthorize("@hasAuthority('system:dict:query')")
+    @PreAuthorize("hasAuthority('system:dict:query')")
     @GetMapping(value = "/{dictCode}")
     public Result getInfo(@PathVariable Long dictCode) {
         return Result.success(dictDataService.selectDictDataById(dictCode));
@@ -77,7 +77,7 @@ public class SysDictDataController extends AbstractController {
     /**
      * 新增字典类型
      */
-    @PreAuthorize("@hasAuthority('system:dict:add')")
+    @PreAuthorize("hasAuthority('system:dict:add')")
     @Log(value = "字典数据", LogType = LogType.INSERT)
     @PostMapping
     public Result add(@Validated @RequestBody SysDictData dict) {
@@ -88,7 +88,7 @@ public class SysDictDataController extends AbstractController {
     /**
      * 修改保存字典类型
      */
-    @PreAuthorize("@hasAuthority('system:dict:edit')")
+    @PreAuthorize("hasAuthority('system:dict:edit')")
     @Log(value = "字典数据", LogType = LogType.UPDATE)
     @PutMapping
     public Result edit(@Validated @RequestBody SysDictData dict) {
@@ -99,7 +99,7 @@ public class SysDictDataController extends AbstractController {
     /**
      * 删除字典类型
      */
-    @PreAuthorize("@hasAuthority('system:dict:remove')")
+    @PreAuthorize("hasAuthority('system:dict:remove')")
     @Log(value = "字典类型", LogType = LogType.DELETE)
     @DeleteMapping("/{dictCodes}")
     public Result remove(@PathVariable Long[] dictCodes) {

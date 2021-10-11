@@ -74,6 +74,9 @@ dubbo:
   #    protocol: registry
   consumer:
     check: false
+  # 订阅服务 默认为* 订阅所有服务
+  cloud:
+    subscribed-services: aurora-auth,aurora-gateway
 
 # oauth2配置
 security:
@@ -104,8 +107,10 @@ aurora:
   rocketmq:
     name-server: 1.14.72.150:9876
     consumer:
-      topic: sysLog
+      topic: Log
       group: LOG
+    producer:
+      group: Log
 
 # 端点检查
 management:

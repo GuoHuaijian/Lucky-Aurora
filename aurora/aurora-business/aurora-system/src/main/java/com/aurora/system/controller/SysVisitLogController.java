@@ -27,7 +27,7 @@ public class SysVisitLogController extends AbstractController {
     @Autowired
     private SysVisitLogService visitLogService;
 
-    @PreAuthorize("@hasAuthority('system:visitlog:list')")
+    @PreAuthorize("hasAuthority('system:visitlog:list')")
     @GetMapping("/list")
     public Result list(SysVisitLog visitLog) {
         startPage();
@@ -36,7 +36,7 @@ public class SysVisitLogController extends AbstractController {
     }
 
     @Log(value = "访问日志", LogType = LogType.EXPORT)
-    @PreAuthorize("@hasAuthority('system:visitlog:export')")
+    @PreAuthorize("hasAuthority('system:visitlog:export')")
     @GetMapping("/export")
     public Result export(SysVisitLog visitLog) {
         List<SysVisitLog> list = visitLogService.selectVisitLogList(visitLog);
@@ -45,14 +45,14 @@ public class SysVisitLogController extends AbstractController {
     }
 
     @Log(value = "访问日志", LogType = LogType.DELETE)
-    @PreAuthorize("@hasAuthority('system:visitlog:remove')")
+    @PreAuthorize("hasAuthority('system:visitlog:remove')")
     @DeleteMapping("/{ids}")
     public Result remove(@PathVariable Long[] ids) {
         return toResult(visitLogService.deleteVisitLogByIds(ids));
     }
 
     @Log(value = "访问日志", LogType = LogType.CLEAN)
-    @PreAuthorize("@hasAuthority('system:visitlog:remove')")
+    @PreAuthorize("hasAuthority('system:visitlog:remove')")
     @DeleteMapping("/clean")
     public Result clean() {
         visitLogService.cleanVisitLog();

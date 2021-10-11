@@ -3,7 +3,7 @@
 <mapper namespace="com.aurora.system.mapper.SysLogMapper">
     <resultMap id="BaseResultMap" type="com.aurora.system.domain.SysLog">
         <!--@mbg.generated-->
-        <!--@Table aurora_blog.sys_log-->
+        <!--@Table sys_log-->
         <id column="log_id" jdbcType="BIGINT" property="logId"/>
         <result column="value" jdbcType="VARCHAR" property="value"/>
         <result column="log_type" jdbcType="INTEGER" property="logType"/>
