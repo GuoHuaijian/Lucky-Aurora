@@ -1,5 +1,6 @@
 package com.aurora.system.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.aurora.common.core.exception.ServiceException;
 import com.aurora.common.core.utils.SpringUtil;
 import com.aurora.common.core.utils.StringUtil;
@@ -23,9 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 /**
  * describe:
@@ -73,7 +72,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public List<String> getRolesByUserId(Long userId) {
-        return userMapper.getRolesByUserId(userId);
+        Set<String> roles = new HashSet<>();
+        // 管理员拥有所有权限
+        if (SysUser.isAdmin(userId)) {
+            roles.add("admin");
+        } else {
+            roles.addAll(userMapper.getRolesByUserId(userId));
+        }
+        return Lists.newArrayList(roles);
     }
 
     /**
@@ -84,7 +90,14 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public List<String> getAuthsByUserId(Long userId) {
-        return userMapper.getAuthsByUserId(userId);
+        Set<String> perms = new HashSet<>();
+        // 管理员拥有所有权限
+        if (SysUser.isAdmin(userId)) {
+            perms.add("*:*:*");
+        } else {
+            perms.addAll(userMapper.getAuthsByUserId(userId));
+        }
+        return Lists.newArrayList(perms);
     }
 
     /**
@@ -317,6 +330,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public boolean updateUserProfile(SysUser user) {
+        if (StrUtil.isNotBlank(String.valueOf(user.getUserName()))) {
+            LambdaUpdateWrapper<SysUser> lambdaUpdateWrapper = new LambdaUpdateWrapper<SysUser>().eq(SysUser::getUserName, user.getUserName());
+            return update(user, lambdaUpdateWrapper);
+        }
         return updateById(user);
     }
 

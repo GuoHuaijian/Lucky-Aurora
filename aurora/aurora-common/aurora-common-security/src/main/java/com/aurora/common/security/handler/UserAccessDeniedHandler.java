@@ -25,7 +25,7 @@ public class UserAccessDeniedHandler implements AccessDeniedHandler {
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response,
                        AccessDeniedException accessDeniedException) {
-        Result.responseJson(response, Result.error(HttpStatusEnum.FORBIDDEN));
+        Result.responseJson(response, Result.error(HttpStatusEnum.FORBIDDEN.getCode(), accessDeniedException.getMessage()));
     }
 
 }

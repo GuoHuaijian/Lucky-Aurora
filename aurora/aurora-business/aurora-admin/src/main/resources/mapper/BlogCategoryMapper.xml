@@ -3,7 +3,7 @@
 <mapper namespace="com.aurora.admin.mapper.BlogCategoryMapper">
     <resultMap id="BaseResultMap" type="com.aurora.admin.domain.BlogCategory">
         <!--@mbg.generated-->
-        <!--@Table aurora_blog.blog_category-->
+        <!--@Table blog_category-->
         <id column="category_id" jdbcType="INTEGER" property="categoryId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="rank" jdbcType="INTEGER" property="rank"/>

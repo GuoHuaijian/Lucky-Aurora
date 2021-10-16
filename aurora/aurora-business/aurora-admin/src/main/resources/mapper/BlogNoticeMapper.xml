@@ -3,7 +3,7 @@
 <mapper namespace="com.aurora.admin.mapper.BlogNoticeMapper">
     <resultMap id="BaseResultMap" type="com.aurora.admin.domain.BlogNotice">
         <!--@mbg.generated-->
-        <!--@Table aurora_blog.blog_notice-->
+        <!--@Table blog_notice-->
         <id column="notice_id" jdbcType="INTEGER" property="noticeId"/>
         <result column="notice_title" jdbcType="VARCHAR" property="noticeTitle"/>
         <result column="notice_type" jdbcType="BOOLEAN" property="noticeType"/>

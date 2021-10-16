@@ -1,36 +1,31 @@
 package com.aurora.admin.domain;
 
+import com.aurora.common.core.web.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
- * describe:
+ * describe: 文章
  *
- * @Author Guo
- * @Date 2021/9/7 13:20
- * @Version 1.0
- */
-
-/**
- * 文章
+ * @Author Guo Huaijian
+ * @Date 2021/10/16
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "aurora_blog.blog_article")
-public class BlogArticle implements Serializable {
+@TableName(value = "blog_article")
+public class BlogArticle extends BaseEntity implements Serializable {
     /**
      * 主键
      */
@@ -125,17 +120,25 @@ public class BlogArticle implements Serializable {
      * 创建时间
      */
     @TableField(value = "create_time")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date createTime;
 
     /**
      * 更新时间
      */
     @TableField(value = "update_time")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private Date updateTime;
+
+    /**
+     * 分类
+     */
+    @TableField(exist = false)
+    private String category;
+
+    /**
+     * 标签列表
+     */
+    @TableField(exist = false)
+    private List<BlogTag> tags;
 
     private static final long serialVersionUID = 1L;
 }

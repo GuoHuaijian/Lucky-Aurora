@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,21 +12,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * describe:
+ * describe: 公告表
  *
- * @Author Guo
- * @Date 2021/9/7 13:20
- * @Version 1.0
- */
-
-/**
- * 公告表
+ * @Author Guo Huaijian
+ * @Date 2021/10/16
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "aurora_blog.blog_notice")
+@TableName(value = "blog_notice")
 public class BlogNotice implements Serializable {
     /**
      * 公告ID
@@ -56,7 +51,7 @@ public class BlogNotice implements Serializable {
     /**
      * 公告状态（0正常 1关闭）
      */
-    @TableField(value = "status")
+    @TableField(value = "`status`")
     private Boolean status;
 
     /**

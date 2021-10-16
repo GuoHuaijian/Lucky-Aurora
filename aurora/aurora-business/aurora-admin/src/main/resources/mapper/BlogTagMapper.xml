@@ -3,7 +3,7 @@
 <mapper namespace="com.aurora.admin.mapper.BlogTagMapper">
     <resultMap id="BaseResultMap" type="com.aurora.admin.domain.BlogTag">
         <!--@mbg.generated-->
-        <!--@Table aurora_blog.blog_tag-->
+        <!--@Table blog_tag-->
         <id column="tag_id" jdbcType="INTEGER" property="tagId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>

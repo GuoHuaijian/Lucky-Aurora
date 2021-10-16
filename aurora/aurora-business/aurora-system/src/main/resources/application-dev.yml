@@ -1,5 +1,10 @@
 spring:
 
+  # 资源信息
+  messages:
+    # 国际化资源文件路径
+    basename: i18n/messages
+
   cloud:
     # Nacos配置
     nacos:
@@ -99,7 +104,7 @@ security:
       # 放行地址
     ignore:
       urls:
-        - /system/hi
+        - /system/captchaImage
         - /system/login
 
 # RocketMQ配置

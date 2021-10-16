@@ -1,6 +1,8 @@
 package com.aurora.common.security.utils;
 
+import com.aurora.common.core.constant.Constants;
 import com.aurora.common.core.utils.ServletUtil;
+import com.aurora.common.core.utils.StringUtil;
 import com.aurora.common.security.domain.SecurityUser;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -60,13 +62,17 @@ public class SecurityUtil {
      * 获取请求token
      */
     public static String getToken() {
-        return getToken(ServletUtil.getRequest());
+        String token = getRequestToken(ServletUtil.getRequest());
+        if (StringUtil.isNotEmpty(token) && token.startsWith(Constants.TOKEN_PREFIX)) {
+            token = token.replace(Constants.TOKEN_PREFIX, "");
+        }
+        return token;
     }
 
     /**
      * 根据request获取请求token
      */
-    public static String getToken(HttpServletRequest request) {
+    public static String getRequestToken(HttpServletRequest request) {
         String token = request.getHeader(tokenHeader);
         return token;
     }
@@ -75,7 +81,7 @@ public class SecurityUtil {
      * 替换token前缀
      */
     public static String replaceTokenPrefix(String token) {
-        token = token.substring(tokenPrefix.length());
+        token = token.substring(Constants.TOKEN_PREFIX.length());
         return token;
     }
 

@@ -1,12 +1,18 @@
 package com.aurora.system.controller;
 
+import com.aurora.common.core.constant.Constants;
+import com.aurora.common.core.manager.AsyncManager;
 import com.aurora.common.core.web.domain.Result;
+import com.aurora.common.security.utils.SecurityUtil;
+import com.aurora.system.domain.LoginBody;
 import com.aurora.system.domain.router.Router;
+import com.aurora.system.factory.LogAsyncFactory;
 import com.aurora.system.service.LoginService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -27,17 +33,21 @@ public class LoginController {
     @Resource
     private LoginService loginService;
 
+    @Resource
+    private RedisConnectionFactory redisConnectionFactory;
+
     /**
      * 登录
      *
-     * @param username
-     * @param password
+     * @param loginBody
      * @return
      */
     @PostMapping("login")
-    public Result login(String username, String password) {
-        Object result = loginService.login(username, password);
-        return Result.success(result);
+    public Result login(@RequestBody LoginBody loginBody) {
+        String token = loginService.login(loginBody);
+        Result result = Result.success();
+        result.put(Constants.TOKEN, token);
+        return result;
     }
 
     /**
@@ -60,5 +70,23 @@ public class LoginController {
     public Result getRouters() {
         List<Router> routers = loginService.getRouters();
         return Result.success(routers);
+    }
+
+    /**
+     * 退出
+     *
+     * @return
+     */
+    @PostMapping("logout")
+    public Result logout() {
+        DefaultTokenServices tokenServices = new DefaultTokenServices();
+        tokenServices.setTokenStore(new RedisTokenStore(redisConnectionFactory));
+        String accessToken = SecurityUtil.getToken();
+        boolean revokeToken = tokenServices.revokeToken(accessToken);
+        if (revokeToken) {
+            AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(SecurityUtil.getUsername(), Constants.LOGOUT, "退出成功"));
+            SecurityContextHolder.clearContext();
+        }
+        return Result.success("退出成功");
     }
 }

@@ -99,7 +99,8 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     public List<SysMenu> selectMenuTreeByUserId(Long userId) {
         List<SysMenu> menus;
         if (SecurityUtil.isAdmin(userId)) {
-            menus = list();
+            LambdaQueryWrapper<SysMenu> order = new LambdaQueryWrapper<SysMenu>().orderByAsc(SysMenu::getParentId).orderByAsc(SysMenu::getOrderNum);
+            menus = list(order);
         } else {
             menus = menuMapper.selectMenuTreeByUserId(userId);
         }
@@ -320,7 +321,7 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         }
         // 非外链并且是一级目录（类型为目录）
         if (0 == menu.getParentId().intValue() && MenuConstants.TYPE_DIR.equals(menu.getMenuType())
-                && MenuConstants.NO_FRAME.equals(menu.getIsFrame())) {
+                && MenuConstants.NO_FRAME.equals(menu.getIsFrame().toString())) {
             routerPath = "/" + menu.getPath();
         }
         // 非外链并且是一级目录（类型为菜单）

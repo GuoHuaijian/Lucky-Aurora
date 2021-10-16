@@ -55,7 +55,7 @@ public class SysMenuController extends AbstractController {
      * 获取菜单下拉树列表
      */
     @GetMapping("/treeSelect")
-    public Result treeselect(SysMenu menu) {
+    public Result treeSelect(SysMenu menu) {
         List<SysMenu> menus = menuService.selectMenuList(menu, SecurityUtil.getUserId());
         return Result.success(menuService.buildMenuTreeSelect(menus));
     }
@@ -64,7 +64,7 @@ public class SysMenuController extends AbstractController {
      * 加载对应角色菜单列表树
      */
     @GetMapping(value = "/roleMenuTreeSelect/{roleId}")
-    public Result roleMenuTreeselect(@PathVariable("roleId") Long roleId) {
+    public Result roleMenuTreeSelect(@PathVariable("roleId") Long roleId) {
         List<SysMenu> menus = menuService.selectMenuList(SecurityUtil.getUserId());
         Result result = Result.success();
         result.put("checkedKeys", menuService.selectMenuListByRoleId(roleId));

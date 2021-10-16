@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Notification, MessageBox, Message } from 'element-ui'
 import store from '@/store'
-import { getToken } from '@/utils/auth'
+import { getToken,removeToken } from '@/utils/auth'
 import errorCode from '@/utils/errorCode'
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
@@ -62,9 +62,11 @@ service.interceptors.response.use(res => {
           type: 'warning'
         }
       ).then(() => {
-        store.dispatch('LogOut').then(() => {
-          location.href = '/index';
-        })
+        // store.dispatch('LogOut').then(() => {
+        //   location.href = '/index';
+        // })
+        removeToken();
+        location.href = '/index';
       }).catch(() => {});
       return Promise.reject('无效的会话，或者会话已过期，请重新登录。')
     } else if (code === 500) {

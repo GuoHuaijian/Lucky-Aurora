@@ -1,5 +1,6 @@
 package com.aurora.system.service;
 
+import com.aurora.system.domain.LoginBody;
 import com.aurora.system.domain.router.Router;
 
 import java.util.List;
@@ -16,13 +17,12 @@ import java.util.Map;
 public interface LoginService {
 
     /**
-     * 获取token
+     * 登录
      *
-     * @param username
-     * @param password
+     * @param loginBody
      * @return
      */
-    Object login(String username, String password);
+    String login(LoginBody loginBody);
 
     /**
      * 获取用户详细信息

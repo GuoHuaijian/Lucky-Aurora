@@ -1,11 +1,11 @@
 package com.aurora.admin.domain;
 
+import com.aurora.common.core.web.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,29 +13,25 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * describe:
+ * describe: 标签
  *
- * @Author Guo
- * @Date 2021/9/7 13:20
- * @Version 1.0
- */
-
-/**
- * 标签
+ * @Author Guo Huaijian
+ * @Date 2021/10/16
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "aurora_blog.blog_tag")
-public class BlogTag implements Serializable {
+@TableName(value = "blog_tag")
+public class BlogTag extends BaseEntity implements Serializable {
     @TableId(value = "tag_id", type = IdType.AUTO)
     private Integer tagId;
 
     /**
      * 标签名字
      */
-    @TableField(value = "name")
+    @TableField(value = "`name`")
     private String name;
 
     /**

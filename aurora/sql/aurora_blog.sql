@@ -273,39 +273,39 @@ CREATE TABLE `sys_log`
 -- Records of sys_log
 -- ----------------------------
 INSERT INTO `sys_log`
-VALUES (100, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (100, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', 'null', 1, '', NULL);
 INSERT INTO `sys_log`
-VALUES (101, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (101, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', '{\"msg\":\"OK\",\"code\":200}', 0, '', NULL);
 INSERT INTO `sys_log`
-VALUES (102, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (102, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', '{\"msg\":\"hello\",\"code\":200}', 0, '', NULL);
 INSERT INTO `sys_log`
-VALUES (103, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (103, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', '{\"msg\":\"hello\",\"code\":200}', 0, '', '2021-09-07 12:27:07');
 INSERT INTO `sys_log`
-VALUES (104, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (104, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', '{\"msg\":\"hello\",\"code\":200}', 0, '', '2021-09-07 12:28:19');
 INSERT INTO `sys_log`
-VALUES (105, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (105, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', '{\"msg\":\"hello\",\"code\":200}', 0, '', '2021-09-07 12:29:57');
 INSERT INTO `sys_log`
-VALUES (106, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (106, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', '{\"msg\":\"hello\",\"code\":200}', 0, '', '2021-09-07 12:32:01');
 INSERT INTO `sys_log`
-VALUES (107, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (107, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', '{\"msg\":\"hello\",\"code\":200}', 0, '', '2021-09-07 12:35:18');
 INSERT INTO `sys_log`
-VALUES (108, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'POST', 1, 'admin', '',
+VALUES (108, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'POST', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', '{\"msg\":\"hello\",\"code\":200}', 0, '', '2021-09-07 12:36:50');
 INSERT INTO `sys_log`
-VALUES (109, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (109, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', 'null', 1,
         '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM article\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist',
         '2021-09-07 12:51:37');
 INSERT INTO `sys_log`
-VALUES (110, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (110, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', 'null', 1, '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM article\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\n;
 bad
 SQL grammar []; nested
@@ -313,12 +313,12 @@ exception is java.sql.SQLSyntaxErrorException: Table
 \'aurora_blog.article\' doesn
 \'t exist', '2021-09-07 12:54:46');
 INSERT INTO `sys_log`
-VALUES (111, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (111, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', 'null', 1,
         '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: SELECT count(0) FROM article\r\n### Cause: java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist\n; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: Table \'aurora_blog.article\' doesn\'t exist',
         '2021-09-07 13:02:16');
 INSERT INTO `sys_log`
-VALUES (112, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (112, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '', 'null', 1, '\r\n### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: Unknown column \'id\' in \'field list\'\r\n### The error may exist in file [D:\\study\\aurora\\AuroraBlog\\aurora-admin\\target\\classes\\mapper\\ArticleMapper.xml]\r\n### The error may involve defaultParameterMap\r\n### The error occurred while setting parameters\r\n### SQL: select                            id,
         title, description, author, content, content_format, read_num, comment_num, like_num, cover_type, cover,
         create_time, update_time, recommend, category_id, publish,
@@ -331,7 +331,7 @@ exception is java.sql.SQLSyntaxErrorException: Unknown column
 2021-09-07 13:03:15
 ');
 INSERT INTO `sys_log`
-VALUES (113, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (113, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '
 127.0.0.1
 ', '', '', 'null', 1, '
@@ -382,35 +382,35 @@ exception is java.sql.SQLSyntaxErrorException: Unknown column
 2021-09-07 13:05:19
 ');
 INSERT INTO `sys_log`
-VALUES (114, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (114, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '
 127.0.0.1
 ', '', '', '{
 \"msg\":\"OK\",\"code\":200,\"data\":{\"data\":[],\"total\":0}}', 0, '', '2021-09-07 13:33:45');
 INSERT INTO `sys_log`
-VALUES (115, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (115, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', '', '',
         '{\"msg\":\"OK\",\"code\":200,\"data\":{\"data\":[{\"articleId\":1,\"author\":\"4\",\"commentNum\":0,\"content\":\"5\",\"createTime\":1630990204000,\"description\":\"3\",\"isRecommend\":false,\"isTop\":false,\"likeNum\":0,\"publish\":0,\"readNum\":0,\"title\":\"2\",\"updateTime\":1630990204000}],\"total\":1}}',
         0, '', '2021-09-07 13:34:58');
 INSERT INTO `sys_log`
-VALUES (116, '文章列表', 0, 'com.aurora.admin.controller.ArticleController.listArticle()', 'GET', 1, 'admin', '',
+VALUES (116, '文章列表', 0, 'com.aurora.admin.controller.BlogArticleController.listArticle()', 'GET', 1, 'admin', '',
         '/admin/article/list', '127.0.0.1', 'XX-XX-内网IP-', '',
         '{\"msg\":\"OK\",\"code\":200,\"data\":{\"data\":[{\"articleId\":1,\"author\":\"4\",\"commentNum\":0,\"content\":\"5\",\"createTime\":1630990204000,\"description\":\"3\",\"isRecommend\":false,\"isTop\":false,\"likeNum\":0,\"publish\":0,\"readNum\":0,\"title\":\"2\",\"updateTime\":1630990204000}],\"total\":1}}',
         0, '', '2021-09-07 14:43:26');
 INSERT INTO `sys_log`
-VALUES (117, '测试', 0, 'com.aurora.admin.controller.ArticleController.test()', 'POST', 1, 'admin', '',
+VALUES (117, '测试', 0, 'com.aurora.admin.controller.BlogArticleController.test()', 'POST', 1, 'admin', '',
         '/admin/article/test/2', '127.0.0.1', 'XX-XX-内网IP-', '2', 'null', 1, '/ by zero', '2021-09-07 14:54:15');
 INSERT INTO `sys_log`
-VALUES (118, '测试', 0, 'com.aurora.admin.controller.ArticleController.test()', 'POST', 1, 'admin', '',
+VALUES (118, '测试', 0, 'com.aurora.admin.controller.BlogArticleController.test()', 'POST', 1, 'admin', '',
         '/admin/article/test/2', '127.0.0.1', 'XX-XX-内网IP-', '2', 'null', 1, '/ by zero', '2021-09-07 14:56:00');
 INSERT INTO `sys_log`
-VALUES (119, '测试', 0, 'com.aurora.admin.controller.ArticleController.test()', 'POST', 1, 'admin', '',
+VALUES (119, '测试', 0, 'com.aurora.admin.controller.BlogArticleController.test()', 'POST', 1, 'admin', '',
         '/admin/article/test/2', '127.0.0.1', 'XX-XX-内网IP-', '2', 'null', 1, '/ by zero', '2021-09-07 14:56:14');
 INSERT INTO `sys_log`
-VALUES (120, '测试', 0, 'com.aurora.admin.controller.ArticleController.test()', 'POST', 1, 'admin', '',
+VALUES (120, '测试', 0, 'com.aurora.admin.controller.BlogArticleController.test()', 'POST', 1, 'admin', '',
         '/admin/article/test/2', '127.0.0.1', 'XX-XX-内网IP-', '2', 'null', 1, '/ by zero', '2021-09-07 14:59:47');
 INSERT INTO `sys_log`
-VALUES (121, '测试', 0, 'com.aurora.admin.controller.ArticleController.test()', 'POST', 1, 'admin', '',
+VALUES (121, '测试', 0, 'com.aurora.admin.controller.BlogArticleController.test()', 'POST', 1, 'admin', '',
         '/admin/article/test/2', '127.0.0.1', 'XX-XX-内网IP-', '2', '{\"msg\":\"/ by zero\",\"code\":500}', 1,
         '/ by zero', '2021-09-07 15:22:45');
 INSERT INTO `sys_log`
@@ -422,224 +422,224 @@ VALUES (124, '', 0, '', '', 0, '', '', '', '', '', '', '', 0, '', '2021-09-09 10
 INSERT INTO `sys_log`
 VALUES (125, '', 0, '', '', 0, '', '', '', '', '', '', '', 0, '', '2021-09-09 10:53:43');
 INSERT INTO `sys_log`
-VALUES (126, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (126, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 10:58:21');
 INSERT INTO `sys_log`
-VALUES (127, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (127, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:00:29');
 INSERT INTO `sys_log`
-VALUES (128, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (128, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:04:13');
 INSERT INTO `sys_log`
-VALUES (129, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (129, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:04:52');
 INSERT INTO `sys_log`
-VALUES (130, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (130, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:05:36');
 INSERT INTO `sys_log`
-VALUES (131, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (131, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:08:29');
 INSERT INTO `sys_log`
-VALUES (132, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (132, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:12:00');
 INSERT INTO `sys_log`
-VALUES (133, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (133, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:14:54');
 INSERT INTO `sys_log`
-VALUES (134, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (134, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:15:50');
 INSERT INTO `sys_log`
-VALUES (135, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (135, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:19:54');
 INSERT INTO `sys_log`
-VALUES (136, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (136, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:20:10');
 INSERT INTO `sys_log`
-VALUES (137, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (137, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:22:28');
 INSERT INTO `sys_log`
-VALUES (138, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (138, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:26:59');
 INSERT INTO `sys_log`
-VALUES (139, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (139, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:36:53');
 INSERT INTO `sys_log`
-VALUES (140, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (140, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:40:01');
 INSERT INTO `sys_log`
-VALUES (141, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (141, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:40:11');
 INSERT INTO `sys_log`
-VALUES (142, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (142, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:44:27');
 INSERT INTO `sys_log`
-VALUES (143, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (143, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:45:38');
 INSERT INTO `sys_log`
-VALUES (144, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (144, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 11:49:37');
 INSERT INTO `sys_log`
-VALUES (145, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (145, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', '获取IP地址异常：UnknownHostException: ip.aliyun.com', '', '\"成功\"', 0, '',
         '2021-09-09 12:37:23');
 INSERT INTO `sys_log`
-VALUES (146, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (146, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', '获取IP地址异常：UnknownHostException: ip.aliyun.com', '', '\"成功\"', 0, '',
         '2021-09-09 12:39:04');
 INSERT INTO `sys_log`
-VALUES (147, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (147, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', '获取IP地址异常：UnknownHostException: ip.aliyun.com', '', '\"成功\"', 0, '',
         '2021-09-09 12:41:11');
 INSERT INTO `sys_log`
-VALUES (148, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (148, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', '获取IP地址异常：UnknownHostException: ip.aliyun.com', '', '\"成功\"', 0, '',
         '2021-09-09 12:43:51');
 INSERT INTO `sys_log`
-VALUES (149, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (149, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', '获取IP地址异常：UnknownHostException: ip.aliyun.com', '', '\"成功\"', 0, '',
         '2021-09-09 12:48:32');
 INSERT INTO `sys_log`
-VALUES (150, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (150, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', '获取IP地址异常：UnknownHostException: ip.aliyun.com', '', '\"成功\"', 0, '',
         '2021-09-09 12:50:00');
 INSERT INTO `sys_log`
-VALUES (151, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (151, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', '获取IP地址异常：UnknownHostException: ip.aliyun.com', '', '\"成功\"', 0, '',
         '2021-09-09 12:53:25');
 INSERT INTO `sys_log`
-VALUES (152, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (152, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 12:59:58');
 INSERT INTO `sys_log`
-VALUES (153, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (153, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 13:04:22');
 INSERT INTO `sys_log`
-VALUES (154, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (154, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:14:15');
 INSERT INTO `sys_log`
-VALUES (155, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (155, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:31:46');
 INSERT INTO `sys_log`
-VALUES (156, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (156, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:35:10');
 INSERT INTO `sys_log`
-VALUES (157, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (157, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:40:10');
 INSERT INTO `sys_log`
-VALUES (158, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (158, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:40:10');
 INSERT INTO `sys_log`
-VALUES (159, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (159, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:40:31');
 INSERT INTO `sys_log`
-VALUES (160, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (160, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:41:56');
 INSERT INTO `sys_log`
-VALUES (161, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (161, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:41:56');
 INSERT INTO `sys_log`
-VALUES (162, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (162, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:41:56');
 INSERT INTO `sys_log`
-VALUES (163, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (163, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 15:52:09');
 INSERT INTO `sys_log`
-VALUES (164, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (164, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:03:10');
 INSERT INTO `sys_log`
-VALUES (165, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (165, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:03:39');
 INSERT INTO `sys_log`
-VALUES (166, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (166, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:10:36');
 INSERT INTO `sys_log`
-VALUES (167, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (167, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:13:18');
 INSERT INTO `sys_log`
-VALUES (168, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (168, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:15:07');
 INSERT INTO `sys_log`
-VALUES (169, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (169, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:15:11');
 INSERT INTO `sys_log`
-VALUES (170, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (170, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:15:11');
 INSERT INTO `sys_log`
-VALUES (171, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (171, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:15:11');
 INSERT INTO `sys_log`
-VALUES (172, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (172, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:15:11');
 INSERT INTO `sys_log`
-VALUES (173, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (173, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:15:11');
 INSERT INTO `sys_log`
-VALUES (174, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (174, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:15:12');
 INSERT INTO `sys_log`
-VALUES (175, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (175, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:15:12');
 INSERT INTO `sys_log`
-VALUES (176, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (176, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-09 16:15:47');
 INSERT INTO `sys_log`
-VALUES (177, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (177, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:00:36');
 INSERT INTO `sys_log`
-VALUES (178, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (178, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:00:37');
 INSERT INTO `sys_log`
-VALUES (179, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (179, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:00:38');
 INSERT INTO `sys_log`
-VALUES (180, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (180, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:00:38');
 INSERT INTO `sys_log`
-VALUES (181, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (181, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:00:38');
 INSERT INTO `sys_log`
-VALUES (182, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (182, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:00:38');
 INSERT INTO `sys_log`
-VALUES (183, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (183, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:00:38');
 INSERT INTO `sys_log`
-VALUES (184, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (184, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:00:38');
 INSERT INTO `sys_log`
-VALUES (185, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (185, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:00:38');
 INSERT INTO `sys_log`
-VALUES (186, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (186, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 11:02:52');
 INSERT INTO `sys_log`
-VALUES (187, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (187, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:49');
 INSERT INTO `sys_log`
-VALUES (188, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (188, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:53');
 INSERT INTO `sys_log`
-VALUES (189, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (189, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:53');
 INSERT INTO `sys_log`
-VALUES (190, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (190, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:53');
 INSERT INTO `sys_log`
-VALUES (191, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (191, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:53');
 INSERT INTO `sys_log`
-VALUES (192, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (192, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:53');
 INSERT INTO `sys_log`
-VALUES (193, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (193, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:53');
 INSERT INTO `sys_log`
-VALUES (194, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (194, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:53');
 INSERT INTO `sys_log`
-VALUES (195, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (195, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:53');
 INSERT INTO `sys_log`
-VALUES (196, '添加文章', 0, 'com.aurora.admin.controller.ArticleController.add()', 'POST', 1, 'admin', '',
+VALUES (196, '添加文章', 0, 'com.aurora.admin.controller.BlogArticleController.add()', 'POST', 1, 'admin', '',
         '/admin/article/test', '127.0.0.1', 'XX-XX-内网IP-', '', '\"成功\"', 0, '', '2021-09-10 13:01:53');
 
 -- ----------------------------

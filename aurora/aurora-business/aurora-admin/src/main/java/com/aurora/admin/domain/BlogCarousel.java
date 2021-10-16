@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,21 +12,17 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * describe:
+ * describe: 轮播图
  *
- * @Author Guo
- * @Date 2021/9/7 13:20
- * @Version 1.0
- */
-
-/**
- * 轮播图
+ * @Author Guo Huaijian
+ * @Date 2021/10/16
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "aurora_blog.blog_carousel")
+@TableName(value = "blog_carousel")
 public class BlogCarousel implements Serializable {
     /**
      * 轮播图id
@@ -62,7 +57,7 @@ public class BlogCarousel implements Serializable {
     /**
      * 1外链，2文章
      */
-    @TableField(value = "type")
+    @TableField(value = "`type`")
     private Boolean type;
 
     /**

@@ -3,7 +3,7 @@
 <mapper namespace="com.aurora.admin.mapper.BlogCarouselMapper">
     <resultMap id="BaseResultMap" type="com.aurora.admin.domain.BlogCarousel">
         <!--@mbg.generated-->
-        <!--@Table aurora_blog.blog_carousel-->
+        <!--@Table blog_carousel-->
         <id column="carousel_id" jdbcType="INTEGER" property="carouselId"/>
         <result column="img_url" jdbcType="VARCHAR" property="imgUrl"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>

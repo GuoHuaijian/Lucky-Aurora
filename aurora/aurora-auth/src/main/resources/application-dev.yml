@@ -61,7 +61,6 @@ security:
       urls:
         - /oauth/**
         - /actuator/**
-        - www.baidu.com
         - /token/**
 # 端点检查
 management:

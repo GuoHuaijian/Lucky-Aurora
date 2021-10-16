@@ -1,11 +1,11 @@
 package com.aurora.admin.domain;
 
+import com.aurora.common.core.web.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,16 +15,16 @@ import java.util.Date;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/7 13:20
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/10/16
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "aurora_blog.blog_category")
-public class BlogCategory implements Serializable {
+@TableName(value = "blog_category")
+public class BlogCategory extends BaseEntity implements Serializable {
     /**
      * 主键
      */
@@ -34,13 +34,13 @@ public class BlogCategory implements Serializable {
     /**
      * 名称
      */
-    @TableField(value = "name")
+    @TableField(value = "`name`")
     private String name;
 
     /**
      * 级别
      */
-    @TableField(value = "rank")
+    @TableField(value = "`rank`")
     private Integer rank;
 
     /**

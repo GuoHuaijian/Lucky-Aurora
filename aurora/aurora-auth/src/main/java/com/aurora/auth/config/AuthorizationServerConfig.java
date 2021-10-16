@@ -2,6 +2,7 @@ package com.aurora.auth.config;
 
 import com.aurora.auth.service.UserDetailsServiceImpl;
 import com.aurora.common.security.component.AuroraTokenEnhancer;
+import com.aurora.common.security.exception.AuroraOauth2ExceptionTranslator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
@@ -52,6 +53,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Resource
     private DataSource dataSource;
 
+    @Resource
+    private AuroraOauth2ExceptionTranslator exceptionTranslator;
+
     @Bean
     public TokenStore tokenStore() {
         // 令牌保存到redis
@@ -80,7 +84,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenStore(tokenStore())
                 // 密码模式需要
                 .authenticationManager(authenticationManager)
-                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+                .allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST)
+                // 自定义异常返回格式
+                .exceptionTranslator(exceptionTranslator);
 
     }
 

@@ -382,8 +382,6 @@ export default {
       userList: null,
       // 弹出层标题
       title: '',
-      // 部门树选项
-      deptOptions: undefined,
       // 是否显示弹出层
       open: false,
       // 部门名称
@@ -478,7 +476,6 @@ export default {
   },
   created() {
     this.getList()
-    this.getTreeselect()
     this.getDicts('sys_normal_disable').then(response => {
       this.statusOptions = response.data
     })
@@ -494,17 +491,11 @@ export default {
     getList() {
       this.loading = true
       listUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-          this.userList = response.rows
-          this.total = response.total
+          this.userList = response.data.data
+          this.total = response.data.total
           this.loading = false
         }
       )
-    },
-    /** 查询部门下拉树结构 */
-    getTreeselect() {
-      treeselect().then(response => {
-        this.deptOptions = response.data
-      })
     },
     // 筛选节点
     filterNode(value, data) {
@@ -587,7 +578,6 @@ export default {
     /** 新增按钮操作 */
     handleAdd() {
       this.reset()
-      this.getTreeselect()
       getUser().then(response => {
         this.postOptions = response.posts
         this.roleOptions = response.roles
@@ -599,7 +589,6 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset()
-      this.getTreeselect()
       const userId = row.userId || this.ids
       getUser(userId).then(response => {
         this.form = response.data

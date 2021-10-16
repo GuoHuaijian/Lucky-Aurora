@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,20 +14,20 @@ import java.util.Date;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/9/7 13:20
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/10/16
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "aurora_blog.blog_about")
+@TableName(value = "blog_about")
 public class BlogAbout implements Serializable {
     /**
      * 关于id
      */
-    @TableId(value = "about_id", type = IdType.INPUT)
+    @TableId(value = "about_id", type = IdType.AUTO)
     private Integer aboutId;
 
     /**

@@ -1,6 +1,7 @@
 package com.aurora.common.security.config;
 
 import com.aurora.common.security.component.AuroraUserAuthenticationConverter;
+import com.aurora.common.security.exception.AuthExceptionEntryPoint;
 import com.aurora.common.security.filter.AuthenticationFilter;
 import com.aurora.common.security.handler.UserAccessDeniedHandler;
 import lombok.SneakyThrows;
@@ -10,7 +11,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.RemoteTokenServices;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.security.web.authentication.preauth.AbstractPreAuthenticatedProcessingFilter;
 
 import javax.annotation.Resource;
 
@@ -61,12 +62,14 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         // 配置没有权限处理类
         httpSecurity.exceptionHandling().accessDeniedHandler(accessDeniedHandler);
         // 添加过滤器
-        httpSecurity.addFilterBefore(new AuthenticationFilter(), BasicAuthenticationFilter.class);
+        httpSecurity.addFilterBefore(new AuthenticationFilter(), AbstractPreAuthenticatedProcessingFilter.class);
     }
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) {
         // 设置用户信息转化
-        resources.tokenServices(tokenServices());
+        resources
+                .tokenServices(tokenServices())
+                .authenticationEntryPoint(new AuthExceptionEntryPoint());
     }
 }

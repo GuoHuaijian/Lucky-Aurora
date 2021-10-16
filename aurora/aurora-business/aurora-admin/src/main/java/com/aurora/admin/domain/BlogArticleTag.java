@@ -5,28 +5,23 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 /**
- * describe:
+ * describe: 标签文章多对多维护表
  *
- * @Author Guo
- * @Date 2021/9/7 13:20
- * @Version 1.0
- */
-
-/**
- * 标签文章多对多维护表
+ * @Author Guo Huaijian
+ * @Date 2021/10/16
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Data
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName(value = "aurora_blog.blog_article_tag")
+@TableName(value = "blog_article_tag")
 public class BlogArticleTag implements Serializable {
     /**
      * 主键
@@ -45,6 +40,11 @@ public class BlogArticleTag implements Serializable {
      */
     @TableField(value = "article_id")
     private Integer articleId;
+
+    public BlogArticleTag(Integer tagId, Integer articleId) {
+        this.tagId = tagId;
+        this.articleId = articleId;
+    }
 
     private static final long serialVersionUID = 1L;
 }

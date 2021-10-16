@@ -1,12 +1,23 @@
 package com.aurora.system.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
+import com.aurora.common.core.constant.Constants;
+import com.aurora.common.core.exception.CaptchaException;
+import com.aurora.common.core.exception.CaptchaExpireException;
+import com.aurora.common.core.exception.ServiceException;
+import com.aurora.common.core.manager.AsyncManager;
+import com.aurora.common.core.utils.*;
+import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.security.utils.SecurityUtil;
+import com.aurora.system.domain.LoginBody;
 import com.aurora.system.domain.SysMenu;
 import com.aurora.system.domain.SysUser;
 import com.aurora.system.domain.router.Router;
+import com.aurora.system.factory.LogAsyncFactory;
 import com.aurora.system.service.LoginService;
+import com.aurora.system.service.SysConfigService;
 import com.aurora.system.service.SysMenuService;
 import com.aurora.system.service.SysUserService;
 import com.google.common.collect.Maps;
@@ -39,15 +50,26 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private SysMenuService menuService;
 
+    @Autowired
+    private RedisCache redisCache;
+
+    @Autowired
+    private SysConfigService configService;
+
     /**
-     * 获取token
+     * 登录
      *
-     * @param username
-     * @param password
+     * @param loginBody
      * @return
      */
     @Override
-    public Object login(String username, String password) {
+    public String login(LoginBody loginBody) {
+        boolean captchaOnOff = configService.selectCaptchaOnOff();
+        String userName = loginBody.getUsername();
+        // 验证码开关
+        if (captchaOnOff) {
+            validateCaptcha(userName, loginBody.getCode(), loginBody.getUuid());
+        }
         String tokenUri = resourceDetails.getAccessTokenUri();
         String clientId = resourceDetails.getClientId();
         String clientSecret = resourceDetails.getClientSecret();
@@ -58,11 +80,28 @@ public class LoginServiceImpl implements LoginService {
         paramMap.put("client_secret", clientSecret);
         paramMap.put("grant_type", grantType);
         paramMap.put("scope", scope);
-        paramMap.put("password", password);
-        paramMap.put("username", username);
-        String result = HttpUtil.post(tokenUri, paramMap);
-        System.out.println(result);
-        return JSONObject.parse(result);
+        paramMap.put("password", loginBody.getPassword());
+        paramMap.put("username", userName);
+        JSONObject object;
+        try {
+            // 获取token
+            String result = HttpUtil.post(tokenUri, paramMap);
+            object = JSONObject.parseObject(result);
+        } catch (Exception e) {
+            AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(userName, Constants.LOGIN_FAIL,
+                    StringUtil.substring(e.getMessage(), 0, 200)));
+            throw new ServiceException(e.getMessage());
+        }
+        if (StrUtil.isNotBlank((String) object.get(Result.CODE_TAG))) {
+            AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(userName, Constants.LOGIN_FAIL,
+                    (String) object.get("message")));
+            throw new ServiceException((String) object.get("message"));
+        } else {
+            String token = (String) object.get("access_token");
+            AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(userName, Constants.LOGIN_SUCCESS, MessageUtil.message("user.login.success")));
+            recordLoginInfo(userName);
+            return token;
+        }
     }
 
     /**
@@ -92,5 +131,39 @@ public class LoginServiceImpl implements LoginService {
         Long userId = SecurityUtil.getUserId();
         List<SysMenu> menus = menuService.selectMenuTreeByUserId(userId);
         return menuService.buildMenus(menus);
+    }
+
+    /**
+     * 校验验证码
+     *
+     * @param username 用户名
+     * @param code     验证码
+     * @param uuid     唯一标识
+     * @return 结果
+     */
+    public void validateCaptcha(String username, String code, String uuid) {
+        String verifyKey = Constants.CAPTCHA_CODE_KEY + uuid;
+        String captcha = redisCache.getCacheObject(verifyKey);
+        redisCache.deleteObject(verifyKey);
+        if (captcha == null) {
+            AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(username, Constants.LOGIN_FAIL,
+                    MessageUtil.message("user.jcaptcha.expire")));
+            throw new CaptchaExpireException();
+        }
+        if (!code.equalsIgnoreCase(captcha)) {
+            AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(username, Constants.LOGIN_FAIL, MessageUtil.message("user.jcaptcha.error")));
+            throw new CaptchaException();
+        }
+    }
+
+    /**
+     * 记录登录信息
+     */
+    public void recordLoginInfo(String userName) {
+        SysUser user = new SysUser();
+        user.setUserName(userName);
+        user.setLoginIp(IpUtil.getIpAddr(ServletUtil.getRequest()));
+        user.setLoginTime(DateUtil.getNowDate());
+        userService.updateUserProfile(user);
     }
 }
