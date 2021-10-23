@@ -6,13 +6,14 @@ import com.aurora.admin.mapper.BlogTagMapper;
 import com.aurora.admin.service.BlogArticleTagService;
 import com.aurora.admin.service.BlogTagService;
 import com.aurora.common.core.exception.ServiceException;
-import com.aurora.common.core.utils.StringUtil;
+import com.aurora.common.core.utils.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,36 +31,81 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
     private BlogArticleTagService articleTagService;
 
     /**
-     * 分页条件查询
+     * 查询标签
      *
-     * @param tag
-     * @return
+     * @param tagId 标签主键
+     * @return 标签
      */
     @Override
-    public List<BlogTag> list(BlogTag tag) {
+    public BlogTag selectBlogTagByTagId(Long tagId) {
+        return getById(tagId);
+    }
+
+    /**
+     * 查询标签列表
+     *
+     * @param tag 标签
+     * @return 标签
+     */
+    @Override
+    public List<BlogTag> selectBlogTagList(BlogTag tag) {
         QueryWrapper<BlogTag> wrapper = new QueryWrapper<>(tag);
-        if (StringUtil.isNotNull(tag.getBeginTime())) {
-            wrapper.lambda().le(BlogTag::getCreateTime, tag.getBeginTime());
-        }
-        if (StringUtil.isNotNull(tag.getEndTime())) {
-            wrapper.lambda().ge(BlogTag::getCreateTime, tag.getEndTime());
-        }
         return list(wrapper);
     }
 
     /**
-     * 删除标签
+     * 新增标签
      *
-     * @param tagIds
-     * @return
+     * @param tag 标签
+     * @return 结果
      */
     @Override
-    public boolean deleteTag(List<Integer> tagIds) {
+    public boolean insertBlogTag(BlogTag tag) {
+        tag.setCreateTime(DateUtil.getNowDate());
+        return save(tag);
+    }
+
+    /**
+     * 修改标签
+     *
+     * @param tag 标签
+     * @return 结果
+     */
+    @Override
+    public boolean updateBlogTag(BlogTag tag) {
+        tag.setUpdateTime(DateUtil.getNowDate());
+        return updateById(tag);
+    }
+
+    /**
+     * 批量删除标签
+     *
+     * @param tagIds 需要删除的标签主键
+     * @return 结果
+     */
+    @Override
+    public boolean deleteBlogTagByTagIds(Long[] tagIds) {
         int count = articleTagService.count(new LambdaQueryWrapper<BlogArticleTag>().in(BlogArticleTag::getTagId,
                 tagIds));
         if (count >= 1) {
             throw new ServiceException("删除标签失败,该标签下有关联博文");
         }
-        return removeByIds(tagIds);
+        return removeByIds(Arrays.asList(tagIds));
+    }
+
+    /**
+     * 删除标签信息
+     *
+     * @param tagId 标签主键
+     * @return 结果
+     */
+    @Override
+    public boolean deleteBlogTagByTagId(Long tagId) {
+        int count = articleTagService.count(new LambdaQueryWrapper<BlogArticleTag>().eq(BlogArticleTag::getTagId,
+                tagId));
+        if (count >= 1) {
+            throw new ServiceException("删除标签失败,该标签下有关联博文");
+        }
+        return removeById(tagId);
     }
 }

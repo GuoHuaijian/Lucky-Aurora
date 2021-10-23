@@ -1,5 +1,6 @@
 package com.aurora.admin.domain;
 
+import com.aurora.common.core.web.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -23,7 +24,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "blog_carousel")
-public class BlogCarousel implements Serializable {
+public class BlogCarousel extends BaseEntity implements Serializable {
     /**
      * 轮播图id
      */

@@ -38,18 +38,6 @@ public class BlogCategory extends BaseEntity implements Serializable {
     private String name;
 
     /**
-     * 级别
-     */
-    @TableField(value = "`rank`")
-    private Integer rank;
-
-    /**
-     * 父主键
-     */
-    @TableField(value = "parent_id")
-    private Integer parentId;
-
-    /**
      * 创建时间
      */
     @TableField(value = "create_time")

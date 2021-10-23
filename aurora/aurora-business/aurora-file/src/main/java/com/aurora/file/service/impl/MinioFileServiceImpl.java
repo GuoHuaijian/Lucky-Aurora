@@ -5,6 +5,7 @@ import com.aurora.file.service.FileService;
 import com.aurora.file.utils.FileUploadUtil;
 import io.minio.MinioClient;
 import io.minio.PutObjectArgs;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,14 +19,15 @@ import javax.annotation.Resource;
  * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0.0
  */
+@Primary
 @Service
 public class MinioFileServiceImpl implements FileService {
 
     @Resource
     private FileConfig config;
 
-    @Resource
-    private MinioClient client;
+//    @Resource
+//    private MinioClient minioClient;
 
     /**
      * 本地文件上传接口
@@ -43,7 +45,11 @@ public class MinioFileServiceImpl implements FileService {
                 .stream(file.getInputStream(), file.getSize(), -1)
                 .contentType(file.getContentType())
                 .build();
-        client.putObject(args);
+        getMinioClient().putObject(args);
         return config.getMinio().getUrl() + "/" + config.getMinio().getBucketName() + "/" + fileName;
+    }
+
+    public MinioClient getMinioClient() {
+        return MinioClient.builder().endpoint(config.getMinio().getUrl()).credentials(config.getMinio().getAccessKey(), config.getMinio().getSecretKey()).build();
     }
 }

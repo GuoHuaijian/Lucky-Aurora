@@ -13,6 +13,19 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+
+      # 跨域
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedHeaders: "*"
+            allowedOrigins: "*"
+            allowedMethods:
+              - GET
+                POST
+                DELETE
+                PUT
+                OPTION
       routes:
         # aurora-auth
         - id: aurora-auth
@@ -33,6 +46,13 @@ spring:
           uri: lb://aurora-admin
           predicates:
             - Path=/dev-api/admin/**
+          filters:
+            - StripPrefix=1
+        # aurora-file
+        - id: aurora-file
+          uri: lb://aurora-file
+          predicates:
+            - Path=/dev-api/file/**
           filters:
             - StripPrefix=1
 

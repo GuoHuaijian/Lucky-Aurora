@@ -6,14 +6,12 @@
         <!--@Table blog_category-->
         <id column="category_id" jdbcType="INTEGER" property="categoryId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="rank" jdbcType="INTEGER" property="rank"/>
-        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        category_id, `name`, `rank`, parent_id, create_time, update_time, remark
+        category_id, `name`, create_time, update_time, remark
     </sql>
 </mapper>

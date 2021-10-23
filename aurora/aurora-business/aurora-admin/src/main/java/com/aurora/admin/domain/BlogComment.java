@@ -1,5 +1,6 @@
 package com.aurora.admin.domain;
 
+import com.aurora.common.core.web.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -23,12 +24,12 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "blog_comment")
-public class BlogComment implements Serializable {
+public class BlogComment extends BaseEntity implements Serializable {
     /**
      * 评论主键id
      */
-    @TableId(value = "id", type = IdType.AUTO)
-    private String id;
+    @TableId(value = "comment_id", type = IdType.AUTO)
+    private String commentId;
 
     /**
      * 评论类型：0:留言 1:文章

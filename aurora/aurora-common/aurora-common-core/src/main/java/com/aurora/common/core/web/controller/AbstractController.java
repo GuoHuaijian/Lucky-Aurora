@@ -47,8 +47,8 @@ public abstract class AbstractController {
      */
     protected void startPage() {
         PageDomain pageDomain = PageSupport.buildPageRequest();
-        Long pageNum = pageDomain.getCurrent();
-        Long pageSize = pageDomain.getSize();
+        Long pageNum = pageDomain.getPageNum();
+        Long pageSize = pageDomain.getPageSize();
         if (StringUtils.hasLength(String.valueOf(pageNum)) && StringUtils.hasLength(String.valueOf(pageSize))) {
             String orderBy = SqlUtil.escapeOrderBySql(pageDomain.getOrderBy());
             // 紧跟着的第一个select方法会被分页 后面的不会被分页，除非再次调用PageHelper.startPage

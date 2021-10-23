@@ -14,7 +14,7 @@
         <result column="comment_num" jdbcType="INTEGER" property="commentNum"/>
         <result column="like_num" jdbcType="INTEGER" property="likeNum"/>
         <result column="cover_type" jdbcType="INTEGER" property="coverType"/>
-        <result column="cover" jdbcType="LONGVARCHAR" property="cover"/>
+        <result column="cover_url" jdbcType="LONGVARCHAR" property="coverUrl"/>
         <result column="is_recommend" jdbcType="BOOLEAN" property="isRecommend"/>
         <result column="category_id" jdbcType="VARCHAR" property="categoryId"/>
         <result column="publish" jdbcType="TINYINT" property="publish"/>
@@ -25,7 +25,7 @@
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
         article_id, title, description, author, content, content_format, read_num, comment_num,
-        like_num, cover_type, cover, is_recommend, category_id, publish, is_top, create_time,
+        like_num, cover_type, cover_url, is_recommend, category_id, publish, is_top, create_time,
         update_time
     </sql>
 </mapper>

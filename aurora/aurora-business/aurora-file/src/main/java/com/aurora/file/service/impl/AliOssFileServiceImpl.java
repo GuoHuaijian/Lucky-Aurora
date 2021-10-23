@@ -1,9 +1,11 @@
 package com.aurora.file.service.impl;
 
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.OSSClientBuilder;
 import com.aurora.file.config.FileConfig;
 import com.aurora.file.service.FileService;
 import com.aurora.file.utils.FileUploadUtil;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,6 +29,12 @@ public class AliOssFileServiceImpl implements FileService {
 
     @Resource
     private OSSClient ossClient;
+
+    @Bean
+    public OSSClient getOSSClient() {
+        return (OSSClient) new OSSClientBuilder().build(config.getAliOss().getEndpoint(), config.getAliOss().getAccessKeyId(),
+                config.getAliOss().getAccessKeySecret());
+    }
 
 
     @Override

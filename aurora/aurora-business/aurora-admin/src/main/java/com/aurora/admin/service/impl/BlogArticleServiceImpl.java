@@ -2,6 +2,7 @@ package com.aurora.admin.service.impl;
 
 import com.aurora.admin.domain.BlogArticle;
 import com.aurora.admin.domain.BlogArticleTag;
+import com.aurora.admin.domain.BlogCategory;
 import com.aurora.admin.domain.BlogTag;
 import com.aurora.admin.mapper.BlogArticleMapper;
 import com.aurora.admin.service.BlogArticleService;
@@ -57,14 +58,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         }
         List<BlogArticle> articles = list(wrapper);
         for (BlogArticle blog : articles) {
-            String category = categoryService.getById(blog.getCategoryId()).getName();
-            List<BlogArticleTag> articleTags = articleTagService.list(new LambdaQueryWrapper<BlogArticleTag>().eq(BlogArticleTag::getArticleId,
-                    blog.getArticleId()));
-            List<Integer> tagIds = Lists.newArrayList();
-            articleTags.forEach(articleTag -> tagIds.add(articleTag.getTagId()));
-            List<BlogTag> tags = tagService.list(new LambdaQueryWrapper<BlogTag>().in(BlogTag::getTagId, tagIds));
-            blog.setCategory(category);
-            blog.setTags(tags);
+            blog = setCategoryAndTag(blog);
         }
         return articles;
     }
@@ -78,8 +72,8 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean saveArticle(BlogArticle article) {
-        saveArticleTag(article.getTags(), article.getArticleId());
-        return save(article);
+        save(article);
+        return saveArticleTag(article.getTags(), article.getArticleId());
     }
 
     /**
@@ -117,7 +111,8 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
      */
     @Override
     public BlogArticle getArticle(Integer articleId) {
-        return getById(articleId);
+        BlogArticle article = getById(articleId);
+        return setCategoryAndTag(article);
     }
 
     /**
@@ -143,5 +138,25 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
     public boolean deleteArticleTag(List<Integer> articleIds) {
         return articleTagService.remove(new LambdaQueryWrapper<BlogArticleTag>().in(BlogArticleTag::getArticleId,
                 articleIds));
+    }
+
+    /**
+     * 添加分类和标签
+     *
+     * @param article
+     * @return
+     */
+    public BlogArticle setCategoryAndTag(BlogArticle article) {
+        BlogCategory category = categoryService.getById(article.getCategoryId());
+        article.setCategory(category);
+        List<BlogArticleTag> articleTags = articleTagService.list(new LambdaQueryWrapper<BlogArticleTag>().eq(BlogArticleTag::getArticleId,
+                article.getArticleId()));
+        List<Integer> tagIds = Lists.newArrayList();
+        articleTags.forEach(articleTag -> tagIds.add(articleTag.getTagId()));
+        if (tagIds.size() > 0) {
+            List<BlogTag> tags = tagService.list(new LambdaQueryWrapper<BlogTag>().in(BlogTag::getTagId, tagIds));
+            article.setTags(tags);
+        }
+        return article;
     }
 }

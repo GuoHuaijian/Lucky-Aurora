@@ -6,13 +6,14 @@ import com.aurora.admin.mapper.BlogCategoryMapper;
 import com.aurora.admin.service.BlogArticleService;
 import com.aurora.admin.service.BlogCategoryService;
 import com.aurora.common.core.exception.ServiceException;
-import com.aurora.common.core.utils.StringUtil;
+import com.aurora.common.core.utils.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -30,36 +31,81 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
     private BlogArticleService articleService;
 
     /**
-     * 条件查询
+     * 查询分类
      *
-     * @param category
-     * @return
+     * @param categoryId 分类主键
+     * @return 分类
      */
     @Override
-    public List<BlogCategory> list(BlogCategory category) {
+    public BlogCategory selectBlogCategoryByCategoryId(Long categoryId) {
+        return getById(categoryId);
+    }
+
+    /**
+     * 查询分类列表
+     *
+     * @param category 分类
+     * @return 分类
+     */
+    @Override
+    public List<BlogCategory> selectBlogCategoryList(BlogCategory category) {
         QueryWrapper<BlogCategory> wrapper = new QueryWrapper<>(category);
-        if (StringUtil.isNotNull(category.getBeginTime())) {
-            wrapper.lambda().le(BlogCategory::getCreateTime, category.getBeginTime());
-        }
-        if (StringUtil.isNotNull(category.getEndTime())) {
-            wrapper.lambda().ge(BlogCategory::getCreateTime, category.getEndTime());
-        }
         return list(wrapper);
     }
 
     /**
-     * 删除
+     * 新增分类
      *
-     * @param categoryIds
-     * @return
+     * @param category 分类
+     * @return 结果
      */
     @Override
-    public boolean deleteCategory(List<Integer> categoryIds) {
+    public boolean insertBlogCategory(BlogCategory category) {
+        category.setCreateTime(DateUtil.getNowDate());
+        return save(category);
+    }
+
+    /**
+     * 修改分类
+     *
+     * @param category 分类
+     * @return 结果
+     */
+    @Override
+    public boolean updateBlogCategory(BlogCategory category) {
+        category.setUpdateTime(DateUtil.getNowDate());
+        return updateById(category);
+    }
+
+    /**
+     * 批量删除分类
+     *
+     * @param categoryIds 需要删除的分类主键
+     * @return 结果
+     */
+    @Override
+    public boolean deleteBlogCategoryByCategoryIds(Long[] categoryIds) {
         int count = articleService.count(new LambdaQueryWrapper<BlogArticle>().in(BlogArticle::getCategoryId,
                 categoryIds));
         if (count >= 1) {
             throw new ServiceException("删除分类失败,该分类下有关联博文");
         }
-        return removeByIds(categoryIds);
+        return removeByIds(Arrays.asList(categoryIds));
+    }
+
+    /**
+     * 删除分类信息
+     *
+     * @param categoryId 分类主键
+     * @return 结果
+     */
+    @Override
+    public boolean deleteBlogCategoryByCategoryId(Long categoryId) {
+        int count = articleService.count(new LambdaQueryWrapper<BlogArticle>().eq(BlogArticle::getCategoryId,
+                categoryId));
+        if (count >= 1) {
+            throw new ServiceException("删除分类失败,该分类下有关联博文");
+        }
+        return removeById(categoryId);
     }
 }

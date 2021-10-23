@@ -1,5 +1,6 @@
 package com.aurora.admin.domain;
 
+import com.aurora.common.core.web.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -22,7 +23,7 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName(value = "blog_article_tag")
-public class BlogArticleTag implements Serializable {
+public class BlogArticleTag extends BaseEntity implements Serializable {
     /**
      * 主键
      */

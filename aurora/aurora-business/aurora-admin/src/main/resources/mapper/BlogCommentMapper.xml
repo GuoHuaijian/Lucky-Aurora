@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.aurora.admin.domain.BlogComment">
         <!--@mbg.generated-->
         <!--@Table blog_comment-->
-        <id column="id" jdbcType="VARCHAR" property="id"/>
+        <id column="comment_id" jdbcType="VARCHAR" property="commentId"/>
         <result column="type" jdbcType="BOOLEAN" property="type"/>
         <result column="owner_id" jdbcType="VARCHAR" property="ownerId"/>
         <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
@@ -20,7 +20,7 @@
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        id, `type`, owner_id, parent_id, `name`, avatar, like_num, dislike_num, content,
+        comment_id, `type`, owner_id, parent_id, `name`, avatar, like_num, dislike_num, content,
         reply_id, reply_name, create_time, update_time
     </sql>
 </mapper>

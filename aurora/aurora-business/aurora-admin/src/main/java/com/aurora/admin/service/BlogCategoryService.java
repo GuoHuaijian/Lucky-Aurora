@@ -16,20 +16,51 @@ import java.util.List;
 public interface BlogCategoryService extends IService<BlogCategory> {
 
     /**
-     * 条件查询
+     * 查询分类
      *
-     * @param category
-     * @return
+     * @param categoryId 分类主键
+     * @return 分类
      */
-    List<BlogCategory> list(BlogCategory category);
+    BlogCategory selectBlogCategoryByCategoryId(Long categoryId);
 
     /**
-     * 删除分类
+     * 查询分类列表
      *
-     * @param categoryIds
-     * @return
+     * @param category 分类
+     * @return 分类集合
      */
-    boolean deleteCategory(List<Integer> categoryIds);
+    List<BlogCategory> selectBlogCategoryList(BlogCategory category);
 
+    /**
+     * 新增分类
+     *
+     * @param category 分类
+     * @return 结果
+     */
+    boolean insertBlogCategory(BlogCategory category);
+
+    /**
+     * 修改分类
+     *
+     * @param category 分类
+     * @return 结果
+     */
+    boolean updateBlogCategory(BlogCategory category);
+
+    /**
+     * 批量删除分类
+     *
+     * @param categoryIds 需要删除的分类主键集合
+     * @return 结果
+     */
+    boolean deleteBlogCategoryByCategoryIds(Long[] categoryIds);
+
+    /**
+     * 删除分类信息
+     *
+     * @param categoryId 分类主键
+     * @return 结果
+     */
+    boolean deleteBlogCategoryByCategoryId(Long categoryId);
 
 }

@@ -30,6 +30,7 @@ import ImageUpload from "@/components/ImageUpload"
 import DictTag from '@/components/DictTag'
 // 头部标签组件
 import VueMeta from 'vue-meta'
+import request from '@/utils/request'
 
 // 全局方法挂载
 Vue.prototype.getDicts = getDicts

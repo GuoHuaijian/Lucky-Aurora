@@ -1,6 +1,6 @@
 server:
   # 端口
-  port: 9527
+  port: 8083
   servlet:
     # 应用的访问路径
     context-path:

@@ -46,6 +46,6 @@ public class ResourcesConfig implements WebMvcConfigurer {
                 // 设置允许跨域请求的域名
                 .allowedOrigins("*")
                 // 设置允许的方法
-                .allowedMethods("GET");
+                .allowedMethods("GET", "POST");
     }
 }

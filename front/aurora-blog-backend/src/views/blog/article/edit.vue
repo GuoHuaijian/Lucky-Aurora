@@ -1,90 +1,108 @@
 <template>
-  <div>
+  <div style="margin-top: 25px">
     <el-form :model="article" label-width="80px" :rules="rules" ref="articleForm">
-      <el-form-item label="博文标题" prop="title">
-        <el-col :span="12">
-          <el-input placeholder="博文标题" v-model="article.title"  clearable></el-input>
-        </el-col>
-      </el-form-item>
       <el-row>
-        <el-col :span="6">
-          <el-form-item label="博文分类">
-            <el-cascader
-              style="width: 100%;"
-              clearable
-              change-on-select
-              :options="categoryOptions"
-              v-model="categoryOptionsSelect"
-              :props="categoryListTreeProps">
-            </el-cascader>
+        <el-col :span="12">
+          <el-form-item label="博文标题" prop="title">
+            <el-col :span="12">
+              <el-input placeholder="博文标题" v-model="article.title" clearable></el-input>
+            </el-col>
+          </el-form-item>
+          <el-row>
+            <el-col :span="7">
+              <el-form-item label="博文分类" prop="categorySelect">
+                <el-select v-model="categorySelect" placeholder="请选择文章分类">
+                  <el-option
+                    v-for="item in category"
+                    :key="item.categoryId"
+                    :label="item.name"
+                    :value="item.categoryId"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+            <el-col :span="7">
+              <el-form-item label="博文标签" prop="tagListSelect">
+                <el-select
+                  style="width: 100%"
+                  v-model="tagListSelect"
+                  multiple
+                  allow-create
+                  filterable
+                  default-first-option
+                  value-key="tagId"
+                  name="name"
+                  placeholder="请选择文章标签" @change="filterTagList"
+                >
+                  <el-option
+                    v-for="item in tags"
+                    :key="item.tagId"
+                    :label="item.name"
+                    :value="item.tagId"
+                  >
+                  </el-option>
+                </el-select>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="6">
+              <el-form-item label="博文作者" prop="author">
+                <el-input placeholder="博文作者" v-model="article.author" clearable></el-input>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="是否推荐" prop="recommend">
+                <el-radio-group v-model="article.isRecommend">
+                  <el-radio :label="true">是</el-radio>
+                  <el-radio :label="false">否</el-radio>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+            <el-col :span="6">
+              <el-form-item label="展示类型" prop="coverType">
+                <el-radio-group v-model="article.coverType">
+                  <el-radio v-for="type in coverTypeList" :key="type.parKey" :label="type.parKey">{{ type.parValue }}
+                  </el-radio>
+                </el-radio-group>
+              </el-form-item>
+            </el-col>
+          </el-row>
+          <el-form-item label="博文描述" prop="description">
+            <el-col :span="12">
+              <el-input type="textarea" v-model="article.description" placeholder="博文描述" clearable></el-input>
+            </el-col>
           </el-form-item>
         </el-col>
-        <el-col :span="6">
-          <el-form-item label="博文标签">
-            <el-select
-              style="width: 100%"
-              v-model="tagListSelect"
-              multiple
-              allow-create
-              filterable
-              default-first-option
-              placeholder="请选择文章标签" @change="filterTagList">
-              <el-option
-                v-for="item in tagList"
-                :key="item.id"
-                :label="item.name"
-                :value="item.id">
-              </el-option>
-            </el-select>
+        <el-col :span="8">
+          <el-form-item label="上传封面" prop="coverUrl">
+            <el-col :span="12">
+              <el-upload
+                drag
+                action="/dev-api/file/upload"
+                list-type="picture"
+                :multiple="false"
+                :before-upload="beforeUploadHandle"
+                :file-list="file"
+                :headers="headers"
+                :on-remove="handleRemove"
+                :on-success="successHandle"
+              >
+                <i class="el-icon-upload"></i>
+                <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
+                <div class="el-upload__tip" slot="tip">只支持jpg、png、gif格式的图片！</div>
+              </el-upload>
+            </el-col>
           </el-form-item>
         </el-col>
       </el-row>
-      <el-form-item label="博文作者">
-        <el-row>
-          <el-col :span="4">
-            <el-input placeholder="博文作者" v-model="article.author" clearable></el-input>
-          </el-col>
-        </el-row>
-      </el-form-item>
-      <el-form-item label="是否推荐">
-        <el-radio-group v-model="article.recommend">
-          <el-radio :label="true" >是</el-radio>
-          <el-radio :label="false" >否</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="展示类型">
-        <el-radio-group v-model="article.coverType">
-          <el-radio v-for="type in coverTypeList" :key="type.parKey" :label="type.parKey" >{{type.parValue}}</el-radio>
-        </el-radio-group>
-      </el-form-item>
-      <el-form-item label="上传封面">
-        <el-col :span="12">
-          <el-upload
-            drag
-            :action="url"
-            list-type="picture"
-            :multiple="false"
-            :before-upload="beforeUploadHandle"
-            :file-list="file"
-            :on-remove="handleRemove"
-            :on-success="successHandle">
-            <i class="el-icon-upload"></i>
-            <div class="el-upload__text">将文件拖到此处，或<em>点击上传</em></div>
-            <div class="el-upload__tip" slot="tip">只支持jpg、png、gif格式的图片！</div>
-          </el-upload>
-        </el-col>
-      </el-form-item>
-      <el-form-item label="博文描述">
-        <el-col :span="12">
-          <el-input type="textarea" v-model="article.description" placeholder="博文描述" clearable></el-input>
-        </el-col>
-      </el-form-item>
-      <el-form-item label="博文内容">
-        <mavon-editor ref=md v-model="article.content" @imgAdd="imgAdd" @change="mavonChangeHandle"></mavon-editor>
+      <el-form-item label="博文内容" prop="content">
+        <mavon-editor ref="md" v-model="article.content" @imgAdd="imgAdd" @change="mavonChangeHandle"></mavon-editor>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="saveArticle()">保存</el-button>
-        <el-button >重置</el-button>
+        <el-button type="primary" @click="editArticle()">保存</el-button>
+        <el-button @click="resetForm('articleForm')">重置</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -95,163 +113,164 @@ import MavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 // import { treeDataTranslate } from '@/utils'
 import marked from 'marked'
+import { addArticle, getArticle, uploadFile,updateArticle } from '@/api/admin/article'
+import { categorySelect } from '@/api/admin/category'
+import { tagSelect } from '@/api/admin/tag'
+import { getToken } from '@/utils/auth'
+
 export default {
   components: {
     'mavon-editor': MavonEditor.mavonEditor
   },
-  data () {
+  data() {
     return {
+      headers: {
+        Authorization: 'Bearer ' + getToken()
+      },
       article: {
-        recommend: false,
-        tagList: [],
+        articleId:null,
+        isRecommend: false,
+        tags: [],
         type: 0,
-        coverType: 2 // 默认无图片
+        coverType: 2, // 默认无图片
+        categoryId:''
       },
       coverTypeList: '',
       url: '',
       file: [],
       rules: {
-        title: {required: true, message: '请输入博文标题', trigger: 'change'}
+        title: { required: true, message: '请输入博文标题', trigger: 'change' },
+        // categorySelect: { required: true, message: '请选择博文分类', trigger: 'blur' },
+        // tagListSelect: { required: true, message: '请选择博文标签', trigger: 'blur' },
+        author: { required: false},
+        coverType: { required: false },
+        description: { required: false },
+        recommend:{ required: false },
+        coverUrl: { required: false },
+        content: { required: true, message: '请输入博文内容', trigger: 'change' },
       },
-      tagList: [],
+      tags: [],
       tagListSelect: [],
-      tagListNew: [],
-      categoryOptions: [],
-      categoryOptionsSelect: [],
-      categoryListTreeProps: {
-        label: 'name',
-        children: 'children',
-        value: 'id'
-      }
+      category: [],
+      categorySelect: '',
     }
   },
-  created () {
+  created() {
     this.init()
   },
   methods: {
-    init () {
-      // 获取博文分类
-      this.$http({
-        url: this.$http.adornUrl('/admin/operation/category/list'),
-        method: 'get',
-        params: this.$http.adornParams({type: 0})
-      }).then(({data}) => {
-        if (data && data.code === 200) {
-          // this.categoryOptions = treeDataTranslate(data.categoryList)
-        }
-      }).then(() => {
-        this.$http({
-          url: this.$http.adornUrl('/admin/operation/tag/select'),
-          method: 'get',
-          params: this.$http.adornParams({type: 0})
-        }).then(({data}) => {
-          if (data && data.code === 200) {
-            this.tagList = data.tagList
+    init() {
+      let id = this.$route.params.id
+      // 修改
+      if (id) {
+        tagSelect().then(res => {
+          this.tags = res.data
+        })
+        categorySelect().then(res => {
+          this.category = res.data
+        })
+        getArticle(id).then(res => {
+          this.article = res.data
+          if (res.data.tags){
+            this.tagListSelect = res.data.tags.map(tag =>{
+              return tag.tagId
+            })
+          }
+          this.categorySelect = res.data.category.categoryId
+          if (res.data.coverUrl){
+            this.file = [{name:'封面',url:res.data.coverUrl}]
           }
         })
-      }).then(() => {
-        this.url = this.$http.adornUrl(`/admin/oss/resource/upload?token=${this.$cookie.get('token')}`)
-        let id = this.$route.params.id
-        if (id) {
-          this.$http({
-            url: this.$http.adornUrl('/admin/article/info/' + id),
-            method: 'get',
-            params: this.$http.adornParams()
-          }).then(({data}) => {
-            if (data && data.code === 200) {
-              this.article = data.article
-              this.file = [{url: data.article.cover}]
-              // 转换tagList
-              this.tagListSelect = this.article.tagList.map(tag => {
-                return tag.id
-              })
-              // 转换categoryId
-              this.categoryOptionsSelect = this.article.categoryId.split(',').map((data) => { return +data })
-            }
-          })
-        }
-      })
+        // 添加
+      } else {
+        categorySelect().then(res => {
+          this.category = res.data
+        })
+        tagSelect().then(res => {
+          this.tags = res.data
+        })
+      }
     },
     // 过滤标签
-    filterTagList (selectValueList) {
+    filterTagList(selectValueList) {
       let tagList = []
       selectValueList.forEach(value => {
         let isInput = true
-        for (let i = 0; i < this.tagList.length; i++) {
-          let tag = this.tagList[i]
-          if (tag.id === value || value.id) {
+        for (let i = 0; i < this.tags.length; i++) {
+          let tag = this.tags[i]
+          if (tag.tagId === value || value.tagId) {
             isInput = false
-            tagList.push({id: tag.id, name: tag.name, type: 0})
+            tagList.push({ tagId: tag.tagId, name: tag.name })
           }
         }
         if (isInput) {
-          tagList.push({name: value, type: 0})
+          tagList.push({ name: value })
         }
       })
-      this.article.tagList = tagList
+      this.article.tags = tagList
     },
     // 上传之前
-    beforeUploadHandle (file) {
+    beforeUploadHandle(file) {
       if (file.type !== 'image/jpg' && file.type !== 'image/jpeg' && file.type !== 'image/png' && file.type !== 'image/gif') {
-        this.$message.error('只支持jpg、png、gif格式的图片！')
+        this.msgError('只支持jpg、png、gif格式的图片！')
         return false
       }
     },
     // 上传成功
-    successHandle (response) {
+    successHandle(response) {
       if (response && response.code === 200) {
-        this.article.cover = response.resource.url
-        this.file = [response.resource]
-        this.$message.success('上传成功！')
+        this.article.coverUrl = response.data.url
+        this.file = [response.data]
+        this.msgSuccess('上传成功！')
       }
     },
     // 移除上传文件
-    handleRemove (file, fileList) {
+    handleRemove(file, fileList) {
       this.file = []
-      this.article.cover = ''
+      this.article.coverUrl = ''
     },
-    // 保存文章
-    saveArticle () {
+    // 编辑文章
+    editArticle() {
       this.$refs['articleForm'].validate((valid) => {
         if (valid) {
           // 转化categoryId
-          this.article.categoryId = this.categoryOptionsSelect.join(',')
-          this.$http({
-            url: this.$http.adornUrl(`/admin/article/${!this.article.id ? 'save' : 'update'}`),
-            method: !this.article.id ? 'post' : 'put',
-            data: this.$http.adornData(this.article)
-          }).then(({data}) => {
-            if (data && data.code === 200) {
-              this.$message.success('保存博文成功')
-              // 关闭当前标签
-              this.$emit('closeCurrentTabs')
-              // 跳转到list
-              this.$router.push('/article-article')
-            } else {
-              this.$message.error(data.msg)
-            }
-          })
+          this.article.categoryId = this.categorySelect
+          if (this.article.articleId){
+            updateArticle(this.article).then(res => {
+              if (res.code == 200) {
+                this.msgSuccess('修改成功')
+              } else {
+                this.msgError('修改失败')
+              }
+            })
+          } else {
+            addArticle(this.article).then(res => {
+              if (res.code == 200) {
+                this.msgSuccess('保存成功')
+              } else {
+                this.msgError('保存失败')
+              }
+            })
+          }
         } else {
           return false
         }
       })
     },
     // 文章内容图片上传
-    imgAdd (pos, $file) {
+    imgAdd(pos, $file) {
       // 第一步.将图片上传到服务器.
       let formData = new FormData()
       formData.append('file', $file)
-      this.$http({
-        url: this.url,
-        method: 'post',
-        data: formData,
-        headers: { 'Content-Type': 'multipart/form-data' }
-      }).then(({data}) => {
-        this.$refs.md.$img2Url(pos, data.resource.url)
+      uploadFile(formData).then(({ data }) => {
+        this.$refs.md.$img2Url(pos, data.url)
       })
     },
-    mavonChangeHandle (context, render) {
+    mavonChangeHandle(context, render) {
       this.article.contentFormat = marked(context)
+    },
+    resetForm(formName) {
+      this.$refs[formName].resetFields();
     }
   }
 }

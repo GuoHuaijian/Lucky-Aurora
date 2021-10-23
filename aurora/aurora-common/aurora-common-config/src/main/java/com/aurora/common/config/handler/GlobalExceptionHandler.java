@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import javax.validation.ConstraintViolationException;
+import java.nio.file.AccessDeniedException;
 
 /**
  * describe: 全局异常捕获处理
@@ -59,8 +60,18 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 参数校验失败
+     * 没有权限
      *
+     * @param e
+     * @return
+     */
+    @ExceptionHandler(AccessDeniedException.class)
+    public Result exceptionHandler(AccessDeniedException e) {
+        log.error("出现错误：{}", e);
+        return Result.error("没有权限");
+    }
+
+    /**
      * @param e
      * @return
      */

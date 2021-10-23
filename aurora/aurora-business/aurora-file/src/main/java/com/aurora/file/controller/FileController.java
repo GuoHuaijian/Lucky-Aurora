@@ -6,6 +6,8 @@ import com.aurora.file.domain.File;
 import com.aurora.file.service.FileService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -21,6 +23,7 @@ import javax.annotation.Resource;
  * @Version 1.0.0
  */
 @RestController
+@RequestMapping("file")
 @Slf4j
 public class FileController {
 
@@ -31,7 +34,7 @@ public class FileController {
      * 文件上传请求
      */
     @PostMapping("upload")
-    public Result<File> upload(MultipartFile file) {
+    public Result<File> upload(@RequestParam("file") MultipartFile file) {
         try {
             // 上传并返回访问地址
             String url = fileService.uploadFile(file);

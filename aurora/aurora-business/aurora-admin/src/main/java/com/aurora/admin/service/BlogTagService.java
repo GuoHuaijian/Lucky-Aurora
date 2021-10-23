@@ -16,20 +16,51 @@ import java.util.List;
 public interface BlogTagService extends IService<BlogTag> {
 
     /**
-     * 分页查询
+     * 查询标签
      *
-     * @param tag
-     * @return
+     * @param tagId 标签主键
+     * @return 标签
      */
-    List<BlogTag> list(BlogTag tag);
-
+    BlogTag selectBlogTagByTagId(Long tagId);
 
     /**
-     * 删除标签
+     * 查询标签列表
      *
-     * @param tagIds
-     * @return
+     * @param tag 标签
+     * @return 标签集合
      */
-    boolean deleteTag(List<Integer> tagIds);
+    List<BlogTag> selectBlogTagList(BlogTag tag);
+
+    /**
+     * 新增标签
+     *
+     * @param tag 标签
+     * @return 结果
+     */
+    boolean insertBlogTag(BlogTag tag);
+
+    /**
+     * 修改标签
+     *
+     * @param tag 标签
+     * @return 结果
+     */
+    boolean updateBlogTag(BlogTag tag);
+
+    /**
+     * 批量删除标签
+     *
+     * @param tagIds 需要删除的标签主键集合
+     * @return 结果
+     */
+    boolean deleteBlogTagByTagIds(Long[] tagIds);
+
+    /**
+     * 删除标签信息
+     *
+     * @param tagId 标签主键
+     * @return 结果
+     */
+    boolean deleteBlogTagByTagId(Long tagId);
 
 }

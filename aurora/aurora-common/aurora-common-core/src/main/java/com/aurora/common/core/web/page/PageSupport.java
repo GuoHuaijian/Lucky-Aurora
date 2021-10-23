@@ -18,12 +18,12 @@ public class PageSupport {
     /**
      * 当前记录起始索引
      */
-    public static final String PAGE_NUM = "current";
+    public static final String PAGE_NUM = "pageNum";
 
     /**
      * 每页显示记录数
      */
-    public static final String PAGE_SIZE = "size";
+    public static final String PAGE_SIZE = "pageSize";
 
     /**
      * 排序字段  多个字段用","分隔
@@ -40,10 +40,10 @@ public class PageSupport {
      */
     public static PageDomain getPageDomain() {
         PageDomain pageDomain = new PageDomain();
-        Long current = Optional.ofNullable(ServletUtil.getParameterToLong(PAGE_NUM)).orElse(1L);
+        Long num = Optional.ofNullable(ServletUtil.getParameterToLong(PAGE_NUM)).orElse(1L);
         Long size = Optional.ofNullable(ServletUtil.getParameterToLong(PAGE_SIZE)).orElse(10L);
-        pageDomain.setCurrent(current);
-        pageDomain.setSize(size);
+        pageDomain.setPageNum(num);
+        pageDomain.setPageSize(size);
         pageDomain.setOrderByColumn(ServletUtil.getParameter(ORDER_BY_COLUMN));
         pageDomain.setIsAsc(ServletUtil.getParameter(IS_ASC));
         return pageDomain;

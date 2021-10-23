@@ -89,8 +89,8 @@ public class BlogArticle extends BaseEntity implements Serializable {
     /**
      * 封面
      */
-    @TableField(value = "cover")
-    private String cover;
+    @TableField(value = "cover_url")
+    private String coverUrl;
 
     /**
      * 是否推荐文章
@@ -132,7 +132,7 @@ public class BlogArticle extends BaseEntity implements Serializable {
      * 分类
      */
     @TableField(exist = false)
-    private String category;
+    private BlogCategory category;
 
     /**
      * 标签列表

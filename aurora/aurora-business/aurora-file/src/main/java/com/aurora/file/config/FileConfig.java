@@ -1,11 +1,7 @@
 package com.aurora.file.config;
 
-import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.OSSClientBuilder;
-import io.minio.MinioClient;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
@@ -72,10 +68,6 @@ public class FileConfig {
          */
         private String objectName;
 
-        @Bean
-        public OSSClient getOSSClient() {
-            return (OSSClient) new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
-        }
     }
 
     /**
@@ -104,10 +96,6 @@ public class FileConfig {
          */
         private String bucketName;
 
-        @Bean
-        public MinioClient getMinioClient() {
-            return MinioClient.builder().endpoint(url).credentials(accessKey, secretKey).build();
-        }
     }
 
     /**

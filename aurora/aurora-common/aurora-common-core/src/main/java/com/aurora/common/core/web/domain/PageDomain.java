@@ -18,12 +18,12 @@ public class PageDomain {
     /**
      * 每页显示条数，默认 10
      */
-    private long size;
+    private long pageSize;
 
     /**
-     * 当前页
+     * 页码
      */
-    private long current;
+    private long pageNum;
 
     /**
      * 排序字段 多个字段用","分隔
