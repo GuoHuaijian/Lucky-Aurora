@@ -1,6 +1,15 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
+      <el-form-item label="内容" prop="title">
+        <el-input
+          v-model="queryParams.content"
+          placeholder="请输入内容"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -56,9 +65,9 @@
 
     <el-table v-loading="loading" :data="aboutList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="关于id" align="center" prop="aboutId" />
-      <el-table-column label="关于内容" align="center" prop="content" />
-      <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
+      <el-table-column label="主键" width="55" align="center" prop="aboutId" />
+      <el-table-column label="内容" align="center" prop="content" show-tooltip-when-overflow/>
+      <el-table-column label="操作" width="130" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
             size="mini"
@@ -149,8 +158,8 @@ export default {
     getList() {
       this.loading = true;
       listAbout(this.queryParams).then(response => {
-        this.aboutList = response.rows;
-        this.total = response.total;
+        this.aboutList = response.data.data;
+        this.total = response.data.total;
         this.loading = false;
       });
     },

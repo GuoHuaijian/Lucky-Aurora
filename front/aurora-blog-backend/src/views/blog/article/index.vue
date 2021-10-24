@@ -19,14 +19,15 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="发布状态" prop="publish">
-        <el-input
-          v-model="queryParams.publish"
-          placeholder="请输入发布状态"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
+      <el-form-item label="状态" prop="publish">
+        <el-select v-model="queryParams.publish" placeholder="请选择发布状态" clearable size="small">
+          <el-option
+            v-for="dict in statusOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -162,7 +163,7 @@
 
 <script>
 import { listArticle, delArticle, exportArticle, updateArticle } from '@/api/admin/article'
-import { changeUserStatus } from '@/api/system/user'
+import { getDicts } from '@/api/system/dict/data'
 
 export default {
   name: "Article",
@@ -184,6 +185,8 @@ export default {
       total: 0,
       // 文章表格数据
       articleList: [],
+      // 状态数据字典
+      statusOptions:[],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -196,6 +199,9 @@ export default {
   },
   created() {
     this.getList();
+    this.getDicts('admin_article_status').then(response => {
+      this.statusOptions = response.data
+    })
   },
   methods: {
     /** 查询文章列表 */

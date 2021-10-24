@@ -1,30 +1,26 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="评论类型：0:留言 1:文章" prop="type">
-        <el-select v-model="queryParams.type" placeholder="请选择评论类型：0:留言 1:文章" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
+      <el-form-item label="类型" prop="type">
+        <el-select v-model="queryParams.type" placeholder="请选择评论类型" clearable size="small">
+          <el-option
+            v-for="dict in typeOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
-      <el-form-item label="被评论id，可以是单个文章id、项目、资源" prop="ownerId">
+      <el-form-item label="评论内容" prop="content">
         <el-input
-          v-model="queryParams.ownerId"
-          placeholder="请输入被评论id，可以是单个文章id、项目、资源"
+          v-model="queryParams.content"
+          placeholder="请输入评论内容"
           clearable
           size="small"
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="评论id 第一级为0" prop="parentId">
-        <el-input
-          v-model="queryParams.parentId"
-          placeholder="请输入评论id 第一级为0"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="评论者名字" prop="name">
+      <el-form-item label="评论者" prop="name">
         <el-input
           v-model="queryParams.name"
           placeholder="请输入评论者名字"
@@ -33,34 +29,7 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="点赞的数量" prop="likeNum">
-        <el-input
-          v-model="queryParams.likeNum"
-          placeholder="请输入点赞的数量"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="踩的数量" prop="dislikeNum">
-        <el-input
-          v-model="queryParams.dislikeNum"
-          placeholder="请输入踩的数量"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="回复的id" prop="replyId">
-        <el-input
-          v-model="queryParams.replyId"
-          placeholder="请输入回复的id"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="回复评论者名字" prop="replyName">
+      <el-form-item label="回复者" prop="replyName">
         <el-input
           v-model="queryParams.replyName"
           placeholder="请输入回复评论者名字"
@@ -124,17 +93,23 @@
 
     <el-table v-loading="loading" :data="commentList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="评论主键id" align="center" prop="id" />
-      <el-table-column label="评论类型：0:留言 1:文章" align="center" prop="type" />
-      <el-table-column label="被评论id，可以是单个文章id、项目、资源" align="center" prop="ownerId" />
-      <el-table-column label="评论id 第一级为0" align="center" prop="parentId" />
-      <el-table-column label="评论者名字" align="center" prop="name" />
-      <el-table-column label="评论者头像" align="center" prop="avatar" />
-      <el-table-column label="点赞的数量" align="center" prop="likeNum" />
-      <el-table-column label="踩的数量" align="center" prop="dislikeNum" />
+      <el-table-column label="主键" align="center" prop="commentId" />
+      <el-table-column label="评论类型" align="center" prop="type" >
+        <template slot-scope="scope">
+          <dict-tag :options="typeOptions" :value="scope.row.type"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="评论文章" align="center" prop="ownerId" />
+      <el-table-column label="评论者" align="center" prop="name" />
+      <el-table-column label="头像" align="center" prop="avatar" >
+        <template slot-scope="scope">
+          <img :src="scope.row.avatar" width="50px"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="点赞" align="center" prop="likeNum" />
+      <el-table-column label="踩" align="center" prop="dislikeNum" />
       <el-table-column label="评论内容" align="center" prop="content" />
-      <el-table-column label="回复的id" align="center" prop="replyId" />
-      <el-table-column label="回复评论者名字" align="center" prop="replyName" />
+      <el-table-column label="回复者" align="center" prop="replyName" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -209,6 +184,7 @@
 
 <script>
 import { listComment, getComment, delComment, addComment, updateComment, exportComment } from "@/api/admin/comment";
+import { getDicts } from '@/api/system/dict/data'
 
 export default {
   name: "Comment",
@@ -234,6 +210,8 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      // 状态数据字典
+      typeOptions:[],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -273,14 +251,17 @@ export default {
   },
   created() {
     this.getList();
+    this.getDicts('admin_comment_type').then(response => {
+      this.typeOptions = response.data
+    })
   },
   methods: {
     /** 查询评论列表 */
     getList() {
       this.loading = true;
       listComment(this.queryParams).then(response => {
-        this.commentList = response.rows;
-        this.total = response.total;
+        this.commentList = response.data.data;
+        this.total = response.data.total;
         this.loading = false;
       });
     },

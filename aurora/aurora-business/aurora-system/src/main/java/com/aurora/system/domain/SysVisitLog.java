@@ -1,9 +1,7 @@
 package com.aurora.system.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -93,7 +91,11 @@ public class SysVisitLog implements Serializable {
     @TableField(value = "status")
     private Integer status;
 
-    @TableField(value = "visit_time")
+    /**
+     * 访问时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "visit_time", fill = FieldFill.INSERT)
     private Date visitTime;
 
     private static final long serialVersionUID = 1L;

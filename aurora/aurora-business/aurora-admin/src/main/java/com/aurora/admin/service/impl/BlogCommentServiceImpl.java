@@ -3,7 +3,6 @@ package com.aurora.admin.service.impl;
 import com.aurora.admin.domain.BlogComment;
 import com.aurora.admin.mapper.BlogCommentMapper;
 import com.aurora.admin.service.BlogCommentService;
-import com.aurora.common.core.utils.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -41,8 +40,7 @@ public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogC
      */
     @Override
     public List<BlogComment> selectBlogCommentList(BlogComment comment) {
-        QueryWrapper<BlogComment> wrapper = new QueryWrapper<>(comment);
-        return list(wrapper);
+        return list(new QueryWrapper<>(comment));
     }
 
     /**
@@ -53,7 +51,6 @@ public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogC
      */
     @Override
     public boolean insertBlogComment(BlogComment comment) {
-        comment.setCreateTime(DateUtil.getNowDate());
         return save(comment);
     }
 
@@ -65,7 +62,6 @@ public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogC
      */
     @Override
     public boolean updateBlogComment(BlogComment comment) {
-        comment.setUpdateTime(DateUtil.getNowDate());
         return updateById(comment);
     }
 

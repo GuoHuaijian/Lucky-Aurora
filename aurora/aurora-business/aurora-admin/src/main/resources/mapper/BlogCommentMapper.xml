@@ -5,7 +5,7 @@
         <!--@mbg.generated-->
         <!--@Table blog_comment-->
         <id column="comment_id" jdbcType="VARCHAR" property="commentId"/>
-        <result column="type" jdbcType="BOOLEAN" property="type"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="owner_id" jdbcType="VARCHAR" property="ownerId"/>
         <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>

@@ -1,9 +1,7 @@
 package com.aurora.system.domain;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -63,13 +61,15 @@ public class SysRole implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 修改时间
      */
-    @TableField(value = "update_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     /**
@@ -96,7 +96,7 @@ public class SysRole implements Serializable {
         this.roleId = roleId;
     }
 
-    public boolean isMenuCheckStrictly() {
+    public Boolean isMenuCheckStrictly() {
         return menuCheckStrictly;
     }
 

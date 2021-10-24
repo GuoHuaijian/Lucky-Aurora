@@ -1,0 +1,19 @@
+spring:
+  # 服务名
+  application:
+    name: aurora-admin
+  #激活配置
+  profiles:
+    active: dev
+  cloud:
+    nacos:
+      config:
+        #指定文件后缀
+        file-extension: yaml
+        #指定配置群组 默认群组DEFAULT_GROUP
+        group: admin
+        #默认为public命名空间,可以省略不写
+        #namespace: public
+        #文件名 -- 如果没有配置则默认为 ${spring.appliction.name}
+        #prefix: aurora-admin
+        server-addr: 1.14.72.150:8848

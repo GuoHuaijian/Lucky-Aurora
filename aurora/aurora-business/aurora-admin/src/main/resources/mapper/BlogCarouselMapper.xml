@@ -9,7 +9,7 @@
         <result column="title" jdbcType="VARCHAR" property="title"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
         <result column="display" jdbcType="CHAR" property="display"/>
-        <result column="type" jdbcType="BOOLEAN" property="type"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>

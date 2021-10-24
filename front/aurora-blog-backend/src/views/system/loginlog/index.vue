@@ -64,7 +64,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['monitor:logininfor:remove']"
+          v-hasPermi="['system:loginlog:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -74,7 +74,7 @@
           icon="el-icon-delete"
           size="mini"
           @click="handleClean"
-          v-hasPermi="['monitor:logininfor:remove']"
+          v-hasPermi="['system:loginlog:remove']"
         >清空</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -85,7 +85,7 @@
           size="mini"
           :loading="exportLoading"
           @click="handleExport"
-          v-hasPermi="['monitor:logininfor:export']"
+          v-hasPermi="['system:loginlog:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -123,10 +123,10 @@
 </template>
 
 <script>
-import { list, delLogininfor, cleanLogininfor, exportLogininfor } from "@/api/monitor/logininfor";
-
+import { list, delLoginLog, cleanLoginLog, exportLoginLog } from "@/api/system/loginlog";
+import { getDicts } from "@/api/system/dict/data"
 export default {
-  name: "Logininfor",
+  name: "LoginLog",
   data() {
     return {
       // 遮罩层
@@ -170,8 +170,8 @@ export default {
     getList() {
       this.loading = true;
       list(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-          this.list = response.rows;
-          this.total = response.total;
+          this.list = response.data.data;
+          this.total = response.data.total;
           this.loading = false;
         }
       );
@@ -207,7 +207,7 @@ export default {
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return delLogininfor(infoIds);
+          return delLoginLog(infoIds);
         }).then(() => {
           this.getList();
           this.msgSuccess("删除成功");
@@ -220,7 +220,7 @@ export default {
           cancelButtonText: "取消",
           type: "warning"
         }).then(function() {
-          return cleanLogininfor();
+          return cleanLoginLog();
         }).then(() => {
           this.getList();
           this.msgSuccess("清空成功");
@@ -235,7 +235,7 @@ export default {
           type: "warning"
         }).then(() => {
           this.exportLoading = true;
-          return exportLogininfor(queryParams);
+          return exportLoginLog(queryParams);
         }).then(response => {
           this.download(response.msg);
           this.exportLoading = false;

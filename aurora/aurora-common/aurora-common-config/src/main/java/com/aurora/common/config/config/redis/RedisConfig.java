@@ -1,4 +1,4 @@
-package com.aurora.common.config.config;
+package com.aurora.common.config.config.redis;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

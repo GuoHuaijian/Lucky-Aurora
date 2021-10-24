@@ -63,7 +63,7 @@
             <el-col :span="6">
               <el-form-item label="展示类型" prop="coverType">
                 <el-radio-group v-model="article.coverType">
-                  <el-radio v-for="type in coverTypeList" :key="type.parKey" :label="type.parKey">{{ type.parValue }}
+                  <el-radio v-for="type in coverTypeList" :key="type.code" :label="type.code">{{ type.value }}
                   </el-radio>
                 </el-radio-group>
               </el-form-item>
@@ -113,10 +113,11 @@ import MavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 // import { treeDataTranslate } from '@/utils'
 import marked from 'marked'
-import { addArticle, getArticle, uploadFile,updateArticle } from '@/api/admin/article'
+import { addArticle, getArticle, uploadFile, updateArticle } from '@/api/admin/article'
 import { categorySelect } from '@/api/admin/category'
 import { tagSelect } from '@/api/admin/tag'
 import { getToken } from '@/utils/auth'
+import store from '@/store'
 
 export default {
   components: {
@@ -128,34 +129,36 @@ export default {
         Authorization: 'Bearer ' + getToken()
       },
       article: {
-        articleId:null,
+        articleId: null,
         isRecommend: false,
         tags: [],
         type: 0,
         coverType: 2, // 默认无图片
-        categoryId:''
+        categoryId: '',
+        author:''
       },
-      coverTypeList: '',
+      coverTypeList: [{ code: 0, value: '小图片' }, { code: 1, value: '大图片' }, { code: 2, value: '无图片' }],
       url: '',
       file: [],
       rules: {
         title: { required: true, message: '请输入博文标题', trigger: 'change' },
         // categorySelect: { required: true, message: '请选择博文分类', trigger: 'blur' },
         // tagListSelect: { required: true, message: '请选择博文标签', trigger: 'blur' },
-        author: { required: false},
+        author: { required: false },
         coverType: { required: false },
         description: { required: false },
-        recommend:{ required: false },
+        recommend: { required: false },
         coverUrl: { required: false },
-        content: { required: true, message: '请输入博文内容', trigger: 'change' },
+        content: { required: true, message: '请输入博文内容', trigger: 'change' }
       },
       tags: [],
       tagListSelect: [],
       category: [],
-      categorySelect: '',
+      categorySelect: ''
     }
   },
   created() {
+    this.article.author = store.getters.name
     this.init()
   },
   methods: {
@@ -171,14 +174,16 @@ export default {
         })
         getArticle(id).then(res => {
           this.article = res.data
-          if (res.data.tags){
-            this.tagListSelect = res.data.tags.map(tag =>{
+          this.article.coverType = res.data.coverType
+          this.article.author = res.data.author
+          if (res.data.tags) {
+            this.tagListSelect = res.data.tags.map(tag => {
               return tag.tagId
             })
           }
           this.categorySelect = res.data.category.categoryId
-          if (res.data.coverUrl){
-            this.file = [{name:'封面',url:res.data.coverUrl}]
+          if (res.data.coverUrl) {
+            this.file = [{ name: '封面', url: res.data.coverUrl }]
           }
         })
         // 添加
@@ -235,7 +240,7 @@ export default {
         if (valid) {
           // 转化categoryId
           this.article.categoryId = this.categorySelect
-          if (this.article.articleId){
+          if (this.article.articleId) {
             updateArticle(this.article).then(res => {
               if (res.code == 200) {
                 this.msgSuccess('修改成功')
@@ -270,7 +275,7 @@ export default {
       this.article.contentFormat = marked(context)
     },
     resetForm(formName) {
-      this.$refs[formName].resetFields();
+      this.$refs[formName].resetFields()
     }
   }
 }

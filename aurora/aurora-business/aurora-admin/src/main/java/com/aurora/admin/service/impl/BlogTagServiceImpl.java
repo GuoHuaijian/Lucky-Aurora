@@ -6,7 +6,6 @@ import com.aurora.admin.mapper.BlogTagMapper;
 import com.aurora.admin.service.BlogArticleTagService;
 import com.aurora.admin.service.BlogTagService;
 import com.aurora.common.core.exception.ServiceException;
-import com.aurora.common.core.utils.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -49,8 +48,7 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
      */
     @Override
     public List<BlogTag> selectBlogTagList(BlogTag tag) {
-        QueryWrapper<BlogTag> wrapper = new QueryWrapper<>(tag);
-        return list(wrapper);
+        return list(new QueryWrapper<>(tag));
     }
 
     /**
@@ -61,7 +59,6 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
      */
     @Override
     public boolean insertBlogTag(BlogTag tag) {
-        tag.setCreateTime(DateUtil.getNowDate());
         return save(tag);
     }
 
@@ -73,7 +70,6 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
      */
     @Override
     public boolean updateBlogTag(BlogTag tag) {
-        tag.setUpdateTime(DateUtil.getNowDate());
         return updateById(tag);
     }
 

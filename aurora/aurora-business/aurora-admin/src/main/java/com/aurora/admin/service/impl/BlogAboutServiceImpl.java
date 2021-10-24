@@ -3,7 +3,6 @@ package com.aurora.admin.service.impl;
 import com.aurora.admin.domain.BlogAbout;
 import com.aurora.admin.mapper.BlogAboutMapper;
 import com.aurora.admin.service.BlogAboutService;
-import com.aurora.common.core.utils.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -41,8 +40,7 @@ public class BlogAboutServiceImpl extends ServiceImpl<BlogAboutMapper, BlogAbout
      */
     @Override
     public List<BlogAbout> selectBlogAboutList(BlogAbout about) {
-        QueryWrapper<BlogAbout> wrapper = new QueryWrapper<>(about);
-        return list(wrapper);
+        return list(new QueryWrapper<>(about));
     }
 
     /**
@@ -53,7 +51,6 @@ public class BlogAboutServiceImpl extends ServiceImpl<BlogAboutMapper, BlogAbout
      */
     @Override
     public boolean insertBlogAbout(BlogAbout about) {
-        about.setCreateTime(DateUtil.getNowDate());
         return this.save(about);
     }
 
@@ -65,7 +62,6 @@ public class BlogAboutServiceImpl extends ServiceImpl<BlogAboutMapper, BlogAbout
      */
     @Override
     public boolean updateBlogAbout(BlogAbout about) {
-        about.setUpdateTime(DateUtil.getNowDate());
         return updateById(about);
     }
 

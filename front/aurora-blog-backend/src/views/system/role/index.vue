@@ -106,7 +106,7 @@
       <el-table-column type="selection" width="55" align="center" />
       <el-table-column label="角色编号" prop="roleId" width="120" />
       <el-table-column label="角色名称" prop="roleName" :show-overflow-tooltip="true" width="150" />
-      <el-table-column label="权限字符" prop="roleKey" :show-overflow-tooltip="true" width="150" />
+      <el-table-column label="权限字符" prop="roleCode" :show-overflow-tooltip="true" width="150" />
       <el-table-column label="显示顺序" prop="roleSort" width="100" />
       <el-table-column label="状态" align="center" width="100">
         <template slot-scope="scope">
@@ -124,7 +124,7 @@
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
-        <template slot-scope="scope" v-if="scope.row.roleId !== 1">
+        <template slot-scope="scope">
           <el-button
             size="mini"
             type="text"
@@ -329,7 +329,7 @@ export default {
         pageNum: 1,
         pageSize: 10,
         roleName: undefined,
-        roleKey: undefined,
+        roleCode: undefined,
         status: undefined
       },
       // 表单参数
@@ -364,8 +364,8 @@ export default {
       this.loading = true;
       listRole(this.addDateRange(this.queryParams, this.dateRange)).then(
         response => {
-          this.roleList = response.rows;
-          this.total = response.total;
+          this.roleList = response.data.data;
+          this.total = response.data.total;
           this.loading = false;
         }
       );

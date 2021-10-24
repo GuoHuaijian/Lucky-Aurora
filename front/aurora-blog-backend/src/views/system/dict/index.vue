@@ -255,8 +255,8 @@ export default {
     getList() {
       this.loading = true;
       listType(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-          this.typeList = response.rows;
-          this.total = response.total;
+          this.typeList = response.data.data;
+          this.total = response.data.total;
           this.loading = false;
         }
       );

@@ -1,4 +1,4 @@
-package com.aurora.common.config.config;
+package com.aurora.common.config.config.redis;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.parser.ParserConfig;

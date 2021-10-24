@@ -3,7 +3,6 @@ package com.aurora.admin.service.impl;
 import com.aurora.admin.domain.BlogCarousel;
 import com.aurora.admin.mapper.BlogCarouselMapper;
 import com.aurora.admin.service.BlogCarouselService;
-import com.aurora.common.core.utils.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -41,8 +40,7 @@ public class BlogCarouselServiceImpl extends ServiceImpl<BlogCarouselMapper, Blo
      */
     @Override
     public List<BlogCarousel> selectBlogCarouselList(BlogCarousel carousel) {
-        QueryWrapper<BlogCarousel> wrapper = new QueryWrapper<>(carousel);
-        return list(wrapper);
+        return list(new QueryWrapper<>(carousel));
     }
 
     /**
@@ -53,7 +51,6 @@ public class BlogCarouselServiceImpl extends ServiceImpl<BlogCarouselMapper, Blo
      */
     @Override
     public boolean insertBlogCarousel(BlogCarousel carousel) {
-        carousel.setCreateTime(DateUtil.getNowDate());
         return save(carousel);
     }
 
@@ -65,7 +62,6 @@ public class BlogCarouselServiceImpl extends ServiceImpl<BlogCarouselMapper, Blo
      */
     @Override
     public boolean updateBlogCarousel(BlogCarousel carousel) {
-        carousel.setUpdateTime(DateUtil.getNowDate());
         return updateById(carousel);
     }
 

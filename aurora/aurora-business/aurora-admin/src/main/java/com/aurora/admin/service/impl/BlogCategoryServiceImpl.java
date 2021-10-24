@@ -6,7 +6,6 @@ import com.aurora.admin.mapper.BlogCategoryMapper;
 import com.aurora.admin.service.BlogArticleService;
 import com.aurora.admin.service.BlogCategoryService;
 import com.aurora.common.core.exception.ServiceException;
-import com.aurora.common.core.utils.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -49,8 +48,7 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
      */
     @Override
     public List<BlogCategory> selectBlogCategoryList(BlogCategory category) {
-        QueryWrapper<BlogCategory> wrapper = new QueryWrapper<>(category);
-        return list(wrapper);
+        return list(new QueryWrapper<>(category));
     }
 
     /**
@@ -61,7 +59,6 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
      */
     @Override
     public boolean insertBlogCategory(BlogCategory category) {
-        category.setCreateTime(DateUtil.getNowDate());
         return save(category);
     }
 
@@ -73,7 +70,6 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
      */
     @Override
     public boolean updateBlogCategory(BlogCategory category) {
-        category.setUpdateTime(DateUtil.getNowDate());
         return updateById(category);
     }
 

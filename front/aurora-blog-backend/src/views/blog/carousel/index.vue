@@ -1,16 +1,7 @@
 <template>
   <div class="app-container">
     <el-form :model="queryParams" ref="queryForm" :inline="true" v-show="showSearch" label-width="68px">
-      <el-form-item label="轮播图url" prop="imgUrl">
-        <el-input
-          v-model="queryParams.imgUrl"
-          placeholder="请输入轮播图url"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="轮播图标题" prop="title">
+      <el-form-item label="标题" prop="title">
         <el-input
           v-model="queryParams.title"
           placeholder="请输入轮播图标题"
@@ -19,27 +10,14 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="轮播图跳转地址" prop="url">
-        <el-input
-          v-model="queryParams.url"
-          placeholder="请输入轮播图跳转地址"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="是否展示该轮播图，1展示，2不展示" prop="display">
-        <el-input
-          v-model="queryParams.display"
-          placeholder="请输入是否展示该轮播图，1展示，2不展示"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="1外链，2文章" prop="type">
-        <el-select v-model="queryParams.type" placeholder="请选择1外链，2文章" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
+      <el-form-item label="状态" prop="display">
+        <el-select v-model="queryParams.display" placeholder="请选择轮播图状态" clearable size="small">
+          <el-option
+            v-for="dict in statusOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
       </el-form-item>
       <el-form-item>
@@ -97,12 +75,19 @@
 
     <el-table v-loading="loading" :data="carouselList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="轮播图id" align="center" prop="carouselId" />
-      <el-table-column label="轮播图url" align="center" prop="imgUrl" />
-      <el-table-column label="轮播图标题" align="center" prop="title" />
-      <el-table-column label="轮播图跳转地址" align="center" prop="url" />
-      <el-table-column label="是否展示该轮播图，1展示，2不展示" align="center" prop="display" />
-      <el-table-column label="1外链，2文章" align="center" prop="type" />
+      <el-table-column label="主键" align="center" prop="carouselId" />
+      <el-table-column label="标题" align="center" prop="title" />
+      <el-table-column label="跳转地址" align="center" prop="url" />
+      <el-table-column label="状态" align="center" prop="display" >
+        <template slot-scope="scope">
+          <dict-tag :options="statusOptions" :value="scope.row.display"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="类型" align="center" prop="type" >
+        <template slot-scope="scope">
+          <dict-tag :options="typeOptions" :value="scope.row.type"/>
+        </template>
+      </el-table-column>
       <el-table-column label="备注" align="center" prop="remark" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
@@ -166,6 +151,7 @@
 
 <script>
 import { listCarousel, getCarousel, delCarousel, addCarousel, updateCarousel, exportCarousel } from "@/api/admin/carousel";
+import { getDicts } from '@/api/system/dict/data'
 
 export default {
   name: "Carousel",
@@ -191,6 +177,10 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      // 状态数据字典
+      statusOptions:[],
+      // 类型数据字典
+      typeOptions:[],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -210,14 +200,20 @@ export default {
   },
   created() {
     this.getList();
+    this.getDicts('admin_carousel_status').then(response => {
+      this.statusOptions = response.data
+    }),
+      this.getDicts('admin_carousel_type').then(response => {
+        this.typeOptions = response.data
+      })
   },
   methods: {
     /** 查询轮播图列表 */
     getList() {
       this.loading = true;
       listCarousel(this.queryParams).then(response => {
-        this.carouselList = response.rows;
-        this.total = response.total;
+        this.carouselList = response.data.data;
+        this.total = response.data.total;
         this.loading = false;
       });
     },

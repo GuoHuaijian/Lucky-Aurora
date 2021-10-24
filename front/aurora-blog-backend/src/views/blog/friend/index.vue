@@ -10,24 +10,6 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="图标url" prop="icon">
-        <el-input
-          v-model="queryParams.icon"
-          placeholder="请输入图标url"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
-      <el-form-item label="简介" prop="description">
-        <el-input
-          v-model="queryParams.description"
-          placeholder="请输入简介"
-          clearable
-          size="small"
-          @keyup.enter.native="handleQuery"
-        />
-      </el-form-item>
       <el-form-item label="网站地址" prop="url">
         <el-input
           v-model="queryParams.url"
@@ -46,18 +28,15 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
-      <el-form-item label="状态 0待审 1通过 2拒绝" prop="status">
-        <el-select v-model="queryParams.status" placeholder="请选择状态 0待审 1通过 2拒绝" clearable size="small">
-          <el-option label="请选择字典生成" value="" />
+      <el-form-item label="状态" prop="status">
+        <el-select v-model="queryParams.status" placeholder="请选择友链状态" clearable size="small">
+          <el-option
+            v-for="dict in statusOptions"
+            :key="dict.dictValue"
+            :label="dict.dictLabel"
+            :value="dict.dictValue"
+          />
         </el-select>
-      </el-form-item>
-      <el-form-item label="创建时间" prop="creationTime">
-        <el-date-picker clearable size="small"
-                        v-model="queryParams.creationTime"
-                        type="date"
-                        value-format="yyyy-MM-dd"
-                        placeholder="选择创建时间">
-        </el-date-picker>
       </el-form-item>
       <el-form-item>
         <el-button type="primary" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
@@ -114,19 +93,25 @@
 
     <el-table v-loading="loading" :data="friendList" @selection-change="handleSelectionChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="主键id" align="center" prop="friendId" />
+      <el-table-column label="主键" align="center" prop="friendId" />
       <el-table-column label="友链名" align="center" prop="name" />
-      <el-table-column label="图标url" align="center" prop="icon" />
-      <el-table-column label="简介" align="center" prop="description" />
-      <el-table-column label="网站地址" align="center" prop="url" />
-      <el-table-column label="站长邮箱" align="center" prop="mail" />
-      <el-table-column label="状态 0待审 1通过 2拒绝" align="center" prop="status" />
-      <el-table-column label="创建时间" align="center" prop="creationTime" width="180">
+      <el-table-column label="图标" align="center" prop="icon" >
         <template slot-scope="scope">
-          <span>{{ parseTime(scope.row.creationTime, '{y}-{m}-{d}') }}</span>
+          <img :src="scope.row.icon" width="50px"/>
         </template>
       </el-table-column>
-      <el-table-column label="备注" align="center" prop="remark" />
+      <el-table-column label="网站地址" align="center" prop="url" />
+      <el-table-column label="站长邮箱" align="center" prop="mail" />
+      <el-table-column label="状态" align="center" prop="status" >
+        <template slot-scope="scope">
+          <dict-tag :options="statusOptions" :value="scope.row.status"/>
+        </template>
+      </el-table-column>
+      <el-table-column label="创建时间" align="center" prop="createTime" width="180">
+        <template slot-scope="scope">
+          <span>{{ parseTime(scope.row.createTime, '{y}-{m}-{d}') }}</span>
+        </template>
+      </el-table-column>
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -178,9 +163,9 @@
             <el-radio label="1">请选择字典生成</el-radio>
           </el-radio-group>
         </el-form-item>
-        <el-form-item label="创建时间" prop="creationTime">
+        <el-form-item label="创建时间" prop="createTime">
           <el-date-picker clearable size="small"
-                          v-model="form.creationTime"
+                          v-model="form.createTime"
                           type="date"
                           value-format="yyyy-MM-dd"
                           placeholder="选择创建时间">
@@ -200,6 +185,7 @@
 
 <script>
 import { listFriend, getFriend, delFriend, addFriend, updateFriend, exportFriend } from "@/api/admin/friend";
+import { getDicts } from '@/api/system/dict/data';
 
 export default {
   name: "Friend",
@@ -225,6 +211,8 @@ export default {
       title: "",
       // 是否显示弹出层
       open: false,
+      // 状态数据字典
+      statusOptions:[],
       // 查询参数
       queryParams: {
         pageNum: 1,
@@ -235,7 +223,7 @@ export default {
         url: null,
         mail: null,
         status: null,
-        creationTime: null,
+        createTime: null,
       },
       // 表单参数
       form: {},
@@ -249,13 +237,17 @@ export default {
   },
   created() {
     this.getList();
+    this.getDicts('admin_friend_status').then(response => {
+      this.statusOptions = response.data
+    })
+
   },
   methods: {
     /** 查询友链列表 */
     getList() {
       this.loading = true;
       listFriend(this.queryParams).then(response => {
-        this.friendList = response.data;
+        this.friendList = response.data.data;
         this.total = response.data.total;
         this.loading = false;
       });
@@ -275,7 +267,7 @@ export default {
         url: null,
         mail: null,
         status: 0,
-        creationTime: null,
+        createTime: null,
         updateTime: null,
         remark: null
       };

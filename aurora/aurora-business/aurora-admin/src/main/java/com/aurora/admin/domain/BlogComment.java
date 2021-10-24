@@ -1,10 +1,8 @@
 package com.aurora.admin.domain;
 
 import com.aurora.common.core.web.domain.BaseEntity;
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -35,7 +33,7 @@ public class BlogComment extends BaseEntity implements Serializable {
      * 评论类型：0:留言 1:文章
      */
     @TableField(value = "`type`")
-    private Boolean type;
+    private Integer type;
 
     /**
      * 被评论id，可以是单个文章id、项目、资源
@@ -94,13 +92,15 @@ public class BlogComment extends BaseEntity implements Serializable {
     /**
      * 创建时间
      */
-    @TableField(value = "create_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
     private Date createTime;
 
     /**
      * 修改时间
      */
-    @TableField(value = "update_time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
 
     private static final long serialVersionUID = 1L;

@@ -1,4 +1,4 @@
-package com.aurora.common.config.config;
+package com.aurora.common.config.config.mybatis;
 
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.autoconfigure.ConfigurationCustomizer;

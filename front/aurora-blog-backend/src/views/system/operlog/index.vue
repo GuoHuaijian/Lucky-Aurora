@@ -80,7 +80,7 @@
           size="mini"
           :disabled="multiple"
           @click="handleDelete"
-          v-hasPermi="['monitor:operlog:remove']"
+          v-hasPermi="['system:log:remove']"
         >删除</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -90,7 +90,7 @@
           icon="el-icon-delete"
           size="mini"
           @click="handleClean"
-          v-hasPermi="['monitor:operlog:remove']"
+          v-hasPermi="['system:log:remove']"
         >清空</el-button>
       </el-col>
       <el-col :span="1.5">
@@ -101,7 +101,7 @@
           size="mini"
           :loading="exportLoading"
           @click="handleExport"
-          v-hasPermi="['monitor:operlog:export']"
+          v-hasPermi="['system:log:export']"
         >导出</el-button>
       </el-col>
       <right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>
@@ -109,11 +109,11 @@
 
     <el-table ref="tables" v-loading="loading" :data="list" @selection-change="handleSelectionChange" :default-sort="defaultSort" @sort-change="handleSortChange">
       <el-table-column type="selection" width="55" align="center" />
-      <el-table-column label="日志编号" align="center" prop="operId" />
-      <el-table-column label="系统模块" align="center" prop="title" />
-      <el-table-column label="操作类型" align="center" prop="businessType">
+      <el-table-column label="日志编号" align="center" prop="logId" />
+      <el-table-column label="系统模块" align="center" prop="value" />
+      <el-table-column label="操作类型" align="center" prop="logType">
         <template slot-scope="scope">
-          <dict-tag :options="typeOptions" :value="scope.row.businessType"/>
+          <dict-tag :options="typeOptions" :value="scope.row.logType"/>
         </template>
       </el-table-column>
       <el-table-column label="请求方式" align="center" prop="requestMethod" />
@@ -137,7 +137,7 @@
             type="text"
             icon="el-icon-view"
             @click="handleView(scope.row,scope.index)"
-            v-hasPermi="['monitor:operlog:query']"
+            v-hasPermi="['system:log:query']"
           >详细</el-button>
         </template>
       </el-table-column>
@@ -156,7 +156,7 @@
       <el-form ref="form" :model="form" label-width="100px" size="mini">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="操作模块：">{{ form.title }} / {{ typeFormat(form) }}</el-form-item>
+            <el-form-item label="操作模块：">{{ form.value }} / {{ typeFormat(form) }}</el-form-item>
             <el-form-item
               label="登录信息："
             >{{ form.operName }} / {{ form.operIp }} / {{ form.operLocation }}</el-form-item>
@@ -196,8 +196,8 @@
 </template>
 
 <script>
-import { list, delOperlog, cleanOperlog, exportOperlog } from "@/api/monitor/operlog";
-
+import { list, delOperlog, cleanOperlog, exportOperlog } from "@/api/system/operlog";
+import { getDicts } from "@/api/system/dict/data"
 export default {
   name: "Operlog",
   data() {
@@ -253,15 +253,15 @@ export default {
     getList() {
       this.loading = true;
       list(this.addDateRange(this.queryParams, this.dateRange)).then( response => {
-          this.list = response.rows;
-          this.total = response.total;
+          this.list = response.data.data;
+          this.total = response.data.total;
           this.loading = false;
         }
       );
     },
     // 操作日志类型字典翻译
     typeFormat(row, column) {
-      return this.selectDictLabel(this.typeOptions, row.businessType);
+      return this.selectDictLabel(this.typeOptions, row.logType);
     },
     /** 搜索按钮操作 */
     handleQuery() {
