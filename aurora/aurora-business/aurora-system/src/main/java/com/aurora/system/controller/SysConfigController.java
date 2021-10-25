@@ -7,7 +7,7 @@ import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
 import com.aurora.common.security.utils.SecurityUtil;
-import com.aurora.system.constant.SystemConstants;
+import com.aurora.system.common.constant.SystemConstants;
 import com.aurora.system.domain.SysConfig;
 import com.aurora.system.service.SysConfigService;
 import org.springframework.beans.factory.annotation.Autowired;

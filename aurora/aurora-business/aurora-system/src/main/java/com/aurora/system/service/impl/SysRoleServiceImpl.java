@@ -4,7 +4,7 @@ import com.aurora.common.core.exception.ServiceException;
 import com.aurora.common.core.utils.SpringUtil;
 import com.aurora.common.core.utils.StringUtil;
 import com.aurora.common.security.utils.SecurityUtil;
-import com.aurora.system.constant.SystemConstants;
+import com.aurora.system.common.constant.SystemConstants;
 import com.aurora.system.domain.SysRole;
 import com.aurora.system.domain.SysRoleMenu;
 import com.aurora.system.domain.SysUser;

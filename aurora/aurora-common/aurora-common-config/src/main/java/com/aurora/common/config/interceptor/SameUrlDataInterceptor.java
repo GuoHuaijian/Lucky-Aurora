@@ -2,11 +2,11 @@ package com.aurora.common.config.interceptor;
 
 import com.alibaba.fastjson.JSONObject;
 import com.aurora.common.config.annotation.RepeatSubmit;
+import com.aurora.common.config.wrapper.RepeatedlyRequestWrapper;
 import com.aurora.common.core.constant.Constants;
-import com.aurora.common.core.filter.RepeatedlyRequestWrapper;
-import com.aurora.common.core.utils.HttpHelper;
 import com.aurora.common.core.utils.RedisCache;
 import com.aurora.common.core.utils.StringUtil;
+import com.aurora.common.core.utils.http.HttpHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,9 +19,10 @@ import java.util.concurrent.TimeUnit;
  * describe: 判断请求url和数据是否和上一次相同，
  * 如果和上次相同，则是重复提交表单。 有效时间为10秒内。
  *
- * @Author Guo
- * @Date 2021/10/25 16:49
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/10/25
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Component
 public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {

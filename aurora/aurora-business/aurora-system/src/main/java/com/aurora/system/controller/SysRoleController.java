@@ -5,7 +5,7 @@ import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
-import com.aurora.system.constant.SystemConstants;
+import com.aurora.system.common.constant.SystemConstants;
 import com.aurora.system.domain.SysRole;
 import com.aurora.system.domain.SysUser;
 import com.aurora.system.domain.SysUserRole;

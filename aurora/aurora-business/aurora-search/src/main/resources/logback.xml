@@ -28,7 +28,7 @@
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${LOG_PATTERN}/sys-log-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/sys-log-info.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -50,7 +50,7 @@
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${LOG_PATTERN}/sys-log-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/sys-log-error.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -71,7 +71,7 @@
         <file>${LOG_PATH}/sys-log.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
-            <fileNamePattern>${LOG_PATTERN}/sys-log.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATH}/sys-log.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
@@ -79,10 +79,6 @@
             <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-
-    <springProfile name="pro">
-
-    </springProfile>
 
     <!-- 日志级别控制  -->
     <!-- 开发环境日志 -->
@@ -94,6 +90,7 @@
               level:
                 com.aurora: info
         -->
+        <!--name用来指定此logger约束的某一个包或者具体的某一个类-->
         <logger name="com.aurora" level="info"/>
         <!-- Spring日志级别控制  -->
         <logger name="org.springframework" level="info"/>

@@ -3,7 +3,7 @@ package com.aurora.common.config.aspect;
 import com.aurora.common.config.annotation.RateLimiter;
 import com.aurora.common.core.enums.LimitType;
 import com.aurora.common.core.exception.ServiceException;
-import com.aurora.common.core.utils.IpUtil;
+import com.aurora.common.core.utils.ip.IpUtil;
 import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.utils.StringUtil;
 import org.aspectj.lang.JoinPoint;
@@ -24,9 +24,10 @@ import java.util.List;
 /**
  * describe: 限流处理
  *
- * @Author Guo
- * @Date 2021/10/25 17:10
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/10/25
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 @Aspect
 @Component

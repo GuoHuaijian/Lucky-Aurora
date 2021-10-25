@@ -1,5 +1,6 @@
-package com.aurora.common.core.filter;
+package com.aurora.common.config.filter;
 
+import com.aurora.common.config.wrapper.RepeatedlyRequestWrapper;
 import com.aurora.common.core.utils.StringUtil;
 import org.springframework.http.MediaType;
 
@@ -10,14 +11,15 @@ import java.io.IOException;
 /**
  * describe: Repeatable 过滤器
  *
- * @Author Guo
- * @Date 2021/10/25 17:03
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/10/25
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class RepeatableFilter implements Filter {
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
 
     }
 

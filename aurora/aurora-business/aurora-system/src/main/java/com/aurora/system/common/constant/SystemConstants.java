@@ -1,4 +1,4 @@
-package com.aurora.system.constant;
+package com.aurora.system.common.constant;
 
 /**
  * describe:

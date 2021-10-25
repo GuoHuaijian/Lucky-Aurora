@@ -1,6 +1,6 @@
-package com.aurora.common.core.filter;
+package com.aurora.common.config.wrapper;
 
-import com.aurora.common.core.utils.HttpHelper;
+import com.aurora.common.core.utils.http.HttpHelper;
 
 import javax.servlet.ReadListener;
 import javax.servlet.ServletInputStream;
@@ -15,9 +15,10 @@ import java.io.InputStreamReader;
 /**
  * describe: 构建可重复读取inputStream的request
  *
- * @Author Guo
- * @Date 2021/10/25 16:52
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/10/25
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class RepeatedlyRequestWrapper extends HttpServletRequestWrapper {
     private final byte[] body;

@@ -7,7 +7,7 @@ import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
 import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.rpc.file.RemoteFileService;
-import com.aurora.system.constant.SystemConstants;
+import com.aurora.system.common.constant.SystemConstants;
 import com.aurora.system.domain.SysUser;
 import com.aurora.system.service.SysUserService;
 import org.apache.dubbo.config.annotation.DubboReference;

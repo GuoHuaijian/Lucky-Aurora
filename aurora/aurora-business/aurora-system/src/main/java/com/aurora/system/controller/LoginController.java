@@ -6,7 +6,7 @@ import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.domain.LoginBody;
 import com.aurora.system.domain.router.Router;
-import com.aurora.system.factory.LogAsyncFactory;
+import com.aurora.system.common.factory.LogAsyncFactory;
 import com.aurora.system.service.LoginService;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.core.context.SecurityContextHolder;

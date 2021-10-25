@@ -1,9 +1,11 @@
-package com.aurora.system.factory;
+package com.aurora.system.common.factory;
 
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.aurora.common.core.constant.Constants;
 import com.aurora.common.core.utils.*;
+import com.aurora.common.core.utils.ip.AddressUtil;
+import com.aurora.common.core.utils.ip.IpUtil;
 import com.aurora.system.domain.SysLoginLog;
 import com.aurora.system.service.SysLoginLogService;
 import lombok.extern.slf4j.Slf4j;

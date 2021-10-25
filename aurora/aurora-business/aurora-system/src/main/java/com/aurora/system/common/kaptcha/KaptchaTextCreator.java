@@ -1,4 +1,4 @@
-package com.aurora.system.kaptcha;
+package com.aurora.system.common.kaptcha;
 
 import com.google.code.kaptcha.text.impl.DefaultTextCreator;
 

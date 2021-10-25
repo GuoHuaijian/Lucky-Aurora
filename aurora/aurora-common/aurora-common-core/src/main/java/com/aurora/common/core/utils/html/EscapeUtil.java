@@ -1,13 +1,14 @@
-package com.aurora.common.core.utils;
+package com.aurora.common.core.utils.html;
 
-import cn.hutool.http.HTMLFilter;
+import com.aurora.common.core.utils.StringUtil;
 
 /**
  * describe: 转义和反转义工具类
  *
- * @Author Guo
- * @Date 2021/10/25 17:06
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/10/25
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class EscapeUtil {
 

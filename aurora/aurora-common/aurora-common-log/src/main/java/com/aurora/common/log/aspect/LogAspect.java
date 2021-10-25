@@ -2,8 +2,8 @@ package com.aurora.common.log.aspect;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
-import com.aurora.common.core.utils.AddressUtil;
-import com.aurora.common.core.utils.IpUtil;
+import com.aurora.common.core.utils.ip.AddressUtil;
+import com.aurora.common.core.utils.ip.IpUtil;
 import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;

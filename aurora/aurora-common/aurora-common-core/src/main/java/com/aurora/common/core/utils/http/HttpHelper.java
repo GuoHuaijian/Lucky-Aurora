@@ -1,4 +1,4 @@
-package com.aurora.common.core.utils;
+package com.aurora.common.core.utils.http;
 
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.slf4j.Logger;
@@ -14,9 +14,10 @@ import java.nio.charset.Charset;
 /**
  * describe: 通用http工具封装
  *
- * @Author Guo
- * @Date 2021/10/25 16:53
- * @Version 1.0
+ * @Author Guo Huaijian
+ * @Date 2021/10/25
+ * @E-mail guohuaijian9527@gmail.com
+ * @Version 1.0.0
  */
 public class HttpHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpHelper.class);

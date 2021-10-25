@@ -4,7 +4,7 @@ import com.aurora.common.core.constant.Constants;
 import com.aurora.common.core.exception.ServiceException;
 import com.aurora.common.core.utils.RedisCache;
 import com.aurora.common.security.utils.SecurityUtil;
-import com.aurora.system.constant.SystemConstants;
+import com.aurora.system.common.constant.SystemConstants;
 import com.aurora.system.domain.RegisterBody;
 import com.aurora.system.domain.SysUser;
 import com.aurora.system.service.SysConfigService;

@@ -4,7 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.rpc.system.RemoteAuthUserService;
 import com.aurora.rpc.system.domain.AuthUser;
-import com.aurora.system.constant.MenuConstants;
+import com.aurora.system.common.constant.MenuConstants;
 import com.aurora.system.domain.SysMenu;
 import com.aurora.system.domain.SysUser;
 import com.aurora.system.service.SysMenuService;

@@ -1,5 +1,0 @@
-server:
-  port: 8099
-spring:
-  application:
-    name: aurora-monitor

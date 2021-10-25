@@ -1,7 +1,7 @@
 package com.aurora.monitor.domain;
 
 import com.aurora.common.core.utils.Arith;
-import com.aurora.common.core.utils.IpUtil;
+import com.aurora.common.core.utils.ip.IpUtil;
 import com.aurora.monitor.domain.server.*;
 import oshi.SystemInfo;
 import oshi.hardware.CentralProcessor;

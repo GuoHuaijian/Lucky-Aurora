@@ -1,11 +1,9 @@
 package com.aurora.system.service.impl;
 
 import com.aurora.common.core.exception.ServiceException;
-import com.aurora.common.core.utils.BeanUtil;
-import com.aurora.common.core.utils.DictUtil;
 import com.aurora.common.core.utils.StringUtil;
-import com.aurora.common.core.utils.domain.DictData;
-import com.aurora.system.constant.SystemConstants;
+import com.aurora.system.common.constant.SystemConstants;
+import com.aurora.system.common.util.DictUtil;
 import com.aurora.system.domain.SysDictData;
 import com.aurora.system.domain.SysDictType;
 import com.aurora.system.mapper.SysDictDataMapper;
@@ -76,15 +74,14 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
      */
     @Override
     public List<SysDictData> selectDictDataByType(String dictType) {
-        List<DictData> dictData = DictUtil.getDictCache(dictType);
+        List<SysDictData> dictData = DictUtil.getDictCache(dictType);
         if (StringUtil.isNotEmpty(dictData)) {
-            return castSysDictData(dictData);
+            return dictData;
         }
-
         List<SysDictData> sysDictData =
                 dictDataMapper.selectList(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType, dictType));
         if (StringUtil.isNotEmpty(sysDictData)) {
-            DictUtil.setDictCache(dictType, castDictData(sysDictData));
+            DictUtil.setDictCache(dictType, sysDictData);
             return sysDictData;
         }
         return null;
@@ -142,7 +139,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
             List<SysDictData> sysDictData =
                     dictDataService.list(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType,
                             dictType.getDictType()));
-            DictUtil.setDictCache(dictType.getDictType(), castDictData(sysDictData));
+            DictUtil.setDictCache(dictType.getDictType(), sysDictData);
         }
     }
 
@@ -193,7 +190,7 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
         if (flag) {
             List<SysDictData> sysDictData =
                     dictDataService.list(new LambdaQueryWrapper<SysDictData>().eq(SysDictData::getDictType, dict.getDictType()));
-            DictUtil.setDictCache(dict.getDictType(), castDictData(sysDictData));
+            DictUtil.setDictCache(dict.getDictType(), sysDictData);
         }
         return flag;
     }
@@ -212,16 +209,6 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
             return SystemConstants.NOT_UNIQUE;
         }
         return SystemConstants.UNIQUE;
-    }
-
-    public List<SysDictData> castSysDictData(List<DictData> dictData) {
-        List<SysDictData> sysDictData = BeanUtil.copyListProperties(dictData, SysDictData::new);
-        return sysDictData;
-    }
-
-    public List<DictData> castDictData(List<SysDictData> sysDictData) {
-        List<DictData> dictData = BeanUtil.copyListProperties(sysDictData, DictData::new);
-        return dictData;
     }
 
 }
