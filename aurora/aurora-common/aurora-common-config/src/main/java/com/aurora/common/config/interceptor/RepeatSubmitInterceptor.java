@@ -6,7 +6,7 @@ import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.web.domain.Result;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.HandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,7 +21,7 @@ import java.lang.reflect.Method;
  * @Version 1.0.0
  */
 @Component
-public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter {
+public abstract class RepeatSubmitInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (handler instanceof HandlerMethod) {
@@ -29,24 +29,22 @@ public abstract class RepeatSubmitInterceptor extends HandlerInterceptorAdapter 
             Method method = handlerMethod.getMethod();
             RepeatSubmit annotation = method.getAnnotation(RepeatSubmit.class);
             if (annotation != null) {
-                if (this.isRepeatSubmit(request)) {
-                    Result ajaxResult = Result.error("不允许重复提交，请稍后再试");
-                    ServletUtil.renderString(response, JSONObject.toJSONString(ajaxResult));
+                if (this.isRepeatSubmit(request, annotation)) {
+                    Result result = Result.error(annotation.message());
+                    ServletUtil.renderString(response, JSONObject.toJSONString(result));
                     return false;
                 }
             }
-            return true;
-        } else {
-            return super.preHandle(request, response, handler);
         }
+        return true;
     }
 
     /**
      * 验证是否重复提交由子类实现具体的防重复提交的规则
      *
      * @param request
+     * @param annotation
      * @return
-     * @throws Exception
      */
-    public abstract boolean isRepeatSubmit(HttpServletRequest request);
+    public abstract boolean isRepeatSubmit(HttpServletRequest request, RepeatSubmit annotation);
 }
