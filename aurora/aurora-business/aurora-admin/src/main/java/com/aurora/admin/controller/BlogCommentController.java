@@ -2,7 +2,7 @@ package com.aurora.admin.controller;
 
 import com.aurora.admin.domain.BlogComment;
 import com.aurora.admin.service.BlogCommentService;
-import com.aurora.common.core.utils.ExcelUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -45,10 +46,10 @@ public class BlogCommentController extends AbstractController {
     @PreAuthorize("hasAuthority('admin:comment:export')")
     @Log(value = "评论", LogType = LogType.EXPORT)
     @GetMapping("/export")
-    public Result export(BlogComment comment) {
+    public void export(BlogComment comment) throws IOException {
         List<BlogComment> list = commentService.selectBlogCommentList(comment);
         ExcelUtil<BlogComment> util = new ExcelUtil<>(BlogComment.class);
-        return util.exportExcel(list, "评论数据");
+        util.exportExcel(list, "评论数据");
     }
 
     /**

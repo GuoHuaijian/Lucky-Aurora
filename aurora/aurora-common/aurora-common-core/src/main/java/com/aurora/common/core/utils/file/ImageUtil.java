@@ -1,15 +1,11 @@
 package com.aurora.common.core.utils.file;
 
-import com.aurora.common.core.constant.Constants;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.poi.ss.util.ImageUtils;
 import org.apache.poi.util.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
@@ -25,7 +21,7 @@ import java.util.Arrays;
  */
 public class ImageUtil {
 
-    private static final Logger log = LoggerFactory.getLogger(ImageUtils.class);
+    private static final Logger log = LoggerFactory.getLogger(ImageUtil.class);
 
     public static byte[] getImage(String imagePath) {
         InputStream is = getFile(imagePath);
@@ -53,29 +49,23 @@ public class ImageUtil {
     /**
      * 读取文件为字节数据
      *
+     * @param url 地址
      * @return 字节数据
      */
     public static byte[] readFile(String url) {
         InputStream in = null;
         ByteArrayOutputStream baos = null;
         try {
-            if (url.startsWith(Constants.HTTP)) {
-                // 网络地址
-                URL urlObj = new URL(url);
-                URLConnection urlConnection = urlObj.openConnection();
-                urlConnection.setConnectTimeout(30 * 1000);
-                urlConnection.setReadTimeout(60 * 1000);
-                urlConnection.setDoInput(true);
-                in = urlConnection.getInputStream();
-            } else {
-                // 本机地址
-                String localPath = FilePath.getProfile();
-                String downloadPath = localPath + StringUtils.substringAfter(url, Constants.RESOURCE_PREFIX);
-                in = new FileInputStream(downloadPath);
-            }
+            // 网络地址
+            URL urlObj = new URL(url);
+            URLConnection urlConnection = urlObj.openConnection();
+            urlConnection.setConnectTimeout(30 * 1000);
+            urlConnection.setReadTimeout(60 * 1000);
+            urlConnection.setDoInput(true);
+            in = urlConnection.getInputStream();
             return IOUtils.toByteArray(in);
         } catch (Exception e) {
-            log.error("获取文件路径异常 {}", e);
+            log.error("访问文件异常 {}", e);
             return null;
         } finally {
             IOUtils.closeQuietly(in);

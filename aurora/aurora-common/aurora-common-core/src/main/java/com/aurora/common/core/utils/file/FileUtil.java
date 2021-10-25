@@ -1,10 +1,7 @@
 package com.aurora.common.core.utils.file;
 
-import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.StrUtil;
-import com.alibaba.fastjson.util.IOUtils;
-import com.aurora.common.core.utils.DateUtil;
-import com.aurora.common.core.utils.IdUtil;
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -109,12 +106,12 @@ public class FileUtil {
      */
     public static boolean checkAllowDownload(String resource) {
         // 禁止目录上跳级别
-        if (StrUtil.contains(resource, "..")) {
+        if (StringUtils.contains(resource, "..")) {
             return false;
         }
 
         // 检查允许下载的文件规则
-        if (ArrayUtil.contains(MimeTypeUtil.DEFAULT_ALLOWED_EXTENSION, FileTypeUtil.getFileType(resource))) {
+        if (ArrayUtils.contains(MimeTypeUtil.DEFAULT_ALLOWED_EXTENSION, FileTypeUtil.getFileType(resource))) {
             return true;
         }
 
@@ -212,6 +209,7 @@ public class FileUtil {
                 .append(percentEncodedFileName);
 
         response.setHeader("Content-disposition", contentDispositionValue.toString());
+        response.setHeader("download-filename", percentEncodedFileName);
     }
 
     /**
@@ -223,61 +221,5 @@ public class FileUtil {
     public static String percentEncode(String s) throws UnsupportedEncodingException {
         String encode = URLEncoder.encode(s, StandardCharsets.UTF_8.toString());
         return encode.replaceAll("\\+", "%20");
-    }
-
-    /**
-     * 写数据到文件中
-     *
-     * @param data 数据
-     * @return 目标文件
-     * @throws IOException IO异常
-     */
-    public static String writeImportBytes(byte[] data) throws IOException {
-        return writeBytes(data, FilePath.getImportPath());
-    }
-
-    /**
-     * 写数据到文件中
-     *
-     * @param data      数据
-     * @param uploadDir 目标文件
-     * @return 目标文件
-     * @throws IOException IO异常
-     */
-    public static String writeBytes(byte[] data, String uploadDir) throws IOException {
-        FileOutputStream fos = null;
-        String pathName = "";
-        try {
-            String extension = getFileExtendName(data);
-            pathName = DateUtil.datePath() + "/" + IdUtil.fastUUID() + "." + extension;
-            File file = FileUploadUtil.getAbsoluteFile(uploadDir, pathName);
-            fos = new FileOutputStream(file);
-            fos.write(data);
-        } finally {
-            IOUtils.close(fos);
-        }
-        return FileUploadUtil.getPathFileName(uploadDir, pathName);
-    }
-
-
-    /**
-     * 获取图像后缀
-     *
-     * @param photoByte 图像数据
-     * @return 后缀名
-     */
-    public static String getFileExtendName(byte[] photoByte) {
-        String strFileExtendName = "jpg";
-        if ((photoByte[0] == 71) && (photoByte[1] == 73) && (photoByte[2] == 70) && (photoByte[3] == 56)
-                && ((photoByte[4] == 55) || (photoByte[4] == 57)) && (photoByte[5] == 97)) {
-            strFileExtendName = "gif";
-        } else if ((photoByte[6] == 74) && (photoByte[7] == 70) && (photoByte[8] == 73) && (photoByte[9] == 70)) {
-            strFileExtendName = "jpg";
-        } else if ((photoByte[0] == 66) && (photoByte[1] == 77)) {
-            strFileExtendName = "bmp";
-        } else if ((photoByte[1] == 80) && (photoByte[2] == 78) && (photoByte[3] == 71)) {
-            strFileExtendName = "png";
-        }
-        return strFileExtendName;
     }
 }

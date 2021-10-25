@@ -2,7 +2,7 @@ package com.aurora.admin.controller;
 
 import com.aurora.admin.domain.BlogTag;
 import com.aurora.admin.service.BlogTagService;
-import com.aurora.common.core.utils.ExcelUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -45,10 +46,10 @@ public class BlogTagController extends AbstractController {
     @PreAuthorize("hasAuthority('admin:tag:export')")
     @Log(value = "标签", LogType = LogType.EXPORT)
     @GetMapping("/export")
-    public Result export(BlogTag tag) {
+    public void export(BlogTag tag) throws IOException {
         List<BlogTag> list = tagService.selectBlogTagList(tag);
         ExcelUtil<BlogTag> util = new ExcelUtil<>(BlogTag.class);
-        return util.exportExcel(list, "标签数据");
+        util.exportExcel(list, "标签数据");
     }
 
     /**

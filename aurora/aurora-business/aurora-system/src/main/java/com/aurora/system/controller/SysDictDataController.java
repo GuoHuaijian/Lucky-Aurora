@@ -1,7 +1,7 @@
 package com.aurora.system.controller;
 
-import com.aurora.common.core.utils.ExcelUtil;
 import com.aurora.common.core.utils.StringUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
@@ -15,6 +15,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,10 +48,10 @@ public class SysDictDataController extends AbstractController {
     @Log(value = "字典数据", LogType = LogType.EXPORT)
     @PreAuthorize("hasAuthority('system:dict:export')")
     @GetMapping("/export")
-    public Result export(SysDictData dictData) {
+    public void export(SysDictData dictData) throws IOException {
         List<SysDictData> list = dictDataService.selectDictDataList(dictData);
         ExcelUtil<SysDictData> util = new ExcelUtil<>(SysDictData.class);
-        return util.exportExcel(list, "字典数据");
+        util.exportExcel(list, "字典数据");
     }
 
     /**

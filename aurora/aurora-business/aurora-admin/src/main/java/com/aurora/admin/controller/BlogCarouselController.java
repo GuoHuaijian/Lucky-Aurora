@@ -2,7 +2,7 @@ package com.aurora.admin.controller;
 
 import com.aurora.admin.domain.BlogCarousel;
 import com.aurora.admin.service.BlogCarouselService;
-import com.aurora.common.core.utils.ExcelUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -44,10 +45,10 @@ public class BlogCarouselController extends AbstractController {
     @PreAuthorize("hasAuthority('admin:carousel:export')")
     @Log(value = "轮播图", LogType = LogType.EXPORT)
     @GetMapping("/export")
-    public Result export(BlogCarousel carousel) {
+    public void export(BlogCarousel carousel) throws IOException {
         List<BlogCarousel> list = carouselService.selectBlogCarouselList(carousel);
         ExcelUtil<BlogCarousel> util = new ExcelUtil<>(BlogCarousel.class);
-        return util.exportExcel(list, "轮播图数据");
+        util.exportExcel(list, "轮播图数据");
     }
 
     /**

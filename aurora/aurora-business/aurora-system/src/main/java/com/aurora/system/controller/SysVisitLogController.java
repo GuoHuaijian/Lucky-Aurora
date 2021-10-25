@@ -1,6 +1,6 @@
 package com.aurora.system.controller;
 
-import com.aurora.common.core.utils.ExcelUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -38,10 +39,10 @@ public class SysVisitLogController extends AbstractController {
     @Log(value = "访问日志", LogType = LogType.EXPORT)
     @PreAuthorize("hasAuthority('system:visitlog:export')")
     @GetMapping("/export")
-    public Result export(SysVisitLog visitLog) {
+    public void export(SysVisitLog visitLog) throws IOException {
         List<SysVisitLog> list = visitLogService.selectVisitLogList(visitLog);
         ExcelUtil<SysVisitLog> util = new ExcelUtil<>(SysVisitLog.class);
-        return util.exportExcel(list, "访问日志");
+        util.exportExcel(list, "访问日志");
     }
 
     @Log(value = "访问日志", LogType = LogType.DELETE)

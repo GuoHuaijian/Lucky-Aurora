@@ -1,6 +1,6 @@
 package com.aurora.system.controller;
 
-import com.aurora.common.core.utils.ExcelUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -39,10 +40,10 @@ public class SysLoginLogController extends AbstractController {
     @Log(value = "登录日志", LogType = LogType.EXPORT)
     @PreAuthorize("hasAuthority('system:loginlog:export')")
     @GetMapping("/export")
-    public Result export(SysLoginLog loginLog) {
+    public void export(SysLoginLog loginLog) throws IOException {
         List<SysLoginLog> list = loginLogService.selectLoginLogList(loginLog);
         ExcelUtil<SysLoginLog> util = new ExcelUtil<>(SysLoginLog.class);
-        return util.exportExcel(list, "登录日志");
+        util.exportExcel(list, "登录日志");
     }
 
     @PreAuthorize("hasAuthority('system:loginlog:remove')")

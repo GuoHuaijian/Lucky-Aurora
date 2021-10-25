@@ -1,6 +1,6 @@
 package com.aurora.system.controller;
 
-import com.aurora.common.core.utils.ExcelUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
@@ -16,6 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -53,10 +54,10 @@ public class SysRoleController extends AbstractController {
     @Log(value = "角色管理", LogType = LogType.EXPORT)
     @PreAuthorize("hasAuthority('system:role:export')")
     @GetMapping("/export")
-    public Result export(SysRole role) {
+    public void export(SysRole role) throws IOException {
         List<SysRole> list = roleService.selectRoleList(role);
         ExcelUtil<SysRole> util = new ExcelUtil<>(SysRole.class);
-        return util.exportExcel(list, "角色数据");
+        util.exportExcel(list, "角色数据");
     }
 
     /**

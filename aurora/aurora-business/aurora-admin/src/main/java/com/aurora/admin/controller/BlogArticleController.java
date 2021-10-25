@@ -2,7 +2,7 @@ package com.aurora.admin.controller;
 
 import com.aurora.admin.domain.BlogArticle;
 import com.aurora.admin.service.BlogArticleService;
-import com.aurora.common.core.utils.ExcelUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -46,10 +47,10 @@ public class BlogArticleController extends AbstractController {
     @PreAuthorize("hasAuthority('admin:article:export')")
     @Log(value = "文章", LogType = LogType.EXPORT)
     @GetMapping("/export")
-    public Result export(BlogArticle article) {
+    public void export(BlogArticle article) throws IOException {
         List<BlogArticle> list = articleService.list(article);
         ExcelUtil<BlogArticle> util = new ExcelUtil<>(BlogArticle.class);
-        return util.exportExcel(list, "文章数据");
+        util.exportExcel(list, "文章数据");
     }
 
     /**

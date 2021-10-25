@@ -1,7 +1,7 @@
 package com.aurora.system.controller;
 
-import com.aurora.common.core.utils.ExcelUtil;
 import com.aurora.common.core.utils.StringUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,10 +55,10 @@ public class SysUserController extends AbstractController {
     @Log(value = "用户管理", LogType = LogType.EXPORT)
     @PreAuthorize("hasAuthority('system:user:export')")
     @GetMapping("/export")
-    public Result export(SysUser user) {
+    public void export(SysUser user) throws IOException {
         List<SysUser> list = userService.selectUserList(user);
         ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
-        return util.exportExcel(list, "用户数据");
+        util.exportExcel(list, "用户数据");
     }
 
     @Log(value = "用户管理", LogType = LogType.IMPORT)
@@ -72,9 +73,9 @@ public class SysUserController extends AbstractController {
     }
 
     @GetMapping("/importTemplate")
-    public Result importTemplate() {
+    public void importTemplate() throws IOException {
         ExcelUtil<SysUser> util = new ExcelUtil<>(SysUser.class);
-        return util.importTemplateExcel("用户数据");
+        util.importTemplateExcel("用户数据");
     }
 
     /**

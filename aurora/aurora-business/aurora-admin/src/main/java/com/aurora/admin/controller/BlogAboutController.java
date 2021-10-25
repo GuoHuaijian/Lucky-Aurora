@@ -2,11 +2,12 @@ package com.aurora.admin.controller;
 
 import com.aurora.admin.domain.BlogAbout;
 import com.aurora.admin.service.BlogAboutService;
-import com.aurora.common.core.utils.ExcelUtil;
+import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -42,13 +43,14 @@ public class BlogAboutController extends AbstractController {
     /**
      * 导出关于我列表
      */
+    @SneakyThrows
     @PreAuthorize("hasAuthority('admin:about:export')")
     @Log(value = "关于我", LogType = LogType.EXPORT)
     @GetMapping("/export")
-    public Result export(BlogAbout about) {
+    public void export(BlogAbout about) {
         List<BlogAbout> list = aboutService.selectBlogAboutList(about);
         ExcelUtil<BlogAbout> util = new ExcelUtil<>(BlogAbout.class);
-        return util.exportExcel(list, "关于我数据");
+        util.exportExcel(list, "关于我数据");
     }
 
     /**

@@ -1,12 +1,13 @@
 package com.aurora.file.utils;
 
+import com.aurora.common.core.exception.file.FileNameLengthLimitExceededException;
+import com.aurora.common.core.exception.file.FileSizeLimitExceededException;
 import com.aurora.common.core.utils.DateUtil;
 import com.aurora.common.core.utils.IdUtil;
 import com.aurora.common.core.utils.file.MimeTypeUtil;
 import com.aurora.file.exception.InvalidExtensionException;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.tomcat.util.http.fileupload.impl.FileSizeLimitExceededException;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -54,17 +55,23 @@ public class FileUploadUtil {
      * @param file             上传的文件
      * @param allowedExtension 上传文件类型
      * @return 返回上传成功的文件名
-     * @throws FileSizeLimitExceededException 如果超出最大大小
-     * @throws IOException                    比如读写文件出错时
+     * @throws FileSizeLimitExceededException       如果超出最大大小
+     * @throws FileNameLengthLimitExceededException 文件名太长
+     * @throws IOException                          比如读写文件出错时
+     * @throws InvalidExtensionException            文件校验异常
      */
     public static final String upload(String baseDir, MultipartFile file, String[] allowedExtension)
-            throws FileSizeLimitExceededException, IOException {
-        int fileNameLength = file.getOriginalFilename().length();
-        if (fileNameLength > FileUploadUtil.DEFAULT_FILE_NAME_LENGTH) {
-            throw new RuntimeException("文件名太长");
+            throws FileSizeLimitExceededException, IOException, FileNameLengthLimitExceededException,
+            InvalidExtensionException {
+        int fileNamelength = file.getOriginalFilename().length();
+        if (fileNamelength > FileUploadUtil.DEFAULT_FILE_NAME_LENGTH) {
+            throw new FileNameLengthLimitExceededException(FileUploadUtil.DEFAULT_FILE_NAME_LENGTH);
         }
+
         assertAllowed(file, allowedExtension);
+
         String fileName = extractFilename(file);
+
         File desc = getAbsoluteFile(baseDir, fileName);
         file.transferTo(desc);
         String pathFileName = getPathFileName(fileName);
@@ -75,12 +82,13 @@ public class FileUploadUtil {
      * 编码文件名
      */
     public static final String extractFilename(MultipartFile file) {
+        String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
-        String fileName = DateUtil.datePath() + "/" + IdUtil.fastUUID() + "." + extension;
+        fileName = DateUtil.datePath() + "/" + IdUtil.fastUUID() + "." + extension;
         return fileName;
     }
 
-    private static final File getAbsoluteFile(String uploadDir, String fileName) {
+    private static final File getAbsoluteFile(String uploadDir, String fileName) throws IOException {
         File desc = new File(uploadDir + File.separator + fileName);
 
         if (!desc.exists()) {
@@ -91,7 +99,7 @@ public class FileUploadUtil {
         return desc.isAbsolute() ? desc : desc.getAbsoluteFile();
     }
 
-    private static final String getPathFileName(String fileName) {
+    private static final String getPathFileName(String fileName) throws IOException {
         String pathFileName = "/" + fileName;
         return pathFileName;
     }
@@ -101,13 +109,15 @@ public class FileUploadUtil {
      *
      * @param file 上传的文件
      * @throws FileSizeLimitExceededException 如果超出最大大小
+     * @throws InvalidExtensionException      文件校验异常
      */
     public static final void assertAllowed(MultipartFile file, String[] allowedExtension)
             throws FileSizeLimitExceededException, InvalidExtensionException {
         long size = file.getSize();
         if (DEFAULT_MAX_SIZE != -1 && size > DEFAULT_MAX_SIZE) {
-            throw new FileSizeLimitExceededException("文件超出最大大小", size, DEFAULT_MAX_SIZE);
+            throw new FileSizeLimitExceededException(DEFAULT_MAX_SIZE / 1024 / 1024);
         }
+
         String fileName = file.getOriginalFilename();
         String extension = getExtension(file);
         if (allowedExtension != null && !isAllowedExtension(extension, allowedExtension)) {
