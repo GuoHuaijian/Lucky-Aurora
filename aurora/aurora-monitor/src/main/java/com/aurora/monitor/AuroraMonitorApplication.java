@@ -1,5 +1,6 @@
 package com.aurora.monitor;
 
+import com.aurora.common.security.annotation.EnableAuroraResourceServer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,7 +12,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0.0
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.aurora.*"})
+@EnableAuroraResourceServer
 public class AuroraMonitorApplication {
 
     public static void main(String[] args) {

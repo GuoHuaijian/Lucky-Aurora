@@ -26,9 +26,6 @@ public class MinioFileServiceImpl implements FileService {
     @Resource
     private FileConfig config;
 
-//    @Resource
-//    private MinioClient minioClient;
-
     /**
      * 本地文件上传接口
      *

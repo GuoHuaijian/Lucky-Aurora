@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<configuration>
+<!-- 支持日志级别热修改 -->
+<configuration scan="true" scanPeriod="10 minutes" debug="false">
     <!-- 日志存放路径 -->
-    <property name="log.path" value="/Users/guohuaijian/ideaProject/blog/AuroraBlog/logs"/>
-
+    <property name="LOG_PATH" value="/opt/aurora/logs"/>
     <!-- 日志输出格式 -->
-    <property name="log.pattern" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
-
-
+    <property name="LOG_PATTERN" value="%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - [%method,%line] - %msg%n"/>
+    <!-- 彩色日志输出格式 -->
+    <property name="CONSOLE_LOG_PATTERN"
+              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
     <!-- 彩色日志依赖的渲染类 -->
     <conversionRule conversionWord="clr" converterClass="org.springframework.boot.logging.logback.ColorConverter"/>
     <conversionRule conversionWord="wex"
                     converterClass="org.springframework.boot.logging.logback.WhitespaceThrowableProxyConverter"/>
     <conversionRule conversionWord="wEx"
                     converterClass="org.springframework.boot.logging.logback.ExtendedWhitespaceThrowableProxyConverter"/>
-    <!-- 彩色日志格式 -->
-    <property name="CONSOLE_LOG_PATTERN"
-              value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(---){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>
-
 
     <!-- 控制台输出 -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
@@ -24,19 +21,19 @@
             <pattern>${CONSOLE_LOG_PATTERN}</pattern>
         </encoder>
     </appender>
-
-    <!-- 系统日志输出 -->
-    <appender name="file_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/sys-info.log</file>
+    <!-- 系统日志输出到文件 实际情况情况中可根据不同日志级别保留不同时间 -->
+    <!-- 只记录INFO级别的日志 -->
+    <appender name="sys_log_info" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/sys-log-info.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/sys-info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATTERN}/sys-log-info.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 过滤的级别 -->
@@ -47,18 +44,18 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
-
-    <appender name="file_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/sys-error.log</file>
+    <!-- 只记录ERROR级别的日志 -->
+    <appender name="sys_log_error" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/sys-log-error.log</file>
         <!-- 循环政策：基于时间创建日志文件 -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 日志文件名格式 -->
-            <fileNamePattern>${log.path}/sys-error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATTERN}/sys-log-error.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <!-- 过滤的级别 -->
@@ -69,38 +66,63 @@
             <onMismatch>DENY</onMismatch>
         </filter>
     </appender>
-
-    <!-- 用户访问日志输出  -->
-    <appender name="sys-user" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}/sys-user.log</file>
+    <!-- 不做过滤全部接收 -->
+    <appender name="sys_log" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}/sys-log.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!-- 按天回滚 daily -->
-            <fileNamePattern>${log.path}/sys-user.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>${LOG_PATTERN}/sys-log.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 日志最大的历史 60天 -->
             <maxHistory>60</maxHistory>
         </rollingPolicy>
         <encoder>
-            <pattern>${log.pattern}</pattern>
+            <pattern>${LOG_PATTERN}</pattern>
         </encoder>
     </appender>
 
-    <!-- 系统模块日志级别控制  -->
-    <logger name="com.aurora" level="info"/>
-    <!-- Spring日志级别控制  -->
-    <logger name="org.springframework" level="info"/>
+    <springProfile name="pro">
 
-    <root level="info">
-        <appender-ref ref="console"/>
-    </root>
+    </springProfile>
 
-    <!--系统操作日志-->
-    <root level="info">
-        <appender-ref ref="file_info"/>
-        <appender-ref ref="file_error"/>
-    </root>
-
-    <!--系统用户操作日志-->
-    <logger name="sys-user" level="info">
-        <appender-ref ref="sys-user"/>
-    </logger>
+    <!-- 日志级别控制  -->
+    <!-- 开发环境日志 -->
+    <springProfile name="dev">
+        <!-- 系统模块日志级别控制  可在Spring的配置文件中修改日志级别 -->
+        <!--
+        示列:
+            logging:
+              level:
+                com.aurora: info
+        -->
+        <logger name="com.aurora" level="info"/>
+        <!-- Spring日志级别控制  -->
+        <logger name="org.springframework" level="info"/>
+        <!-- 控制台日志级别控制  -->
+        <root level="info">
+            <appender-ref ref="console"/>
+        </root>
+        <!--系统操作日志级别控制 可以单独放在一个root或logger标签下控制日志级别,输出控制中还可以做过滤-->
+        <root level="info">
+            <appender-ref ref="sys_log_info"/>
+            <appender-ref ref="sys_log_error"/>
+            <appender-ref ref="sys_log"/>
+        </root>
+    </springProfile>
+    <!-- 测试环境日志  -->
+    <springProfile name="test">
+        <!-- 系统模块日志级别控制  -->
+        <logger name="com.aurora" level="debug"/>
+        <!-- Spring日志级别控制  -->
+        <logger name="org.springframework" level="debug"/>
+        <!-- 控制台日志级别控制  -->
+        <root level="debug">
+            <appender-ref ref="console"/>
+        </root>
+        <!--系统操作日志级别控制 可以单独放在一个root或logger标签下控制日志级别,输出控制中还可以做过滤-->
+        <root level="debug">
+            <appender-ref ref="sys_log_info"/>
+            <appender-ref ref="sys_log_error"/>
+            <appender-ref ref="sys_log"/>
+        </root>
+    </springProfile>
 </configuration>
