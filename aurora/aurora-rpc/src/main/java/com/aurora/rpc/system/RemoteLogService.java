@@ -1,6 +1,6 @@
 package com.aurora.rpc.system;
 
-import com.aurora.rpc.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysOperateLog;
 import com.aurora.rpc.system.domain.SysVisitLog;
 
 /**
@@ -16,9 +16,9 @@ public interface RemoteLogService {
     /**
      * 保存操作日志
      *
-     * @param log
+     * @param operateLog
      */
-    void saveLog(SysLog log);
+    void saveLog(SysOperateLog operateLog);
 
     /**
      * 保存访问日志

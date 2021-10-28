@@ -25,6 +25,9 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
         log.info("start insert fill ....");
         this.strictInsertFill(metaObject, "createTime", () -> DateUtil.getNowDate(), Date.class);
         this.strictUpdateFill(metaObject, "updateTime", () -> DateUtil.getNowDate(), Date.class);
+        this.strictUpdateFill(metaObject, "loginTime", () -> DateUtil.getNowDate(), Date.class);
+        this.strictUpdateFill(metaObject, "visitTime", () -> DateUtil.getNowDate(), Date.class);
+        this.strictUpdateFill(metaObject, "operateTime", () -> DateUtil.getNowDate(), Date.class);
     }
 
     @Override

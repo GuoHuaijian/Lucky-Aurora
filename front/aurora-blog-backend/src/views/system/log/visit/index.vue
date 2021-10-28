@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import { list, delVisitLog, cleanVisitLog, exportVisitLog } from "@/api/system/visitlog";
+import { list, delVisitLog, cleanVisitLog, exportVisitLog } from "@/api/system/visit";
 import { getDicts } from "@/api/system/dict/data"
 export default {
   name: "VisitLog",

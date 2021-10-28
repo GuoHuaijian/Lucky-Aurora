@@ -3,32 +3,32 @@ import request from '@/utils/request'
 // 查询操作日志列表
 export function list(query) {
   return request({
-    url: '/system/log/list',
+    url: '/system/operateLog/list',
     method: 'get',
     params: query
   })
 }
 
 // 删除操作日志
-export function delOperlog(operId) {
+export function delOperateLog(operateId) {
   return request({
-    url: '/system/log/' + operId,
+    url: '/system/operateLog/' + operateId,
     method: 'delete'
   })
 }
 
 // 清空操作日志
-export function cleanOperlog() {
+export function cleanOperateLog() {
   return request({
-    url: '/system/log/clean',
+    url: '/system/operateLog/clean',
     method: 'delete'
   })
 }
 
 // 导出操作日志
-export function exportOperlog(query) {
+export function exportOperateLog(query) {
   return request({
-    url: '/system/log/export',
+    url: '/system/operateLog/export',
     method: 'get',
     params: query
   })

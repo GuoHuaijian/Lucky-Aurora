@@ -1,15 +1,14 @@
 package com.aurora.system.service.impl;
 
-import com.aurora.system.domain.SysLog;
-import com.aurora.system.mapper.SysLogMapper;
-import com.aurora.system.service.SysLogService;
+import com.aurora.rpc.system.domain.SysOperateLog;
+import com.aurora.system.mapper.SysOperateLogMapper;
+import com.aurora.system.service.SysOperateLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -21,42 +20,41 @@ import java.util.List;
  * @Version 1.0.0
  */
 @Service
-public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> implements SysLogService {
+public class SysOperateLogServiceImpl extends ServiceImpl<SysOperateLogMapper, SysOperateLog> implements SysOperateLogService {
 
     @Autowired
-    private SysLogMapper logMapper;
+    private SysOperateLogMapper operateLogMapper;
 
     /**
      * 保存操作日志
      *
-     * @param log
+     * @param operateLog
      * @return
      */
     @Override
-    public boolean saveLog(SysLog log) {
-        log.setOperTime(new Date());
-        return save(log);
+    public boolean saveOperateLog(SysOperateLog operateLog) {
+        return save(operateLog);
     }
 
     /**
      * 新增操作日志
      *
-     * @param log 操作日志对象
+     * @param operateLog 操作日志对象
      */
     @Override
-    public void insertLog(SysLog log) {
-        saveLog(log);
+    public void insertOperateLog(SysOperateLog operateLog) {
+        saveOperateLog(operateLog);
     }
 
     /**
      * 查询系统操作日志集合
      *
-     * @param log 操作日志对象
+     * @param operateLog 操作日志对象
      * @return 操作日志集合
      */
     @Override
-    public List<SysLog> selectLogList(SysLog log) {
-        return list(new QueryWrapper<>(log));
+    public List<SysOperateLog> selectOperateLogList(SysOperateLog operateLog) {
+        return list(new QueryWrapper<>(operateLog));
     }
 
     /**
@@ -66,7 +64,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
      * @return 结果
      */
     @Override
-    public boolean deleteLogByIds(Long[] ids) {
+    public boolean deleteOperateLogByIds(Long[] ids) {
         return removeByIds(Arrays.asList(ids));
     }
 
@@ -77,7 +75,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
      * @return 操作日志对象
      */
     @Override
-    public SysLog selectLogById(Long id) {
+    public SysOperateLog selectOperateLogById(Long id) {
         return getById(id);
     }
 
@@ -85,7 +83,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogMapper, SysLog> impleme
      * 清空操作日志
      */
     @Override
-    public void cleanLog() {
-        logMapper.cleanLog();
+    public void cleanOperateLog() {
+        operateLogMapper.cleanOperateLog();
     }
 }

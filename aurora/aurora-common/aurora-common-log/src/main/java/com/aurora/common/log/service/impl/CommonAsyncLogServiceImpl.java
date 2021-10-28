@@ -2,7 +2,7 @@ package com.aurora.common.log.service.impl;
 
 import com.aurora.common.log.service.AsyncLogService;
 import com.aurora.rpc.system.RemoteLogService;
-import com.aurora.rpc.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysOperateLog;
 import com.aurora.rpc.system.domain.SysVisitLog;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.scheduling.annotation.Async;
@@ -27,8 +27,8 @@ public class CommonAsyncLogServiceImpl implements AsyncLogService {
      */
     @Async("asyncExecutor")
     @Override
-    public void saveLog(SysLog sysLog) {
-        remoteLogService.saveLog(sysLog);
+    public void saveLog(SysOperateLog operateLog) {
+        remoteLogService.saveLog(operateLog);
     }
 
     /**

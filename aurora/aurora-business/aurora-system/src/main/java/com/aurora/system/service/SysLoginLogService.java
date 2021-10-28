@@ -1,6 +1,6 @@
 package com.aurora.system.service;
 
-import com.aurora.system.domain.SysLoginLog;
+import com.aurora.rpc.system.domain.SysLoginLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;
@@ -33,10 +33,10 @@ public interface SysLoginLogService extends IService<SysLoginLog> {
     /**
      * 批量删除系统登录日志
      *
-     * @param infoIds 需要删除的登录日志ID
+     * @param ids 需要删除的登录日志ID
      * @return
      */
-    boolean deleteLoginLogByIds(Long[] infoIds);
+    boolean deleteLoginLogByIds(Long[] ids);
 
     /**
      * 清空系统登录日志

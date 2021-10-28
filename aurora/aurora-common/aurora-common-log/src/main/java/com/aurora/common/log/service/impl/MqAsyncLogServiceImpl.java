@@ -5,7 +5,7 @@ import com.aurora.common.rocketmq.constant.ConsumerGroupConstant;
 import com.aurora.common.rocketmq.constant.TagConstant;
 import com.aurora.common.rocketmq.constant.TopicConstant;
 import com.aurora.common.rocketmq.producer.RocketMqProducer;
-import com.aurora.rpc.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysOperateLog;
 import com.aurora.rpc.system.domain.SysVisitLog;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -36,8 +36,8 @@ public class MqAsyncLogServiceImpl implements AsyncLogService {
      */
     @Async("asyncExecutor")
     @Override
-    public void saveLog(SysLog sysLog) throws MQBrokerException, RemotingException, InterruptedException, MQClientException {
-        sendService.send(sysLog, TopicConstant.LOG_TOPIC_NAME, ConsumerGroupConstant.LOG_GROUP_ID,
+    public void saveLog(SysOperateLog operateLog) throws MQBrokerException, RemotingException, InterruptedException, MQClientException {
+        sendService.send(operateLog, TopicConstant.LOG_TOPIC_NAME, ConsumerGroupConstant.LOG_GROUP_ID,
                 TagConstant.OPERATE_LOG);
     }
 

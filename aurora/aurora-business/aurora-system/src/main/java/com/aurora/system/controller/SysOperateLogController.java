@@ -5,8 +5,8 @@ import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
-import com.aurora.system.domain.SysLog;
-import com.aurora.system.service.SysLogService;
+import com.aurora.rpc.system.domain.SysOperateLog;
+import com.aurora.system.service.SysOperateLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,41 +23,41 @@ import java.util.List;
  * @Version 1.0.0
  */
 @RestController
-@RequestMapping("/system/log")
-public class SyslogController extends AbstractController {
+@RequestMapping("/system/operateLog")
+public class SysOperateLogController extends AbstractController {
 
     @Autowired
-    private SysLogService logService;
+    private SysOperateLogService operateLogService;
 
-    @PreAuthorize("hasAuthority('system:log:list')")
+    @PreAuthorize("hasAuthority('system:operatelog:list')")
     @GetMapping("/list")
-    public Result list(SysLog log) {
+    public Result list(SysOperateLog operateLog) {
         startPage();
-        List<SysLog> list = logService.selectLogList(log);
+        List<SysOperateLog> list = operateLogService.selectOperateLogList(operateLog);
         return Result.success(getPageDate(list));
     }
 
     @Log(value = "操作日志", LogType = LogType.EXPORT)
-    @PreAuthorize("hasAuthority('system:log:export')")
+    @PreAuthorize("hasAuthority('system:operatelog:export')")
     @GetMapping("/export")
-    public void export(SysLog log) throws IOException {
-        List<SysLog> list = logService.selectLogList(log);
-        ExcelUtil<SysLog> util = new ExcelUtil<>(SysLog.class);
+    public void export(SysOperateLog operateLog) throws IOException {
+        List<SysOperateLog> list = operateLogService.selectOperateLogList(operateLog);
+        ExcelUtil<SysOperateLog> util = new ExcelUtil<>(SysOperateLog.class);
         util.exportExcel(list, "操作日志");
     }
 
     @Log(value = "操作日志", LogType = LogType.DELETE)
-    @PreAuthorize("hasAuthority('system:log:remove')")
+    @PreAuthorize("hasAuthority('system:operatelog:remove')")
     @DeleteMapping("/{ids}")
     public Result remove(@PathVariable Long[] ids) {
-        return toResult(logService.deleteLogByIds(ids));
+        return toResult(operateLogService.deleteOperateLogByIds(ids));
     }
 
     @Log(value = "操作日志", LogType = LogType.CLEAN)
-    @PreAuthorize("hasAuthority('system:log:remove')")
+    @PreAuthorize("hasAuthority('system:operatelog:remove')")
     @DeleteMapping("/clean")
     public Result clean() {
-        logService.cleanLog();
+        operateLogService.cleanOperateLog();
         return Result.success();
     }
 }

@@ -1,10 +1,9 @@
 package com.aurora.system.service.rpc;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.aurora.rpc.system.RemoteLogService;
-import com.aurora.rpc.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysOperateLog;
 import com.aurora.rpc.system.domain.SysVisitLog;
-import com.aurora.system.service.SysLogService;
+import com.aurora.system.service.SysOperateLogService;
 import com.aurora.system.service.SysVisitLogService;
 import org.apache.dubbo.config.annotation.DubboService;
 
@@ -22,7 +21,7 @@ import javax.annotation.Resource;
 public class RemoteLogServiceImpl implements RemoteLogService {
 
     @Resource
-    private SysLogService logService;
+    private SysOperateLogService logService;
 
     @Resource
     private SysVisitLogService visitLogService;
@@ -30,13 +29,11 @@ public class RemoteLogServiceImpl implements RemoteLogService {
     /**
      * 保存操作日志
      *
-     * @param log
+     * @param operateLog
      */
     @Override
-    public void saveLog(SysLog log) {
-        com.aurora.system.domain.SysLog sysLog = new com.aurora.system.domain.SysLog();
-        BeanUtil.copyProperties(log, sysLog);
-        logService.saveLog(sysLog);
+    public void saveLog(SysOperateLog operateLog) {
+        logService.saveOperateLog(operateLog);
     }
 
     /**
@@ -46,8 +43,6 @@ public class RemoteLogServiceImpl implements RemoteLogService {
      */
     @Override
     public void saveLog(SysVisitLog visitLog) {
-        com.aurora.system.domain.SysVisitLog log = new com.aurora.system.domain.SysVisitLog();
-        BeanUtil.copyProperties(visitLog, log);
-        visitLogService.saveVisitLog(log);
+        visitLogService.saveVisitLog(visitLog);
     }
 }

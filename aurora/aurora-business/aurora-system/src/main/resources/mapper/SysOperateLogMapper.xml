@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aurora.system.mapper.SysOperateLogMapper">
+    <resultMap id="BaseResultMap" type="com.aurora.rpc.system.domain.SysOperateLog">
+        <!--@mbg.generated-->
+        <!--@Table sys_operate_log-->
+        <id column="operate_id" jdbcType="BIGINT" property="operateId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="log_type" jdbcType="INTEGER" property="logType"/>
+        <result column="method" jdbcType="VARCHAR" property="method"/>
+        <result column="request_method" jdbcType="VARCHAR" property="requestMethod"/>
+        <result column="operator_type" jdbcType="INTEGER" property="operatorType"/>
+        <result column="operator" jdbcType="VARCHAR" property="operator"/>
+        <result column="operate_url" jdbcType="VARCHAR" property="operateUrl"/>
+        <result column="operate_ip" jdbcType="VARCHAR" property="operateIp"/>
+        <result column="operate_location" jdbcType="VARCHAR" property="operateLocation"/>
+        <result column="operate_param" jdbcType="VARCHAR" property="operateParam"/>
+        <result column="json_result" jdbcType="VARCHAR" property="jsonResult"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="error_msg" jdbcType="VARCHAR" property="errorMsg"/>
+        <result column="operate_time" jdbcType="TIMESTAMP" property="operateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        operate_id, `title`, log_type, `method`, request_method, operator_type, operator,
+        operate_url, operate_ip, operate_location, operate_param, json_result, `status`, error_msg, operate_time
+    </sql>
+
+    <update id="cleanOperateLog">
+        truncate table sys_operate_log
+    </update>
+</mapper>

@@ -18,7 +18,7 @@ public @interface VLog {
     /**
      * 请求的模块
      */
-    String title() default "";
+    String value() default "";
 
     /**
      * 文章id

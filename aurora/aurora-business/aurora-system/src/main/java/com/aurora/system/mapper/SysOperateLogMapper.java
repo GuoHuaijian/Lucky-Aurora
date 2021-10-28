@@ -1,6 +1,6 @@
 package com.aurora.system.mapper;
 
-import com.aurora.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysOperateLog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -13,10 +13,10 @@ import org.apache.ibatis.annotations.Mapper;
  * @Version 1.0.0
  */
 @Mapper
-public interface SysLogMapper extends BaseMapper<SysLog> {
+public interface SysOperateLogMapper extends BaseMapper<SysOperateLog> {
 
     /**
      * 清空操作日志
      */
-    void cleanLog();
+    void cleanOperateLog();
 }

@@ -3,10 +3,12 @@ package com.aurora.system.common.factory;
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
 import com.aurora.common.core.constant.Constants;
-import com.aurora.common.core.utils.*;
+import com.aurora.common.core.utils.LogUtil;
+import com.aurora.common.core.utils.ServletUtil;
+import com.aurora.common.core.utils.SpringUtil;
 import com.aurora.common.core.utils.ip.AddressUtil;
 import com.aurora.common.core.utils.ip.IpUtil;
-import com.aurora.system.domain.SysLoginLog;
+import com.aurora.rpc.system.domain.SysLoginLog;
 import com.aurora.system.service.SysLoginLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -57,7 +59,7 @@ public class LogAsyncFactory {
                 // 封装对象
                 SysLoginLog loginLog = new SysLoginLog();
                 loginLog.setUserName(username);
-                loginLog.setIpaddr(ip);
+                loginLog.setLoginIp(ip);
                 loginLog.setLoginLocation(address);
                 loginLog.setBrowser(browser);
                 loginLog.setOs(os);

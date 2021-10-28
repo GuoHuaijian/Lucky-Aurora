@@ -1,6 +1,5 @@
 package com.aurora.common.core.utils.bean;
 
-import com.aurora.common.core.utils.bean.BeanUtilCallBack;
 import org.springframework.beans.BeanUtils;
 
 import java.util.ArrayList;

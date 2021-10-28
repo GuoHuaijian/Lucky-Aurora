@@ -1,6 +1,6 @@
 package com.aurora.system.service.impl;
 
-import com.aurora.system.domain.SysLoginLog;
+import com.aurora.rpc.system.domain.SysLoginLog;
 import com.aurora.system.mapper.SysLoginLogMapper;
 import com.aurora.system.service.SysLoginLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -49,12 +49,12 @@ public class SysLoginLogServiceImpl extends ServiceImpl<SysLoginLogMapper, SysLo
     /**
      * 批量删除系统登录日志
      *
-     * @param infoIds 需要删除的登录日志ID
+     * @param ids 需要删除的登录日志ID
      * @return
      */
     @Override
-    public boolean deleteLoginLogByIds(Long[] infoIds) {
-        return removeByIds(Arrays.asList(infoIds));
+    public boolean deleteLoginLogByIds(Long[] ids) {
+        return removeByIds(Arrays.asList(ids));
     }
 
     /**

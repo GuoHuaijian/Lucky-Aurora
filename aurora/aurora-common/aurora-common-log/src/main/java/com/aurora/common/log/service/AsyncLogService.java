@@ -1,6 +1,6 @@
 package com.aurora.common.log.service;
 
-import com.aurora.rpc.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysOperateLog;
 import com.aurora.rpc.system.domain.SysVisitLog;
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
@@ -19,13 +19,13 @@ public interface AsyncLogService {
     /**
      * 保存操作日志记录
      *
-     * @param sysLog
+     * @param operateLog
      * @throws MQBrokerException
      * @throws RemotingException
      * @throws InterruptedException
      * @throws MQClientException
      */
-    void saveLog(SysLog sysLog) throws MQBrokerException, RemotingException, InterruptedException, MQClientException;
+    void saveLog(SysOperateLog operateLog) throws MQBrokerException, RemotingException, InterruptedException, MQClientException;
 
     /**
      * 保存访问日志记录

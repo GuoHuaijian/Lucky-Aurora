@@ -2,10 +2,10 @@ package com.aurora.common.log.aspect;
 
 import cn.hutool.http.useragent.UserAgent;
 import cn.hutool.http.useragent.UserAgentUtil;
-import com.aurora.common.core.utils.ip.AddressUtil;
-import com.aurora.common.core.utils.ip.IpUtil;
 import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.utils.StringUtil;
+import com.aurora.common.core.utils.ip.AddressUtil;
+import com.aurora.common.core.utils.ip.IpUtil;
 import com.aurora.common.log.annotation.VLog;
 import com.aurora.common.log.enums.LogStatus;
 import com.aurora.common.log.service.AsyncLogService;
@@ -78,7 +78,7 @@ public class VisitLogAspect {
             SysVisitLog visitLog = new SysVisitLog();
             visitLog.setStatus(LogStatus.SUCCESS.getCode());
             String ip = IpUtil.getIpAddr(ServletUtil.getRequest());
-            visitLog.setIp(ip);
+            visitLog.setVisitIp(ip);
             final UserAgent userAgent = UserAgentUtil.parse(ServletUtil.getRequest().getHeader("User-Agent"));
             // 获取客户端操作系统
             String os = userAgent.getOs().getName();
@@ -86,7 +86,7 @@ public class VisitLogAspect {
             String browser = userAgent.getBrowser().getName();
             visitLog.setOs(os);
             visitLog.setBrowser(browser);
-            visitLog.setLocation(AddressUtil.getAddress(ip));
+            visitLog.setVisitLocation(AddressUtil.getAddress(ip));
             visitLog.setUrl(ServletUtil.getRequest().getRequestURI());
             if (e != null) {
                 visitLog.setStatus(LogStatus.ERROR.getCode());
@@ -113,7 +113,7 @@ public class VisitLogAspect {
      * @param visitLog 操作日志
      */
     public void getControllerMethodDescription(VLog log, SysVisitLog visitLog) {
-        visitLog.setTitle(log.title());
+        visitLog.setTitle(log.value());
         if (StringUtil.isNotEmpty(log.blogId())) {
             visitLog.setBlogId(Integer.parseInt(log.blogId()));
         }

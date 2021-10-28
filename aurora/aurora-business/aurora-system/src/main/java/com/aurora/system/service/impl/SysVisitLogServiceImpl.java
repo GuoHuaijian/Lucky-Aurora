@@ -1,6 +1,6 @@
 package com.aurora.system.service.impl;
 
-import com.aurora.system.domain.SysVisitLog;
+import com.aurora.rpc.system.domain.SysVisitLog;
 import com.aurora.system.mapper.SysVisitLogMapper;
 import com.aurora.system.service.SysVisitLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,7 +33,6 @@ public class SysVisitLogServiceImpl extends ServiceImpl<SysVisitLogMapper, SysVi
      */
     @Override
     public boolean saveVisitLog(SysVisitLog visitLog) {
-        visitLog.setVisitTime(new Date());
         return save(visitLog);
     }
 

@@ -5,9 +5,9 @@ import com.aurora.common.rocketmq.constant.ConsumerGroupConstant;
 import com.aurora.common.rocketmq.constant.TagConstant;
 import com.aurora.common.rocketmq.constant.TopicConstant;
 import com.aurora.common.rocketmq.consumer.RocketMqConsumer;
-import com.aurora.system.domain.SysLog;
-import com.aurora.system.domain.SysVisitLog;
-import com.aurora.system.service.SysLogService;
+import com.aurora.rpc.system.domain.SysOperateLog;
+import com.aurora.rpc.system.domain.SysVisitLog;
+import com.aurora.system.service.SysOperateLogService;
 import com.aurora.system.service.SysVisitLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -34,7 +34,7 @@ import javax.annotation.Resource;
 public class LogConsumer {
 
     @Resource
-    private SysLogService logService;
+    private SysOperateLogService operateLogService;
 
     @Resource
     private SysVisitLogService visitLogService;
@@ -58,7 +58,7 @@ public class LogConsumer {
                     String tags = msg.getTags();
                     String body = new String(msg.getBody(), "utf-8");
                     if (TagConstant.OPERATE_LOG.equals(tags)) {
-                        logService.saveLog(JSON.parseObject(body, SysLog.class));
+                        operateLogService.saveOperateLog(JSON.parseObject(body, SysOperateLog.class));
                     } else if (TagConstant.VISIT_LOG.equals(tags)) {
                         visitLogService.saveVisitLog(JSON.parseObject(body, SysVisitLog.class));
                     }

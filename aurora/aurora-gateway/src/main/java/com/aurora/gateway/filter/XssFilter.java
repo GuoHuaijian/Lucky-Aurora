@@ -1,7 +1,7 @@
 package com.aurora.gateway.filter;
 
-import com.aurora.common.core.utils.html.EscapeUtil;
 import com.aurora.common.core.utils.StringUtil;
+import com.aurora.common.core.utils.html.EscapeUtil;
 import com.aurora.gateway.properties.XssProperties;
 import io.netty.buffer.ByteBufAllocator;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,5 +1,7 @@
 package com.aurora.rpc.system.domain;
 
+import com.baomidou.mybatisplus.annotation.*;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,86 +22,99 @@ import java.util.Date;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SysLog implements Serializable {
+@TableName(value = "sys_operate_log")
+public class SysOperateLog implements Serializable {
+
     /**
      * 日志主键
      */
-    private Long logId;
+    @TableId(value = "operate_id", type = IdType.AUTO)
+    private Long operateId;
 
     /**
      * 模块标题
      */
-    private String value;
+    @TableField(value = "title")
+    private String title;
 
     /**
      * 业务类型（0其它 1新增 2修改 3删除）
      */
+    @TableField(value = "log_type")
     private Integer logType;
 
     /**
      * 方法名称
      */
+    @TableField(value = "method")
     private String method;
 
     /**
      * 请求方式
      */
+    @TableField(value = "request_method")
     private String requestMethod;
 
     /**
      * 操作类别（0其它 1后台用户 2手机端用户）
      */
+    @TableField(value = "operator_type")
     private Integer operatorType;
 
     /**
      * 操作人员
      */
-    private String operName;
-
-    /**
-     * 部门名称
-     */
-    private String deptName;
+    @TableField(value = "operator")
+    private String operator;
 
     /**
      * 请求URL
      */
-    private String operUrl;
+    @TableField(value = "operate_url")
+    private String operateUrl;
 
     /**
      * 主机地址
      */
-    private String operIp;
+    @TableField(value = "operate_ip")
+    private String operateIp;
 
     /**
      * 操作地点
      */
-    private String operLocation;
+    @TableField(value = "operate_location")
+    private String operateLocation;
 
     /**
      * 请求参数
      */
-    private String operParam;
+    @TableField(value = "operate_param")
+    private String operateParam;
 
     /**
      * 返回参数
      */
+    @TableField(value = "json_result")
     private String jsonResult;
 
     /**
      * 操作状态（0正常 1异常）
      */
+    @TableField(value = "status")
     private Integer status;
 
     /**
      * 错误消息
      */
+    @TableField(value = "error_msg")
     private String errorMsg;
 
     /**
      * 操作时间
      */
-    private Date operTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @TableField(value = "operate_time", fill = FieldFill.INSERT)
+    private Date operateTime;
 
     private static final long serialVersionUID = 1L;
 }

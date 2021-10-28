@@ -2,15 +2,15 @@ package com.aurora.common.log.aspect;
 
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson.JSON;
+import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.utils.ip.AddressUtil;
 import com.aurora.common.core.utils.ip.IpUtil;
-import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogStatus;
 import com.aurora.common.log.service.AsyncLogService;
 import com.aurora.common.security.utils.SecurityUtil;
-import com.aurora.rpc.system.domain.SysLog;
+import com.aurora.rpc.system.domain.SysOperateLog;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.Signature;
@@ -44,7 +44,7 @@ import java.util.Map;
 @Aspect
 @Component
 @Slf4j
-public class LogAspect {
+public class OperateLogAspect {
 
     @Resource
     private AsyncLogService asyncLogService;
@@ -85,33 +85,33 @@ public class LogAspect {
                 return;
             }
             // *========数据库日志=========*//
-            SysLog sysLog = new SysLog();
-            sysLog.setStatus(LogStatus.SUCCESS.getCode());
+            SysOperateLog operateLog = new SysOperateLog();
+            operateLog.setStatus(LogStatus.SUCCESS.getCode());
             // 请求的地址
             String ip = IpUtil.getIpAddr(ServletUtil.getRequest());
-            sysLog.setOperIp(ip);
-            sysLog.setOperLocation(AddressUtil.getAddress(ip));
+            operateLog.setOperateIp(ip);
+            operateLog.setOperateLocation(AddressUtil.getAddress(ip));
             // 返回参数
-            sysLog.setJsonResult(JSON.toJSONString(jsonResult));
-            sysLog.setOperUrl(ServletUtil.getRequest().getRequestURI());
+            operateLog.setJsonResult(JSON.toJSONString(jsonResult));
+            operateLog.setOperateUrl(ServletUtil.getRequest().getRequestURI());
             String username = SecurityUtil.getUsername();
             if (StrUtil.isNotBlank(username)) {
-                sysLog.setOperName(username);
+                operateLog.setOperator(username);
             }
             if (e != null) {
-                sysLog.setStatus(LogStatus.ERROR.getCode());
-                sysLog.setErrorMsg(StrUtil.sub(e.getMessage(), 0, 2000));
+                operateLog.setStatus(LogStatus.ERROR.getCode());
+                operateLog.setErrorMsg(StrUtil.sub(e.getMessage(), 0, 2000));
             }
             // 设置方法名称
             String className = joinPoint.getTarget().getClass().getName();
             String methodName = joinPoint.getSignature().getName();
-            sysLog.setMethod(className + "." + methodName + "()");
+            operateLog.setMethod(className + "." + methodName + "()");
             // 设置请求方式
-            sysLog.setRequestMethod(ServletUtil.getRequest().getMethod());
+            operateLog.setRequestMethod(ServletUtil.getRequest().getMethod());
             // 处理设置注解上的参数
-            getControllerMethodDescription(joinPoint, controllerLog, sysLog);
+            getControllerMethodDescription(joinPoint, controllerLog, operateLog);
             // 保存数据库
-            asyncLogService.saveLog(sysLog);
+            asyncLogService.saveLog(operateLog);
         } catch (Exception exp) {
             // 记录本地异常日志
             log.error("==前置通知异常==");
@@ -123,33 +123,33 @@ public class LogAspect {
     /**
      * 获取注解中对方法的描述信息 用于Controller层注解
      *
-     * @param log    日志
-     * @param sysLog 操作日志
+     * @param log        日志
+     * @param operateLog 操作日志
      */
-    public void getControllerMethodDescription(JoinPoint joinPoint, Log log, SysLog sysLog) {
+    public void getControllerMethodDescription(JoinPoint joinPoint, Log log, SysOperateLog operateLog) {
         // 设置action动作
-        sysLog.setLogType(log.LogType().getCode());
+        operateLog.setLogType(log.LogType().getCode());
         // 设置标题
-        sysLog.setValue(log.value());
+        operateLog.setTitle(log.value());
         // 设置操作人类别
-        sysLog.setOperatorType(log.operatorType().getCode());
+        operateLog.setOperatorType(log.operatorType().getCode());
         // 是否需要保存request，参数和值
         if (log.isSaveRequestData()) {
             // 获取参数的信息，传入到数据库中。
-            setRequestValue(joinPoint, sysLog);
+            setRequestValue(joinPoint, operateLog);
         }
     }
 
     /**
      * 获取请求的参数，放到log中
      *
-     * @param sysLog 操作日志
+     * @param operateLog 操作日志
      */
-    private void setRequestValue(JoinPoint joinPoint, SysLog sysLog) {
-        String requestMethod = sysLog.getRequestMethod();
+    private void setRequestValue(JoinPoint joinPoint, SysOperateLog operateLog) {
+        String requestMethod = operateLog.getRequestMethod();
         if (HttpMethod.PUT.name().equals(requestMethod) || HttpMethod.POST.name().equals(requestMethod)) {
             String params = argsArrayToString(joinPoint.getArgs());
-            sysLog.setOperParam(StrUtil.sub(params, 0, 2000));
+            operateLog.setOperateParam(StrUtil.sub(params, 0, 2000));
         }
     }
 

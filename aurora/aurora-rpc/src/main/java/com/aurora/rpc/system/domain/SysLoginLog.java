@@ -1,4 +1,4 @@
-package com.aurora.system.domain;
+package com.aurora.rpc.system.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -22,11 +22,12 @@ import java.util.Date;
 @NoArgsConstructor
 @TableName(value = "sys_login_log")
 public class SysLoginLog implements Serializable {
+
     /**
      * 访问ID
      */
-    @TableId(value = "info_id", type = IdType.AUTO)
-    private Long infoId;
+    @TableId(value = "login_id", type = IdType.AUTO)
+    private Long loginId;
 
     /**
      * 用户账号
@@ -37,8 +38,8 @@ public class SysLoginLog implements Serializable {
     /**
      * 登录IP地址
      */
-    @TableField(value = "ipaddr")
-    private String ipaddr;
+    @TableField(value = "login_ip")
+    private String loginIp;
 
     /**
      * 登录地点

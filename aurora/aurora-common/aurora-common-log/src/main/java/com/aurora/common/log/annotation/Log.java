@@ -6,7 +6,7 @@ import com.aurora.common.log.enums.OperatorType;
 import java.lang.annotation.*;
 
 /**
- * describe:
+ * describe: 操作日志
  *
  * @Author Guo Huaijian
  * @Date 2021/9/6
