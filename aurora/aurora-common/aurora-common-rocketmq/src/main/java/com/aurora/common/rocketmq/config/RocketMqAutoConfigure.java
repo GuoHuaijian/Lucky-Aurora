@@ -15,6 +15,7 @@ import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.Optional;
 
 /**
  * describe:
@@ -43,7 +44,7 @@ public class RocketMqAutoConfigure {
     public DefaultMQProducer defaultMQProducer() throws MQClientException {
         RocketMqProperties.Producer producerConfig = rocketMqProperties.getProducer();
         String nameServer = rocketMqProperties.getNameServer();
-        String groupName = producerConfig.getGroup();
+        String groupName = Optional.ofNullable(producerConfig.getGroup()).orElse(RocketMqProperties.Producer.DEFAULT_GROUP);
         Assert.hasText(nameServer, "[rocketmq.name-server] must not be null");
         Assert.hasText(groupName, "[rocketmq.producer.group] must not be null");
         String accessChannel = rocketMqProperties.getAccessChannel();
@@ -74,8 +75,8 @@ public class RocketMqAutoConfigure {
     public DefaultMQPushConsumer defaultMQPushConsumer() throws MQClientException {
         RocketMqProperties.Consumer consumerConfig = rocketMqProperties.getConsumer();
         String nameServer = rocketMqProperties.getNameServer();
-        String groupName = consumerConfig.getGroup();
-        String topicName = consumerConfig.getTopic();
+        String groupName = Optional.ofNullable(consumerConfig.getGroup()).orElse(RocketMqProperties.Consumer.DEFAULT_GROUP);
+        String topicName = Optional.ofNullable(consumerConfig.getTopic()).orElse(RocketMqProperties.Consumer.DEFAULT_TOPIC);
         Assert.hasText(nameServer, "[rocketmq.name-server] must not be null");
         Assert.hasText(groupName, "[rocketmq.consumer.group] must not be null");
         Assert.hasText(topicName, "[rocketmq.consumer.topic] must not be null");

@@ -1,11 +1,7 @@
 package com.aurora.common.rocketmq.config;
 
 import lombok.Data;
-import org.apache.rocketmq.common.topic.TopicValidator;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * describe:
@@ -45,6 +41,11 @@ public class RocketMqProperties {
     public static class Producer {
 
         /**
+         * 默认组名
+         */
+        public static final String DEFAULT_GROUP = "Default_Producer";
+
+        /**
          * 生产的组名.
          */
         private String group;
@@ -81,30 +82,21 @@ public class RocketMqProperties {
          */
         private int maxMessageSize = 1024 * 1024 * 4;
 
-        /**
-         * access-key属性。
-         */
-        private String accessKey;
-
-        /**
-         * “secretKey”的属性。
-         */
-        private String secretKey;
-
-        /**
-         * 切换消息跟踪的标志实例。
-         */
-        private boolean enableMsgTrace = false;
-
-        /**
-         * 消息跟踪主题的名称值。如果没有配置，则可以使用默认跟踪主题名称。
-         */
-        private String customizedTraceTopic = TopicValidator.RMQ_SYS_TRACE_TOPIC;
-
     }
 
     @Data
     public static final class Consumer {
+
+        /**
+         * 默认组名
+         */
+        public static final String DEFAULT_GROUP = "Default_Consumer";
+
+        /**
+         * 默认组名
+         */
+        public static final String DEFAULT_TOPIC = "Default_Topic";
+
         /**
          * 消费者的组名。
          */
@@ -131,42 +123,9 @@ public class RocketMqProperties {
         private String selectorExpression = "*";
 
         /**
-         * access-key属性。
-         */
-        private String accessKey;
-
-        /**
-         * “secretKey”的属性。
-         */
-        private String secretKey;
-
-        /**
          * 每次提取的最大消息数。
          */
         private int pullBatchSize = 10;
-
-        /**
-         * 切换消息跟踪的标志实例。
-         */
-        private boolean enableMsgTrace = false;
-
-        /**
-         * 消息跟踪主题的名称值。如果没有配置，则可以使用默认跟踪主题名称。
-         */
-        private String customizedTraceTopic = TopicValidator.RMQ_SYS_TRACE_TOPIC;
-
-        /**
-         * 侦听器配置容器
-         * 模式是这样的:
-         * group1.topic1 = false
-         * group2.topic2 = true
-         * group3.topic3 = false
-         */
-        private Map<String, Map<String, Boolean>> listeners = new HashMap<>();
-
-        public boolean isEnableMsgTrace() {
-            return enableMsgTrace;
-        }
 
     }
 }

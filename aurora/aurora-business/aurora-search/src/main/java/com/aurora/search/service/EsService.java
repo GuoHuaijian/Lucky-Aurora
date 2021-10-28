@@ -33,5 +33,5 @@ public interface EsService {
      * @param articleId
      * @throws IOException
      */
-    void deleteIndex(String articleId) throws IOException;
+    void deleteIndex(Integer articleId) throws IOException;
 }

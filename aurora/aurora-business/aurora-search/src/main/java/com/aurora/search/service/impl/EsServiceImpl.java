@@ -84,7 +84,7 @@ public class EsServiceImpl implements EsService {
      * @throws IOException
      */
     @Override
-    public void deleteIndex(String articleId) throws IOException {
+    public void deleteIndex(Integer articleId) throws IOException {
         DeleteByQueryRequest request = new DeleteByQueryRequest("aurora_blog");
         request.setQuery(new TermQueryBuilder("articleId", articleId));
         restHighLevelClient.deleteByQuery(request, RequestOptions.DEFAULT);

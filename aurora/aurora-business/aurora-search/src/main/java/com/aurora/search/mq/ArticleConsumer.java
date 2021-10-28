@@ -1,9 +1,11 @@
 package com.aurora.search.mq;
 
+import com.alibaba.fastjson.JSON;
 import com.aurora.common.rocketmq.constant.ConsumerGroupConstant;
 import com.aurora.common.rocketmq.constant.TagConstant;
 import com.aurora.common.rocketmq.constant.TopicConstant;
 import com.aurora.common.rocketmq.consumer.RocketMqConsumer;
+import com.aurora.search.domain.Article;
 import com.aurora.search.service.EsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
@@ -27,7 +29,7 @@ import javax.annotation.Resource;
  */
 @Component
 @Slf4j
-public class ArticleStorageService {
+public class ArticleConsumer {
 
     @Resource
     private EsService esService;
@@ -38,7 +40,6 @@ public class ArticleStorageService {
     @PostConstruct
     public void onMessage() throws MQClientException {
         DefaultMQPushConsumer pushConsumer = consumer.buildConsumer(TopicConstant.ARTICLE_ADD_TOPIC_NAME, ConsumerGroupConstant.ARTICLE_GROUP_ID);
-        pushConsumer.subscribe(TopicConstant.ARTICLE_ADD_TOPIC_NAME, TagConstant.ARTICLE_ADD);
         pushConsumer.registerMessageListener((MessageListenerConcurrently) (msgs, context) -> {
             if (CollectionUtils.isEmpty(msgs)) {
                 log.info("MQ接收消息为空，直接返回成功");
@@ -51,7 +52,15 @@ public class ArticleStorageService {
                     String tags = msg.getTags();
                     String body = new String(msg.getBody(), "utf-8");
                     log.info("MQ消息topic={}, tags={}, 消息内容={}", topic, tags, body);
-                    esService.addIndex(body);
+                    if (TagConstant.ARTICLE_ADD.equals(tags)) {
+                        esService.addIndex(body);
+                    }
+                    if (TagConstant.ARTICLE_UPDATE.equals(tags)) {
+                        esService.updateIndex(body);
+                    }
+                    if (TagConstant.ARTICLE_DELETE.equals(tags)) {
+                        esService.deleteIndex(JSON.parseObject(body, Article.class).getArticleId());
+                    }
                 } catch (Exception e) {
                     log.error("获取MQ消息内容异常{}", e);
                 }
@@ -60,40 +69,4 @@ public class ArticleStorageService {
         });
         pushConsumer.start();
     }
-
-//    /**
-//     * 博文更新处理
-//     *
-//     * @param record
-//     */
-//    @KafkaListener(topics = {TopicConstant.ARTICLE_UPDATE_TOPIC_NAME}, containerFactory = ContainerFactoryConstant.ARTICLE_CONTAINER_FACTORY_NAME)
-//    public void articleUpdate(ConsumerRecord<?, ?> record) {
-//        Optional message = Optional.ofNullable(record.value());
-//        message.ifPresent(msg -> {
-//            try {
-//                esService.updateIndex(record);
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            log.info("消息队列消费消息： Topic:" + record.topic() + ",Message:" + msg);
-//        });
-//    }
-//
-//    /**
-//     * 博文删除处理
-//     *
-//     * @param record
-//     */
-//    @KafkaListener(topics = {TopicConstant.ARTICLE_DELETE_TOPIC_NAME}, containerFactory = ContainerFactoryConstant.ARTICLE_CONTAINER_FACTORY_NAME)
-//    public void articleDelete(ConsumerRecord<?, ?> record) {
-//        Optional message = Optional.ofNullable(record.value());
-//        message.ifPresent(msg -> {
-//            try {
-//                esService.deleteIndex(JSONObject.toJSONString(msg));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//            log.info("消息队列消费消息： Topic:" + record.topic() + ",Message:" + msg);
-//        });
-//    }
 }

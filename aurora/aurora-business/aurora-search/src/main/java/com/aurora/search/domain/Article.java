@@ -80,7 +80,7 @@ public class Article implements Serializable {
     /**
      * 封面
      */
-    private String cover;
+    private String coverUrl;
 
     /**
      * 是否推荐文章
@@ -95,7 +95,7 @@ public class Article implements Serializable {
     /**
      * 发布状态
      */
-    private Byte publish;
+    private Integer publish;
 
     /**
      * 是否置顶
