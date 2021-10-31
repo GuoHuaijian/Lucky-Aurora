@@ -117,7 +117,7 @@
         </template>
       </el-table-column>
       <el-table-column label="请求方式" align="center" prop="requestMethod" />
-      <el-table-column label="操作人员" align="center" prop="operateName" width="100" :show-overflow-tooltip="true" sortable="custom" :sort-orders="['descending', 'ascending']" />
+      <el-table-column label="操作人员" align="center" prop="operator" width="100" :show-overflow-tooltip="true" sortable="custom" :sort-orders="['descending', 'ascending']" />
       <el-table-column label="操作地址" align="center" prop="operateIp" width="130" :show-overflow-tooltip="true" />
       <el-table-column label="操作地点" align="center" prop="operateLocation" :show-overflow-tooltip="true" />
       <el-table-column label="操作状态" align="center" prop="status">
@@ -196,7 +196,7 @@
 </template>
 
 <script>
-import { list, delOperateLog, cleanOperateLog, exportOperateLog } from "@/api/system/operate";
+import { list, delOperateLog, cleanOperateLog, exportOperateLog } from "@/api/system/log/operate";
 import { getDicts } from "@/api/system/dict/data"
 export default {
   name: "OperateLog",

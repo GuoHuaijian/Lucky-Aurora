@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.aurora</groupId>
+        <artifactId>aurora-common</artifactId>
+        <version>1.0.0</version>
+    </parent>
+    <groupId>com.aurora</groupId>
+    <artifactId>aurora-common-blog</artifactId>
+    <version>1.0.0</version>
+    <name>aurora-common-blog</name>
+    <description>aurora-common-blog</description>
+    <properties>
+        <java.version>1.8</java.version>
+    </properties>
+    <dependencies>
+        <!-- Aurora工具包 -->
+        <dependency>
+            <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Aurora配置 -->
+        <dependency>
+            <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-config</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Aurora日志 -->
+        <dependency>
+            <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-log</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Aurora Mybatis -->
+        <dependency>
+            <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-mybatis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Spring Cloud Bootstrap -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Dubbo -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Nacos Discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- Mysql -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

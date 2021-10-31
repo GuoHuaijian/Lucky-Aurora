@@ -32,6 +32,7 @@
                 </router-link>
               </li>
             </ul>
+           <bg-login class="bg-login"/>
             <div class="search">
               <el-input
                   placeholder="请输入内容"
@@ -89,7 +90,7 @@ export default {
       }
     },
   },
-};
+}
 </script>
 
 <style>
@@ -117,6 +118,7 @@ export default {
 
 nav {
   width: 1200px;
+  height: 60px;
   margin: auto;
   position: relative;
 }
@@ -152,11 +154,14 @@ li {
 }
 
 .search {
-  position: absolute;
-  right: 0;
-  margin-right: 60px;
+  float: right;
 }
-
+.bg-login{
+  float: right;
+  height: 60px;
+  width: 100px;
+  margin-right: 50px;
+}
 .input-with-select {
   width: 200px;
 }

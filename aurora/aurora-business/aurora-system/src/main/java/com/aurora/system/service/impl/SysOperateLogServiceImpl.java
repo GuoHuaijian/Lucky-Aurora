@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ public class SysOperateLogServiceImpl extends ServiceImpl<SysOperateLogMapper, S
      */
     @Override
     public boolean saveOperateLog(SysOperateLog operateLog) {
+        operateLog.setOperateTime(new Date());
         return save(operateLog);
     }
 

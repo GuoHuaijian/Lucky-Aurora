@@ -1,6 +1,5 @@
 package com.aurora.system.controller;
 
-import com.aurora.common.config.annotation.RepeatSubmit;
 import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
@@ -82,7 +81,6 @@ public class SysConfigController extends AbstractController {
     @PreAuthorize("hasAuthority('system:config:add')")
     @Log(value = "参数管理", LogType = LogType.INSERT)
     @PostMapping
-    @RepeatSubmit
     public Result add(@Validated @RequestBody SysConfig config) {
         if (SystemConstants.NOT_UNIQUE.equals(configService.checkConfigKeyUnique(config))) {
             return Result.error("新增参数'" + config.getConfigName() + "'失败，参数键名已存在");

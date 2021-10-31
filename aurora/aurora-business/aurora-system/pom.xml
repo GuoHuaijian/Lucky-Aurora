@@ -19,51 +19,70 @@
     </properties>
 
     <dependencies>
-        <!-- Aurora -->
-        <dependency>
-            <groupId>com.aurora</groupId>
-            <artifactId>aurora-common-security</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+        <!-- Aurora工具包 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!-- Aurora安全 -->
+        <dependency>
+            <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-security</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Aurora配置 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-config</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!-- Aurora日志 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-log</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!-- Aurora Redis -->
         <dependency>
             <groupId>com.aurora</groupId>
-            <artifactId>aurora-rpc</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.aurora</groupId>
-            <artifactId>aurora-common-rocketmq</artifactId>
+            <artifactId>aurora-common-redis</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Spring Boot -->
+        <!-- Aurora Mybatis -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-mybatis</artifactId>
+            <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+
+        <!-- Spring cloud Bootstrap -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Dubbo -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Nacos Discovery -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Nacos Config -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
         <!-- Mysql -->
@@ -71,34 +90,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
-        </dependency>
-
-        <!-- Mybatis-Plus -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <exclusions>
-                <exclusion>
-                    <artifactId>mybatis</artifactId>
-                    <groupId>org.mybatis</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <!-- Dubbo Spring Cloud -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-dubbo</artifactId>
-        </dependency>
-
-        <!-- Spring Cloud Nacos -->
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.cloud</groupId>
-            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
 
         <!-- 验证码 -->

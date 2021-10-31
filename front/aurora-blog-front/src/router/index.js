@@ -28,10 +28,15 @@ const routes = [
         path: '/about',
         name: 'about',
         component: () => import('../views/about/index')
+    },{
+        path: '/auth',
+        name: 'auth',
+        component: () => import('../components/Layout/Header/auth')
     }
 ]
 
 const router = new VueRouter({
+    mode: 'history', // 去掉url中的#
     routes
 })
 

@@ -20,6 +20,8 @@ import Recommend from '../components/Aside/Recommend'
 import Footer from '../components/Layout/Footer'
 import BaseLayout from '../components/Layout/BaseLayout'
 import Comment from '../components/Common/Comment'
+import Login from '../components/Layout/Header/login'
+import Auth from '../components/Layout/Header/auth'
 
 
 // 全局注册组件
@@ -44,4 +46,6 @@ Vue.component("panel", Panel)
 Vue.component("bg-footer", Footer)
 Vue.component("base-layout", BaseLayout)
 Vue.component("bg-comment", Comment)
+Vue.component("bg-login", Login)
+Vue.component("bg-auth", Auth)
 

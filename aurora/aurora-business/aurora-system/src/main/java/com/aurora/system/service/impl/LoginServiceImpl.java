@@ -8,9 +8,13 @@ import com.aurora.common.core.exception.CaptchaException;
 import com.aurora.common.core.exception.CaptchaExpireException;
 import com.aurora.common.core.exception.ServiceException;
 import com.aurora.common.core.manager.AsyncManager;
-import com.aurora.common.core.utils.*;
+import com.aurora.common.core.utils.DateUtil;
+import com.aurora.common.core.utils.MessageUtil;
+import com.aurora.common.core.utils.ServletUtil;
+import com.aurora.common.core.utils.StringUtil;
 import com.aurora.common.core.utils.ip.IpUtil;
 import com.aurora.common.core.web.domain.Result;
+import com.aurora.common.redis.RedisCache;
 import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.common.factory.LogAsyncFactory;
 import com.aurora.system.domain.LoginBody;
@@ -22,6 +26,7 @@ import com.aurora.system.service.SysConfigService;
 import com.aurora.system.service.SysMenuService;
 import com.aurora.system.service.SysUserService;
 import com.google.common.collect.Maps;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.oauth2.client.resource.OAuth2ProtectedResourceDetails;
 import org.springframework.stereotype.Service;
@@ -39,6 +44,7 @@ import java.util.Map;
  * @E-mail guohuaijian9527@gmail.com
  * @Version 1.0.0
  */
+@Slf4j
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -89,9 +95,10 @@ public class LoginServiceImpl implements LoginService {
             String result = HttpUtil.post(tokenUri, paramMap);
             object = JSONObject.parseObject(result);
         } catch (Exception e) {
+            log.debug(e.getMessage());
             AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(userName, Constants.LOGIN_FAIL,
-                    StringUtil.substring(e.getMessage(), 0, 200)));
-            throw new ServiceException(e.getMessage());
+                    StringUtil.substring("获取token异常", 0, 200)));
+            throw new ServiceException("获取token异常");
         }
         if (StrUtil.isNotBlank((String) object.get(Result.CODE_TAG))) {
             AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(userName, Constants.LOGIN_FAIL,

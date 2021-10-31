@@ -1,9 +1,9 @@
 package com.aurora.system.common.util;
 
 import com.aurora.common.core.constant.Constants;
-import com.aurora.common.core.utils.RedisCache;
 import com.aurora.common.core.utils.SpringUtil;
 import com.aurora.common.core.utils.StringUtil;
+import com.aurora.common.redis.RedisCache;
 import com.aurora.system.domain.SysDictData;
 import org.apache.commons.lang3.StringUtils;
 

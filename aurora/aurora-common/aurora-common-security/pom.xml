@@ -19,22 +19,12 @@
     </properties>
 
     <dependencies>
-        <!-- Aurora -->
+        <!-- Aurora工具包 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-core</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <!-- Spring Boot -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <optional>true</optional>
         </dependency>
 
         <!-- Spring Cloud Oauth2 -->

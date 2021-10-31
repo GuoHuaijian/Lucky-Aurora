@@ -22,6 +22,7 @@
         <module>aurora-file</module>
         <module>aurora-search</module>
         <module>aurora-system</module>
+        <module>aurora-portal</module>
     </modules>
 
     <build>

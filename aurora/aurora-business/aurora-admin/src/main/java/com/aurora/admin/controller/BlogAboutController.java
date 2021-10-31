@@ -1,7 +1,7 @@
 package com.aurora.admin.controller;
 
-import com.aurora.admin.domain.BlogAbout;
-import com.aurora.admin.service.BlogAboutService;
+import com.aurora.common.blog.domain.BlogAbout;
+import com.aurora.common.blog.service.BlogAboutService;
 import com.aurora.common.core.utils.poi.ExcelUtil;
 import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -33,6 +34,7 @@ public class SysVisitLogServiceImpl extends ServiceImpl<SysVisitLogMapper, SysVi
      */
     @Override
     public boolean saveVisitLog(SysVisitLog visitLog) {
+        visitLog.setVisitTime(new Date());
         return save(visitLog);
     }
 

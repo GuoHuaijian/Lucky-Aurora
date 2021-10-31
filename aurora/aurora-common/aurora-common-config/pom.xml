@@ -18,17 +18,12 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-        <!-- Aurora -->
+        <!-- Aurora工具包 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-core</artifactId>
             <version>${project.version}</version>
-        </dependency>
-
-        <!-- Aop -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- Validation -->
@@ -37,15 +32,19 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- Mybatis Plus -->
+        <!-- Sentinel Dubbo -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-apache-dubbo-adapter</artifactId>
         </dependency>
+
+        <!-- Spring Cloud Dubbo -->
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-extension</artifactId>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-dubbo</artifactId>
+            <optional>true</optional>
         </dependency>
+
     </dependencies>
 
     <build>

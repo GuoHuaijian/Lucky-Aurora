@@ -37,13 +37,15 @@
         <poi-ooxml.version>4.1.2</poi-ooxml.version>
         <commons-io.version>1.4</commons-io.version>
         <oshi.version>5.8.0</oshi.version>
+        <dubbo.version>2.7.8</dubbo.version>
+        <sentinel-dubbo.version>1.8.2</sentinel-dubbo.version>
+        <justauth.version>1.16.5</justauth.version>
     </properties>
 
     <dependencyManagement>
 
         <dependencies>
-
-            <!-- Spring Cloud Alibaba-->
+            <!-- Spring Cloud Alibaba -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>
@@ -61,6 +63,13 @@
                 <scope>import</scope>
             </dependency>
 
+            <!-- Spring Cloud Oauth2 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-oauth2</artifactId>
+                <version>${oauth2.version}</version>
+            </dependency>
+
             <!-- Spring Boot -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -70,35 +79,7 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- Spring Cloud Oauth2 -->
-            <dependency>
-                <groupId>org.springframework.cloud</groupId>
-                <artifactId>spring-cloud-starter-oauth2</artifactId>
-                <version>${oauth2.version}</version>
-            </dependency>
-
-            <!-- Dubbo-kryo -->
-            <dependency>
-                <groupId>de.javakaffee</groupId>
-                <artifactId>kryo-serializers</artifactId>
-                <version>${kryo.version}</version>
-            </dependency>
-
-            <!-- Guava -->
-            <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>${guava.version}</version>
-            </dependency>
-
-            <!-- Hutool -->
-            <dependency>
-                <groupId>cn.hutool</groupId>
-                <artifactId>hutool-all</artifactId>
-                <version>${hutool.version}</version>
-            </dependency>
-
-            <!-- Spring Security -->
+            <!-- Spring Boot Security -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-security</artifactId>
@@ -116,12 +97,32 @@
                 <artifactId>mybatis-plus-extension</artifactId>
                 <version>${mybatis-plus.version}</version>
             </dependency>
-
-            <!-- JSON -->
             <dependency>
-                <groupId>com.alibaba</groupId>
-                <artifactId>fastjson</artifactId>
-                <version>${fastjson.version}</version>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>${mybatis-plus.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- Dubbo -->
+            <dependency>
+                <groupId>org.apache.dubbo</groupId>
+                <artifactId>dubbo</artifactId>
+                <version>${dubbo.version}</version>
+            </dependency>
+
+            <!-- Dubbo kryo -->
+            <dependency>
+                <groupId>de.javakaffee</groupId>
+                <artifactId>kryo-serializers</artifactId>
+                <version>${kryo.version}</version>
+            </dependency>
+
+            <!-- Sentinel Dubbo -->
+            <dependency>
+                <groupId>com.alibaba.csp</groupId>
+                <artifactId>sentinel-apache-dubbo-adapter</artifactId>
+                <version>${sentinel-dubbo.version}</version>
             </dependency>
 
             <!-- RocketMQ -->
@@ -129,6 +130,27 @@
                 <groupId>org.apache.rocketmq</groupId>
                 <artifactId>rocketmq-client</artifactId>
                 <version>${rocketmq.version}</version>
+            </dependency>
+
+            <!-- Guava -->
+            <dependency>
+                <groupId>com.google.guava</groupId>
+                <artifactId>guava</artifactId>
+                <version>${guava.version}</version>
+            </dependency>
+
+            <!-- Hutool -->
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+
+            <!-- JSON -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>fastjson</artifactId>
+                <version>${fastjson.version}</version>
             </dependency>
 
             <!-- 验证码 -->
@@ -173,6 +195,12 @@
                 <version>${oshi.version}</version>
             </dependency>
 
+            <!-- JustAuth -->
+            <dependency>
+                <groupId>me.zhyd.oauth</groupId>
+                <artifactId>JustAuth</artifactId>
+                <version>${justauth.version}</version>
+            </dependency>
         </dependencies>
 
     </dependencyManagement>

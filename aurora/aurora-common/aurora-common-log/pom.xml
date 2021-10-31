@@ -18,48 +18,46 @@
         <java.version>1.8</java.version>
     </properties>
     <dependencies>
-
-        <!-- Aurora -->
+        <!-- Aurora工具包 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-core</artifactId>
             <version>${project.version}</version>
+            <optional>true</optional>
         </dependency>
+
+        <!-- Aurora安全 -->
+        <dependency>
+            <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-security</artifactId>
+            <version>${project.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Aurora调用接口 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-rpc</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.aurora</groupId>
-            <artifactId>aurora-common-security</artifactId>
-            <version>${project.version}</version>
-        </dependency>
+
+        <!-- Aurora消息队列 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-rocketmq</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Spring Boot -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-aop</artifactId>
-        </dependency>
-
-        <!-- Dubbo Spring Cloud -->
+        <!-- Spring Cloud Dubbo -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-dubbo</artifactId>
+        </dependency>
+
+        <!-- Spring Boot Aop -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
     </dependencies>

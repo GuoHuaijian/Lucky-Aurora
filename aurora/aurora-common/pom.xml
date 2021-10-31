@@ -24,6 +24,9 @@
         <module>aurora-common-config</module>
         <module>aurora-common-log</module>
         <module>aurora-common-rocketmq</module>
+        <module>aurora-common-blog</module>
+        <module>aurora-common-redis</module>
+        <module>aurora-common-mybatis</module>
     </modules>
 
     <dependencies>

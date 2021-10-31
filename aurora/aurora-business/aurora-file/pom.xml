@@ -11,7 +11,7 @@
     <artifactId>aurora-file</artifactId>
     <version>1.0.0</version>
     <name>aurora-file</name>
-    <description>Demo project for Spring Boot</description>
+    <description>文件处理模块</description>
     <packaging>jar</packaging>
 
     <properties>
@@ -22,54 +22,46 @@
         <aliyunOss.version>3.10.2</aliyunOss.version>
     </properties>
     <dependencies>
-
-        <!-- Aurora -->
+        <!-- Aurora工具包 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-core</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!-- Aurora调用接口 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-rpc</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <!-- Aurora安全 -->
         <dependency>
             <groupId>com.aurora</groupId>
             <artifactId>aurora-common-security</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Spring Boot -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+        <!-- Spring Cloud Bootstrap -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-bootstrap</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-        </dependency>
 
-        <!-- Dubbo Spring Cloud -->
+        <!-- Spring Cloud Dubbo -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-dubbo</artifactId>
         </dependency>
 
-        <!-- Spring Cloud Nacos -->
+        <!-- Spring Cloud Nacos Discovery -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
+
+        <!-- Spring Cloud Nacos Config -->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
