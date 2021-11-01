@@ -11,52 +11,11 @@
 </template>
 
 <script>
-
+import {tagList } from '../../../api/all';
 export default {
   data() {
     return {
-      tagList: [{
-        "id": null,
-        "name": "本站相关",
-        "type": null,
-        "linkNum": "1"
-      },
-        {
-          "id": null,
-          "name": "关于",
-          "type": null,
-          "linkNum": "1"
-        },
-        {
-          "id": null,
-          "name": "Java",
-          "type": null,
-          "linkNum": "4"
-        },
-        {
-          "id": null,
-          "name": "JVM",
-          "type": null,
-          "linkNum": "2"
-        },
-        {
-          "id": null,
-          "name": "面试",
-          "type": null,
-          "linkNum": "1"
-        },
-        {
-          "id": null,
-          "name": "ElasticSearch",
-          "type": null,
-          "linkNum": "1"
-        },
-        {
-          "id": null,
-          "name": "Arthas",
-          "type": null,
-          "linkNum": "1"
-        }]
+      tagList: []
     };
   },
 
@@ -65,6 +24,9 @@ export default {
   computed: {},
 
   mounted() {
+    tagList().then(res =>{
+      this.tagList = res.data.data
+    })
   },
 
   methods: {}

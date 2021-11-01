@@ -2,12 +2,19 @@
   <div>
     <div class="login_form">
       <div class="login" v-if="isLogin == true">
-        <el-avatar :src="url" ></el-avatar>
-        <el-button type="text"><span v-model="name">{{name}}</span></el-button>
+        <el-dropdown @command="handleCommand">
+        <span class="el-dropdown-link">
+          <el-avatar :src="url"></el-avatar>
+        </span>
+          <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item icon="el-icon-user" command="user">个人中心</el-dropdown-item>
+            <el-dropdown-item icon="el-icon-switch-button" command="logout">退出</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
       </div>
       <div class="login" v-else>
-        <el-avatar src=""></el-avatar>
-        <el-button type="text" @click="hello()">未登录</el-button>
+        <el-button type="text" @click="loginDialog()">登录</el-button>
+        <el-button type="text" @click="loginDialog()">注册</el-button>
       </div>
     </div>
 
@@ -24,18 +31,20 @@
             <template slot="prepend">密码</template>
           </el-input>
         </el-form-item>
-        <el-form-item>
-            <el-button type="primary" @click="login('ruleForm')">登录</el-button>
-            <el-button @click="test()">取 消</el-button>
+        <el-form-item class="btns">
+          <el-button type="primary" @click="login('ruleForm')">登录</el-button>
+          <el-button type="info">取 消</el-button>
         </el-form-item>
-        <el-form-item>
-          <span>第三方登录:</span>
-          <a @click="test('gitee')">
-            <img src="https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.11/gitee.png"/>
-          </a>
-          <a @click="test('github')">
-            <img src="https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.11/github.png"/>
-          </a>
+        <el-form-item style="height: 40px">
+          <span>第三方登录: </span>
+          <div style="display: inline-block;height: 40px">
+            <a @click="login('gitee')" class="login-icon">
+              <img src="https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.11/gitee.png"/>
+            </a>
+            <a @click="login('github')" class="login-icon">
+              <img src="https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.11/github.png"/>
+            </a>
+          </div>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -43,17 +52,18 @@
 </template>
 
 <script>
-import { getAuthorize,getInfo } from '../../../api/all';
+import {getAuthorize, getInfo} from '../../../api/all';
+
 export default {
   data() {
     return {
-      url:null,
-      name:null,
+      url: null,
+      name: null,
       authUrl: null,
-      platform:{
-      source: null,
-      code: null,
-      state: null,
+      platform: {
+        source: null,
+        code: null,
+        state: null,
       },
       isLogin: false,
       open: false,
@@ -90,13 +100,22 @@ export default {
   },
 
   methods: {
-    hello() {
+    loginDialog() {
       this.open = true
     },
-    test:function(source) {
+    handleCommand(command){
+      if (command === 'logout'){
+        localStorage.removeItem("authCode");
+        location.reload();
+      }
+      if (command === 'user'){
+        alert("还未实现")
+      }
+    },
+    login(source) {
       this.platform.source = source;
-      getAuthorize(this.platform).then(res =>{
-         this.authUrl = res.data.data.authorizeUrl;
+      getAuthorize(this.platform).then(res => {
+        this.authUrl = res.data.data.authorizeUrl;
         // 更新状态码与登录平台名称
         this.platform.state = res.data.data.state;
 
@@ -111,7 +130,7 @@ export default {
         window.addEventListener("storage", this.getAuthCode);
       })
     },
-    getAuthCode: function () {
+    getAuthCode() {
       // 获取授权码
       const code = localStorage.getItem("authCode");
       this.platform.code = code
@@ -120,18 +139,18 @@ export default {
       this.removeStorageListener();
       if (code) {
         // 调用登录函数
-        this.open = false
         this.authLogin();
         return;
       }
       throw this.platform + "授权码获取失败";
     },
     authLogin() {
-      getInfo(this.platform).then(res =>{
+      getInfo(this.platform).then(res => {
         this.url = res.data.data.avatar
         this.name = res.data.data.nickname
-        localStorage.setItem("url",this.url)
-        localStorage.setItem("name",this.name)
+        localStorage.setItem("url", this.url)
+        localStorage.setItem("name", this.name)
+        this.open = false
         location.reload();
       })
     },
@@ -157,5 +176,15 @@ export default {
 .login-name {
   height: 60px;
   line-height: 60px;
+}
+
+.btns {
+  display: flex;
+  justify-content: flex-end;
+}
+.login-icon{
+  display: inline-block;
+  margin-left: 8px;
+  height: 40px;
 }
 </style>

@@ -1,8 +1,10 @@
 <template>
   <div>
     <el-carousel :interval="5000" arrow="hover">
-      <el-carousel-item v-for="item in items" :key="item">
-        <img :src="item" class="carousel-img"/>
+      <el-carousel-item v-for="item in items" :key="item.carouselId">
+        <a :href="item.url">
+        <img :src="item.imgUrl" class="carousel-img" :alt="item.name"/>
+        </a>
       </el-carousel-item>
     </el-carousel>
   </div>

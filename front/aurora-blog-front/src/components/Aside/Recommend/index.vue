@@ -3,16 +3,16 @@
     <panel :title="'推荐阅读'">
       <div slot="content" class="content">
         <div class="top" v-if="topRecommend">
-          <a :href="'/' + topRecommend.urlType + '/' + topRecommend.linkId">
+          <a :href="'/' + 'article' + '/' + topRecommend.articleId">
             <p class="title">{{ topRecommend.title }}</p>
             <div class="tags">
-              <el-tag :type="index | mapTagColors" v-for="(tag,index) in topRecommend.tagList" :key="tag.id"
+              <el-tag :type="index | mapTagColors" v-for="(tag,index) in topRecommend.tags" :key="tag.tagId"
                       effect="dark" size="mini" style="margin-right: 4px; margin-bottom:5px; float: left;">
                 {{ tag.name }}
               </el-tag>
             </div>
             <div class="img">
-              <img :src="topRecommend.cover" alt="">
+              <img :src="topRecommend.coverUrl" alt="">
             </div>
             <p class="desc">{{ topRecommend.description | textLineBreak(60) }}</p>
             <p class="info">
@@ -25,8 +25,8 @@
           </a>
         </div>
         <ul class="others">
-          <li v-for="recommend in recommendList" :key="recommend.id">
-            <a :href="'/' + recommend.urlType + '/' +recommend.linkId">
+          <li v-for="recommend in recommendList" :key="recommend.articleId">
+            <a :href="'/' + 'article' + '/' +recommend.articleId">
               <p class="title">{{ recommend.title }}</p>
               <p class="info">
                 <span class="time"><a><i class="iconfont icon-shijian"></i>{{
@@ -46,94 +46,19 @@
 </template>
 
 <script>
-
+import { articleList } from '../../../api/all';
 export default {
   data() {
     return {
-      recommendList: [{
-        "id": 1,
-        "linkId": 1,
-        "type": 2,
-        "orderNum": 2,
-        "title": "Java虚拟机01——Java内存数据区域和内存溢出异常",
-        "top": null,
-        "description": "Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有些区域则依赖用户线程的启动和结束而建立和销毁.",
-        "readNum": 12,
-        "commentNum": 13,
-        "likeNum": 1,
-        "urlType": "bookNote",
-        "cover": null,
-        "createTime": 1552173065000,
-        "tagList": null
-      }, {
-        "id": 2,
-        "linkId": 1,
-        "type": 2,
-        "orderNum": 2,
-        "title": "Java虚拟机01——Java内存数据区域和内存溢出异常",
-        "top": null,
-        "description": "Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有些区域则依赖用户线程的启动和结束而建立和销毁.",
-        "readNum": 12,
-        "commentNum": 13,
-        "likeNum": 1,
-        "urlType": "bookNote",
-        "cover": "https://img1.baidu.com/it/u=3886212450,854269223&fm=26&fmt=auto&gp=0.jpg",
-        "createTime": 1552173065000,
-        "tagList": null
-      }, {
-        "id": 3,
-        "linkId": 1,
-        "type": 2,
-        "orderNum": 2,
-        "title": "Java虚拟机01——Java内存数据区域和内存溢出异常",
-        "top": null,
-        "description": "Java虚拟机在执行Java程序的过程中会把它所管理的内存划分为若干个不同的数据区域。这些区域都有各自的用途，以及创建和销毁的时间，有的区域随着虚拟机进程的启动而存在，有些区域则依赖用户线程的启动和结束而建立和销毁.",
-        "readNum": 12,
-        "commentNum": 13,
-        "likeNum": 1,
-        "urlType": "bookNote",
-        "cover": "https://img1.baidu.com/it/u=3886212450,854269223&fm=26&fmt=auto&gp=0.jpg",
-        "createTime": 1552173065000,
-        "tagList": [
-          {
-            "id": 1,
-            "name": "本站相关",
-            "type": 0
-          },
-          {
-            "id": 2,
-            "name": "关于",
-            "type": 0
-          }
-        ]
-      }],
-      topRecommend: {
-        "id": 6,
-        "linkId": 1,
-        "type": 0,
-        "orderNum": 1,
-        "title": "关于本站和博主",
-        "top": true,
-        "description": "关于本站和博主",
-        "readNum": 54,
-        "commentNum": 13,
-        "likeNum": 1,
-        "urlType": "article",
-        "cover": "https://img1.baidu.com/it/u=3886212450,854269223&fm=26&fmt=auto&gp=0.jpg",
-        "createTime": 1552172978000,
-        "tagList": [
-          {
-            "id": 1,
-            "name": "本站相关",
-            "type": 0
-          },
-          {
-            "id": 2,
-            "name": "关于",
-            "type": 0
-          }
-        ]
-      }
+      // 查询参数
+      queryParams: {
+        pageNum: 1,
+        pageSize: 5,
+        orderByColumn: 'isRecommend',
+        isAsc: 'desc'
+      },
+      recommendList: [],
+      topRecommend: {}
     };
   },
 
@@ -142,6 +67,10 @@ export default {
   computed: {},
 
   mounted() {
+    articleList(this.queryParams).then(res =>{
+      this.topRecommend = res.data.data.data.shift()
+      this.recommendList = res.data.data.data;
+    })
   },
 
   methods: {}

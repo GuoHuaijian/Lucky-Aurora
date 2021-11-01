@@ -2,11 +2,11 @@
   <div class="friend-links">
     <panel :title="'友情链接'">
       <ul class="link-list" slot="content">
-        <li v-for="link in linkList" :key="link.id">
+        <li v-for="link in linkList" :key="link.friendId">
           <a :href="link.url" target="_blank">
-            <img :src="link.avatar" alt="">
+            <img :src="link.icon" alt="">
             <div class="right">
-              <p class="title">{{ link.title }}</p>
+              <p class="title">{{ link.name }}</p>
               <p class="link">{{ link.url }}</p>
             </div>
           </a>
@@ -17,16 +17,11 @@
 </template>
 
 <script>
-
+import { friendList } from '../../../api/all';
 export default {
   data() {
     return {
-      linkList: [{
-        "id": 1,
-        "title": "郭怀检",
-        "url": "www.baidu.com",
-        "avatar": "https://img1.baidu.com/it/u=3886212450,854269223&fm=26&fmt=auto&gp=0.jpg"
-      }]
+      linkList: []
     };
   },
 
@@ -35,6 +30,9 @@ export default {
   computed: {},
 
   mounted() {
+    friendList().then(res =>{
+      this.linkList = res.data.data
+    })
   },
 
   methods: {}

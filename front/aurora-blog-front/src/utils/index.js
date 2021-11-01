@@ -2,6 +2,7 @@
  * [Datestr 时间戳转字符串格式]
  */
 export function socialDateFormat(date) {
+    date = Date.parse(new Date(date))
     // 获取js 时间戳
     var time = new Date().getTime()
     // 去掉 js 时间戳后三位
@@ -25,7 +26,12 @@ export function socialDateFormat(date) {
     } else {
         // 超过3天
         date = new Date(parseInt(date))
-        return date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate()
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        return y+'-'+m+'-'+d;
     }
 }
 

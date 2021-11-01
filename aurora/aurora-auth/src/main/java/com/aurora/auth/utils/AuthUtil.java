@@ -33,16 +33,16 @@ public class AuthUtil {
         switch (source.toLowerCase()) {
             case "github":
                 authRequest = new AuthGithubRequest(AuthConfig.builder()
-                        .clientId("")
-                        .clientSecret("")
-                        .redirectUri("http://127.0.0.1:8080/auth")
+                        .clientId("64e5a257be07574aad99")
+                        .clientSecret("86bd9c240405aa1b57c2ce8d099909dc65da9baf")
+                        .redirectUri("http://localhost:8080/auth")
                         .scopes(AuthScopeUtils.getScopes(AuthGithubScope.values())).build());
                 break;
             case "gitee":
                 authRequest = new AuthGiteeRequest(AuthConfig.builder()
                         .clientId("aecd1f6cff7e4c27344c9c09b03807160dd7bfca2aaf5bac471775c8499de2ac")
                         .clientSecret("c2134f5af3379722dfc651e2ab12d88a8ecfe901b65e279ff42ecd19a362f845")
-                        .redirectUri("http://127.0.0.1:8080/auth")
+                        .redirectUri("http://localhost:8080/auth")
                         .build());
                 break;
             case "weibo":

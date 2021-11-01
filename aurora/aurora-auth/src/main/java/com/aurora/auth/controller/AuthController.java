@@ -53,7 +53,6 @@ public class AuthController {
     @PostMapping(value = "/getInfo")
     public Result authorizeLogin(AuthCallback callback, String source) {
         AuthRequest authRequest = AuthUtil.getAuthRequest(source);
-        System.out.println(callback);
         // 用户信息
         AuthResponse<?> result;
         result = authRequest.login(callback);

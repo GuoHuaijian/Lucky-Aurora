@@ -104,4 +104,20 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
         }
         return removeById(tagId);
     }
+
+    /**
+     * 查询标签列表
+     *
+     * @return 标签集合
+     */
+    @Override
+    public List<BlogTag> List() {
+        List<BlogTag> tags = list();
+        for (BlogTag tag : tags) {
+            int count = articleTagService.count(new LambdaQueryWrapper<BlogArticleTag>().eq(BlogArticleTag::getTagId,
+                    tag.getTagId()));
+            tag.setLinkNum(count);
+        }
+        return tags;
+    }
 }

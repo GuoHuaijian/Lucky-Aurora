@@ -52,5 +52,11 @@ public class BlogTag extends BaseEntity implements Serializable {
     @TableField(value = "remark")
     private String remark;
 
+    /**
+     * 博文关联数
+     */
+    @TableField(exist = false)
+    private Integer linkNum;
+
     private static final long serialVersionUID = 1L;
 }

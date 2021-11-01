@@ -13,14 +13,14 @@
           >
             <div class="text-wrapper">
               <h4 class="title">
-                <a :href="'/Article/' + article.id">{{ article.title }}</a>
-                <span class="special" v-if="article.top > 0" title="置顶">置顶</span>
+                <a :href="'/Article/' + article.articleId">{{ article.title }}</a>
+                <span class="special" v-if="article.isTop === true" title="置顶">置顶</span>
               </h4>
               <div class="tags">
                 <el-tag
-                    v-for="(tag, index) in article.tagList"
+                    v-for="(tag, index) in article.tags"
                     :type="index | mapTagColors"
-                    :key="tag.id"
+                    :key="tag.tagId"
                     effect="plain" size="small"
                 >{{ tag.name }}
                 </el-tag
@@ -29,7 +29,7 @@
               <p class="desc">
                 {{
                   article.description | filterHtml | textLineBreak(70)
-                }}<a :href="'/Article/' + article.id">
+                }}<a :href="'/Article/' + article.articleId">
                 查看更多
                 <i class="el-icon-caret-right"></i>
               </a>
@@ -44,7 +44,7 @@
                 ></span
                 >
                 <span class="readings"><a
-                ><i class="iconfont icon-comment"></i> {{ article.readNum }} 评论</a
+                ><i class="iconfont icon-comment"></i> {{ article.commentNum }} 评论</a
                 ></span>
                 <span class="likes"
                 ><a @click="likePost(article)"
@@ -62,7 +62,7 @@
               style="padding-left: 0px; padding-right: 0px"
           >
             <div class="img-wrapper" :class="themeClass(article.coverType)">
-              <img :src="article.cover" alt=""/>
+              <img :src="article.coverUrl" alt=""/>
             </div>
           </el-col>
         </el-row>

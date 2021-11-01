@@ -63,4 +63,11 @@ public interface BlogTagService extends IService<BlogTag> {
      */
     boolean deleteBlogTagByTagId(Long tagId);
 
+    /**
+     * 查询标签列表
+     *
+     * @return 标签集合
+     */
+    List<BlogTag> List();
+
 }

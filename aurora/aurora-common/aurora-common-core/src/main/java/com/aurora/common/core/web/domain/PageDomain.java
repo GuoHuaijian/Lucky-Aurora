@@ -2,7 +2,12 @@ package com.aurora.common.core.web.domain;
 
 import cn.hutool.core.util.StrUtil;
 import com.aurora.common.core.utils.CamelCaseUtil;
+import com.google.common.collect.Lists;
 import lombok.Data;
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * describe: 分页参数
@@ -15,6 +20,15 @@ import lombok.Data;
 @Data
 public class PageDomain {
 
+    /**
+     * 降序
+     */
+    private static final String DESC = "desc";
+
+    /**
+     * 升序
+     */
+    private static final String ASC = "asc";
     /**
      * 每页显示条数，默认 10
      */
@@ -33,7 +47,7 @@ public class PageDomain {
     /**
      * 排序的方向 "desc" 或者 "asc"
      */
-    private String isAsc;
+    private String isAsc = ASC;
 
     /**
      * 组合排序sql字符串
@@ -44,6 +58,12 @@ public class PageDomain {
         if (StrUtil.isEmpty(orderByColumn)) {
             return "";
         }
-        return CamelCaseUtil.toCapitalizeCamelCase(orderByColumn) + " " + isAsc;
+        if (isAsc.equalsIgnoreCase(DESC)) {
+            List<String> descStr = Lists.newArrayList();
+            List<String> columns = Arrays.asList(CamelCaseUtil.toUnderlineName(orderByColumn).split(","));
+            columns.forEach(column -> descStr.add(StrUtil.format(column + " {}", DESC)));
+            return StringUtils.join(descStr, ",");
+        }
+        return CamelCaseUtil.toUnderlineName(orderByColumn) + " " + isAsc;
     }
 }
