@@ -1,5 +1,6 @@
 package com.aurora.auth.controller;
 
+import com.aurora.auth.domain.SysUser;
 import com.aurora.auth.service.SysUserAuthService;
 import com.aurora.auth.utils.AuthUtil;
 import com.aurora.common.core.web.domain.Result;
@@ -7,6 +8,7 @@ import com.google.common.collect.Maps;
 import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
+import me.zhyd.oauth.model.AuthUser;
 import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
 import org.springframework.web.bind.annotation.*;
@@ -35,7 +37,7 @@ public class AuthController {
      * @return
      */
     @GetMapping(value = "/render")
-    public Result getAuthorize(@RequestParam(value = "source") String source) {
+    public Result getAuthorizeUrl(@RequestParam(value = "source") String source) {
         AuthRequest authRequest = AuthUtil.getAuthRequest(source);
         // 生成状态码
         String state = AuthStateUtils.createState();
@@ -59,13 +61,14 @@ public class AuthController {
     public Result authorizeLogin(AuthCallback callback, String source) {
         AuthRequest authRequest = AuthUtil.getAuthRequest(source);
         // 用户信息
-        AuthResponse<?> result;
-        result = authRequest.login(callback);
+        AuthResponse<?> result = authRequest.login(callback);
         if (result.getData() == null) {
             // 授权失败, 返回错误信息
             return Result.error(result.getMsg());
         }
         Object data = result.getData();
-        return Result.success(data);
+        AuthUser authUser = (AuthUser) data;
+        SysUser user = userAuthService.getUserByAuth(authUser);
+        return Result.success(user);
     }
 }

@@ -2,6 +2,7 @@ package com.aurora.auth.service;
 
 import com.aurora.auth.domain.SysThirdAuth;
 import com.baomidou.mybatisplus.extension.service.IService;
+import me.zhyd.oauth.model.AuthUser;
 
 /**
  * describe:
@@ -21,4 +22,20 @@ public interface SysThirdAuthService extends IService<SysThirdAuth> {
      * @return
      */
     SysThirdAuth getThirdAuth(String uuid, String source);
+
+    /**
+     * 新增第三方授权信息
+     *
+     * @param user
+     * @return
+     */
+    SysThirdAuth addThirdAuth(AuthUser user);
+
+    /**
+     * 更新第三方授权信息
+     *
+     * @param authUser
+     * @param authId
+     */
+    void updateThirdAuth(AuthUser authUser, Integer authId);
 }

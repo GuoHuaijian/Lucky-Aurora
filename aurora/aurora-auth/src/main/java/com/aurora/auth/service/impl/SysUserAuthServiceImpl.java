@@ -10,7 +10,9 @@ import com.aurora.auth.service.SysUserService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
+import me.zhyd.oauth.model.AuthUser;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 /**
  * describe:
@@ -32,15 +34,28 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
     /**
      * 通过第三方授权信息获取用户
      *
-     * @param uuid   第三方系统的唯一ID
-     * @param source 第三方用户来源
+     * @param authUser
      * @return
      */
     @Override
-    public SysUser getUserByAuth(String uuid, String source) {
-        SysThirdAuth thirdAuth = thirdAuthService.getThirdAuth(uuid, source);
+    public SysUser getUserByAuth(AuthUser authUser) {
+        SysThirdAuth thirdAuth = thirdAuthService.getThirdAuth(authUser.getUuid(), authUser.getSource());
+        boolean flag = StringUtils.isEmpty(thirdAuth);
+        // 第一次登录添加第三方用户
+        if (flag) {
+            Integer authId = thirdAuthService.addThirdAuth(authUser).getAuthId();
+            Long userId = userService.addThirdUser(authUser).getUserId();
+            save(new SysUserAuth(Integer.parseInt(String.valueOf(userId)), authId));
+            thirdAuth = new SysThirdAuth();
+            thirdAuth.setAuthId(authId);
+        }
         SysUserAuth userAuth = getUserAuthByAuthId(thirdAuth.getAuthId());
+        if (!flag) {
+            thirdAuthService.updateThirdAuth(authUser, thirdAuth.getAuthId());
+            userService.updateThirdUser(authUser, Long.parseLong(String.valueOf(userAuth.getUserId())));
+        }
         SysUser user = userService.getById(userAuth.getUserId());
+        userService.recordLoginInfo(user.getUserId());
         return user;
     }
 

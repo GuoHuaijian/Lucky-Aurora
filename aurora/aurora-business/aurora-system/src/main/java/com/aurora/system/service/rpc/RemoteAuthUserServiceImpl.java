@@ -1,12 +1,9 @@
 package com.aurora.system.service.rpc;
 
-import cn.hutool.core.bean.BeanUtil;
 import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.rpc.system.RemoteAuthUserService;
-import com.aurora.rpc.system.domain.AuthUser;
 import com.aurora.system.common.constant.MenuConstants;
 import com.aurora.system.domain.SysMenu;
-import com.aurora.system.domain.SysUser;
 import com.aurora.system.service.SysMenuService;
 import com.aurora.system.service.SysRoleService;
 import com.aurora.system.service.SysUserService;
@@ -36,20 +33,6 @@ public class RemoteAuthUserServiceImpl implements RemoteAuthUserService {
 
     @Autowired
     private SysMenuService menuService;
-
-    /**
-     * 根据用户名查询用户
-     *
-     * @param userName
-     * @return
-     */
-    @Override
-    public AuthUser getUserByName(String userName) {
-        SysUser user = userService.getUserByName(userName);
-        AuthUser authUser = new AuthUser();
-        BeanUtil.copyProperties(user, authUser);
-        return authUser;
-    }
 
     /**
      * 根据用户id查询用户角色

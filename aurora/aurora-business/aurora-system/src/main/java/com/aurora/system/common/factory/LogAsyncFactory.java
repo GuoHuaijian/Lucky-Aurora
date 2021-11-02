@@ -8,7 +8,7 @@ import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.utils.SpringUtil;
 import com.aurora.common.core.utils.ip.AddressUtil;
 import com.aurora.common.core.utils.ip.IpUtil;
-import com.aurora.rpc.system.domain.SysLoginLog;
+import com.aurora.system.domain.SysLoginLog;
 import com.aurora.system.service.SysLoginLogService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;

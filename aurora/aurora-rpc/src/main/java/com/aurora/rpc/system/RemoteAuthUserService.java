@@ -1,8 +1,6 @@
 package com.aurora.rpc.system;
 
 
-import com.aurora.rpc.system.domain.AuthUser;
-
 import java.util.List;
 
 /**
@@ -14,14 +12,6 @@ import java.util.List;
  * @Version 1.0.0
  */
 public interface RemoteAuthUserService {
-
-    /**
-     * 根据用户名查询用户
-     *
-     * @param userName
-     * @return
-     */
-    AuthUser getUserByName(String userName);
 
     /**
      * 根据用户id查询用户角色

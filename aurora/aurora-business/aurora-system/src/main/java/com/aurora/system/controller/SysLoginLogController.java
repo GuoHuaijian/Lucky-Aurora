@@ -5,7 +5,7 @@ import com.aurora.common.core.web.controller.AbstractController;
 import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.log.annotation.Log;
 import com.aurora.common.log.enums.LogType;
-import com.aurora.rpc.system.domain.SysLoginLog;
+import com.aurora.system.domain.SysLoginLog;
 import com.aurora.system.service.SysLoginLogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;

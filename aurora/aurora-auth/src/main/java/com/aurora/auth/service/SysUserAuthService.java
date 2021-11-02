@@ -3,6 +3,7 @@ package com.aurora.auth.service;
 import com.aurora.auth.domain.SysUser;
 import com.aurora.auth.domain.SysUserAuth;
 import com.baomidou.mybatisplus.extension.service.IService;
+import me.zhyd.oauth.model.AuthUser;
 
 /**
  * describe:
@@ -17,11 +18,10 @@ public interface SysUserAuthService extends IService<SysUserAuth> {
     /**
      * 通过第三方授权信息获取用户
      *
-     * @param uuid   第三方系统的唯一ID
-     * @param source 第三方用户来源
+     * @param authUser
      * @return
      */
-    SysUser getUserByAuth(String uuid, String source);
+    SysUser getUserByAuth(AuthUser authUser);
 
     /**
      * 通过授权id获取授权用户关联

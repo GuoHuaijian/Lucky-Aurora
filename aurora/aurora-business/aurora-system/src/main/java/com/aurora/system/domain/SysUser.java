@@ -71,7 +71,7 @@ public class SysUser implements Serializable {
      * 用户状态
      */
     @TableField(value = "status")
-    private Boolean status;
+    private Integer status;
 
     /**
      * 性别 0男 1女

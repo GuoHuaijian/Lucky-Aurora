@@ -1,6 +1,6 @@
 package com.aurora.system.service.impl;
 
-import com.aurora.rpc.system.domain.SysLoginLog;
+import com.aurora.system.domain.SysLoginLog;
 import com.aurora.system.mapper.SysLoginLogMapper;
 import com.aurora.system.service.SysLoginLogService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;

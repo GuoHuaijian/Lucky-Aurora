@@ -1,6 +1,6 @@
 package com.aurora.system.service;
 
-import com.aurora.rpc.system.domain.SysLoginLog;
+import com.aurora.system.domain.SysLoginLog;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 import java.util.List;

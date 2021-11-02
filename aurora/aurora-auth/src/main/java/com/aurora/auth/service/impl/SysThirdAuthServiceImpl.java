@@ -5,6 +5,8 @@ import com.aurora.auth.mapper.SysThirdAuthMapper;
 import com.aurora.auth.service.SysThirdAuthService;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import me.zhyd.oauth.model.AuthUser;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 /**
@@ -30,5 +32,37 @@ public class SysThirdAuthServiceImpl extends ServiceImpl<SysThirdAuthMapper, Sys
         SysThirdAuth thirdAuth = this.getOne(new LambdaQueryWrapper<SysThirdAuth>().eq(SysThirdAuth::getUuid, uuid).eq(SysThirdAuth::getSource,
                 source));
         return thirdAuth;
+    }
+
+    /**
+     * 新增第三方授权信息
+     *
+     * @param authUser
+     * @return
+     */
+    @Override
+    public SysThirdAuth addThirdAuth(AuthUser authUser) {
+        SysThirdAuth thirdAuth = new SysThirdAuth();
+        thirdAuth.setUuid(authUser.getUuid());
+        thirdAuth.setSource(authUser.getSource());
+        BeanUtils.copyProperties(authUser.getToken(), thirdAuth);
+        save(thirdAuth);
+        return thirdAuth;
+    }
+
+    /**
+     * 更新第三方授权信息
+     *
+     * @param authUser
+     * @param authId
+     */
+    @Override
+    public void updateThirdAuth(AuthUser authUser, Integer authId) {
+        SysThirdAuth thirdAuth = new SysThirdAuth();
+        thirdAuth.setAuthId(authId);
+        thirdAuth.setUuid(authUser.getUuid());
+        thirdAuth.setSource(authUser.getSource());
+        BeanUtils.copyProperties(authUser.getToken(), thirdAuth);
+        updateById(thirdAuth);
     }
 }

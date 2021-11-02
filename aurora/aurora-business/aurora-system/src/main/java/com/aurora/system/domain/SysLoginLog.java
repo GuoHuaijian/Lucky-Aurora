@@ -1,4 +1,4 @@
-package com.aurora.rpc.system.domain;
+package com.aurora.system.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;

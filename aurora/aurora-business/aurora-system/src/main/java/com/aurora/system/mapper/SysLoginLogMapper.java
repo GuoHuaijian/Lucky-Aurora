@@ -1,6 +1,6 @@
 package com.aurora.system.mapper;
 
-import com.aurora.rpc.system.domain.SysLoginLog;
+import com.aurora.system.domain.SysLoginLog;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 

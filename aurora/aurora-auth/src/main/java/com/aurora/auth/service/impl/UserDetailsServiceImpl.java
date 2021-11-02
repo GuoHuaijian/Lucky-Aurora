@@ -1,9 +1,11 @@
 package com.aurora.auth.service.impl;
 
+import com.aurora.auth.domain.SysUser;
+import com.aurora.auth.service.SysUserService;
 import com.aurora.common.core.utils.AssertUtil;
 import com.aurora.common.security.domain.SecurityUser;
 import com.aurora.rpc.system.RemoteAuthUserService;
-import com.aurora.rpc.system.domain.AuthUser;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.DubboReference;
 import org.springframework.beans.BeanUtils;
@@ -29,10 +31,13 @@ import java.util.Set;
  */
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @DubboReference(version = "1.0.0")
     private RemoteAuthUserService remoteAuthUserService;
+
+    private final SysUserService userService;
 
     /**
      * 根据用户名查用户信息
@@ -42,7 +47,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String username) {
-        AuthUser authUser = remoteAuthUserService.getUserByName(username);
+        SysUser authUser = userService.getUserByName(username);
         AssertUtil.notNull(authUser, new UsernameNotFoundException("用户名不存在"));
         AssertUtil.notTrue("2".equals(authUser.getStatus()), new LockedException("用户已禁用"));
         if (authUser != null) {

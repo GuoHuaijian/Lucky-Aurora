@@ -26,7 +26,7 @@ public class SysThirdAuth implements Serializable {
     /**
      * 主建
      */
-    @TableId(value = "auth_id", type = IdType.INPUT)
+    @TableId(value = "auth_id", type = IdType.AUTO)
     private Integer authId;
 
     /**

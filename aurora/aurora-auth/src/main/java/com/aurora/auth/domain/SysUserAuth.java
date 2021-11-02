@@ -26,7 +26,7 @@ public class SysUserAuth implements Serializable {
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.INPUT)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     /**
@@ -40,6 +40,11 @@ public class SysUserAuth implements Serializable {
      */
     @TableField(value = "auth_id")
     private Integer authId;
+
+    public SysUserAuth(Integer userId, Integer authId) {
+        this.userId = userId;
+        this.authId = authId;
+    }
 
     private static final long serialVersionUID = 1L;
 }

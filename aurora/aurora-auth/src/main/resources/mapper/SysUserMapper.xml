@@ -11,7 +11,7 @@
         <result column="email" jdbcType="VARCHAR" property="email"/>
         <result column="phone_number" jdbcType="VARCHAR" property="phoneNumber"/>
         <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
-        <result column="status" jdbcType="BOOLEAN" property="status"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
         <result column="sex" jdbcType="INTEGER" property="sex"/>
         <result column="user_type" jdbcType="INTEGER" property="userType"/>
         <result column="login_ip" jdbcType="VARCHAR" property="loginIp"/>

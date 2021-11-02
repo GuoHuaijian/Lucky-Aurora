@@ -32,12 +32,11 @@
           </el-input>
         </el-form-item>
         <el-form-item class="btns">
-          <el-button type="primary" @click="login('ruleForm')">登录</el-button>
-          <el-button type="info">取 消</el-button>
+          <el-button type="primary" @click="login('ruleForm')" style="width: 260px">登录</el-button>
         </el-form-item>
-        <el-form-item style="height: 40px">
+        <el-form-item class="three-login">
           <span>第三方登录: </span>
-          <div style="display: inline-block;height: 40px">
+          <div class="login-box">
             <a @click="login('gitee')" class="login-icon">
               <img src="https://cdn.jsdelivr.net/gh/justauth/justauth-oauth-logo@1.11/gitee.png"/>
             </a>
@@ -180,10 +179,31 @@ export default {
 
 .btns {
   display: flex;
-  justify-content: flex-end;
+  justify-content: left;
+  align-items: center;
+}
+.three-login{
+  width: 260px;
+  height: 40px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+}
+::v-deep .el-form-item__content {
+  display: flex;
+  line-height: 40px;
+  position: relative;
+  font-size: 14px;
+}
+::v-deep .el-button+.el-button{
+  margin-left: 30px;
+}
+.login-box{
+  display: flex;
+  justify-content: center;
+align-items: center;
 }
 .login-icon{
-  display: inline-block;
   margin-left: 8px;
   height: 40px;
 }
