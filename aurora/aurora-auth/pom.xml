@@ -40,6 +40,13 @@
             <version>${project.version}</version>
         </dependency>
 
+        <!-- Aurora Mybatis -->
+        <dependency>
+            <groupId>com.aurora</groupId>
+            <artifactId>aurora-common-mybatis</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
         <!-- Spring cloud Bootstrap -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

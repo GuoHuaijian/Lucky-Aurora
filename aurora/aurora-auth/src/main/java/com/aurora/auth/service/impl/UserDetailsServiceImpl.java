@@ -1,4 +1,4 @@
-package com.aurora.auth.service;
+package com.aurora.auth.service.impl;
 
 import com.aurora.common.core.utils.AssertUtil;
 import com.aurora.common.security.domain.SecurityUser;

@@ -1,6 +1,6 @@
 package com.aurora.auth.config;
 
-import com.aurora.auth.service.UserDetailsServiceImpl;
+import com.aurora.auth.service.impl.UserDetailsServiceImpl;
 import com.aurora.common.security.component.AuroraTokenEnhancer;
 import com.aurora.common.security.exception.AuroraOauth2ExceptionTranslator;
 import org.springframework.context.annotation.Bean;

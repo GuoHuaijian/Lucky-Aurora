@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aurora.auth.mapper.SysThirdAuthMapper">
+    <resultMap id="BaseResultMap" type="com.aurora.auth.domain.SysThirdAuth">
+        <!--@mbg.generated-->
+        <!--@Table sys_third_auth-->
+        <id column="auth_id" jdbcType="INTEGER" property="authId"/>
+        <result column="uuid" jdbcType="VARCHAR" property="uuid"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+        <result column="access_token" jdbcType="VARCHAR" property="accessToken"/>
+        <result column="expire_in" jdbcType="INTEGER" property="expireIn"/>
+        <result column="refresh_token" jdbcType="VARCHAR" property="refreshToken"/>
+        <result column="open_id" jdbcType="VARCHAR" property="openId"/>
+        <result column="uid" jdbcType="VARCHAR" property="uid"/>
+        <result column="access_code" jdbcType="VARCHAR" property="accessCode"/>
+        <result column="union_id" jdbcType="VARCHAR" property="unionId"/>
+        <result column="scope" jdbcType="VARCHAR" property="scope"/>
+        <result column="token_type" jdbcType="VARCHAR" property="tokenType"/>
+        <result column="id_token" jdbcType="VARCHAR" property="idToken"/>
+        <result column="mac_algorithm" jdbcType="VARCHAR" property="macAlgorithm"/>
+        <result column="mac_key" jdbcType="VARCHAR" property="macKey"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="oauth_token" jdbcType="VARCHAR" property="oauthToken"/>
+        <result column="oauth_token_secret" jdbcType="VARCHAR" property="oauthTokenSecret"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        <!--@mbg.generated-->
+        auth_id, uuid, `source`, access_token, expire_in, refresh_token, open_id, `uid`,
+        access_code, union_id, `scope`, token_type, id_token, mac_algorithm, mac_key, code,
+        oauth_token, oauth_token_secret
+    </sql>
+</mapper>

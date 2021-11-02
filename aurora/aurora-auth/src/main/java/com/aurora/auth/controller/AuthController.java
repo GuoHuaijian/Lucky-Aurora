@@ -1,8 +1,10 @@
 package com.aurora.auth.controller;
 
+import com.aurora.auth.service.SysUserAuthService;
 import com.aurora.auth.utils.AuthUtil;
 import com.aurora.common.core.web.domain.Result;
 import com.google.common.collect.Maps;
+import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.model.AuthCallback;
 import me.zhyd.oauth.model.AuthResponse;
 import me.zhyd.oauth.request.AuthRequest;
@@ -21,7 +23,10 @@ import java.util.HashMap;
  */
 @RestController
 @RequestMapping("/oauth")
+@RequiredArgsConstructor
 public class AuthController {
+
+    private final SysUserAuthService userAuthService;
 
     /**
      * 生成授权链接
