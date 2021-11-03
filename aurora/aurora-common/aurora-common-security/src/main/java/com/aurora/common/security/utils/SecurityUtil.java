@@ -4,10 +4,15 @@ import com.aurora.common.core.constant.Constants;
 import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.utils.StringUtil;
 import com.aurora.common.security.domain.SecurityUser;
+import com.google.common.collect.Sets;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Stream;
 
 /**
  * describe:
@@ -56,6 +61,32 @@ public class SecurityUtil {
      */
     public static Long getUserId() {
         return getSecurityUser().getUserId();
+    }
+
+    /**
+     * 获取用户角色
+     *
+     * @return
+     */
+    public static Set<String> getUserRoles(){
+        Set<String> roleSet = Sets.newHashSet();
+        Collection<GrantedAuthority> authorities = getSecurityUser().getAuthorities();
+        Stream<GrantedAuthority> roles = authorities.stream().filter(role -> role.getAuthority().startsWith("ROLE_"));
+        roles.forEach(role -> roleSet.add(role.getAuthority().replaceFirst("ROLE_","")));
+        return roleSet;
+    }
+
+    /**
+     * 获取用户权限
+     *
+     * @return
+     */
+    public static Set<String> getUserAuths(){
+        Set<String> authSet = Sets.newHashSet();
+        Collection<GrantedAuthority> authorities = getSecurityUser().getAuthorities();
+        Stream<GrantedAuthority> auths = authorities.stream().filter(role -> !role.getAuthority().startsWith("ROLE_"));
+        auths.forEach(role -> authSet.add(role.getAuthority()));
+        return authSet;
     }
 
     /**

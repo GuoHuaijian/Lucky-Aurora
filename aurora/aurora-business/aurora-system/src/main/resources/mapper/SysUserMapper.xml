@@ -26,21 +26,6 @@
         sex, user_type, login_ip, login_time, create_time, update_time, remark
     </sql>
 
-    <select id="getRolesByUserId" resultType="string">
-        select role_code
-        from sys_role
-        where role_id in (select role_id from sys_user_role where user_id = #{userId});
-    </select>
-    <select id="getAuthsByUserId" resultType="string">
-        select perms
-        from sys_menu
-        where menu_id in (select menu_id
-                          from sys_role_menu
-                          where role_id in (select role_id
-                                            from sys_user_role
-                                            where user_id = #{userId}));
-    </select>
-
     <select id="selectAllocatedList" parameterType="com.aurora.system.domain.SysUser" resultMap="BaseResultMap">
         select distinct u.user_id, u.user_name, u.nick_name, u.email, u.phone_number, u.status, u.create_time
         from sys_user u

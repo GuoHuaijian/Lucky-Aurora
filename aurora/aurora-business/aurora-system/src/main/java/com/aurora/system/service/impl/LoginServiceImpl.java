@@ -1,6 +1,5 @@
 package com.aurora.system.service.impl;
 
-import cn.hutool.core.util.StrUtil;
 import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson.JSONObject;
 import com.aurora.common.core.constant.Constants;
@@ -13,13 +12,13 @@ import com.aurora.common.core.utils.MessageUtil;
 import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.utils.StringUtil;
 import com.aurora.common.core.utils.ip.IpUtil;
-import com.aurora.common.core.web.domain.Result;
 import com.aurora.common.redis.RedisCache;
 import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.common.factory.LogAsyncFactory;
 import com.aurora.system.domain.LoginBody;
 import com.aurora.system.domain.SysMenu;
 import com.aurora.system.domain.SysUser;
+import com.aurora.system.domain.AuthInfo;
 import com.aurora.system.domain.router.Router;
 import com.aurora.system.service.LoginService;
 import com.aurora.system.service.SysConfigService;
@@ -35,6 +34,7 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * describe:
@@ -89,27 +89,21 @@ public class LoginServiceImpl implements LoginService {
         paramMap.put("scope", scope);
         paramMap.put("password", loginBody.getPassword());
         paramMap.put("username", userName);
-        JSONObject object;
+        AuthInfo authInfo;
         try {
             // 获取token
             String result = HttpUtil.post(tokenUri, paramMap);
-            object = JSONObject.parseObject(result);
+            authInfo = JSONObject.parseObject(result, AuthInfo.class);
         } catch (Exception e) {
             log.debug(e.getMessage());
             AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(userName, Constants.LOGIN_FAIL,
                     StringUtil.substring("获取token异常", 0, 200)));
             throw new ServiceException("获取token异常");
         }
-        if (StrUtil.isNotBlank((String) object.get(Result.CODE_TAG))) {
-            AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(userName, Constants.LOGIN_FAIL,
-                    (String) object.get("message")));
-            throw new ServiceException((String) object.get("message"));
-        } else {
-            String token = (String) object.get("access_token");
-            AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(userName, Constants.LOGIN_SUCCESS, MessageUtil.message("user.login.success")));
-            recordLoginInfo(userName);
-            return token;
-        }
+        String token = authInfo.getAccess_token();
+        AsyncManager.me().execute(LogAsyncFactory.recordLoginLog(userName, Constants.LOGIN_SUCCESS, MessageUtil.message("user.login.success")));
+        recordLoginInfo(userName);
+        return token;
     }
 
     /**
@@ -119,9 +113,10 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     public Map<String, Object> getInfo() {
-        SysUser user = userService.getUserByName(SecurityUtil.getUsername());
-        List<String> roles = userService.getRolesByUserId(SecurityUtil.getUserId());
-        List<String> auths = userService.getAuthsByUserId(SecurityUtil.getUserId());
+        Long userId = SecurityUtil.getUserId();
+        SysUser user = userService.selectUserById(userId);
+        Set<String> roles = SecurityUtil.getUserRoles();
+        Set<String> auths = SecurityUtil.getUserAuths();
         HashMap<String, Object> map = Maps.newHashMap();
         map.put("user", user);
         map.put("roles", roles);

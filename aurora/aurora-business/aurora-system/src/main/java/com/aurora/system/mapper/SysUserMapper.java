@@ -18,22 +18,6 @@ import java.util.List;
 public interface SysUserMapper extends BaseMapper<SysUser> {
 
     /**
-     * 根据用户id查询用户角色
-     *
-     * @param userId
-     * @return
-     */
-    List<String> getRolesByUserId(Long userId);
-
-    /**
-     * 根据用户id查询用户权限
-     *
-     * @param userId
-     * @return
-     */
-    List<String> getAuthsByUserId(Long userId);
-
-    /**
      * 根据条件分页查询未已配用户角色列表
      *
      * @param user 用户信息

@@ -4,6 +4,8 @@ import com.aurora.auth.domain.SysUser;
 import com.baomidou.mybatisplus.extension.service.IService;
 import me.zhyd.oauth.model.AuthUser;
 
+import java.util.Set;
+
 /**
  * describe:
  *
@@ -21,6 +23,22 @@ public interface SysUserService extends IService<SysUser> {
      * @return
      */
     SysUser getUserByName(String userName);
+
+    /**
+     * 根据用户id查询用户角色
+     *
+     * @param userId
+     * @return
+     */
+    Set<String> getRolesByUserId(Long userId);
+
+    /**
+     * 根据用户id查询用户权限
+     *
+     * @param userId
+     * @return
+     */
+    Set<String> getAuthsByUserId(Long userId);
 
     /**
      * 新增第三方用户

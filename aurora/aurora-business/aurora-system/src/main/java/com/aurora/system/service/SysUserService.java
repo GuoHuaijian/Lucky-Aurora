@@ -16,30 +16,6 @@ import java.util.List;
 public interface SysUserService extends IService<SysUser> {
 
     /**
-     * 根据用户名查询用户
-     *
-     * @param userName
-     * @return
-     */
-    SysUser getUserByName(String userName);
-
-    /**
-     * 根据用户id查询用户角色
-     *
-     * @param userId
-     * @return
-     */
-    List<String> getRolesByUserId(Long userId);
-
-    /**
-     * 根据用户id查询用户权限
-     *
-     * @param userId
-     * @return
-     */
-    List<String> getAuthsByUserId(Long userId);
-
-    /**
      * 根据条件分页查询用户列表
      *
      * @param user 用户信息

@@ -51,56 +51,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     private SysConfigService configService;
 
     /**
-     * 根据用户名查询用户
-     *
-     * @param userName
-     * @return
-     */
-    @Override
-    public SysUser getUserByName(String userName) {
-        LambdaQueryWrapper<SysUser> userLambdaQueryWrapper = new LambdaQueryWrapper<>();
-        userLambdaQueryWrapper.eq(SysUser::getUserName, userName);
-        SysUser user = getOne(userLambdaQueryWrapper);
-        return user;
-    }
-
-    /**
-     * 根据用户id查询用户角色
-     *
-     * @param userId
-     * @return
-     */
-    @Override
-    public List<String> getRolesByUserId(Long userId) {
-        Set<String> roles = new HashSet<>();
-        // 管理员拥有所有权限
-        if (SysUser.isAdmin(userId)) {
-            roles.add("admin");
-        } else {
-            roles.addAll(userMapper.getRolesByUserId(userId));
-        }
-        return Lists.newArrayList(roles);
-    }
-
-    /**
-     * 根据用户id查询用户权限
-     *
-     * @param userId
-     * @return
-     */
-    @Override
-    public List<String> getAuthsByUserId(Long userId) {
-        Set<String> perms = new HashSet<>();
-        // 管理员拥有所有权限
-        if (SysUser.isAdmin(userId)) {
-            perms.add("*:*:*");
-        } else {
-            perms.addAll(userMapper.getAuthsByUserId(userId));
-        }
-        return Lists.newArrayList(perms);
-    }
-
-    /**
      * 根据条件分页查询用户列表
      *
      * @param user 用户信息

@@ -25,4 +25,29 @@
         user_id, user_name, nick_name, `password`, email, phone_number, avatar, `status`,
         sex, user_type, login_ip, login_time, create_time, update_time, remark
     </sql>
+
+    <select id="getRolesByUserId" resultType="string">
+        select role_code
+        from sys_role
+        where role_id in (select role_id from sys_user_role where user_id = #{userId});
+    </select>
+    <select id="getAuthsByUserId" resultType="string">
+        select perms
+        from sys_menu
+        where menu_id in (select menu_id
+        from sys_role_menu
+        where role_id in (select role_id
+        from sys_user_role
+        where user_id = #{userId})) and (perms is not null and trim(perms) != '')
+    </select>
+    <select id="getAllRoles" resultType="java.lang.String">
+        select role_code
+        from sys_role
+        where status = '0'
+    </select>
+    <select id="getAllAuths" resultType="java.lang.String">
+        select perms
+        from sys_menu
+        where status = '0' and (perms is not null and trim(perms) != '')
+    </select>
 </mapper>

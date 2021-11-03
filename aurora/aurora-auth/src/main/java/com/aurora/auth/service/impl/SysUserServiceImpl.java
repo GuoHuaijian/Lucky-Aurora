@@ -6,11 +6,15 @@ import com.aurora.auth.service.SysUserService;
 import com.aurora.common.core.utils.DateUtil;
 import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.utils.ip.IpUtil;
+import com.aurora.common.security.utils.SecurityUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.enums.AuthUserGender;
 import me.zhyd.oauth.model.AuthUser;
 import org.springframework.stereotype.Service;
+
+import java.util.Set;
 
 /**
  * describe:
@@ -21,8 +25,10 @@ import org.springframework.stereotype.Service;
  * @Version 1.0.0
  */
 @Service
+@RequiredArgsConstructor
 public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> implements SysUserService {
 
+    private final SysUserMapper userMapper;
 
     /**
      * 根据用户名查询用户
@@ -34,6 +40,36 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     public SysUser getUserByName(String userName) {
         SysUser user = getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserName, userName));
         return user;
+    }
+
+    /**
+     * 根据用户id查询用户角色
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public Set<String> getRolesByUserId(Long userId) {
+        // 超级管理员admin
+        if (SecurityUtil.isAdmin(userId)) {
+            return userMapper.getAllRoles();
+        }
+        return userMapper.getRolesByUserId(userId);
+    }
+
+    /**
+     * 根据用户id查询用户权限
+     *
+     * @param userId
+     * @return
+     */
+    @Override
+    public Set<String> getAuthsByUserId(Long userId) {
+        // 超级管理员admin
+        if (SecurityUtil.isAdmin(userId)) {
+            return userMapper.getAllAuths();
+        }
+        return userMapper.getAuthsByUserId(userId);
     }
 
     /**
