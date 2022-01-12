@@ -15,10 +15,10 @@
         <result column="like_num" jdbcType="INTEGER" property="likeNum"/>
         <result column="cover_type" jdbcType="INTEGER" property="coverType"/>
         <result column="cover_url" jdbcType="LONGVARCHAR" property="coverUrl"/>
-        <result column="is_recommend" jdbcType="BOOLEAN" property="isRecommend"/>
+        <result column="is_recommend" jdbcType="TINYINT" property="isRecommend"/>
         <result column="category_id" jdbcType="VARCHAR" property="categoryId"/>
         <result column="publish" jdbcType="TINYINT" property="publish"/>
-        <result column="is_top" jdbcType="BOOLEAN" property="isTop"/>
+        <result column="is_top" jdbcType="TINYINT" property="isTop"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>

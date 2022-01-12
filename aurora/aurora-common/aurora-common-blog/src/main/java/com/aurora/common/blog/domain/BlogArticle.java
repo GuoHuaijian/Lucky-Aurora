@@ -94,7 +94,7 @@ public class BlogArticle extends BaseEntity implements Serializable {
      * 是否推荐文章
      */
     @TableField(value = "is_recommend")
-    private Boolean isRecommend;
+    private Integer isRecommend;
 
     /**
      * 分类类别存在多级分类，用逗号隔开
@@ -106,13 +106,13 @@ public class BlogArticle extends BaseEntity implements Serializable {
      * 发布状态
      */
     @TableField(value = "publish")
-    private Byte publish;
+    private Integer publish;
 
     /**
      * 是否置顶
      */
     @TableField(value = "is_top")
-    private Boolean isTop;
+    private Integer isTop;
 
     /**
      * 创建时间

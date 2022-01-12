@@ -98,7 +98,10 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
     @Transactional(rollbackFor = Exception.class)
     @Override
     public boolean updateArticle(BlogArticle article) {
-        deleteArticleTag(Arrays.asList(article.getArticleId()));
+        // 修改状态不删除标签
+        if (StringUtil.isNotNull(article.getTitle())){
+            deleteArticleTag(Arrays.asList(article.getArticleId()));
+        }
         saveArticleTag(article.getTags(), article.getArticleId());
         return updateById(article);
     }

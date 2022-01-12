@@ -326,12 +326,6 @@ public class ExcelUtil<T> {
      * @param sheetName 工作表的名称
      * @return 结果
      */
-    /**
-     * 对list数据源将其里面的数据导入到excel表单
-     *
-     * @param sheetName 工作表的名称
-     * @return 结果
-     */
     public void importTemplateExcel(String sheetName) throws IOException {
         importTemplateExcel(ServletUtil.getResponse(), sheetName, StringUtils.EMPTY);
     }
