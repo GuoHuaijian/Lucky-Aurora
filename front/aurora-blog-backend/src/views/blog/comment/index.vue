@@ -47,16 +47,6 @@
     <el-row :gutter="10" class="mb8">
       <el-col :span="1.5">
         <el-button
-          type="primary"
-          plain
-          icon="el-icon-plus"
-          size="mini"
-          @click="handleAdd"
-          v-hasPermi="['admin:comment:add']"
-        >新增</el-button>
-      </el-col>
-      <el-col :span="1.5">
-        <el-button
           type="success"
           plain
           icon="el-icon-edit"
@@ -141,16 +131,15 @@
     <!-- 添加或修改评论对话框 -->
     <el-dialog :title="title" :visible.sync="open" width="500px" append-to-body>
       <el-form ref="form" :model="form" :rules="rules" label-width="80px">
-        <el-form-item label="评论类型：0:留言 1:文章" prop="type">
-          <el-select v-model="form.type" placeholder="请选择评论类型：0:留言 1:文章">
-            <el-option label="请选择字典生成" value="" />
+        <el-form-item label="评论类型" prop="type">
+          <el-select v-model="queryParams.type" placeholder="请选择评论类型" clearable size="small">
+            <el-option
+              v-for="dict in typeOptions"
+              :key="dict.dictValue"
+              :label="dict.dictLabel"
+              :value="dict.dictValue"
+            />
           </el-select>
-        </el-form-item>
-        <el-form-item label="被评论id，可以是单个文章id、项目、资源" prop="ownerId">
-          <el-input v-model="form.ownerId" placeholder="请输入被评论id，可以是单个文章id、项目、资源" />
-        </el-form-item>
-        <el-form-item label="评论id 第一级为0" prop="parentId">
-          <el-input v-model="form.parentId" placeholder="请输入评论id 第一级为0" />
         </el-form-item>
         <el-form-item label="评论者名字" prop="name">
           <el-input v-model="form.name" placeholder="请输入评论者名字" />
@@ -166,9 +155,6 @@
         </el-form-item>
         <el-form-item label="评论内容">
           <editor v-model="form.content" :min-height="192"/>
-        </el-form-item>
-        <el-form-item label="回复的id" prop="replyId">
-          <el-input v-model="form.replyId" placeholder="请输入回复的id" />
         </el-form-item>
         <el-form-item label="回复评论者名字" prop="replyName">
           <el-input v-model="form.replyName" placeholder="请输入回复评论者名字" />
@@ -301,7 +287,7 @@ export default {
     },
     // 多选框选中数据
     handleSelectionChange(selection) {
-      this.ids = selection.map(item => item.id)
+      this.ids = selection.map(item => item.commentId)
       this.single = selection.length!==1
       this.multiple = !selection.length
     },
@@ -314,7 +300,7 @@ export default {
     /** 修改按钮操作 */
     handleUpdate(row) {
       this.reset();
-      const id = row.id || this.ids
+      const id = row.commentId || this.ids
       getComment(id).then(response => {
         this.form = response.data;
         this.open = true;

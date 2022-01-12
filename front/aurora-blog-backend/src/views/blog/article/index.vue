@@ -101,6 +101,7 @@
       <el-table-column label="推荐" align="center">
         <template slot-scope="scope" prop="isRecommend">
           <el-switch
+            :active-value="0" :inactive-value="1"
             v-model="scope.row.isRecommend"
             @change="handleRecommend(scope.row)">
           </el-switch>
@@ -109,6 +110,7 @@
       <el-table-column label="置顶" align="center" prop="isTop">
         <template slot-scope="scope">
           <el-switch
+            :active-value="1" :inactive-value="0"
             v-model="scope.row.isTop"
             @change="handleTop(scope.row)">
           </el-switch>
@@ -235,7 +237,8 @@ export default {
     },
     /** 修改按钮操作 */
     handleUpdate(row) {
-      this.$router.push('/blog/update/'+row.articleId)
+      const articleId = row.articleId || this.ids
+      this.$router.push('/blog/update/'+articleId)
     },
     /** 删除按钮操作 */
     handleDelete(row) {
@@ -268,8 +271,8 @@ export default {
     },
     /** 推荐操作 */
     handleRecommend(row) {
-      let text = row.isRecommend === 'true' ? '推荐' : '不推荐'
-      this.$confirm('确认要"' + text + '""' + row.title + '"博文吗?', '警告', {
+      let text = row.isRecommend === '0' ? '推荐' : '不推荐'
+      this.$confirm('确认' + text + '"' + row.title + '"博文吗?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
@@ -282,12 +285,12 @@ export default {
       }).then(() => {
         this.msgSuccess(text + '成功')
       }).catch(function() {
-        row.isRecommend = row.isRecommend === 'true' ? 'false' : 'true'
+        row.isRecommend = row.isRecommend === '0' ? '0' : '1'
       })
     },
     /** 置顶操作 */
     handleTop(row) {
-      let text = row.isTop === 'true' ? '置顶' : '不置顶'
+      let text = row.isTop === '0' ? '置顶' : '不置顶'
       this.$confirm('确认要"' + text + '""' + row.title + '"博文吗?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -301,7 +304,7 @@ export default {
       }).then(() => {
         this.msgSuccess(text + '成功')
       }).catch(function() {
-        row.isTop = row.isTop === 'true' ? 'false' : 'true'
+        row.isTop = row.isTop === '0' ? '0' : '1'
       })
     },
     /** 发布状态 */

@@ -123,18 +123,30 @@
         <el-form-item label="轮播图url" prop="imgUrl">
           <el-input v-model="form.imgUrl" placeholder="请输入轮播图url" />
         </el-form-item>
-        <el-form-item label="轮播图标题" prop="title">
+        <el-form-item label="标题" prop="title">
           <el-input v-model="form.title" placeholder="请输入轮播图标题" />
         </el-form-item>
-        <el-form-item label="轮播图跳转地址" prop="url">
+        <el-form-item label="跳转地址" prop="url">
           <el-input v-model="form.url" placeholder="请输入轮播图跳转地址" />
         </el-form-item>
-        <el-form-item label="是否展示该轮播图，1展示，2不展示" prop="display">
-          <el-input v-model="form.display" placeholder="请输入是否展示该轮播图，1展示，2不展示" />
+        <el-form-item label="是否展示" prop="display">
+          <el-select v-model="form.display" placeholder="请选择轮播图状态">
+            <el-option
+              v-for="dict in statusOptions"
+              :key="dict.dictValue"
+              :label="dict.dictLabel"
+              :value="dict.dictValue"
+            />
+          </el-select>
         </el-form-item>
-        <el-form-item label="1外链，2文章" prop="type">
-          <el-select v-model="form.type" placeholder="请选择1外链，2文章">
-            <el-option label="请选择字典生成" value="" />
+        <el-form-item label="类型" prop="type">
+          <el-select v-model="form.type" placeholder="请选择类型">
+            <el-option
+              v-for="dict in typeOptions"
+              :key="dict.dictValue"
+              :label="dict.dictLabel"
+              :value="dict.dictValue"
+            />
           </el-select>
         </el-form-item>
         <el-form-item label="备注" prop="remark">
@@ -265,6 +277,7 @@ export default {
       const carouselId = row.carouselId || this.ids
       getCarousel(carouselId).then(response => {
         this.form = response.data;
+        this.form.type = String(this.form.type);
         this.open = true;
         this.title = "修改轮播图";
       });

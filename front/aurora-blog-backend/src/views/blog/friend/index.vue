@@ -158,10 +158,15 @@
         <el-form-item label="站长邮箱" prop="mail">
           <el-input v-model="form.mail" placeholder="请输入站长邮箱" />
         </el-form-item>
-        <el-form-item label="状态 0待审 1通过 2拒绝">
-          <el-radio-group v-model="form.status">
-            <el-radio label="1">请选择字典生成</el-radio>
-          </el-radio-group>
+        <el-form-item label="状态">
+          <el-select v-model="form.status" placeholder="请选择状态">
+            <el-option
+              v-for="dict in statusOptions"
+              :key="dict.dictValue"
+              :label="dict.dictLabel"
+              :value="dict.dictValue"
+            />
+          </el-select>
         </el-form-item>
         <el-form-item label="创建时间" prop="createTime">
           <el-date-picker clearable size="small"
@@ -266,7 +271,7 @@ export default {
         description: null,
         url: null,
         mail: null,
-        status: 0,
+        status: '0',
         createTime: null,
         updateTime: null,
         remark: null
@@ -301,6 +306,7 @@ export default {
       const friendId = row.friendId || this.ids
       getFriend(friendId).then(response => {
         this.form = response.data;
+        this.form.status = String(this.form.status);
         this.open = true;
         this.title = "修改友链";
       });
