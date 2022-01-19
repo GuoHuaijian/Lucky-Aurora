@@ -13,7 +13,7 @@
           >
             <div class="text-wrapper">
               <h4 class="title">
-                <a :href="'/Article/' + article.articleId">{{ article.title }}</a>
+                <a :href="'/article/' + article.articleId">{{ article.title }}</a>
                 <span class="special" v-if="article.isTop === true" title="置顶">置顶</span>
               </h4>
               <div class="tags">

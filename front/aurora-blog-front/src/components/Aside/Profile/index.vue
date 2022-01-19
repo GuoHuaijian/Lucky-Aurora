@@ -1,9 +1,9 @@
 <template>
   <div class="profile">
     <div class="about">
-      <img class="background" src="../../../assets/img/background.jpg" alt=""/>
-      <img class="avatar" src="../../../assets/img/avatar.jpg" alt=""/>
-      <p class="name">郭怀检</p>
+      <img class="background" src="../../../assets/img/background1.jpg" alt=""/>
+      <img class="avatar" src="../../../assets/img/avatar1.jpg" alt=""/>
+      <p class="name">Aurora</p>
       <p class="desc">Write the code, Change the World</p>
       <ul class="social">
         <li>

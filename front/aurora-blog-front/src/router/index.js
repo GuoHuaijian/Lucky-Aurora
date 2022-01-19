@@ -13,11 +13,11 @@ const routes = [
         name: 'articles',
         component: () => import('../views/article/list/index')
     }, {
-        path: '/Article',
+        path: '/article/:id',
         name: 'article',
         component: () => import('../views/article/detail/index')
     }, {
-        path: '/Archive',
+        path: '/archive',
         name: 'archive',
         component: () => import('../views/archive/index')
     },{

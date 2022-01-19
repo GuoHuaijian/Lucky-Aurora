@@ -3,10 +3,10 @@
     <p class="level level-one">
       <span class="title">分类：</span>
       <span class="class">
-        <a class="active" data-level="1" @click="choseLevel($event)">全部</a>
-        <a class="name" :id="'id' + category.id" :data-level="category.ranks"
-           @click="choseLevel($event)"
-           v-for="category in this.categoryList" :key="category.id">{{ category.name }}</a>
+        <a class="active" data-level="1" @click="choseLevel($event,'')">全部</a>
+        <a class="name" :id="'id' + category.categoryId" :data-level="category.ranks"
+           @click="choseLevel($event,category.categoryId)"
+           v-for="category in this.categoryList" :key="category.categoryId">{{ category.name }}</a>
       </span>
     </p>
   </div>
@@ -29,7 +29,11 @@ export default {
   },
 
   methods: {
-    choseLevel(event) {
+    selectCategory (categoryId) {
+      this.$emit('filterByCategory', categoryId === -1 ? undefined : categoryId)
+    },
+    choseLevel(event,id) {
+     this.selectCategory(id);
       // 更新样式
       let pNode = event.target.parentNode
       let activeNode = pNode.querySelector('.active')

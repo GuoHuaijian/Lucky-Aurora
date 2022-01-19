@@ -47,15 +47,32 @@ export default {
       this.items = res.data.data;
     }),
     categoryList().then(res =>{
+
       this.categoryList = res.data.data;
     }),
-    articleList(this.queryParams).then(res =>{
-      this.articleList = res.data.data.data;
-    })
+    this.getArticleList()
   },
 
   methods: {
     browseMore() {
+      this.queryParams.pageNum++
+      this.getArticleList()
+    },
+    getArticleList(){
+      articleList(this.queryParams).then(res => {
+        if (res && res.data.code === 200) {
+          if (res.data.data.total <= (this.queryParams.pageNum*this.queryParams.pageSize)) {
+            this.noMoreData = true
+          } else {
+            this.noMoreData = false
+          }
+          this.articleList = this.articleList.concat(res.data.data.data);
+        }
+      }).then( () => {
+        this.$refs.browseMore.stopLoading()
+      }).catch(() => {
+        this.$refs.browseMore.stopLoading()
+      })
     }
   }
 }

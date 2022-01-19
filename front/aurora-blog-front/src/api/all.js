@@ -26,10 +26,19 @@ export function articleList(query) {
     })
 }
 
+// 获取文章详情
+export function getArticle(id) {
+    return request({
+        url: '/portal/article/'+id,
+        method: 'get',
+    })
+}
+
+
 // 获取标签列表
 export function tagList() {
     return request({
-        url: '/portal/article/tags',
+        url: '/portal/tag/tags',
         method: 'get'
     })
 }
@@ -37,7 +46,7 @@ export function tagList() {
 // 获取分类列表
 export function categoryList() {
     return request({
-        url: '/portal/article/categories',
+        url: '/portal/category/categories',
         method: 'get'
     })
 }
@@ -53,7 +62,15 @@ export function carouselList() {
 // 获取轮播图列表
 export function friendList() {
     return request({
-        url: '/portal/article/friends',
+        url: '/portal/friend/friends',
+        method: 'get'
+    })
+}
+
+// 获取时间线列表
+export function TimelineList() {
+    return request({
+        url: '/portal/timeline',
         method: 'get'
     })
 }

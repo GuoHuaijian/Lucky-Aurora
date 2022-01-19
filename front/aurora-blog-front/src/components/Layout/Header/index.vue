@@ -5,7 +5,7 @@
         <header class="header-navigation">
           <nav>
             <div class="logo">
-              <a href="/">郭怀检</a>
+              <img href="/" src="../../../assets/img/logo1.png" style="height: 56px"/>
             </div>
             <ul class="menuList">
               <li>

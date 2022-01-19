@@ -3,7 +3,7 @@
     <div class="info">
       <el-tag type="info" size="mini">{{ post.createTime | socialDate }}</el-tag>
       <div class="base-info">
-        <a class="title" :href="'/' + post.postType + '/' + post.id">
+        <a class="title" :href="'/article' + '/' + post.articleId">
           {{ post.title }}
         </a>
         <a class="see-desc" @click.stop="seeDesc" :class="{show: showDesc}">查看简介&nbsp;&nbsp;<i

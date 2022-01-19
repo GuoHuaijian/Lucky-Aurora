@@ -167,7 +167,6 @@ export default {
     }
   },
   created() {
-    console.log(this.comments)
   }
 }
 </script>
