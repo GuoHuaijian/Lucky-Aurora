@@ -57,9 +57,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
             wrapper.lambda().le(BlogArticle::getCreateTime, article.getEndTime());
         }
         List<BlogArticle> articles = list(wrapper);
-        for (BlogArticle blog : articles) {
-            blog = setCategoryAndTag(blog);
-        }
+        articles.forEach(blog ->setCategoryAndTag(blog));
         return articles;
     }
 
@@ -142,6 +140,8 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         return articleTagService.remove(new LambdaQueryWrapper<BlogArticleTag>().in(BlogArticleTag::getArticleId,
                 articleIds));
     }
+
+
 
     /**
      * 添加分类和标签

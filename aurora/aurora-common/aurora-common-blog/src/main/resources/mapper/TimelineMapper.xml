@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aurora.common.blog.mapper.TimelineMapper">
+    <select id="listTimeline" resultType="com.aurora.common.blog.domain.line.Timeline">
+        select article_id, title, description, create_time
+        from aurora_blog.blog_article
+        where DATE_FORMAT(create_time, '%Y') = #{year}
+          and DATE_FORMAT(create_time, '%m') = #{month}
+          and publish = 0
+        order by create_time desc
+    </select>
+
+    <select id="listTimelineYear" resultType="com.aurora.common.blog.domain.line.TimelineYear">
+        select t.year, count(t.year) as count
+        from (
+                     select article_id,
+                            title,
+                            description,
+                            create_time,
+                            DATE_FORMAT(create_time, '%Y') as year
+                     from blog_article
+                     where publish = 0) t
+        group by t.year
+        order by t.year desc
+    </select>
+</mapper>
