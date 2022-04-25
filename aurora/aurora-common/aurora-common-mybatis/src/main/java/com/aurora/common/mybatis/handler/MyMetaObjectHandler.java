@@ -22,16 +22,16 @@ public class MyMetaObjectHandler implements MetaObjectHandler {
     @Override
     public void insertFill(MetaObject metaObject) {
         log.info("start insert fill ....");
-        this.strictInsertFill(metaObject, "createTime", () -> new Date(), Date.class);
-        this.strictUpdateFill(metaObject, "updateTime", () -> new Date(), Date.class);
-        this.strictUpdateFill(metaObject, "loginTime", () -> new Date(), Date.class);
-        this.strictUpdateFill(metaObject, "visitTime", () -> new Date(), Date.class);
-        this.strictUpdateFill(metaObject, "operateTime", () -> new Date(), Date.class);
+        this.strictInsertFill(metaObject, "createTime", Date::new, Date.class);
+        this.strictUpdateFill(metaObject, "updateTime", Date::new, Date.class);
+        this.strictUpdateFill(metaObject, "loginTime", Date::new, Date.class);
+        this.strictUpdateFill(metaObject, "visitTime", Date::new, Date.class);
+        this.strictUpdateFill(metaObject, "operateTime", Date::new, Date.class);
     }
 
     @Override
     public void updateFill(MetaObject metaObject) {
         log.info("start update fill ....");
-        this.strictUpdateFill(metaObject, "updateTime", () -> new Date(), Date.class);
+        this.strictUpdateFill(metaObject, "updateTime", Date::new, Date.class);
     }
 }
