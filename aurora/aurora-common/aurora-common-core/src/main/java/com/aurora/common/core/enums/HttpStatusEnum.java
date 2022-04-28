@@ -4,10 +4,10 @@ package com.aurora.common.core.enums;
  * http状态枚举
  * describe: 返回状态码及信息
  *
- * @Author Guo Huaijian
- * @Date 2020/12/31
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2020/12/31
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public enum HttpStatusEnum {
 

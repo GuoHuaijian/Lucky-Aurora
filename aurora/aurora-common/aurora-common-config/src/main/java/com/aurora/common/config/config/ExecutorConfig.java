@@ -19,10 +19,10 @@ import java.util.concurrent.ThreadPoolExecutor;
 /**
  * describe: 线程池配置  定时任务，异步任务
  *
- * @Author Guo Huaijian
- * @Date 2021/8/26
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/8/26
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Configuration
 @EnableAsync

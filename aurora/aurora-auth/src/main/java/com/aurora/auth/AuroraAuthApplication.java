@@ -7,10 +7,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/1/1
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/1/1
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @SpringBootApplication(scanBasePackages = {"com.aurora.*"})
 @EnableDubbo(scanBasePackages = {"com.aurora.auth.*"})

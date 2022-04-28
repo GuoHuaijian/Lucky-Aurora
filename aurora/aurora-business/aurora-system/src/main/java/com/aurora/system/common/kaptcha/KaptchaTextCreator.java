@@ -7,10 +7,10 @@ import java.util.Random;
 /**
  * describe: 验证码文本生成器
  *
- * @Author Guo Huaijian
- * @Date 2021/10/15
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/15
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public class KaptchaTextCreator extends DefaultTextCreator {
     private static final String[] CNUMBERS = "0,1,2,3,4,5,6,7,8,9,10".split(",");

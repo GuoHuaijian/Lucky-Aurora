@@ -12,10 +12,10 @@ import java.util.Date;
 /**
  * describe: 访问日志记录
  *
- * @Author Guo Huaijian
- * @Date 2021/10/11
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/11
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Data
 @AllArgsConstructor
@@ -95,7 +95,7 @@ public class SysVisitLog implements Serializable {
     /**
      * 访问时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @TableField(value = "visit_time", fill = FieldFill.INSERT)
     private Date visitTime;
 

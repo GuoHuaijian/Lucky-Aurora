@@ -8,10 +8,10 @@ import java.util.Date;
 /**
  * describe: 时间工具类
  *
- * @Author Guo Huaijian
- * @Date 2021/9/10
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/9/10
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public class DateUtil extends cn.hutool.core.date.DateUtil {
     public static String YYYY = "yyyy";

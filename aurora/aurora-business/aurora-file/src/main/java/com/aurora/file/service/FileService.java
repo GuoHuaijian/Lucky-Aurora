@@ -6,10 +6,10 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * describe: 文件上传接口
  *
- * @Author Guo Huaijian
- * @Date 2021/9/10
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/9/10
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public interface FileService {
 

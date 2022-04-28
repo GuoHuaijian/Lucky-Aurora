@@ -8,10 +8,10 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/9/28
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/9/28
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @SpringBootApplication(scanBasePackages = {"com.aurora.*"}, exclude = {DataSourceAutoConfiguration.class})
 @EnableAuroraResourceServer

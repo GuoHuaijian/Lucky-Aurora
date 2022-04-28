@@ -1,7 +1,6 @@
 package com.aurora.system.service.impl;
 
 import com.aurora.common.core.exception.ServiceException;
-import com.aurora.common.core.utils.SpringUtil;
 import com.aurora.common.core.utils.StringUtil;
 import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.common.constant.SystemConstants;
@@ -26,10 +25,10 @@ import java.util.*;
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/10/9
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/9
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Service
 public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> implements SysRoleService {
@@ -98,7 +97,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      */
     @Override
     public List<SysRole> selectRoleAll() {
-        return SpringUtil.getAopProxy(this).selectRoleList(new SysRole());
+        return this.selectRoleList(new SysRole());
     }
 
     /**
@@ -180,7 +179,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         if (!SysUser.isAdmin(SecurityUtil.getUserId())) {
             SysRole role = new SysRole();
             role.setRoleId(roleId);
-            List<SysRole> roles = SpringUtil.getAopProxy(this).selectRoleList(role);
+            List<SysRole> roles = this.selectRoleList(role);
             if (StringUtil.isEmpty(roles)) {
                 throw new ServiceException("没有权限访问角色数据！");
             }
@@ -331,7 +330,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public boolean insertAuthUsers(Long roleId, Long[] userIds) {
         // 新增用户与角色管理
-        List<SysUserRole> list = new ArrayList<SysUserRole>();
+        List<SysUserRole> list = new ArrayList<>();
         for (Long userId : userIds) {
             SysUserRole ur = new SysUserRole();
             ur.setUserId(userId);

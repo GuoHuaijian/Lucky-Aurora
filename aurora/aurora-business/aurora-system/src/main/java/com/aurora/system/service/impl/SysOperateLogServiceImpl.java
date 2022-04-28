@@ -15,10 +15,10 @@ import java.util.List;
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/1/30
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/1/30
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Service
 public class SysOperateLogServiceImpl extends ServiceImpl<SysOperateLogMapper, SysOperateLog> implements SysOperateLogService {

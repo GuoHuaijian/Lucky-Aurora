@@ -249,8 +249,10 @@ export default {
     });
   },
   methods: {
-    /** 查询登录日志 */
+    /** 查询操作日志 */
     getList() {
+      this.queryParams.orderByColumn = "operateTime";
+      this.queryParams.isAsc = "desc";
       this.loading = true;
       list(this.addDateRange(this.queryParams, this.dateRange)).then( response => {
           this.list = response.data.data;

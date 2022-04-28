@@ -9,10 +9,10 @@ import java.util.regex.Pattern;
 /**
  * describe: HTML过滤器，用于去除XSS漏洞隐患。
  *
- * @Author Guo Huaijian
- * @Date 2021/10/26
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/26
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public final class HTMLFilter {
     /**

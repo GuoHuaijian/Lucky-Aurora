@@ -9,10 +9,10 @@ import java.util.Map;
 /**
  * describe: Entity基类
  *
- * @Author Guo Huaijian
- * @Date 2021/10/16
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/16
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Data
 public class BaseEntity {

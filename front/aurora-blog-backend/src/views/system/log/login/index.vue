@@ -169,6 +169,8 @@ export default {
     /** 查询登录日志列表 */
     getList() {
       this.loading = true;
+      this.queryParams.orderByColumn = "loginTime";
+      this.queryParams.isAsc = "desc";
       list(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
           this.list = response.data.data;
           this.total = response.data.total;

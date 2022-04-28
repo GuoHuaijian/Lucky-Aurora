@@ -12,10 +12,10 @@ import org.springframework.stereotype.Component;
 /**
  * describe:  spring工具类 方便在非spring管理环境中获取bean
  *
- * @Author Guo Huaijian
- * @Date 2021/10/10
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/10
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Component
 public final class SpringUtil implements BeanFactoryPostProcessor, ApplicationContextAware {

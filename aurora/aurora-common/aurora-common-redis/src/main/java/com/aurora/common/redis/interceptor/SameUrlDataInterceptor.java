@@ -19,10 +19,10 @@ import java.util.concurrent.TimeUnit;
  * describe: 判断请求url和数据是否和上一次相同，
  * 如果和上次相同，则是重复提交表单。 有效时间为10秒内。
  *
- * @Author Guo Huaijian
- * @Date 2021/10/25
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/25
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Component
 public class SameUrlDataInterceptor extends RepeatSubmitInterceptor {

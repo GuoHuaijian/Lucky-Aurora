@@ -13,10 +13,10 @@ import java.util.Date;
 /**
  * describe: 操作日志记录
  *
- * @Author Guo Huaijian
- * @Date 2021/9/7
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/9/7
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Data
 @Builder
@@ -112,7 +112,7 @@ public class SysOperateLog implements Serializable {
     /**
      * 操作时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @TableField(value = "operate_time", fill = FieldFill.INSERT)
     private Date operateTime;
 

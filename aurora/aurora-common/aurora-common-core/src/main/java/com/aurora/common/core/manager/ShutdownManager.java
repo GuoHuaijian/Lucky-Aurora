@@ -9,10 +9,10 @@ import javax.annotation.PreDestroy;
 /**
  * describe: 确保应用退出时能关闭后台线程
  *
- * @Author Guo Huaijian
- * @Date 2021/10/15
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/15
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Component
 public class ShutdownManager {

@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 /**
  * describe: 服务器监控
  *
- * @Author Guo Huaijian
- * @Date 2021/10/25
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/25
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping("/monitor/server")

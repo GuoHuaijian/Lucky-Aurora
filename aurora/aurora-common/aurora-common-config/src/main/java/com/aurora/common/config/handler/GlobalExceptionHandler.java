@@ -13,10 +13,10 @@ import java.nio.file.AccessDeniedException;
 /**
  * describe: 全局异常捕获处理
  *
- * @Author Guo Huaijian
- * @Date 2021/8/26
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/8/26
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @RestControllerAdvice
 @Slf4j

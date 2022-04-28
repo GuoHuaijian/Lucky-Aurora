@@ -11,10 +11,10 @@ import reactor.core.publisher.Mono;
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/10/23
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/23
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Component
 public class MyGateWayFilter implements GlobalFilter, Ordered {

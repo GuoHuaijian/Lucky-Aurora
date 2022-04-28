@@ -3,10 +3,10 @@ package com.aurora.monitor.domain.server;
 /**
  * describe: 系统相关信息
  *
- * @Author Guo Huaijian
- * @Date 2021/9/28
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/9/28
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public class Sys {
     /**

@@ -11,10 +11,10 @@ import java.io.IOException;
 /**
  * describe: Repeatable 过滤器
  *
- * @Author Guo Huaijian
- * @Date 2021/10/25
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/25
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public class RepeatableFilter implements Filter {
 

@@ -19,10 +19,10 @@ import java.util.List;
 /**
  * describe: 通用controller处理
  *
- * @Author Guo Huaijian
- * @Date 2020/12/31
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2020/12/31
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public abstract class AbstractController {
 

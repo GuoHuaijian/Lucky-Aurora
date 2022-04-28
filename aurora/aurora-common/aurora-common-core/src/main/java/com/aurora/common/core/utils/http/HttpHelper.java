@@ -14,10 +14,10 @@ import java.nio.charset.Charset;
 /**
  * describe: 通用http工具封装
  *
- * @Author Guo Huaijian
- * @Date 2021/10/25
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/25
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public class HttpHelper {
     private static final Logger LOGGER = LoggerFactory.getLogger(HttpHelper.class);

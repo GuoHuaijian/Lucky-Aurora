@@ -15,10 +15,10 @@ import java.nio.charset.Charset;
 /**
  * describe: Redis使用FastJson序列化
  *
- * @Author Guo Huaijian
- * @Date 2021/10/11
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/11
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public class FastJson2JsonRedisSerializer<T> implements RedisSerializer<T> {
     @SuppressWarnings("unused")

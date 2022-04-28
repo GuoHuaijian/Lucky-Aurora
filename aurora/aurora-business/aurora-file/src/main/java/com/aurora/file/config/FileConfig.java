@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Configuration;
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/9/29
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/9/29
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Data
 @Configuration

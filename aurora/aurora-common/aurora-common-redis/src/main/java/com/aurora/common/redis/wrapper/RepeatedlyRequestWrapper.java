@@ -15,10 +15,10 @@ import java.io.InputStreamReader;
 /**
  * describe: 构建可重复读取inputStream的request
  *
- * @Author Guo Huaijian
- * @Date 2021/10/25
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/25
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public class RepeatedlyRequestWrapper extends HttpServletRequestWrapper {
     private final byte[] body;

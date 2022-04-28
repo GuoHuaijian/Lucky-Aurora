@@ -170,9 +170,11 @@ export default {
     });
   },
   methods: {
-    /** 查询操作日志 */
+    /** 查询访问日志 */
     getList() {
       this.loading = true;
+      this.queryParams.orderByColumn = "visitTime";
+      this.queryParams.isAsc = "desc";
       list(this.addDateRange(this.queryParams, this.dateRange)).then( response => {
           this.list = response.data.data;
           this.total = response.data.total;

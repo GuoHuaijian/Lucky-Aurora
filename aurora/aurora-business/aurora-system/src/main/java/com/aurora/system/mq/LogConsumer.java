@@ -20,14 +20,15 @@ import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.nio.charset.StandardCharsets;
 
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/9/7
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/9/7
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Component
 @Slf4j
@@ -56,7 +57,7 @@ public class LogConsumer {
                 try {
                     String topic = msg.getTopic();
                     String tags = msg.getTags();
-                    String body = new String(msg.getBody(), "utf-8");
+                    String body = new String(msg.getBody(), StandardCharsets.UTF_8);
                     if (TagConstant.OPERATE_LOG.equals(tags)) {
                         operateLogService.saveOperateLog(JSON.parseObject(body, SysOperateLog.class));
                     } else if (TagConstant.VISIT_LOG.equals(tags)) {

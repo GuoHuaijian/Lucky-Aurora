@@ -26,10 +26,10 @@ import java.util.stream.Collectors;
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/9/30
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/9/30
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @RestController
 @RequestMapping("/system/user")

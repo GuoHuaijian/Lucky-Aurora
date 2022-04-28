@@ -2,7 +2,6 @@ package com.aurora.system.service.impl;
 
 import cn.hutool.core.util.StrUtil;
 import com.aurora.common.core.exception.ServiceException;
-import com.aurora.common.core.utils.SpringUtil;
 import com.aurora.common.core.utils.StringUtil;
 import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.common.constant.SystemConstants;
@@ -24,15 +23,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/1/1
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/1/1
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Service
 @Slf4j
@@ -197,7 +198,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (!SysUser.isAdmin(SecurityUtil.getUserId())) {
             SysUser user = new SysUser();
             user.setUserId(userId);
-            List<SysUser> users = SpringUtil.getAopProxy(this).selectUserList(user);
+            List<SysUser> users = this.selectUserList(user);
             if (StringUtil.isEmpty(users)) {
                 throw new ServiceException("没有权限访问用户数据！");
             }

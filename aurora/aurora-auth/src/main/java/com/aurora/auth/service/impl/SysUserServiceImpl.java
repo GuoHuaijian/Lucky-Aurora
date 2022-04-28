@@ -19,10 +19,10 @@ import java.util.Set;
 /**
  * describe:
  *
- * @Author Guo Huaijian
- * @Date 2021/11/2
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/11/2
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Service
 @RequiredArgsConstructor

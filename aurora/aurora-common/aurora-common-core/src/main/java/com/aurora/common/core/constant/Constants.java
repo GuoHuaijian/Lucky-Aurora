@@ -3,10 +3,10 @@ package com.aurora.common.core.constant;
 /**
  * describe: 通用常量
  *
- * @Author Guo Huaijian
- * @Date 2021/8/25 14:44
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/8/25 14:44
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 public class Constants {
 

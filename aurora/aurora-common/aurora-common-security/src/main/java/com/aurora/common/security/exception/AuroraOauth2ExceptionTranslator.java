@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 /**
  * describe: 自定义登录失败异常信息
  *
- * @Author Guo Huaijian
- * @Date 2021/10/16
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/10/16
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Component
 public class AuroraOauth2ExceptionTranslator implements WebResponseExceptionTranslator {

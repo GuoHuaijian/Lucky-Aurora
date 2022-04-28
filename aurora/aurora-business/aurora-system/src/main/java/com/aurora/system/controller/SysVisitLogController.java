@@ -17,9 +17,9 @@ import java.util.List;
 /**
  * describe:
  *
- * @Author Guo
- * @Date 2021/10/11 9:57
- * @Version 1.0
+ * @author Guo
+ * @date 2021/10/11 9:57
+ * @version 1.0
  */
 @RestController
 @RequestMapping("/system/visitLog")

@@ -12,10 +12,10 @@ import javax.validation.ValidatorFactory;
 /**
  * describe: 参数校验
  *
- * @Author Guo Huaijian
- * @Date 2021/8/26
- * @E-mail guohuaijian9527@gmail.com
- * @Version 1.0.0
+ * @author Guo Huaijian
+ * @date 2021/8/26
+ * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Configuration
 public class ValidatorConfig {
