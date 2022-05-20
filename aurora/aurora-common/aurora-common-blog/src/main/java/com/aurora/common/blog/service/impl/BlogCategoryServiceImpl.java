@@ -5,7 +5,7 @@ import com.aurora.common.blog.domain.BlogCategory;
 import com.aurora.common.blog.mapper.BlogCategoryMapper;
 import com.aurora.common.blog.service.BlogArticleService;
 import com.aurora.common.blog.service.BlogCategoryService;
-import com.aurora.common.core.exception.ServiceException;
+import com.aurora.common.core.utils.AssertUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -83,9 +83,7 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
     public boolean deleteBlogCategoryByCategoryIds(Long[] categoryIds) {
         int count = articleService.count(new LambdaQueryWrapper<BlogArticle>().in(BlogArticle::getCategoryId,
                 categoryIds));
-        if (count >= 1) {
-            throw new ServiceException("删除分类失败,该分类下有关联博文");
-        }
+        AssertUtil.isTrue(count >= 1,"删除分类失败,该分类下有关联博文");
         return removeByIds(Arrays.asList(categoryIds));
     }
 
@@ -99,9 +97,7 @@ public class BlogCategoryServiceImpl extends ServiceImpl<BlogCategoryMapper, Blo
     public boolean deleteBlogCategoryByCategoryId(Long categoryId) {
         int count = articleService.count(new LambdaQueryWrapper<BlogArticle>().eq(BlogArticle::getCategoryId,
                 categoryId));
-        if (count >= 1) {
-            throw new ServiceException("删除分类失败,该分类下有关联博文");
-        }
+        AssertUtil.isTrue(count >= 1,"删除分类失败,该分类下有关联博文");
         return removeById(categoryId);
     }
 }

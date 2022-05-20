@@ -1,6 +1,7 @@
 package com.aurora.system.service.impl;
 
 import com.aurora.common.core.exception.ServiceException;
+import com.aurora.common.core.utils.AssertUtil;
 import com.aurora.common.core.utils.StringUtil;
 import com.aurora.common.security.utils.SecurityUtil;
 import com.aurora.system.common.constant.SystemConstants;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * describe:
@@ -63,7 +65,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         List<SysRole> roles = selectRoleAll();
         for (SysRole role : roles) {
             for (SysRole userRole : userRoles) {
-                if (role.getRoleId().longValue() == userRole.getRoleId().longValue()) {
+                if (role.getRoleId().equals(userRole.getRoleId())) {
                     role.setFlag(true);
                     break;
                 }
@@ -109,9 +111,8 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public List<Long> selectRoleListByUserId(Long userId) {
         List<SysUserRole> userRoles = userRoleService.list(new LambdaQueryWrapper<SysUserRole>().eq(SysUserRole::getUserId, userId));
-        List<Long> list = Lists.newArrayList();
-        userRoles.forEach(userRole -> list.add(userRole.getRoleId()));
-        return list;
+        List<Long> roleIds = userRoles.stream().map(SysUserRole::getRoleId).collect(Collectors.toList());
+        return roleIds;
     }
 
     /**
@@ -135,7 +136,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     public String checkRoleNameUnique(SysRole role) {
         Long roleId = StringUtil.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SysRole info = getOne(new LambdaQueryWrapper<SysRole>().eq(SysRole::getRoleName, role.getRoleName()));
-        if (StringUtil.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue()) {
+        if (StringUtil.isNotNull(info) && !info.getRoleId().equals(roleId)) {
             return SystemConstants.NOT_UNIQUE;
         }
         return SystemConstants.UNIQUE;
@@ -151,7 +152,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     public String checkRoleKeyUnique(SysRole role) {
         Long roleId = StringUtil.isNull(role.getRoleId()) ? -1L : role.getRoleId();
         SysRole info = getOne(new LambdaQueryWrapper<SysRole>().eq(SysRole::getRoleCode, role.getRoleCode()));
-        if (StringUtil.isNotNull(info) && info.getRoleId().longValue() != roleId.longValue()) {
+        if (StringUtil.isNotNull(info) && !info.getRoleId().equals(roleId)) {
             return SystemConstants.NOT_UNIQUE;
         }
         return SystemConstants.UNIQUE;
@@ -180,9 +181,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
             SysRole role = new SysRole();
             role.setRoleId(roleId);
             List<SysRole> roles = this.selectRoleList(role);
-            if (StringUtil.isEmpty(roles)) {
-                throw new ServiceException("没有权限访问角色数据！");
-            }
+            AssertUtil.isNull(roles,"没有权限访问角色数据！");
         }
     }
 
@@ -287,9 +286,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         for (Long roleId : roleIds) {
             checkRoleAllowed(new SysRole(roleId));
             SysRole role = selectRoleById(roleId);
-            if (countUserRoleByRoleId(roleId) > 0) {
-                throw new ServiceException(String.format("%1$s已分配,不能删除", role.getRoleName()));
-            }
+            AssertUtil.isTrue(roleId > 0,String.format("%1$s已分配,不能删除", role.getRoleName()));
         }
         // 删除角色与菜单关联
         roleMenuService.remove(new LambdaQueryWrapper<SysRoleMenu>().in(SysRoleMenu::getRoleId, roleIds));
@@ -330,7 +327,7 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Override
     public boolean insertAuthUsers(Long roleId, Long[] userIds) {
         // 新增用户与角色管理
-        List<SysUserRole> list = new ArrayList<>();
+        List<SysUserRole> list = Lists.newArrayList();
         for (Long userId : userIds) {
             SysUserRole ur = new SysUserRole();
             ur.setUserId(userId);
@@ -342,12 +339,10 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
 
 
     public List<SysRole> getRoleByUserId(Long userId) {
-        List<SysUserRole> sysUserRoles =
-                userRoleService.list(new LambdaQueryWrapper<SysUserRole>()
+        List<SysUserRole> userRoles = userRoleService.list(new LambdaQueryWrapper<SysUserRole>()
                         .eq(SysUserRole::getUserId, userId));
-        List<Long> list = Lists.newArrayList();
-        sysUserRoles.forEach(t -> list.add(t.getRoleId()));
-        List<SysRole> roles = list(new LambdaQueryWrapper<SysRole>().in(SysRole::getRoleId, list));
+        List<Long> roleIds = userRoles.stream().map(SysUserRole::getRoleId).collect(Collectors.toList());
+        List<SysRole> roles = list(new LambdaQueryWrapper<SysRole>().in(SysRole::getRoleId, roleIds));
         return roles;
     }
 }

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * @version 1.0.0
  */
 @Component
-public class AuroraOauth2ExceptionTranslator implements WebResponseExceptionTranslator {
+public class AuroraOauth2ExceptionTranslator implements WebResponseExceptionTranslator<OAuth2Exception> {
     @Override
     public ResponseEntity<OAuth2Exception> translate(Exception e) {
 

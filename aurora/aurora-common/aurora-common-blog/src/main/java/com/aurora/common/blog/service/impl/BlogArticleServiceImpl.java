@@ -1,5 +1,6 @@
 package com.aurora.common.blog.service.impl;
 
+import cn.hutool.core.collection.CollectionUtil;
 import com.aurora.common.blog.domain.BlogArticle;
 import com.aurora.common.blog.domain.BlogArticleTag;
 import com.aurora.common.blog.domain.BlogCategory;
@@ -11,23 +12,23 @@ import com.aurora.common.blog.service.BlogCategoryService;
 import com.aurora.common.blog.service.BlogTagService;
 import com.aurora.common.core.utils.StringUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * describe:
  *
  * @author Guo Huaijian
+ * @version 1.0.0
  * @date 2021/10/16
  * @e-mail guohuaijian9527@gmail.com
- * @version 1.0.0
  */
 @Service
 public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogArticle> implements BlogArticleService {
@@ -49,15 +50,11 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
      */
     @Override
     public List<BlogArticle> list(BlogArticle article) {
-        QueryWrapper<BlogArticle> wrapper = new QueryWrapper<>(article);
-        if (StringUtil.isNotNull(article.getBeginTime())) {
-            wrapper.lambda().ge(BlogArticle::getCreateTime, article.getBeginTime());
-        }
-        if (StringUtil.isNotNull(article.getEndTime())) {
-            wrapper.lambda().le(BlogArticle::getCreateTime, article.getEndTime());
-        }
+        LambdaQueryWrapper<BlogArticle> wrapper = new LambdaQueryWrapper<>();
+        wrapper.ge(StringUtil.isNotNull(article.getBeginTime()), BlogArticle::getCreateTime, article.getBeginTime());
+        wrapper.le(StringUtil.isNotNull(article.getEndTime()), BlogArticle::getCreateTime, article.getEndTime());
         List<BlogArticle> articles = list(wrapper);
-        articles.forEach(blog ->setCategoryAndTag(blog));
+        articles.forEach(this::setCategoryAndTag);
         return articles;
     }
 
@@ -97,8 +94,8 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
     @Override
     public boolean updateArticle(BlogArticle article) {
         // 修改状态不删除标签
-        if (StringUtil.isNotNull(article.getTitle())){
-            deleteArticleTag(Arrays.asList(article.getArticleId()));
+        if (StringUtil.isNotNull(article.getTitle())) {
+            deleteArticleTag(Collections.singletonList(article.getArticleId()));
         }
         saveArticleTag(article.getTags(), article.getArticleId());
         return updateById(article);
@@ -136,11 +133,10 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
      *
      * @param articleIds
      */
-    public boolean deleteArticleTag(List<Integer> articleIds) {
-        return articleTagService.remove(new LambdaQueryWrapper<BlogArticleTag>().in(BlogArticleTag::getArticleId,
+    public void deleteArticleTag(List<Integer> articleIds) {
+        articleTagService.remove(new LambdaQueryWrapper<BlogArticleTag>().in(BlogArticleTag::getArticleId,
                 articleIds));
     }
-
 
 
     /**
@@ -152,14 +148,12 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
     public BlogArticle setCategoryAndTag(BlogArticle article) {
         BlogCategory category = categoryService.getById(article.getCategoryId());
         article.setCategory(category);
-        List<BlogArticleTag> articleTags = articleTagService.list(new LambdaQueryWrapper<BlogArticleTag>().eq(BlogArticleTag::getArticleId,
-                article.getArticleId()));
-        List<Integer> tagIds = Lists.newArrayList();
-        articleTags.forEach(articleTag -> tagIds.add(articleTag.getTagId()));
-        if (tagIds.size() > 0) {
-            List<BlogTag> tags = tagService.list(new LambdaQueryWrapper<BlogTag>().in(BlogTag::getTagId, tagIds));
-            article.setTags(tags);
-        }
+        List<BlogArticleTag> articleTags = articleTagService.list(new LambdaQueryWrapper<BlogArticleTag>()
+                .eq(BlogArticleTag::getArticleId, article.getArticleId()));
+        List<Integer> tagIds = articleTags.stream().map(BlogArticleTag::getTagId).collect(Collectors.toList());
+        List<BlogTag> tags = tagService.list(new LambdaQueryWrapper<BlogTag>().in(CollectionUtil.isNotEmpty(tagIds),
+                        BlogTag::getTagId, tagIds));
+        article.setTags(tags);
         return article;
     }
 }

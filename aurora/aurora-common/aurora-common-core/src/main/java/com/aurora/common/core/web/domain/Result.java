@@ -23,7 +23,7 @@ import java.util.HashMap;
 @Data
 @Slf4j
 @EqualsAndHashCode(callSuper = false)
-public class Result<T> extends HashMap<String, Object> implements Serializable {
+public class Result extends HashMap<String, Object> implements Serializable {
 
     private static final long serialVersionUID = 1L;
 

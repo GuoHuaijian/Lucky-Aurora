@@ -48,7 +48,7 @@ public class GlobalResultHandler implements ResponseBodyAdvice {
         } else if (o instanceof Result) {
             // 处理controller返回为字符串时, 转换报异常的bug（默认使用的jackson转换器会报类型转换的错）
             //（如果使用FastJsonHttpMessageConverter，则不需要加下面if判断）
-            result = (Result<Object>) o;
+            result = (Result) o;
         } else if (o instanceof String) {
             result.put(Result.DATA_TAG, o);
             return JSON.toJSONString(result);

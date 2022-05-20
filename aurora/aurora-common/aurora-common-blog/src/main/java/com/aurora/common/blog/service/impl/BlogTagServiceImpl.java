@@ -5,7 +5,7 @@ import com.aurora.common.blog.domain.BlogTag;
 import com.aurora.common.blog.mapper.BlogTagMapper;
 import com.aurora.common.blog.service.BlogArticleTagService;
 import com.aurora.common.blog.service.BlogTagService;
-import com.aurora.common.core.exception.ServiceException;
+import com.aurora.common.core.utils.AssertUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -83,9 +83,7 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
     public boolean deleteBlogTagByTagIds(Long[] tagIds) {
         int count = articleTagService.count(new LambdaQueryWrapper<BlogArticleTag>().in(BlogArticleTag::getTagId,
                 tagIds));
-        if (count >= 1) {
-            throw new ServiceException("删除标签失败,该标签下有关联博文");
-        }
+        AssertUtil.isTrue(count >= 1,"删除标签失败,该标签下有关联博文");
         return removeByIds(Arrays.asList(tagIds));
     }
 
@@ -99,9 +97,7 @@ public class BlogTagServiceImpl extends ServiceImpl<BlogTagMapper, BlogTag> impl
     public boolean deleteBlogTagByTagId(Long tagId) {
         int count = articleTagService.count(new LambdaQueryWrapper<BlogArticleTag>().eq(BlogArticleTag::getTagId,
                 tagId));
-        if (count >= 1) {
-            throw new ServiceException("删除标签失败,该标签下有关联博文");
-        }
+        AssertUtil.isTrue(count >= 1,"删除标签失败,该标签下有关联博文");
         return removeById(tagId);
     }
 
