@@ -4,17 +4,18 @@
     <div class="comment-input">
       <div class="input-wrapper">
         <el-input class="gray-bg-input"
+                  v-model="pComment"
                   type="textarea"
                   :rows="3"
                   autofocus
                   placeholder="写下你的评论">
         </el-input>
         <div class="btn-control">
-          <el-button class="btn" type="primary" round @click="commitComment">确定</el-button>
+          <el-button class="btn" type="primary" round @click="commitComment(0)">确定</el-button>
         </div>
       </div>
     </div>
-    <div class="comment" v-for="item in comments" :key="item.id">
+    <div class="comment" v-for="item in comments" :key="item.commentId">
       <div class="info">
         <img class="avatar" :src="item.avatar" width="36" height="36"/>
         <div class="right">
@@ -38,7 +39,7 @@
         </span>
       </div>
       <div class="reply">
-        <div class="item" v-for="reply in item.reply" :key="reply.id">
+        <div class="item" v-for="reply in item.reply" :key="reply.commentId">
           <div class="reply-content">
             <img style=" border-radius: 50%;" :src="reply.avatar" width="36" height="36"/>
             <span class="from-name">{{ reply.name }}</span><span>: </span>
@@ -61,14 +62,14 @@
             </span>
           </div>
         </div>
-        <div class="write-reply" v-if="item.reply.length > 0" @click="showCommentInput(item)">
-          <i class="el-icon-edit"></i>
-          <span class="add-comment">添加新评论</span>
-        </div>
+        <!--        <div class="write-reply" v-if="item.reply.length > 0" @click="showCommentInput(item)">-->
+        <!--          <i class="el-icon-edit"></i>-->
+        <!--          <span class="add-comment">添加新评论</span>-->
+        <!--        </div>-->
         <transition name="fade">
-          <div class="input-wrapper" v-if="showItemId === item.id">
+          <div class="input-wrapper" v-if="showItemId === item.commentId">
             <el-input class="gray-bg-input"
-                      v-model="inputComment"
+                      v-model="replyComment"
                       type="textarea"
                       :rows="3"
                       autofocus
@@ -76,7 +77,7 @@
             </el-input>
             <div class="btn-control">
               <el-button class="cancel" type="primary" round @click="cancel">取消</el-button>
-              <el-button class="btn" type="primary" round @click="commitComment">确定</el-button>
+              <el-button class="btn" type="primary" round @click="commitComment(item.commentId)">确定</el-button>
             </div>
           </div>
         </transition>
@@ -87,20 +88,40 @@
 
 <script>
 
-import Vue from 'vue'
+import Vue from 'vue';
+import {addComment} from '../../../api/all';
 
 export default {
   props: {
     comments: {
       type: Array,
       required: true
+    },
+    commentType: {
+      type: Number,
+      required: true
+    },
+    articleId: {
+      type: Number,
+      required: false
     }
   },
   components: {},
   data() {
     return {
-      inputComment: '',
-      showItemId: ''
+      pComment: '',
+      replyComment: '',
+      showItemId: '',
+      comment: {
+        type: this.commentType,
+        ownerId: '',
+        parentId: '',
+        // 评论者id
+        observerId: '',
+        content: '',
+        // 回复评论的id
+        replyId: 0
+      }
     }
   },
   computed: {},
@@ -148,8 +169,28 @@ export default {
     /**
      * 提交评论
      */
-    commitComment() {
-      console.log(this.inputComment);
+    commitComment(itemId) {
+      const userId = localStorage.getItem("userId");
+      if (!userId) {
+        this.$notify({
+          title: '提示',
+          message: '请先登录再评论',
+          type: 'warning'
+        });
+        return;
+      }
+      this.comment.observerId = userId;
+      this.comment.parentId = itemId;
+      this.comment.content = this.replyComment;
+      this.comment.ownerId = this.articleId;
+      if (itemId === 0) {
+        this.comment.content = this.pComment;
+      }
+      addComment(this.comment).then(res => {
+        if (res.data.data.code === 200){
+          location.reload();
+        }
+      })
     },
 
     /**
@@ -159,11 +200,13 @@ export default {
      */
     showCommentInput(item, reply) {
       if (reply) {
-        this.inputComment = "@" + reply.name + " "
+        this.replyComment = "@" + reply.name + " "
+        this.comment.replyId = reply.commentId;
       } else {
-        this.inputComment = ''
+        this.replyComment = "@" + item.name + " "
+        this.comment.replyId = item.commentId;
       }
-      this.showItemId = item.id
+      this.showItemId = item.commentId
     }
   },
   created() {
@@ -177,7 +220,7 @@ export default {
   box-sizing: border-box;
 }
 
-.container .comment-input .btn-control{
+.container .comment-input .btn-control {
   display: flex;
   justify-content: flex-end;
   align-items: center;

@@ -37,7 +37,7 @@ public interface BlogArticleService extends IService<BlogArticle> {
      * @param articleIds
      * @return
      */
-    boolean deleteBatch(List<Integer> articleIds);
+    boolean deleteBatch(List<Long> articleIds);
 
     /**
      * 更新博文

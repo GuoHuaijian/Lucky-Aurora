@@ -26,9 +26,9 @@ import java.util.stream.Collectors;
  * describe:
  *
  * @author Guo Huaijian
- * @version 1.0.0
  * @date 2021/10/16
  * @e-mail guohuaijian9527@gmail.com
+ * @version 1.0.0
  */
 @Service
 public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogArticle> implements BlogArticleService {
@@ -53,6 +53,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
         LambdaQueryWrapper<BlogArticle> wrapper = new LambdaQueryWrapper<>();
         wrapper.ge(StringUtil.isNotNull(article.getBeginTime()), BlogArticle::getCreateTime, article.getBeginTime());
         wrapper.le(StringUtil.isNotNull(article.getEndTime()), BlogArticle::getCreateTime, article.getEndTime());
+        wrapper.eq(StringUtil.isNotNull(article.getCategoryId()),BlogArticle::getCategoryId,article.getCategoryId());
         List<BlogArticle> articles = list(wrapper);
         articles.forEach(this::setCategoryAndTag);
         return articles;
@@ -79,7 +80,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
      */
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public boolean deleteBatch(List<Integer> articleIds) {
+    public boolean deleteBatch(List<Long> articleIds) {
         deleteArticleTag(articleIds);
         return removeByIds(articleIds);
     }
@@ -119,7 +120,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
      * @param tags
      * @param articleId
      */
-    public boolean saveArticleTag(List<BlogTag> tags, Integer articleId) {
+    public boolean saveArticleTag(List<BlogTag> tags, Long articleId) {
         if (StringUtil.isNotEmpty(tags)) {
             List<BlogArticleTag> articleTags = Lists.newArrayList();
             tags.forEach(tag -> articleTags.add(new BlogArticleTag(tag.getTagId(), articleId)));
@@ -133,7 +134,7 @@ public class BlogArticleServiceImpl extends ServiceImpl<BlogArticleMapper, BlogA
      *
      * @param articleIds
      */
-    public void deleteArticleTag(List<Integer> articleIds) {
+    public void deleteArticleTag(List<Long> articleIds) {
         articleTagService.remove(new LambdaQueryWrapper<BlogArticleTag>().in(BlogArticleTag::getArticleId,
                 articleIds));
     }

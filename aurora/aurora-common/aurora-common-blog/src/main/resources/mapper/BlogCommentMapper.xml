@@ -4,23 +4,21 @@
     <resultMap id="BaseResultMap" type="com.aurora.common.blog.domain.BlogComment">
         <!--@mbg.generated-->
         <!--@Table blog_comment-->
-        <id column="comment_id" jdbcType="VARCHAR" property="commentId"/>
+        <id column="comment_id" jdbcType="INTEGER" property="commentId"/>
         <result column="type" jdbcType="INTEGER" property="type"/>
-        <result column="owner_id" jdbcType="VARCHAR" property="ownerId"/>
-        <result column="parent_id" jdbcType="VARCHAR" property="parentId"/>
-        <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="owner_id" jdbcType="INTEGER" property="ownerId"/>
+        <result column="parent_id" jdbcType="INTEGER" property="parentId"/>
+        <result column="observer_id" jdbcType="INTEGER" property="observerId"/>
         <result column="like_num" jdbcType="INTEGER" property="likeNum"/>
         <result column="dislike_num" jdbcType="INTEGER" property="dislikeNum"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
         <result column="reply_id" jdbcType="VARCHAR" property="replyId"/>
-        <result column="reply_name" jdbcType="VARCHAR" property="replyName"/>
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
     <sql id="Base_Column_List">
         <!--@mbg.generated-->
-        comment_id, `type`, owner_id, parent_id, `name`, avatar, like_num, dislike_num, content,
-        reply_id, reply_name, create_time, update_time
+        comment_id, `type`, owner_id, parent_id, observer_id, like_num, dislike_num, content,
+        reply_id, create_time, update_time
     </sql>
 </mapper>

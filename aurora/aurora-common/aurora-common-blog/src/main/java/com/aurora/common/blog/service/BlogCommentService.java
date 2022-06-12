@@ -31,6 +31,15 @@ public interface BlogCommentService extends IService<BlogComment> {
      */
     List<BlogComment> selectBlogCommentList(BlogComment comment);
 
+
+    /**
+     * 获取评论结构列表
+     *
+     * @param ownerId
+     * @return
+     */
+    List<BlogComment> comments(Long ownerId);
+
     /**
      * 新增评论
      *

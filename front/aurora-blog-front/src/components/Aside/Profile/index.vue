@@ -1,10 +1,10 @@
 <template>
   <div class="profile">
     <div class="about">
-      <img class="background" src="../../../assets/img/background1.jpg" alt=""/>
-      <img class="avatar" src="../../../assets/img/avatar1.jpg" alt=""/>
+      <img class="background" src="../../../assets/img/background.jpg" alt=""/>
+      <img class="avatar" src="../../../assets/img/avatar.jpg" alt=""/>
       <p class="name">Aurora</p>
-      <p class="desc">Write the code, Change the World</p>
+      <p class="desc">寒江孤影,江湖故人</p>
       <ul class="social">
         <li>
           <a href="https://github.com/guohuaijian" target="_blank"

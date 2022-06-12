@@ -74,3 +74,20 @@ export function TimelineList() {
         method: 'get'
     })
 }
+
+// 添加评论
+export function addComment(data) {
+    return request({
+        url: '/portal/comment/add',
+        method: 'post',
+        data: data
+    })
+}
+
+// 查询评论列表
+export function getComments(ownerId) {
+    return request({
+        url: '/portal/comment/' + ownerId,
+        method: 'get'
+    })
+}

@@ -5,7 +5,7 @@
         <header class="header-navigation">
           <nav>
             <div class="logo">
-              <img href="/" src="../../../assets/img/logo1.png" style="height: 56px"/>
+              <img href="/" src="../../../assets/img/logo.png" style="height: 56px"/>
             </div>
             <ul class="menuList">
               <li>

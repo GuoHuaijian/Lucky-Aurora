@@ -28,7 +28,7 @@ public class BlogArticle extends BaseEntity implements Serializable {
      * 主键
      */
     @TableId(value = "article_id", type = IdType.AUTO)
-    private Integer articleId;
+    private Long articleId;
 
     /**
      * 文章标题

@@ -3,12 +3,14 @@ package com.aurora.common.blog.domain;
 import com.aurora.common.core.web.domain.BaseEntity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * describe: 评论表
@@ -27,7 +29,7 @@ public class BlogComment extends BaseEntity implements Serializable {
      * 评论主键id
      */
     @TableId(value = "comment_id", type = IdType.AUTO)
-    private String commentId;
+    private Long commentId;
 
     /**
      * 评论类型：0:留言 1:文章
@@ -39,25 +41,19 @@ public class BlogComment extends BaseEntity implements Serializable {
      * 被评论id，可以是单个文章id、项目、资源
      */
     @TableField(value = "owner_id")
-    private String ownerId;
+    private Long ownerId;
 
     /**
      * 评论id 第一级为0
      */
     @TableField(value = "parent_id")
-    private String parentId;
+    private Long parentId;
 
     /**
-     * 评论者名字
+     * 评论者id
      */
-    @TableField(value = "`name`")
-    private String name;
-
-    /**
-     * 评论者头像
-     */
-    @TableField(value = "avatar")
-    private String avatar;
+    @TableField(value = "observer_id")
+    private Long observerId;
 
     /**
      * 点赞的数量
@@ -81,13 +77,7 @@ public class BlogComment extends BaseEntity implements Serializable {
      * 回复的id
      */
     @TableField(value = "reply_id")
-    private String replyId;
-
-    /**
-     * 回复评论者名字
-     */
-    @TableField(value = "reply_name")
-    private String replyName;
+    private Long replyId;
 
     /**
      * 创建时间
@@ -102,6 +92,37 @@ public class BlogComment extends BaseEntity implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
     private Date updateTime;
+
+    /**
+     * 评论者名字
+     */
+    @TableField(exist = false)
+    private String name;
+
+    /**
+     * 评论者头像
+     */
+    @TableField(exist = false)
+    private String avatar;
+
+    /**
+     * 回复评论者名字
+     */
+    @TableField(exist = false)
+    private String replyName;
+
+    /**
+     * 评论的文章
+     */
+    @TableField(exist = false)
+    private String articleTitle;
+
+    /**
+     * 回复
+     */
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    @TableField(exist = false)
+    private List<BlogComment> reply;
 
     private static final long serialVersionUID = 1L;
 }

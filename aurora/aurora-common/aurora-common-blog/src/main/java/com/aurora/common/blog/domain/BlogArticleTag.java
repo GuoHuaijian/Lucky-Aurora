@@ -40,9 +40,9 @@ public class BlogArticleTag extends BaseEntity implements Serializable {
      * 文章Id
      */
     @TableField(value = "article_id")
-    private Integer articleId;
+    private Long articleId;
 
-    public BlogArticleTag(Integer tagId, Integer articleId) {
+    public BlogArticleTag(Integer tagId, Long articleId) {
         this.tagId = tagId;
         this.articleId = articleId;
     }

@@ -5,7 +5,8 @@
         <div class="article-page-header">
           <p class="title">{{ article.title }}</p>
           <div class="tags">
-            <el-tag size="small" effect="dark" :type="index | mapTagColors" v-for="(tag , index) in article.tagList" :key="tag.id">
+            <el-tag size="small" effect="dark" :type="index | mapTagColors" v-for="(tag , index) in article.tagList"
+                    :key="tag.id">
               {{ tag.name }}
             </el-tag>
           </div>
@@ -42,7 +43,7 @@
             }}
           </div>
         </div>
-        <bg-comment :comments="commentData"></bg-comment>
+        <bg-comment :comments="commentData" :comment-type=1 :article-id="article.articleId"></bg-comment>
       </div>
       <iv-affix :offset-top="60" slot="side-toc">
         <side-toc/>
@@ -56,7 +57,7 @@ import TOC from '../../../common/js/MarkdownToc'
 // TOC滚动监听
 import TocScrollSpy from '../../../common/js/TocScrollSpy'
 import * as CommentData from '../../../mock/commentdata'
-import { getArticle } from '../../../api/all';
+import {getArticle, getComments} from '../../../api/all';
 
 export default {
   data() {
@@ -71,11 +72,11 @@ export default {
   computed: {},
 
   created() {
-    this.commentData = CommentData.comment.data;
   },
 
   mounted() {
     this.getArticle()
+    this.comments()
     this.addCodeLineNumber()
     this.refreshDiectory()
   },
@@ -115,6 +116,11 @@ export default {
             this.refreshDiectory()
           })
         }
+      })
+    },
+    comments() {
+      getComments(this.$route.params.id).then(res => {
+        this.commentData = res.data.data
       })
     },
     refreshDiectory() {

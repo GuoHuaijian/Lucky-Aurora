@@ -147,8 +147,10 @@ export default {
       getInfo(this.platform).then(res => {
         this.url = res.data.data.avatar
         this.name = res.data.data.nickname
+        let userId = res.data.data.userId
         localStorage.setItem("url", this.url)
         localStorage.setItem("name", this.name)
+        localStorage.setItem("userId",userId)
         this.open = false
         location.reload();
       })

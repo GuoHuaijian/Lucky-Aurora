@@ -2,7 +2,7 @@
   <common-layout>
     <template v-slot:content>
       <section-title main-title="留言板" sub-title="MessageBoard"/>
-      <bg-comment :comments="commentData"/>
+      <bg-comment :comments="commentData" :comment-type=0 />
     </template>
   </common-layout>
 </template>

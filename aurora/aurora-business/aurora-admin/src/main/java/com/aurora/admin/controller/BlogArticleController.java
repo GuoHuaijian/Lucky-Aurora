@@ -90,7 +90,7 @@ public class BlogArticleController extends AbstractController {
     @PreAuthorize("hasAuthority('admin:article:remove')")
     @Log(value = "文章", LogType = LogType.DELETE)
     @DeleteMapping("/{articleIds}")
-    public Result remove(@PathVariable Integer[] articleIds) {
+    public Result remove(@PathVariable Long[] articleIds) {
         return toResult(articleService.deleteBatch(Arrays.asList(articleIds)));
     }
 }
