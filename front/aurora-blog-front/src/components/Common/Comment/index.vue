@@ -121,7 +121,8 @@ export default {
         content: '',
         // 回复评论的id
         replyId: 0
-      }
+      },
+      commentPrefix:''
     }
   },
   computed: {},
@@ -172,16 +173,17 @@ export default {
     commitComment(itemId) {
       const userId = localStorage.getItem("userId");
       if (!userId) {
-        this.$notify({
-          title: '提示',
-          message: '请先登录再评论',
-          type: 'warning'
+        this.$message({
+          message: '请先登陆再评论',
+          type: 'warning',
+          center:true,
+          offset:150
         });
         return;
       }
       this.comment.observerId = userId;
       this.comment.parentId = itemId;
-      this.comment.content = this.replyComment;
+      this.comment.content = this.replyComment.replace(this.commentPrefix,"");
       this.comment.ownerId = this.articleId;
       if (itemId === 0) {
         this.comment.content = this.pComment;
@@ -191,8 +193,15 @@ export default {
         this.comment.ownerId = 0
       }
       addComment(this.comment).then(res => {
-        if (res.data.code === 200){
+        if (res.code === 200){
           location.reload();
+        } else {
+          this.$message({
+            message: '评论出错了',
+            type: 'error',
+            center:true,
+            offset:150
+          });
         }
       })
     },
@@ -210,6 +219,7 @@ export default {
         this.replyComment = "@" + item.name + " "
         this.comment.replyId = item.commentId;
       }
+      this.commentPrefix = this.replyComment
       this.showItemId = item.commentId
     }
   },

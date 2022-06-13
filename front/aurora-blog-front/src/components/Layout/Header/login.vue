@@ -105,6 +105,9 @@ export default {
     handleCommand(command){
       if (command === 'logout'){
         localStorage.removeItem("authCode");
+        localStorage.removeItem("url")
+        localStorage.removeItem("name")
+        localStorage.removeItem("userId")
         location.reload();
       }
       if (command === 'user'){
