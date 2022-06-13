@@ -42,7 +42,7 @@ public class SysDictDataController extends AbstractController {
     public Result list(SysDictData dictData) {
         startPage();
         List<SysDictData> list = dictDataService.selectDictDataList(dictData);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     @Log(value = "字典数据", LogType = LogType.EXPORT)

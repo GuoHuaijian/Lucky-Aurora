@@ -36,7 +36,7 @@ public class BlogCarouselController extends AbstractController {
     public Result list(BlogCarousel carousel) {
         startPage();
         List<BlogCarousel> list = carouselService.selectBlogCarouselList(carousel);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**

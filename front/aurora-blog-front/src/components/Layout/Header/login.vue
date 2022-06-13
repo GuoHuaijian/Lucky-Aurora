@@ -114,9 +114,9 @@ export default {
     login(source) {
       this.platform.source = source;
       getAuthorize(this.platform).then(res => {
-        this.authUrl = res.data.data.authorizeUrl;
+        this.authUrl = res.data.authorizeUrl;
         // 更新状态码与登录平台名称
-        this.platform.state = res.data.data.state;
+        this.platform.state = res.data.state;
 
         // 打开授权窗口
         window.open(
@@ -145,9 +145,9 @@ export default {
     },
     authLogin() {
       getInfo(this.platform).then(res => {
-        this.url = res.data.data.avatar
-        this.name = res.data.data.nickname
-        let userId = res.data.data.userId
+        this.url = res.data.avatar
+        this.name = res.data.nickname
+        let userId = res.data.userId
         localStorage.setItem("url", this.url)
         localStorage.setItem("name", this.name)
         localStorage.setItem("userId",userId)

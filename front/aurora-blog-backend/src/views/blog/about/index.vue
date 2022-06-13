@@ -158,8 +158,8 @@ export default {
     getList() {
       this.loading = true;
       listAbout(this.queryParams).then(response => {
-        this.aboutList = response.data.data;
-        this.total = response.data.total;
+        this.aboutList = response.data;
+        this.total = response.total;
         this.loading = false;
       });
     },

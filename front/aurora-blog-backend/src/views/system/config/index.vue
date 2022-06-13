@@ -250,8 +250,8 @@ export default {
     getList() {
       this.loading = true;
       listConfig(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-          this.configList = response.data.data;
-          this.total = response.data.total;
+          this.configList = response.data;
+          this.total = response.total;
           this.loading = false;
         }
       );

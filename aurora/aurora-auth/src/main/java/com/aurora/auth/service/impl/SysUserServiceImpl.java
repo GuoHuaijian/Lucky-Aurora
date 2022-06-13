@@ -7,7 +7,7 @@ import com.aurora.common.core.utils.DateUtil;
 import com.aurora.common.core.utils.ServletUtil;
 import com.aurora.common.core.utils.ip.IpUtil;
 import com.aurora.common.security.utils.SecurityUtil;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.enums.AuthUserGender;
@@ -38,8 +38,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
      */
     @Override
     public SysUser getUserByName(String userName) {
-        SysUser user = getOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserName, userName));
-        return user;
+        return getOne(Wrappers.lambdaQuery(SysUser.class).eq(SysUser::getUserName, userName));
     }
 
     /**

@@ -235,8 +235,8 @@ export default {
     getList() {
       this.loading = true;
       listNotice(this.queryParams).then(response => {
-        this.noticeList = response.data.data;
-        this.total = response.data.total;
+        this.noticeList = response.data;
+        this.total = response.total;
         this.loading = false;
       });
     },

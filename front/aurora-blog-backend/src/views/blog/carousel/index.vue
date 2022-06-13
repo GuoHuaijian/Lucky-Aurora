@@ -224,8 +224,8 @@ export default {
     getList() {
       this.loading = true;
       listCarousel(this.queryParams).then(response => {
-        this.carouselList = response.data.data;
-        this.total = response.data.total;
+        this.carouselList = response.data;
+        this.total = response.total;
         this.loading = false;
       });
     },

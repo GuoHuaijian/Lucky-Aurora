@@ -37,7 +37,7 @@ public class BlogCommentController extends AbstractController {
     public Result list(BlogComment comment) {
         startPage();
         List<BlogComment> list = commentService.selectBlogCommentList(comment);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**

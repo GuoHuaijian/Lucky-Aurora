@@ -34,7 +34,7 @@ public class SysLoginLogController extends AbstractController {
     public Result list(SysLoginLog loginLog) {
         startPage();
         List<SysLoginLog> list = loginLogService.selectLoginLogList(loginLog);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     @Log(value = "登录日志", LogType = LogType.EXPORT)

@@ -31,7 +31,7 @@ export default {
 
   mounted() {
     friendList().then(res =>{
-      this.linkList = res.data.data
+      this.linkList = res.data
     })
   },
 

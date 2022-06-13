@@ -56,7 +56,6 @@
 import TOC from '../../../common/js/MarkdownToc'
 // TOC滚动监听
 import TocScrollSpy from '../../../common/js/TocScrollSpy'
-import * as CommentData from '../../../mock/commentdata'
 import {getArticle, getComments} from '../../../api/all';
 
 export default {
@@ -108,8 +107,8 @@ export default {
     getArticle() {
       let articleId = this.$route.params.id
       getArticle(articleId).then(res => {
-        if (res.data && res.data.code === 200) {
-          this.article = res.data.data
+        if (res && res.code === 200) {
+          this.article = res.data
           // 更新目录、高亮代码
           this.$nextTick(function () {
             //this.addCodeLineNumber()
@@ -120,7 +119,7 @@ export default {
     },
     comments() {
       getComments(this.$route.params.id).then(res => {
-        this.commentData = res.data.data
+        this.commentData = res.data
       })
     },
     refreshDiectory() {

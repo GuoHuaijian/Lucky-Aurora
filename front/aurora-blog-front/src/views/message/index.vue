@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import * as CommentData from "../../mock/commentdata";
+import {getComments} from '../../api/all';
 export default {
   data() {
     return {
@@ -21,13 +21,19 @@ export default {
   computed: {},
 
   created() {
-    this.commentData = CommentData.comment.data;
   },
 
   mounted() {
+    this.comments()
   },
 
-  methods: {}
+  methods: {
+    comments() {
+      getComments(0).then(res => {
+        this.commentData = res.data
+      })
+    },
+  }
 }
 </script>
 

@@ -186,8 +186,12 @@ export default {
       if (itemId === 0) {
         this.comment.content = this.pComment;
       }
+      // 留言
+      if (this.commentType === 0){
+        this.comment.ownerId = 0
+      }
       addComment(this.comment).then(res => {
-        if (res.data.data.code === 200){
+        if (res.data.code === 200){
           location.reload();
         }
       })

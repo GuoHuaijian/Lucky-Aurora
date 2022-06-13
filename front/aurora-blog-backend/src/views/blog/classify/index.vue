@@ -162,8 +162,8 @@ export default {
     getList() {
       this.loading = true;
       listCategory(this.queryParams).then(response => {
-        this.categoryList = response.data.data;
-        this.total = response.data.total;
+        this.categoryList = response.data;
+        this.total = response.total;
         this.loading = false;
       });
     },

@@ -7,12 +7,13 @@ import com.aurora.auth.mapper.SysUserAuthMapper;
 import com.aurora.auth.service.SysThirdAuthService;
 import com.aurora.auth.service.SysUserAuthService;
 import com.aurora.auth.service.SysUserService;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.model.AuthUser;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
+
+import java.util.Objects;
 
 /**
  * describe:
@@ -40,7 +41,7 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
     @Override
     public SysUser getUserByAuth(AuthUser authUser) {
         SysThirdAuth thirdAuth = thirdAuthService.getThirdAuth(authUser.getUuid(), authUser.getSource());
-        boolean flag = StringUtils.isEmpty(thirdAuth);
+        boolean flag = Objects.isNull(thirdAuth);
         // 第一次登录添加第三方用户
         if (flag) {
             Integer authId = thirdAuthService.addThirdAuth(authUser).getAuthId();
@@ -67,7 +68,6 @@ public class SysUserAuthServiceImpl extends ServiceImpl<SysUserAuthMapper, SysUs
      */
     @Override
     public SysUserAuth getUserAuthByAuthId(Integer authId) {
-        SysUserAuth userAuth = getOne(new LambdaQueryWrapper<SysUserAuth>().eq(SysUserAuth::getAuthId, authId));
-        return userAuth;
+        return getOne(Wrappers.lambdaQuery(SysUserAuth.class).eq(SysUserAuth::getAuthId, authId));
     }
 }

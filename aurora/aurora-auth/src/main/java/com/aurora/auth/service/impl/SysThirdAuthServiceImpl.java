@@ -3,7 +3,7 @@ package com.aurora.auth.service.impl;
 import com.aurora.auth.domain.SysThirdAuth;
 import com.aurora.auth.mapper.SysThirdAuthMapper;
 import com.aurora.auth.service.SysThirdAuthService;
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import me.zhyd.oauth.model.AuthUser;
 import org.springframework.beans.BeanUtils;
@@ -29,9 +29,8 @@ public class SysThirdAuthServiceImpl extends ServiceImpl<SysThirdAuthMapper, Sys
      */
     @Override
     public SysThirdAuth getThirdAuth(String uuid, String source) {
-        SysThirdAuth thirdAuth = this.getOne(new LambdaQueryWrapper<SysThirdAuth>().eq(SysThirdAuth::getUuid, uuid).eq(SysThirdAuth::getSource,
+        return this.getOne(Wrappers.lambdaQuery(SysThirdAuth.class).eq(SysThirdAuth::getUuid, uuid).eq(SysThirdAuth::getSource,
                 source));
-        return thirdAuth;
     }
 
     /**

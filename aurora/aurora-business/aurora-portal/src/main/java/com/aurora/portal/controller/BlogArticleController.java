@@ -39,7 +39,7 @@ public class BlogArticleController extends AbstractController {
     public Result list(BlogArticle article) {
         startPage();
         List<BlogArticle> articles = articleService.list(article);
-        return Result.success(getPageDate(articles));
+        return getPageResult(articles);
     }
 
     /**
@@ -50,7 +50,7 @@ public class BlogArticleController extends AbstractController {
      */
     @VLog(value = "查看文章",blogId = "#{id}")
     @GetMapping("/{id}")
-    public Result list(@PathVariable("id") Integer id) {
+    public Result detail(@PathVariable("id") Integer id) {
         BlogArticle article = articleService.getArticle(id);
         return Result.success(article);
     }

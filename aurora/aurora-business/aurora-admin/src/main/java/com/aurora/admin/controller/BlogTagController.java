@@ -37,7 +37,7 @@ public class BlogTagController extends AbstractController {
     public Result list(BlogTag tag) {
         startPage();
         List<BlogTag> list = tagService.selectBlogTagList(tag);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**

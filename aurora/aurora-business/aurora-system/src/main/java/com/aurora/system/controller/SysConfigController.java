@@ -40,7 +40,7 @@ public class SysConfigController extends AbstractController {
     public Result list(SysConfig config) {
         startPage();
         List<SysConfig> list = configService.selectConfigList(config);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**

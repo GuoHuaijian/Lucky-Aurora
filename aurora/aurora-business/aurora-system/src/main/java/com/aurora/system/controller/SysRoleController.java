@@ -48,7 +48,7 @@ public class SysRoleController extends AbstractController {
     public Result list(SysRole role) {
         startPage();
         List<SysRole> list = roleService.selectRoleList(role);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     @Log(value = "角色管理", LogType = LogType.EXPORT)
@@ -150,7 +150,7 @@ public class SysRoleController extends AbstractController {
     public Result allocatedList(SysUser user) {
         startPage();
         List<SysUser> list = userService.selectAllocatedList(user);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**
@@ -161,7 +161,7 @@ public class SysRoleController extends AbstractController {
     public Result unallocatedList(SysUser user) {
         startPage();
         List<SysUser> list = userService.selectUnallocatedList(user);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**

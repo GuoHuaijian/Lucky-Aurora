@@ -33,7 +33,7 @@ public class SysVisitLogController extends AbstractController {
     public Result list(SysVisitLog visitLog) {
         startPage();
         List<SysVisitLog> list = visitLogService.selectVisitLogList(visitLog);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     @Log(value = "访问日志", LogType = LogType.EXPORT)

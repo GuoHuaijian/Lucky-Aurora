@@ -39,7 +39,7 @@ public class BlogArticleController extends AbstractController {
     public Result list(BlogArticle article) {
         startPage();
         List<BlogArticle> articles = articleService.list(article);
-        return Result.success(getPageDate(articles));
+        return getPageResult(articles);
     }
 
     /**

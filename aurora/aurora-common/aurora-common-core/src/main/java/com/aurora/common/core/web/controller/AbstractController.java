@@ -68,6 +68,20 @@ public abstract class AbstractController {
     }
 
     /**
+     * 响应请求分页数据
+     *
+     * @param list
+     * @return
+     */
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    protected Result getPageResult(List<?> list){
+        PageInfo page = new PageInfo(list);
+        Result result = Result.success(page.getList());
+        result.put("total",page.getTotal());
+        return result;
+    }
+
+    /**
      * 响应返回结果
      *
      * @param result

@@ -69,8 +69,8 @@ export default {
 
   mounted() {
     articleList(this.queryParams).then(res =>{
-      this.topHotRead = res.data.data.data.shift()
-      this.hotReadList = res.data.data.data;
+      this.topHotRead = res.data.shift()
+      this.hotReadList = res.data;
     })
   },
 

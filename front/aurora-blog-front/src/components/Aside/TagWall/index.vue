@@ -25,7 +25,7 @@ export default {
 
   mounted() {
     tagList().then(res =>{
-      this.tagList = res.data.data
+      this.tagList = res.data
     })
   },
 

@@ -488,8 +488,8 @@ export default {
     getList() {
       this.loading = true
       listUser(this.addDateRange(this.queryParams, this.dateRange)).then(response => {
-          this.userList = response.data.data
-          this.total = response.data.total
+          this.userList = response.data
+          this.total = response.total
           this.loading = false
         }
       )

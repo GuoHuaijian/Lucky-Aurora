@@ -37,7 +37,7 @@ public class BlogCategoryController extends AbstractController {
     public Result list(BlogCategory category) {
         startPage();
         List<BlogCategory> list = categoryService.selectBlogCategoryList(category);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**

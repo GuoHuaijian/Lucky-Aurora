@@ -37,7 +37,7 @@ public class SysNoticeController extends AbstractController {
     public Result list(SysNotice notice) {
         startPage();
         List<SysNotice> list = noticeService.selectNoticeList(notice);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**

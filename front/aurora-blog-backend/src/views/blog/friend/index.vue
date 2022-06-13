@@ -252,8 +252,8 @@ export default {
     getList() {
       this.loading = true;
       listFriend(this.queryParams).then(response => {
-        this.friendList = response.data.data;
-        this.total = response.data.total;
+        this.friendList = response.data;
+        this.total = response.total;
         this.loading = false;
       });
     },

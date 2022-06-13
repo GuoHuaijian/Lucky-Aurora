@@ -5,6 +5,7 @@ import com.aurora.common.blog.domain.BlogComment;
 import com.aurora.common.blog.mapper.BlogCommentMapper;
 import com.aurora.common.blog.service.BlogArticleService;
 import com.aurora.common.blog.service.BlogCommentService;
+import com.aurora.common.core.utils.LongUtil;
 import com.aurora.rpc.system.RemoteUserService;
 import com.aurora.rpc.system.domain.User;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
@@ -126,16 +127,21 @@ public class BlogCommentServiceImpl extends ServiceImpl<BlogCommentMapper, BlogC
         List<User> users = userService.getUsers(new ArrayList<>(userIds));
         List<BlogArticle> articles = articleService.listByIds(new ArrayList<>(articleIds));
         for (BlogComment comment : comments) {
-            User user = users.stream().filter(u -> comment.getObserverId().equals(u.getUserId())).findFirst().get();
+            // 设置评论者姓名头像
+            User user =
+                    users.stream().filter(u -> comment.getObserverId().equals(u.getUserId())).findFirst().orElse(new User());
             comment.setName(user.getNickName());
             comment.setAvatar(user.getAvatar());
-            if (Objects.nonNull(comment.getReplyId()) && comment.getReplyId() != 0) {
-                BlogComment blogComment = comments.stream().filter(c -> comment.getReplyId().equals(c.getCommentId())).findFirst().get();
+            // 设置被回复者头像
+            if (LongUtil.isNotEmpty(comment.getReplyId())) {
+                BlogComment blogComment =
+                        comments.stream().filter(c -> comment.getReplyId().equals(c.getCommentId())).findFirst().orElse(new BlogComment());
                 comment.setReplyName(blogComment.getName());
             }
-            if (Objects.nonNull(comment.getOwnerId())) {
+            // 设置被评论文章的标题
+            if (LongUtil.isNotEmpty(comment.getOwnerId())) {
                 BlogArticle article =
-                        articles.stream().filter(a -> comment.getOwnerId().equals(a.getArticleId())).findFirst().get();
+                        articles.stream().filter(a -> comment.getOwnerId().equals(a.getArticleId())).findFirst().orElse(new BlogArticle());
                 comment.setArticleTitle(article.getTitle());
             }
         }

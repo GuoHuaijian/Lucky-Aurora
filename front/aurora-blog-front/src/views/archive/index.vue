@@ -39,7 +39,7 @@ export default {
   methods: {
     listTimeline() {
       TimelineList().then(res =>{
-        this.timelineList = res.data.data
+        this.timelineList = res.data
       });
     }
   }

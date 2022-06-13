@@ -246,8 +246,8 @@ export default {
     getList() {
       this.loading = true;
       listComment(this.queryParams).then(response => {
-        this.commentList = response.data.data;
-        this.total = response.data.total;
+        this.commentList = response.data;
+        this.total = response.total;
         this.loading = false;
       });
     },

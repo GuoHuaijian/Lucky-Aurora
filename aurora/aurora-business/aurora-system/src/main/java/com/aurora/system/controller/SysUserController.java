@@ -49,7 +49,7 @@ public class SysUserController extends AbstractController {
     public Result list(SysUser user) {
         startPage();
         List<SysUser> list = userService.selectUserList(user);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     @Log(value = "用户管理", LogType = LogType.EXPORT)

@@ -37,7 +37,7 @@ public class BlogFriendController extends AbstractController {
     public Result list(BlogFriend friend) {
         startPage();
         List<BlogFriend> list = friendService.selectBlogFriendList(friend);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**

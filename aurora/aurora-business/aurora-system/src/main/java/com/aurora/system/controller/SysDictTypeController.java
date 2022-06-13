@@ -36,7 +36,7 @@ public class SysDictTypeController extends AbstractController {
     public Result list(SysDictType dictType) {
         startPage();
         List<SysDictType> list = dictTypeService.selectDictTypeList(dictType);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     @Log(value = "字典类型", LogType = LogType.EXPORT)

@@ -37,7 +37,7 @@ public class BlogAboutController extends AbstractController {
     public Result list(BlogAbout about) {
         startPage();
         List<BlogAbout> list = aboutService.selectBlogAboutList(about);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     /**

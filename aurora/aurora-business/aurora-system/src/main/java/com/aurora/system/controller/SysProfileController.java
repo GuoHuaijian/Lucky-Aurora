@@ -59,7 +59,6 @@ public class SysProfileController extends AbstractController {
             return Result.error("修改用户'" + user.getUserName() + "'失败，邮箱账号已存在");
         }
         SysUser sysUser = userService.getById(SecurityUtil.getUserId());
-        ;
         user.setUserId(sysUser.getUserId());
         user.setPassword(null);
         boolean flag = userService.updateUserProfile(user);

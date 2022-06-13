@@ -176,8 +176,8 @@ export default {
       this.queryParams.orderByColumn = "visitTime";
       this.queryParams.isAsc = "desc";
       list(this.addDateRange(this.queryParams, this.dateRange)).then( response => {
-          this.list = response.data.data;
-          this.total = response.data.total;
+          this.list = response.data;
+          this.total = response.total;
           this.loading = false;
         }
       );

@@ -68,8 +68,8 @@ export default {
 
   mounted() {
     articleList(this.queryParams).then(res =>{
-      this.topRecommend = res.data.data.data.shift()
-      this.recommendList = res.data.data.data;
+      this.topRecommend = res.data.shift()
+      this.recommendList = res.data;
     })
   },
 

@@ -44,11 +44,11 @@ export default {
 
   created() {
     carouselList().then(res =>{
-      this.items = res.data.data;
+      this.items = res.data;
     }),
     categoryList().then(res =>{
 
-      this.categoryList = res.data.data;
+      this.categoryList = res.data;
     }),
     this.getArticleList()
   },
@@ -60,13 +60,13 @@ export default {
     },
     getArticleList(){
       articleList(this.queryParams).then(res => {
-        if (res && res.data.code === 200) {
-          if (res.data.data.total <= (this.queryParams.pageNum*this.queryParams.pageSize)) {
+        if (res && res.code === 200) {
+          if (res.total <= (this.queryParams.pageNum*this.queryParams.pageSize)) {
             this.noMoreData = true
           } else {
             this.noMoreData = false
           }
-          this.articleList = this.articleList.concat(res.data.data.data);
+          this.articleList = this.articleList.concat(res.data);
         }
       }).then( () => {
         this.$refs.browseMore.stopLoading()

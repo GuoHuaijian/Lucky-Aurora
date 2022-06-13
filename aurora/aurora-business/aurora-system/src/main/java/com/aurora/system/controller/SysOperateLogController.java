@@ -34,7 +34,7 @@ public class SysOperateLogController extends AbstractController {
     public Result list(SysOperateLog operateLog) {
         startPage();
         List<SysOperateLog> list = operateLogService.selectOperateLogList(operateLog);
-        return Result.success(getPageDate(list));
+        return getPageResult(list);
     }
 
     @Log(value = "操作日志", LogType = LogType.EXPORT)
